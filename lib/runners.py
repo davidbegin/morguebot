@@ -1,6 +1,6 @@
 from lib.command_parser import execute_command
 from lib.command_parser import process_msg
-from lib.morgue_finder import find_morgue_file
+from lib.morgue_finder import fetch_morgue_file
 from lib.status_checkers import check_for_new_gods
 from lib.file_watcher import watch_for_changes
 
@@ -14,8 +14,8 @@ def run_command(
     character=None,
     local_mode=False,
 ):
-    morgue_file = find_morgue_file(
-        morgue_file_path=morgue_filepath,
+    morgue_file = fetch_morgue_file(
+        morgue_filepath=morgue_filepath,
         morgue_url=morgue_url,
         character=character,
         local_mode=local_mode,
@@ -37,8 +37,8 @@ def run_bot(
     while True:
         # We Request the morgue file everytime
         # To get the latest data
-        morgue_file = find_morgue_file(
-            morgue_file_path=morgue_filepath,
+        morgue_file = fetch_morgue_file(
+            morgue_filepath=morgue_filepath,
             morgue_url=morgue_url,
             character=character,
             local_mode=local_mode,
