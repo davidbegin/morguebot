@@ -15,11 +15,21 @@ python bot.py
 
 And in chat !h?, should print out the available commands
 
+## Morgue File Finding Options
+
 ## Bot Mode:
 
 TODO:
 
 ## Command Mode
 
-TODO:
+The `-e` flag or `--exec-cmd` will execute a single command you pass it, instead of starting the bot.
+```
+python bot.py -e rFire
+```
 
+You can disable sending bot messages to twitch and output to STDOUT with `-d` or `--disable-twitch`
+
+```
+python bot.py -e mutations -d
+```

@@ -57,6 +57,5 @@ def main():
         )
 
 
-# Why do we do this???
 if __name__ == "__main__":
     exit(main())

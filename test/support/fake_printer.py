@@ -1,4 +1,4 @@
-class FakePrinter():
+class FakePrinter:
     def print_max_resistance(self, morgue_file):
         pass
 

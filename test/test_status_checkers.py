@@ -1,6 +1,7 @@
 from lib.status_checkers import check_for_new_gods
 from support.fake_printer import FakePrinter
 
+
 def test_check_for_new_gods():
     current_altars = {
         "Ashenzari",
@@ -29,4 +30,3 @@ def test_check_for_new_gods():
     morgue_file = open("Support/WilliamGates.txt").read()
     all_altars, new_altars = check_for_new_gods(old_altars, morgue_file, FakePrinter())
     assert set(new_altars) == current_altars.difference(old_altars)
-
