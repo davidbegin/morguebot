@@ -7,29 +7,11 @@ import requests
 
 # Print the Location
 
-
-def find_morgue_filepath(character=None):
-    if character is None:
-        # TODO: Make this configurable
-        character = "GucciMane"
-
-    # TODO: Look up Platform defaults
-    default_morgue_folder = (
-        f"/Users/begin/Library/Application Support/Dungeon Crawl Stone Soup/morgue"
-    )
-    morgue_folder = os.environ.get("MORGUE_FOLDER", default_morgue_folder)
-    return f"{morgue_folder}/{character}.txt"
-
-
-def find_morgue_url(character=None, morgue_url=None):
-    if character:
-        morgue_url = f"http://crawl.akrasiac.org/rawdata/{character}/{character}.txt"
-    else:
-        # TODO: Make this configurable, and unify the names
-        username = "beginbot"
-        morgue_url = f"http://crawl.akrasiac.org/rawdata/{username}/{username}.txt"
-
-    return morgue_url
+# TODO: Look up Platform defaults
+DEFAULT_MORGUE_FOLDER = (
+    f"/Users/begin/Library/Application Support/Dungeon Crawl Stone Soup/morgue"
+)
+MORGUE_DOMAIN = "http://crawl.akrasiac.org/rawdata"
 
 
 def fetch_morgue_file(
@@ -37,12 +19,21 @@ def fetch_morgue_file(
 ):
     if local_mode:
         if morgue_filepath is None:
-            morgue_filepath = find_morgue_filepath(character=character)
+            morgue_filepath = _find_morgue_filepath(character=character)
         return open(morgue_filepath).read()
     else:
         if morgue_url is None:
-            morgue_url = find_morgue_url(character)
+            morgue_url = _find_morgue_url(character)
         return _fetch_online_morgue(morgue_url)
+
+
+def _find_morgue_url(character="beginbot"):
+    return f"{MORGUE_DOMAIN}/{character}/{character}.txt"
+
+
+def _find_morgue_filepath(character="GucciMane"):
+    morgue_folder = os.environ.get("MORGUE_FOLDER", DEFAULT_MORGUE_FOLDER)
+    return f"{morgue_folder}/{character}.txt"
 
 
 # TODO: add suggestions for fun!
