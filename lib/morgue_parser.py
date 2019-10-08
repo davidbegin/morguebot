@@ -3,7 +3,6 @@ import requests
 import sys
 import time
 
-
 # This Belongs at a different level of abstraction
 def read_morgue_file(morgue_file_path, morgue_url):
     if morgue_file_path:
@@ -12,6 +11,9 @@ def read_morgue_file(morgue_file_path, morgue_url):
     elif morgue_url:
         return fetch_online_morgue(morgue_url)
     else:
+        # Can we curl the lobby and get a random user???
+        # http://crawl.akrasiac.org:8080/#lobby
+        # TODO: find a random user from the lobby, if you don't supply one
         username = "beginbot"
         morgue_url = f"http://crawl.akrasiac.org/rawdata/{username}/{username}.txt"
         return fetch_online_morgue(morgue_url)

@@ -23,7 +23,6 @@ def run_command(
     execute_command(printer, command, morgue_file)
 
 
-
 # TODO: I don't like how this has an old_altars input
 # since it will never be used, but it does fix the problem
 def run_bot(
