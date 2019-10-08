@@ -40,7 +40,6 @@ def process_msg(printer, irc_response, morgue_file):
 def execute_command(printer, msg, morgue_file):
     split_command = msg.split()
     command = split_command[0]
-    print(f"\033[36;1mExecuting {command}\033[0m")
 
     # TODO: Start account for commands with args
 
