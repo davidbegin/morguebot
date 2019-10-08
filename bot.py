@@ -39,16 +39,16 @@ def main():
     if options.exec_command:
         # Figure out something better for this
         # Always print the overview locally, so we know who we are working with
-        disabled_printer = Printer(server, disable_twitch=True)
-        run_command(
-            f"!overview",
-            server,
-            printer,
-            morgue_filepath=options.morgue_filepath,
-            morgue_url=options.morgue_url,
-            character=options.character,
-            local_mode=options.local_mode,
-        )
+        # disabled_printer = Printer(server, disable_twitch=True)
+        # run_command(
+        #     f"!overview",
+        #     server,
+        #     printer,
+        #     morgue_filepath=options.morgue_filepath,
+        #     morgue_url=options.morgue_url,
+        #     character=options.character,
+        #     local_mode=options.local_mode,
+        # )
 
         run_command(
             f"!{options.exec_command}",

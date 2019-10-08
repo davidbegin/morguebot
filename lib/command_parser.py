@@ -1,4 +1,3 @@
-from lib.morgue_parser import read_morgue_file
 from lib.printer import Printer
 
 

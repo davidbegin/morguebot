@@ -17,6 +17,22 @@ And in chat !h?, should print out the available commands
 
 ## Morgue File Finding Options
 
+You can fetch a local Morgue File
+parser.add_option("-c", "--char", action="store", type="string", dest="character")
+
+Or You can Fetch a Morgue File online from
+f"http://crawl.akrasiac.org/rawdata/{character}/{character}.txt"
+```
+    parser.add_option("-c", "--char", action="store", type="string", dest="character")
+    parser.add_option("-l", "--local", action="store_true", dest="local_mode")
+    parser.add_option(
+        "-m", "--morgue-file", action="store", type="string", dest="morgue_filepath"
+    )
+    parser.add_option(
+        "-u", "--morgue-url", action="store", type="string", dest="morgue_url"
+    )
+```
+
 ## Bot Mode:
 
 TODO:

@@ -1,32 +1,6 @@
 import re
-import requests
 import sys
 import time
-
-# This Belongs at a different level of abstraction
-def read_morgue_file(morgue_file_path, morgue_url):
-    if morgue_file_path:
-        with open(morgue_file_path) as morgue_file:
-            return morgue_file.read()
-    elif morgue_url:
-        return fetch_online_morgue(morgue_url)
-    else:
-        # Can we curl the lobby and get a random user???
-        # http://crawl.akrasiac.org:8080/#lobby
-        # TODO: find a random user from the lobby, if you don't supply one
-        username = "beginbot"
-        morgue_url = f"http://crawl.akrasiac.org/rawdata/{username}/{username}.txt"
-        return fetch_online_morgue(morgue_url)
-
-
-def fetch_online_morgue(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.text
-    else:
-        print(f"\033[031;1mCould not find the Character at {url}\033[0m")
-        sys.exit()
-
 
 # ========================================================================================
 

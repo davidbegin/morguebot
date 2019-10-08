@@ -12,13 +12,13 @@ def run_command(
     morgue_filepath=None,
     morgue_url=None,
     character=None,
-    local_mode=None,
+    local_mode=False,
 ):
     morgue_file = find_morgue_file(
         morgue_file_path=morgue_filepath,
         morgue_url=morgue_url,
         character=character,
-        local_mode=False,
+        local_mode=local_mode,
     )
     execute_command(printer, command, morgue_file)
 
@@ -45,7 +45,7 @@ def run_bot(
         )
 
         # TODO: figure out this ordering
-        old_altars = check_for_new_gods(old_altars, morgue_file, printer)
+        old_altars, _ = check_for_new_gods(old_altars, morgue_file, printer)
         # This Could be the pattern
         # old_levels = check_for_new_levels(old_levels, morgue_file, printer)
 
