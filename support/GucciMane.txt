@@ -1,0 +1,147 @@
+Dungeon Crawl Stone Soup version 0.23.2 (tiles) character file.
+
+Game seed: 27535284806467565
+
+Gucci Mane the Conjurer (Deep Elf Conjurer)          Turns: 737, Time: 00:02:30
+
+Health: 15/15      AC:  2    Str:  5    XL:     2   Next: 37%
+Magic:  8/8        EV: 13    Int: 19    God:    
+Gold:   10         SH:  0    Dex: 15    Spells: 7/8 levels left
+
+rFire    . . .     SeeInvis .   d - +0 dagger (venom)
+rCold    . . .     Gourm    .   (no shield)
+rNeg     . . .     Faith    .   a - +0 robe
+rPois    .         Spirit   .   (no helmet)
+rElec    .         Reflect  .   (no cloak)
+rCorr    .         Harm     .   (no gloves)
+MR       .....                  (no boots)
+Stlth    ++........             (no amulet)
+HPRegen  0.05/turn              (no ring)
+MPRegen  0.11/turn              (no ring)
+
+@: no status effects
+A: no striking features
+a: no special abilities
+
+
+You are on level 1 of the Dungeon.
+You are not hungry.
+
+You have visited 1 branch of the dungeon, and seen 1 of its levels.
+
+You have collected 10 gold pieces.
+
+Inventory:
+
+Hand Weapons
+ d - a +0 dagger of venom (weapon)
+Armour
+ a - a +0 robe (worn)
+Scrolls
+ b - a scroll labeled BUCEUFOSTE
+Comestibles
+ c - a ration
+ f - a chunk of flesh
+
+
+   Skills:
+ + Level 2.9 Dodging
+ - Level 2.4 Stealth
+ + Level 3.5 Spellcasting
+ + Level 4.6 Conjurations
+
+
+You have 7 spell levels left.
+You know the following spells:
+
+ Your Spells              Type           Power        Failure   Level  Hunger
+a - Magic Dart            Conj           ###.         2%          1    None
+
+Your spell library contains the following spells:
+
+ Spells                   Type           Power        Failure   Level  Hunger
+ Searing Ray              Conj           ###...       3%          2    ##.....
+ Dazzling Spray           Conj/Hex       ##....       17%         3    ###....
+ Iskenderun's Mystic Bla  Conj           ###.....     22%         4    ####...
+ Force Lance              Conj/Tloc      ##......     50%         4    ####...
+ Fulminant Prism          Conj/Hex       ##........   50%         4    ####...
+
+
+Dungeon Overview and Level Annotations
+
+Branches:
+Dungeon (1/15)            
+
+Altars:
+
+Message History
+
+Press: ? - help, Shift-Dir - straight line, f - kobold
+Aim: a kobold, wielding a +0 short sword (resting)
+The magic dart hits the kobold but does no damage.
+The kobold shouts!
+Casting: Magic Dart (safe; 2% risk of failure)
+Confirm with . or Enter, or press ? or * to list all spells.
+Aiming: Magic Dart (safe; 2% risk of failure)
+Press: ? - help, Shift-Dir - straight line, f/p - kobold
+Aim: a kobold, wielding a +0 short sword
+The magic dart hits the kobold.
+You kill the kobold!
+You start resting.
+Magic restored.
+Things that are here:
+a +0 short sword; a kobold corpse
+Okay, then.
+Unknown command.
+Unknown command.
+Unknown command.
+Unknown command.
+
+         #......'.....
+#.       #...>..#..###
+#.###########.#.#..#..
+........#.# #.#.#..#.#
+........#.###.#.#..#.#
+ .......#.....#.#.....
+    #...........#.##.#
+    #...........#.##.#
+    #...........#+##.#
+    #...#+#..........#
+    #...# #..........#
+    #...# #...........
+    #.@.# #..........#
+    #...# #...........
+    ##### #.........).
+          +..........#
+          #..........#
+          #########...
+                  ####
+                     #
+                     #
+
+
+There are no monsters in sight!
+
+Vanquished Creatures
+  2 dart slugs (D:1)
+  A giant cockroach (D:1)
+  2 goblins (D:1)
+  A hobgoblin (D:1)
+  2 frilled lizards (D:1)
+  3 kobolds (D:1)
+  A rat (D:1)
+12 creatures vanquished.
+
+Notes
+Turn   | Place    | Note
+-------+----------+-------------------------------------------
+     0 | D:1      | Gucci Mane the Deep Elf Conjurer began the quest for the
+                  | Orb.
+     0 | D:1      | Reached XP level 1. HP: 10/10 MP: 6/6
+   512 | D:1      | Reached XP level 2. HP: 15/15 MP: 6/8
+
+Action                   || total
+-------------------------++-------
+ Cast: Magic Dart        ||    25
+Dodge: Dodged            ||     1
+
