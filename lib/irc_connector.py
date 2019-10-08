@@ -11,7 +11,7 @@ def _handshake(server):
 
     server.send(bytes("PASS " + token + "\r\n", "utf-8"))
     server.send(bytes("NICK " + bot + "\r\n", "utf-8"))
-    server.send(bytes("JOIN " + channel + "\r\n", "utf-8"))
+    server.send(bytes("JOIN " + "#" + channel + "\r\n", "utf-8"))
 
 
 def connect_to_twitch():
