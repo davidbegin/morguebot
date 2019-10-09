@@ -14,6 +14,13 @@ def run_command(
     character=None,
     local_mode=False,
 ):
+
+    # import requests
+    # x = requests.get("http://crawl.akrasiac.org/scoring/all-players.html")
+    # # x = requests.get("http://crawl.akrasiac.org:8080/#lobby")
+    # # x = requests.get("http://crawl.akrasiac.org/scoring/top-N.html")
+    # y = x.text
+    # import pdb; pdb.set_trace()
     morgue_file = fetch_morgue_file(
         morgue_filepath=morgue_filepath,
         morgue_url=morgue_url,
@@ -46,8 +53,6 @@ def run_bot(
 
         # TODO: figure out this ordering
         old_altars, _ = check_for_new_gods(old_altars, morgue_file, printer)
-        # This Could be the pattern
-        # old_levels = check_for_new_levels(old_levels, morgue_file, printer)
 
         _respond_to_irc(morgue_file, server, printer)
 

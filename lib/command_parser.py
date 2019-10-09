@@ -17,6 +17,7 @@ COMMANDS_WITH_NO_ARGS = (
         "!skills",
         "!h?",
         "!maxR",
+        "!mf",
     ]
     + RESISTANCES
     + TRAITS
@@ -72,6 +73,9 @@ def execute_command(printer, msg, morgue_file):
             printer.print_mr(morgue_file)
         elif command == "!maxR":
             printer.print_max_resistance(morgue_file)
+        elif command == "!mf":
+            pass
+            # printer.print_morgue_file_location(morgue_file)
     else:
         print(f"\033[31;1mINVALID COMMAND: {command}\033[0m")
         print(f"Valid Commands: {COMMANDS_WITH_NO_ARGS}")

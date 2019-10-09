@@ -1,11 +1,19 @@
 import socket
 import os
+import boto3
+from base64 import b64decode
 
 
 def _handshake(server):
     # TODO: add error handling around not having the required environment variables
     # TODO: add some conncection debug information
-    token = os.environ["MORGUEBOT_TWITCH_OAUTH_TOKEN"]
+    if "AWS_LAMBDA_NAME" in os.environ:
+        encrypted_token = os.environ["MORGUEBOT_TWITCH_OAUTH_TOKEN"]
+        token = boto3.client("kms").decrypt(CiphertextBlob=b64decode(encrypted_token))[
+            "Plaintext"
+        ]
+    else:
+        token = os.environ["MORGUEBOT_TWITCH_OAUTH_TOKEN"]
     bot = os.environ["MORGUEBOT_BOT_NAME"]
     channel = os.environ["MORGUEBOT_CHANNEL"]
 
