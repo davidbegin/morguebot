@@ -70,14 +70,11 @@ class Printer:
         if not self.disable_twitch:
             # TODO: Make this configurable
             channel = "#beginbot"
-            if msg and not self.disable_twitch:
+
+            if msg:
                 self.server.send(
                     bytes("PRIVMSG " + channel + " :" + msg + "\n", "utf-8")
                 )
-            else:
-                import code
-
-                code.interact(local=dict(globals(), **locals()))
 
     def print_command(self, name, value):
         fmt_str = f"{name}: {value}"
