@@ -13,6 +13,7 @@ from lib.morgue_parser import fetch_potions
 from lib.morgue_parser import fetch_weapons
 from lib.morgue_parser import fetch_armour
 from lib.morgue_parser import fetch_skills
+from lib.morgue_parser import fetch_altars
 
 
 # I Need a better data struct for aliases
@@ -80,6 +81,17 @@ class Printer:
         fmt_str = f"{name}: {value}"
         print("\n\033[35m" + fmt_str + "\033[0m")
         self.send_msg(fmt_str)
+
+    def print_gods(self, morgue_file):
+        altars = set(fetch_altars(morgue_file))
+        gods_remaining = 25 - len(altars)
+
+        if len(altars) == 25:
+            self.send_msg("Kreygasm YOU HAVE SEEN EVERY GOD! Kreygasm")
+        else:
+            self.send_msg(f"MercyWing1 Gods MercyWing2")
+            self.send_msg(', '.join(sorted(altars)))
+            self.send_msg(f"You have {gods_remaining} to be found")
 
     def print_skills(self, morgue_file):
         self.send_msg(f"PowerUpL Listing All Skills PowerUpR")

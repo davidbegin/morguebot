@@ -48,16 +48,7 @@ def main():
             local_mode=options.local_mode,
         )
     else:
-
-        run_status_checker(
-            server,
-            printer,
-            morgue_filepath=options.morgue_filepath,
-            morgue_url=options.morgue_url,
-            character=options.character,
-            local_mode=options.local_mode,
-        )
-        # run_bot(
+        # run_status_checker(
         #     server,
         #     printer,
         #     morgue_filepath=options.morgue_filepath,
@@ -65,6 +56,14 @@ def main():
         #     character=options.character,
         #     local_mode=options.local_mode,
         # )
+        run_bot(
+            server,
+            printer,
+            morgue_filepath=options.morgue_filepath,
+            morgue_url=options.morgue_url,
+            character=options.character,
+            local_mode=options.local_mode,
+        )
 
 
 if __name__ == "__main__":

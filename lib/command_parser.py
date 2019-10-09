@@ -18,6 +18,7 @@ COMMANDS_WITH_NO_ARGS = (
         "!h?",
         "!maxR",
         "!mf",
+        "!gods",
     ]
     + RESISTANCES
     + TRAITS
@@ -73,6 +74,8 @@ def execute_command(printer, msg, morgue_file):
             printer.print_mr(morgue_file)
         elif command == "!maxR":
             printer.print_max_resistance(morgue_file)
+        elif command == "!gods":
+            printer.print_gods(morgue_file)
         elif command == "!mf":
             pass
             # printer.print_morgue_file_location(morgue_file)
