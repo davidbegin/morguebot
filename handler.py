@@ -7,9 +7,18 @@ import boto3
 
 def handler(event, context):
     print("Received event: " + json.dumps(event, indent=2))
+
     server = connect_to_twitch()
     printer = Printer(server, disable_twitch=False)
+
     if "command" in event.keys():
-        run_command(f"!{event['command']}", server, printer)
+        command = f"!{event['command']}"
     else:
-        run_command(f"!overview", server, printer)
+        command = "!overview"
+
+    if "character" in event.keys():
+        character = event["character"]
+    else:
+        character = None
+
+    run_command(command, server, printer, character=character)

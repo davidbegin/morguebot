@@ -29,5 +29,5 @@ deploy: artifact
 
 
 invoke:
-	aws lambda invoke --function-name bot --payload '{"command": "${COMMAND}"}' logs/lambda.txt
+	aws lambda invoke --function-name bot --payload '{"command":"${COMMAND}", "character":"${CHARACTER}"}' logs/lambda.txt
 

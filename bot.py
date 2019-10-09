@@ -6,6 +6,7 @@ from lib.irc_connector import connect_to_twitch
 from lib.printer import Printer
 from lib.runners import run_bot
 from lib.runners import run_command
+from lib.runners import run_status_checker
 
 
 def main():
@@ -37,19 +38,6 @@ def main():
     printer = Printer(server, disable_twitch=options.disable_twitch)
 
     if options.exec_command:
-        # Figure out something better for this
-        # Always print the overview locally, so we know who we are working with
-        # disabled_printer = Printer(server, disable_twitch=True)
-        # run_command(
-        #     f"!overview",
-        #     server,
-        #     printer,
-        #     morgue_filepath=options.morgue_filepath,
-        #     morgue_url=options.morgue_url,
-        #     character=options.character,
-        #     local_mode=options.local_mode,
-        # )
-
         run_command(
             f"!{options.exec_command}",
             server,
@@ -60,7 +48,8 @@ def main():
             local_mode=options.local_mode,
         )
     else:
-        run_bot(
+
+        run_status_checker(
             server,
             printer,
             morgue_filepath=options.morgue_filepath,
@@ -68,6 +57,14 @@ def main():
             character=options.character,
             local_mode=options.local_mode,
         )
+        # run_bot(
+        #     server,
+        #     printer,
+        #     morgue_filepath=options.morgue_filepath,
+        #     morgue_url=options.morgue_url,
+        #     character=options.character,
+        #     local_mode=options.local_mode,
+        # )
 
 
 if __name__ == "__main__":

@@ -22,7 +22,8 @@ def fetch_morgue_file(
         if morgue_filepath is None:
             morgue_filepath = _find_morgue_filepath(character=character)
 
-        print(f"\033[37;1mUsing morgue_filepath: {morgue_filepath}\033[0m")
+        # TODO: Make this print on bootup
+        # print(f"\033[37;1mUsing morgue_filepath: {morgue_filepath}\033[0m")
         return open(morgue_filepath).read()
     else:
         if character and morgue_url is None:
