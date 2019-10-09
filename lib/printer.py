@@ -90,7 +90,7 @@ class Printer:
             self.send_msg("Kreygasm YOU HAVE SEEN EVERY GOD! Kreygasm")
         else:
             self.send_msg(f"MercyWing1 Gods MercyWing2")
-            self.send_msg(', '.join(sorted(altars)))
+            self.send_msg(", ".join(sorted(altars)))
             self.send_msg(f"You have {gods_remaining} to be found")
 
     def print_skills(self, morgue_file):

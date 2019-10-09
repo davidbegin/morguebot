@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import time
+
 from optparse import OptionParser
 
 from lib.irc_connector import connect_to_twitch
@@ -7,6 +9,8 @@ from lib.printer import Printer
 from lib.runners import run_bot
 from lib.runners import run_command
 from lib.runners import run_status_checker
+from lib.morgue_finder import fetch_morgue_file
+from lib.morgue_parser import fetch_altars
 
 
 def main():
@@ -22,9 +26,12 @@ def main():
         "-u", "--morgue-url", action="store", type="string", dest="morgue_url"
     )
 
-    # Run in Bot Mode or single command
+    # Run in Different Modes
     parser.add_option(
         "-e", "--exec-cmd", action="store", type="string", dest="exec_command"
+    )
+    parser.add_option(
+        "-s", "--status-checker", action="store_true", dest="status_checker"
     )
 
     # Printer Options
@@ -47,15 +54,27 @@ def main():
             character=options.character,
             local_mode=options.local_mode,
         )
+    elif options.status_checker:
+        morgue_file = fetch_morgue_file(
+            morgue_filepath=options.morgue_filepath,
+            morgue_url=options.morgue_url,
+            character=options.character,
+            local_mode=options.local_mode,
+        )
+        old_altars = set(fetch_altars(morgue_file))
+
+        while True:
+            run_status_checker(
+                server,
+                printer,
+                morgue_filepath=options.morgue_filepath,
+                morgue_url=options.morgue_url,
+                character=options.character,
+                local_mode=options.local_mode,
+                old_altars=old_altars,
+            )
+            time.sleep(1)
     else:
-        # run_status_checker(
-        #     server,
-        #     printer,
-        #     morgue_filepath=options.morgue_filepath,
-        #     morgue_url=options.morgue_url,
-        #     character=options.character,
-        #     local_mode=options.local_mode,
-        # )
         run_bot(
             server,
             printer,
