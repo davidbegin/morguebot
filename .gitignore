@@ -4,3 +4,4 @@
 *.swp
 *.swn
 .morguebot
+.build/

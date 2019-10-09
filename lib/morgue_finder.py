@@ -25,8 +25,10 @@ def fetch_morgue_file(
         print(f"\033[37;1mUsing morgue_filepath: {morgue_filepath}\033[0m")
         return open(morgue_filepath).read()
     else:
-        if morgue_url is None:
+        if character and morgue_url is None:
             morgue_url = _find_morgue_url(character)
+        if morgue_url is None:
+            morgue_url = _find_morgue_url()
 
         print(f"\033[037;1mUsing morgue_url: {morgue_url}\033[0m")
         return _fetch_online_morgue(morgue_url)

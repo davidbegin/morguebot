@@ -68,7 +68,10 @@ def _respond_to_irc(morgue_file, server, printer):
     # How do we wan to control these prints better
     print(irc_response)
 
-    if irc_response[1] == "PRIVMSG":
+    if len(irc_response) < 2:
+        # print(irc_response)
+        pass
+    elif irc_response[1] == "PRIVMSG":
         process_msg(printer, irc_response, morgue_file)
 
     # TODO: is the 2nd item in the split IRC response array always the type???
