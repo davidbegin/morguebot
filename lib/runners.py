@@ -15,12 +15,6 @@ def run_command(
     local_mode=False,
 ):
 
-    # import requests
-    # x = requests.get("http://crawl.akrasiac.org/scoring/all-players.html")
-    # # x = requests.get("http://crawl.akrasiac.org:8080/#lobby")
-    # # x = requests.get("http://crawl.akrasiac.org/scoring/top-N.html")
-    # y = x.text
-    # import pdb; pdb.set_trace()
     morgue_file = fetch_morgue_file(
         morgue_filepath=morgue_filepath,
         morgue_url=morgue_url,
