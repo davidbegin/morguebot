@@ -4,17 +4,21 @@ from lib.morgue_parser import fetch_altars
 
 
 def validate_seed(character):
-    old_seed = _fetch_seed(character.character)
+    pass
+    # old_seed = _fetch_seed(character.character)
 
-    if old_seed != character.seed:
-        print("New Seeds!")
-        _store_seed(character.character, character.seed)
+    # if old_seed != character.seed:
+    #     print("New Seeds!")
+    #     _store_seed(character.character, character.seed)
 
 
 # Fun Fact: There are currently 25 gods in DC
 def check_for_new_gods(character, printer):
     old_altars = _fetch_gods(character.character)
     altars = set(fetch_altars(character.morgue_file()))
+
+    print(f"old_altars: {old_altars}")
+    print(f"altars: {altars}")
 
     if len(altars) > len(old_altars):
         new_altars = altars.difference(set(old_altars))
@@ -48,8 +52,12 @@ def _fetch_gods(character):
     response = client.get_item(
         TableName=TABLE_NAME, Key={"character": {"S": character}}
     )
-    if "gods" in response["Item"]:
-        return response["Item"]["gods"]["SS"]
+
+    if "Item" in response:
+        if "gods" in response["Item"]:
+            return response["Item"]["gods"]["SS"]
+        else:
+            return []
     else:
         return []
 

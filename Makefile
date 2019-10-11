@@ -9,18 +9,15 @@ l:
 		black bot.py
 
 deps:
-	virtualenv .morguebotdeploy
+	virtualenv .morguebotd2
 	( source /Users/begin/code/morguebot/.mdeploy/bin/activate;)
 	pip install -r requirements/runtime.txt
 
-
-
-
 artifact:
-	# cd /Users/begin/code/morguebot/.morguebot2/lib/python3.7/site-packages/; zip -r9 ../../../../build/dependencies.zip .;
-	# cp build/dependencies.zip build/handler.zip
+	cd /Users/begin/code/morguebot/.morguebot2/lib/python3.7/site-packages/; zip -r9 ../../../../build/dependencies.zip .;
+	cp build/dependencies.zip build/handler.zip
 	zip -rg build/handler.zip lib/
-	zip -g build/handler.zip handler.py
+	zip -g build/handler.zip lambda_handler.py
 
 
 deploy: artifact

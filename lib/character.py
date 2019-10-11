@@ -3,6 +3,8 @@ import sys
 import requests
 
 from lib.morgue_parser import fetch_seed
+from lib.morgue_parser import fetch_turns
+from lib.morgue_saver import morgue_saver
 
 # Can we curl the lobby and get a random user???
 # http://crawl.akrasiac.org:8080/#lobby
@@ -25,15 +27,19 @@ class Character:
         self.morgue_url = morgue_url
         self.character = character
         self.local_mode = local_mode
-
         self._find_character_and_morguefile()
-        self._find_seed()
 
+    # I want to Save Here
     def morgue_file(self):
         if self.local_mode:
-            return open(self.morgue_filepath).read()
+            morgue = open(self.morgue_filepath).read()
         else:
-            return self._fetch_online_morgue(self.morgue_url)
+            morgue = self._fetch_online_morgue(self.morgue_url)
+        self.seed = fetch_seed(morgue)
+        self.turns = fetch_turns(morgue)
+
+        morgue_saver(self, morgue)
+        return morgue
 
     def _find_character_and_morguefile(self):
         if self.local_mode:
@@ -62,9 +68,6 @@ class Character:
     def _find_morgue_filepath(self):
         morgue_folder = os.environ.get("MORGUE_FOLDER", DEFAULT_MORGUE_FOLDER)
         return f"{morgue_folder}/{self.character}.txt"
-
-    def _find_seed(self):
-        self.seed = fetch_seed(self.morgue_file())
 
     # TODO: add suggestions for fun!
     def _fetch_online_morgue(self, url):

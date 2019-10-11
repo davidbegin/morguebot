@@ -29,8 +29,11 @@ def _handshake(server):
 
 
 def connect_to_twitch():
-    connection_data = ("irc.chat.twitch.tv", 6667)
-    server = socket.socket()
-    server.connect(connection_data)
-    _handshake(server)
-    return server
+    if "MORGUEBOT_TWITCH_OAUTH_TOKEN" in os.environ:
+        connection_data = ("irc.chat.twitch.tv", 6667)
+        server = socket.socket()
+        server.connect(connection_data)
+        _handshake(server)
+        return server
+    else:
+        print("Not connecting to Twitch")

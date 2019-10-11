@@ -108,6 +108,12 @@ def fetch_seed(morgue_file):
         return m.group(0)
 
 
+def fetch_turns(morgue_file):
+    m = re.search(f".* Turns:\s(.*),.*", str(morgue_file))
+    if m:
+        return m.group(1)
+
+
 def fetch_overview(morgue_file):
     m = re.search(f".* Turns:\s(.*)", str(morgue_file))
     if m:
