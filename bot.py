@@ -55,7 +55,7 @@ def main():
     )
 
     if options.exec_command:
-        execute_command(printer, f"!{options.exec_command}", character.morgue_file())
+        execute_command(printer, f"!{options.exec_command}", character)
     elif options.status_checker:
         while True:
             validate_seed(character)
