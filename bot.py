@@ -8,8 +8,6 @@ from lib.command_parser import execute_command
 from lib.irc_connector import connect_to_twitch
 from lib.printer import Printer
 from lib.runners import run_bot
-from lib.morgue_finder import fetch_morgue_file
-from lib.morgue_parser import fetch_altars
 
 from lib.character import Character
 from lib.status_checkers import check_for_new_gods
@@ -64,14 +62,7 @@ def main():
             check_for_new_gods(character, printer)
             time.sleep(3)
     else:
-        run_bot(
-            server,
-            printer,
-            morgue_filepath=options.morgue_filepath,
-            morgue_url=options.morgue_url,
-            character=options.character,
-            local_mode=options.local_mode,
-        )
+        run_bot(server, printer, character=character)
 
 
 if __name__ == "__main__":

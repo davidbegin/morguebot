@@ -3,8 +3,6 @@ import json
 from lib.irc_connector import connect_to_twitch
 from lib.printer import Printer
 from lib.runners import run_status_checker
-from lib.morgue_finder import fetch_morgue_file
-from lib.morgue_parser import fetch_altars
 from lib.command_parser import execute_command
 from lib.character import Character
 from lib.status_checkers import check_for_new_gods

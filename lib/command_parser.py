@@ -27,18 +27,17 @@ COMMANDS_WITH_NO_ARGS = (
 
 # This is not a Parser
 # it is an exeuctor
-
-
-def process_msg(printer, irc_response, morgue_file):
+def process_msg(printer, irc_response, character):
     user, msg = _parse_user_and_msg(irc_response)
 
     if _is_command_msg(msg):
-        execute_command(printer, msg, morgue_file)
+        execute_command(printer, msg, character)
     else:
         print(f"{user}: {msg}")
 
 
-def execute_command(printer, msg, morgue_file):
+def execute_command(printer, msg, character):
+    morgue_file = character.morgue_file()
     split_command = msg.split()
     command = split_command[0]
 

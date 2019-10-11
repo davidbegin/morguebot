@@ -1,0 +1,3 @@
+name: morguebot
+runtime: python
+description: Parse Dungeon Crawl Morgue Files
