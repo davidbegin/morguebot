@@ -102,6 +102,12 @@ def fetch_resistance(morgue_file, resistance):
 # ========================================================================================
 
 
+def fetch_seed(morgue_file):
+    m = re.search(f"Game seed:\s(.*)", str(morgue_file))
+    if m:
+        return m.group(0)
+
+
 def fetch_overview(morgue_file):
     m = re.search(f".* Turns:\s(.*)", str(morgue_file))
     if m:

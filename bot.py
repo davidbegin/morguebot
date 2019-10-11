@@ -4,13 +4,16 @@ import time
 
 from optparse import OptionParser
 
+from lib.command_parser import execute_command
 from lib.irc_connector import connect_to_twitch
 from lib.printer import Printer
 from lib.runners import run_bot
-from lib.runners import run_command
-from lib.runners import run_status_checker
 from lib.morgue_finder import fetch_morgue_file
 from lib.morgue_parser import fetch_altars
+
+from lib.character import Character
+from lib.status_checkers import check_for_new_gods
+from lib.status_checkers import validate_seed
 
 
 def main():
@@ -42,38 +45,24 @@ def main():
     (options, args) = parser.parse_args()
 
     server = connect_to_twitch()
-    printer = Printer(server, disable_twitch=options.disable_twitch)
+    printer = Printer(
+        server, disable_twitch=options.disable_twitch, character=options.character
+    )
+
+    character = Character(
+        morgue_filepath=options.morgue_filepath,
+        morgue_url=options.morgue_url,
+        character=options.character,
+        local_mode=options.local_mode,
+    )
 
     if options.exec_command:
-        run_command(
-            f"!{options.exec_command}",
-            server,
-            printer,
-            morgue_filepath=options.morgue_filepath,
-            morgue_url=options.morgue_url,
-            character=options.character,
-            local_mode=options.local_mode,
-        )
+        execute_command(printer, f"!{options.exec_command}", character.morgue_file())
     elif options.status_checker:
-        morgue_file = fetch_morgue_file(
-            morgue_filepath=options.morgue_filepath,
-            morgue_url=options.morgue_url,
-            character=options.character,
-            local_mode=options.local_mode,
-        )
-        old_altars = set(fetch_altars(morgue_file))
-
         while True:
-            run_status_checker(
-                server,
-                printer,
-                morgue_filepath=options.morgue_filepath,
-                morgue_url=options.morgue_url,
-                character=options.character,
-                local_mode=options.local_mode,
-                old_altars=old_altars,
-            )
-            time.sleep(1)
+            validate_seed(character)
+            check_for_new_gods(character, printer)
+            time.sleep(3)
     else:
         run_bot(
             server,

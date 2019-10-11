@@ -49,3 +49,7 @@ You can disable sending bot messages to twitch and output to STDOUT with `-d` or
 ```
 python bot.py -e mutations -d
 ```
+
+## Deployed Architecture
+
+![Morguebot](images/MorgueArch.png)

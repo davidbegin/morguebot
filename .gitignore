@@ -3,6 +3,6 @@
 *.pyo
 *.swp
 *.swn
-.morguebot
+.morguebot*
 build/
 logs/

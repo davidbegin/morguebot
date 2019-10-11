@@ -17,9 +17,8 @@ deps:
 
 
 artifact:
-	# cd /Users/begin/code/morguebot/.morguebot/lib/python3.7/site-packages/; zip -r9 ../../../../build/dependencies.zip .;
+	# cd /Users/begin/code/morguebot/.morguebot2/lib/python3.7/site-packages/; zip -r9 ../../../../build/dependencies.zip .;
 	# cp build/dependencies.zip build/handler.zip
-
 	zip -rg build/handler.zip lib/
 	zip -g build/handler.zip handler.py
 

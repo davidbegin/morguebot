@@ -27,9 +27,10 @@ ALIASES = {"rF": "rFire", "rE": "rElec", "rC": "rCold", "rP": "rPois", "MR": "TO
 
 
 class Printer:
-    def __init__(self, server, disable_twitch=False):
+    def __init__(self, server, disable_twitch=False, character=None):
         self.server = server
         self.disable_twitch = disable_twitch
+        self.character = character
 
     def find_aliases(name):
         pass

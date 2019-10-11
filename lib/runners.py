@@ -3,57 +3,8 @@ import time
 from lib.command_parser import execute_command
 from lib.command_parser import process_msg
 from lib.morgue_finder import fetch_morgue_file
-from lib.status_checkers import check_for_new_gods
 from lib.file_watcher import watch_for_changes
 from lib.morgue_parser import fetch_altars
-
-
-def run_command(
-    command,
-    server,
-    printer,
-    morgue_filepath=None,
-    morgue_url=None,
-    character=None,
-    local_mode=False,
-):
-
-    morgue_file = fetch_morgue_file(
-        morgue_filepath=morgue_filepath,
-        morgue_url=morgue_url,
-        character=character,
-        local_mode=local_mode,
-    )
-    execute_command(printer, command, morgue_file)
-
-
-# TODO: I don't like how this has an old_altars input
-# since it will never be used, but it does fix the problem
-def run_status_checker(
-    server,
-    printer,
-    morgue_filepath=None,
-    morgue_url=None,
-    character=None,
-    local_mode=None,
-    old_altars=None,
-):
-    # We Request the morgue file everytime
-    # To get the latest data
-    morgue_file = fetch_morgue_file(
-        morgue_filepath=morgue_filepath,
-        morgue_url=morgue_url,
-        character=character,
-        local_mode=local_mode,
-    )
-
-    # TODO: figure out this ordering
-
-    # Where do want to save state?
-    # We could save morgue file in S3
-    # We could create hash of the morgue, and compare if it changed
-    # We could start extract actual data into something like DynamoDB
-    old_altars, _ = check_for_new_gods(old_altars, morgue_file, printer)
 
 
 def _respond_to_irc(morgue_file, server, printer):
@@ -97,8 +48,6 @@ def run_bot(
             character=character,
             local_mode=local_mode,
         )
-
-        # old_altars, _ = check_for_new_gods(old_altars, morgue_file, printer)
 
         _respond_to_irc(morgue_file, server, printer)
 
