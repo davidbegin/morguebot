@@ -1,36 +1,7 @@
 import pulumi
+from pulumi import Output
+import json
 from pulumi_aws import s3, lambda_, iam
-
-# ============
-# S3
-# ============
-
-# Create an AWS resource (S3 Bucket)
-bucket = s3.Bucket('morgue-files')
-
-
-# Export the name of the bucket
-pulumi.export('bucket_name',  bucket.id)
-morgue_file_bucket_policy = """{
-    "Version": "2012-10-17",
-    "Id": "MYBUCKETPOLICY",
-    "Statement": [
-        {
-            "Sid": "Allow",
-            "Effect": "Allow",
-            "Principal": {
-                "AWS": [
-                    "arn:aws:iam::851075464416:role/lambda_exec_role",
-                    "arn:aws:iam::851075464416:role/lambdaRole-e999bda"
-                ]
-            },
-            "Action": "s3:*",
-            "Resource": "arn:aws:s3:::morgue-files-2944dfb/*"
-        }
-    ]
-}
-"""
-s3.BucketPolicy("morgue-file-bucket-policy", bucket=bucket.id, policy=morgue_file_bucket_policy)
 
 # ============
 # IAM
@@ -53,10 +24,69 @@ lambda_role = iam.Role('lambdaRole',
 )
 
 
-# TODO: comeback and fix this string interpolation
-lambda_role_policy = iam.RolePolicy('lambdaRolePolicy',
-    role=lambda_role.id,
-    policy="""{
+# ============
+# S3
+# ============
+
+bucket = s3.Bucket('morgue-files')
+pulumi.export('bucket_name',  bucket.id)
+pulumi.export('bucket_arn',  bucket.arn)
+
+bucket_arn = bucket.arn
+lambda_role_arn = lambda_role.arn
+
+def morgue_file_bucket_policy(bucket_arn, lambda_role_arn):
+    return json.dumps({
+        "Version": "2012-10-17",
+        "Id": "MYBUCKETPOLICY",
+        "Statement": [
+            {
+                "Sid": "Allow",
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": [
+                        lambda_role_arn
+                        ]
+                    },
+                "Action": "s3:*",
+                "Resource": f"{bucket_arn}/*"
+                }
+            ]
+        })
+
+
+# signed_blob_url = Output.all(storage_account.name, storage_container.name, blob.name, account_sas.sas) \
+#     .apply(lambda args: f"https://{args[0]}.blob.core.windows.net/{args[1]}/{args[2]}{args[3]}")
+
+policy = Output.all(lambda_role.arn, bucket.arn) \
+        .apply(lambda args: json.dumps({
+            "Version": "2012-10-17",
+            "Id": "MYBUCKETPOLICY",
+            "Statement": [
+                {
+                    "Sid": "Allow",
+                    "Effect": "Allow",
+                    "Principal": {
+                        "AWS": [
+                            args[0]
+                            ]
+                        },
+                    "Action": "s3:*",
+                    "Resource": f"{args[1]}/*"
+                    }
+                ]
+            })
+            )
+
+s3.BucketPolicy(
+    "morgue-file-bucket-policy",
+    bucket=bucket.id,
+    policy=policy
+)
+
+
+def lambda_role_policy(bucket_arn):
+    return json.dumps({
         "Version": "2012-10-17",
         "Statement": [
           {
@@ -73,13 +103,17 @@ lambda_role_policy = iam.RolePolicy('lambdaRolePolicy',
             "Action": [
                 "s3:PutObject"
             ],
-            "Resource": "arn:aws:s3:::morgue-files-2944dfb"
+            "Resource": bucket_arn
           }
         ]
-    }"""
-)
+    })
 
-# ===== bucket.id
+
+# TODO: comeback and fix this string interpolation
+lambda_role_policy = iam.RolePolicy('lambdaRolePolicy',
+    role=lambda_role.id,
+    policy=bucket_arn.apply(lambda_role_policy)
+)
 
 # ============
 # Lambda
@@ -97,7 +131,6 @@ hello_world_fn = lambda_.Function('morgue-saver',
     environment={
         "variables": {
             "MORGUE_BUCKETNAME": bucket.id
-            }
         }
+    }
 )
-

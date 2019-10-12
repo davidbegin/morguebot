@@ -1,0 +1,2 @@
+{ "Version": "2012-10-17", "Id": "MYBUCKETPOLICY", "Statement": [ { "Sid": "Allow", "Effect": "Allow", "Principal": { "AWS": [ "arn:aws:iam::851075464416:role/lambdaRole-e999bda", "arn:aws:iam::851075464416:role/lambda_exec_role" ] }, "Action": "s3:*", "Resource": "arn:aws:s3:::morgue-files-2944dfb/*" } ] }
+

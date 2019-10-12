@@ -1,4 +1,7 @@
 class FakePrinter:
+    def __init__(self):
+        self.new_altars = None
+
     def print_max_resistance(self, morgue_file):
         pass
 
@@ -30,7 +33,7 @@ class FakePrinter:
         pass
 
     def print_missionary(self, new_altars):
-        pass
+        self.new_altars = altars
 
     def print_help(self, commands):
         pass
