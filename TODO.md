@@ -19,8 +19,6 @@ Deploy:
 
 Deployment TODO:
 ================
-  - Ship Artifact with a version number to S3
-  - Used S3 Lambda Artifact for Deploying all Lambdas
   - Figure a way to encrypt Secrets with KMS using Pulumi for Oauth token
   - Create Lambda that has S3 Event Source for picking up and Parsing new Morgue Files
   - Have a Lambda call out to SNS -> SNS Topic -> SQS -> SQS Event Source Lambda for different Bot Commands

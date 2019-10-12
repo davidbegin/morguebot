@@ -41,7 +41,7 @@ class Character:
         self.seed = fetch_seed(morgue)
         self.turns = fetch_turns(morgue)
 
-        morgue_saver(self, morgue)
+        # morgue_saver(self, morgue)
         return morgue
 
     def _find_character_and_morguefile(self):

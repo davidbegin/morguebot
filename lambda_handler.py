@@ -10,7 +10,8 @@ import boto3
 
 
 def save_morgue(event, context):
-    print("Received event: " + json.dumps(event, indent=2))
+    print("SAVE tHE MORGUE!!!!!!!!!")
+    # print("Received event: " + json.dumps(event, indent=2))
 
     server = connect_to_twitch()
 
