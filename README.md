@@ -13,24 +13,30 @@ Then you can start the bot
 python bot.py
 ```
 
-And in chat !h?, should print out the available commands
+And in chat `!h?`, should print out the available commands
 
 ## Morgue File Finding Options
 
-You can fetch a local Morgue File
-parser.add_option("-c", "--char", action="store", type="string", dest="character")
-
-Or You can Fetch a Morgue File online from
-f"http://crawl.akrasiac.org/rawdata/{character}/{character}.txt"
+Here are the the flags used to determine the Morgue File Location.
 ```
-    parser.add_option("-c", "--char", action="store", type="string", dest="character")
-    parser.add_option("-l", "--local", action="store_true", dest="local_mode")
-    parser.add_option(
-        "-m", "--morgue-file", action="store", type="string", dest="morgue_filepath"
-    )
-    parser.add_option(
-        "-u", "--morgue-url", action="store", type="string", dest="morgue_url"
-    )
+python bot.py --char beginbot
+python bot.py -c beginbot
+# This will grab the Morgue File from: http://crawl.akrasiac.org/rawdata/beginbot/beginbot.txt
+
+python bot.py --char beginbot --local
+python bot.py --char beginbot -l
+# This will grab the Morgue Locally using the default morgue location
+# /Users/{whoami}/Library/Application Support/Dungeon Crawl Stone Soup/morgue
+
+# Or you can pass in a morgue folder to look for the user locally
+MORGUE_FOLDER="/Users/youngthug/songs" python bot.py -c beginbot -l
+# /Users/youngthug/songs/beginbot.txt
+
+# OR you can pass in a morgue file directly
+python bot.py --morgue-file /Users/youngthug/songs/beginbot.txt
+
+# OR you can pass in a morgue url directly
+python bot.py --morgue-url http://crawl.akrasiac.org/rawdata/beginbot/beginbot.txt
 ```
 
 ## Bot Mode:

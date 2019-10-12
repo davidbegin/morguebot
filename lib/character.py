@@ -1,21 +1,27 @@
 import os
 import sys
+import subprocess
+
 import requests
 
 from lib.morgue_parser import fetch_seed
 from lib.morgue_parser import fetch_turns
 from lib.morgue_saver import morgue_saver
 
-# Can we curl the lobby and get a random user???
-# http://crawl.akrasiac.org:8080/#lobby
-# TODO: find a random user from the lobby, if you don't supply one
-# Print the Location
-# TODO: Look up Platform defaults
+
+def _find_user():
+    process = subprocess.Popen("whoami", stdout=subprocess.PIPE)
+    output, error = process.communicate()
+    return output.decode("utf-8").strip()
 
 
-DEFAULT_MORGUE_FOLDER = (
-    f"/Users/begin/Library/Application Support/Dungeon Crawl Stone Soup/morgue"
-)
+if "DEFAULT_MORGUE_FOLDER" in os.environ:
+    DEFAULT_MORGUE_FOLDER = os.environ["DEFAULT_MORGUE_FOLDER"]
+else:
+    DEFAULT_MORGUE_FOLDER = (
+        f"/Users/{_find_user()}/Library/Application Support/Dungeon Crawl Stone Soup/morgue"
+    )
+
 MORGUE_DOMAIN = "http://crawl.akrasiac.org/rawdata"
 
 
@@ -29,7 +35,6 @@ class Character:
         self.local_mode = local_mode
         self._find_character_and_morguefile()
 
-    # I want to Save Here
     def morgue_file(self):
         if self.local_mode:
             morgue = open(self.morgue_filepath).read()

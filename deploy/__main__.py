@@ -3,6 +3,10 @@ from pulumi import Output
 import json
 from pulumi_aws import s3, lambda_, iam
 
+config = pulumi.Config()
+
+print(config.require_secret('oauth_token'))
+
 # ============
 # IAM
 # ============

@@ -6,3 +6,4 @@
 .morguebot*
 build/
 logs/
+one.py

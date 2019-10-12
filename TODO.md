@@ -4,6 +4,7 @@ TODO:
   - Figure out a cool plan for color library
   - Build a system for banning users from calling commands
   - Add error handling around the program crashing
+  - Update the README
 
 
 Deployment TODO:
@@ -17,6 +18,7 @@ Deployment TODO:
 
 Dungeon Crawl Specific Features:
 ================================
+  - We need to update Overview, like give us some details about the character for real, like an overview
   - Add a system for calculating your max resistances
   - Add a system for calculating max weapon amounts
   - Make the bot Celebrate Level upgrades
