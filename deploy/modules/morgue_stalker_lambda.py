@@ -7,7 +7,7 @@ config = pulumi.Config()
 
 
 s3_lambda_role = iam.Role(
-    "lambdaRole",
+    "morgue-stalker-role",
     assume_role_policy="""{
         "Version": "2012-10-17",
         "Statement": [
@@ -46,7 +46,7 @@ def lambda_role_policy(bucket_arn):
 
 # TODO: comeback and fix this string interpolation
 lambda_role_policy = iam.RolePolicy(
-    "lambdaRolePolicy",
+    "morgue-stalker-role-policy",
     role=s3_lambda_role.id,
     policy=bucket.arn.apply(lambda_role_policy),
 )
@@ -61,10 +61,10 @@ lambda_role_policy = iam.RolePolicy(
 
 # TODO: Add the source_hash_code thang to trigger updates
 cloudwatch_lambda = lambda_.Function(
-    "morgue-saver",
+    "morgue-stalker",
     role=s3_lambda_role.arn,
     runtime="python3.6",
-    handler="lambda_handler.save_morgue",
+    handler="morgue_stalker.handler",
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
     timeout=200,

@@ -8,11 +8,17 @@ from modules.dynamodb import dynamodb_table
 
 from modules.s3 import bucket
 
-from modules.s3_lambda import morgue_parser_lambda_role
-from modules.s3_lambda import morgue_parser_lambda
+from modules.morgue_bot_lambda import morgue_parser_lambda_role
+from modules.morgue_bot_lambda import morgue_parser_lambda
 
-from modules.cloudwatch_lambda import cloudwatch_lambda
+from modules.morgue_stalker_lambda import cloudwatch_lambda
 
 from modules.s3 import allow_s3_bucket_access
+
+
+import modules.xl_bot_lambda
+import modules.god_bot_lambda
+import modules.morgue_stalker_lambda
+import modules.twitch_chat_bot_lambda
 
 allow_s3_bucket_access(bucket, [morgue_parser_lambda_role])

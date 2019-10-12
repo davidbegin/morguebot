@@ -5,9 +5,7 @@ l:
 		black deploy/*.py
 		black lib/
 		black test/
-		black bot.py
-		black lambda_handler.py
-		black morgue_parser.py
+		black *.py
 		black deploy/ --exclude venv
 		black deploy/modules
 
