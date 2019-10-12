@@ -8,6 +8,7 @@ from lib.status_checkers import check_for_new_gods
 
 import boto3
 
+
 def save_morgue(event, context):
     print("Received event: " + json.dumps(event, indent=2))
 
@@ -47,6 +48,7 @@ def lambda_handler(event, context):
     character = Character(character=character)
     execute_command(printer, command, character.morgue_file())
 
+
 def overview(event, context):
     print("Received event: " + json.dumps(event, indent=2))
     server = connect_to_twitch()
@@ -58,6 +60,7 @@ def overview(event, context):
     printer = Printer(server, disable_twitch=False, character=character)
     character = Character(character=character)
     execute_command(printer, "!overview", character.morgue_file())
+
 
 def status(event, context):
     print("Received event: " + json.dumps(event, indent=2))

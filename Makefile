@@ -1,5 +1,3 @@
-
-
 t:
 		python3 -m pytest test/ -s
 
@@ -7,21 +5,38 @@ l:
 		black lib/
 		black test/
 		black bot.py
+		black lambda_handler.py
 
-deps:
-	virtualenv .morguebotd2
-	( source /Users/begin/code/morguebot/.mdeploy/bin/activate;)
-	pip install -r requirements/runtime.txt
+# Not Working
+# deps:
+# 	virtualenv .morguebotd2
+# 	( source /Users/begin/code/morguebot/.mdeploy/bin/activate;)
+# 	pip install -r requirements/runtime.txt
 
-artifact:
+# We needs this to take a random thang
+# make artifact ARTIFACT_NAME=handler422.zip
+dependencies:
 	cd /Users/begin/code/morguebot/.morguebot2/lib/python3.7/site-packages/; zip -r9 ../../../../build/dependencies.zip .;
-	cp build/dependencies.zip build/handler.zip
-	zip -rg build/handler.zip lib/
-	zip -g build/handler.zip lambda_handler.py
+
+# artifact: dependencies
+artifact:
+	cp build/dependencies.zip build/$(ARTIFACT_NAME)
+	zip -rg build/$(ARTIFACT_NAME) lib/
+	zip -g build/$(ARTIFACT_NAME) lambda_handler.py
 
 
-deploy: artifact
-	 aws lambda update-function-code --function-name bot --zip-file fileb://build/handler.zip
+# make artifact_deploy ARTIFACT_NAME=handler422.zip
+artifact_deploy: artifact
+	aws s3 cp build/$(ARTIFACT_NAME) s3://morgue-artifacts/$(ARTIFACT_NAME)
+	cd deploy; source venv/bin/activate; echo $(ARTIFACT_NAME) | pulumi config set artifact_name; pulumi up --yes
+
+
+
+
+# cat my_key.pub | pulumi config set publicKey
+# make deploy ARTIFACT_NAME=handler422.zip
+# deploy:
+# 	 # aws lambda update-function-code --function-name bot --zip-file fileb://build/handler.zip
 
 
 invoke:

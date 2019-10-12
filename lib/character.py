@@ -18,9 +18,7 @@ def _find_user():
 if "DEFAULT_MORGUE_FOLDER" in os.environ:
     DEFAULT_MORGUE_FOLDER = os.environ["DEFAULT_MORGUE_FOLDER"]
 else:
-    DEFAULT_MORGUE_FOLDER = (
-        f"/Users/{_find_user()}/Library/Application Support/Dungeon Crawl Stone Soup/morgue"
-    )
+    DEFAULT_MORGUE_FOLDER = f"/Users/{_find_user()}/Library/Application Support/Dungeon Crawl Stone Soup/morgue"
 
 MORGUE_DOMAIN = "http://crawl.akrasiac.org/rawdata"
 

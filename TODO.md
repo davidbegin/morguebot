@@ -7,6 +7,16 @@ TODO:
   - Update the README
 
 
+Build a S3 Bucket for Artifacts
+Use S3 Artifacts For Deploying Lambdas
+Deploy:
+=======,
+  - Morgue parser/store/notifier -> DynamoDB
+  - Twitch Chat -> Oauth 
+  - XL Lambda -> Triggered from SQS SNS Topic
+  - New Gods -> Triggered from SQS SNS Topic
+
+
 Deployment TODO:
 ================
   - Ship Artifact with a version number to S3
@@ -36,3 +46,10 @@ Goals:
   - Easy instructions for others to user
   - Deployed, and the !join system like !lomlobot
   - Every file having some decent tests
+  - One of Each Event Source for Lambda
+    - Kinesis
+    - SQS / SNS
+    - DynamoDB
+    - S3
+    - CloudWatch
+
