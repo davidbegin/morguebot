@@ -90,10 +90,9 @@ def morgue_parser(event, context):
     # You should talk to your DynamoDB table
     character = Character(character=character_name)
 
-    # OR this will be S3!?!?!?!
-    db = MorgueDB(character=character)
     skills = fetch_skills(character.morgue_file())
-
+    db = MorgueDB(character=character)
     db._store_skills(skills)
+
     # Save Skills
     print(skills)

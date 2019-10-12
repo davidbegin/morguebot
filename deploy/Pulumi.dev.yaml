@@ -1,5 +1,5 @@
 config:
   aws:region: us-west-2
-  morguebot:artifact_name: handler439.zip
+  morguebot:artifact_name: handler441.zip
   morguebot:oauth_token:
     secure: AAABACQDedJwghHPhg14MkUpciTvKeBtrsRuOX4PZvZwmgpvyPYoy6bBlBwcENXOpLe2yRnKqT7HBEWmh0o8J8bmIQ==
