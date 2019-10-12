@@ -80,19 +80,3 @@ def status(event, context):
     printer = Printer(server, disable_twitch=False, character=character)
     character = Character(character=character)
     check_for_new_gods(character, printer)
-
-
-def morgue_parser(event, context):
-    print("Received event: " + json.dumps(event, indent=2))
-    print(context)
-    character_name = os.environ.get("CHARACTER", None)
-    print(f"character_name: {character_name}")
-    # # You should talk to your DynamoDB table
-    character = Character(character=character_name)
-
-    # skills = fetch_skills(character.morgue_file())
-    # db = MorgueDB(character=character)
-    # db._store_skills(skills)
-
-    # # Save Skills
-    # print(skills)
