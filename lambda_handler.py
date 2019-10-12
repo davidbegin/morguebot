@@ -87,12 +87,12 @@ def morgue_parser(event, context):
     print(context)
     character_name = os.environ.get("CHARACTER", None)
     print(f"character_name: {character_name}")
-    # You should talk to your DynamoDB table
+    # # You should talk to your DynamoDB table
     character = Character(character=character_name)
 
-    skills = fetch_skills(character.morgue_file())
-    db = MorgueDB(character=character)
-    db._store_skills(skills)
+    # skills = fetch_skills(character.morgue_file())
+    # db = MorgueDB(character=character)
+    # db._store_skills(skills)
 
-    # Save Skills
-    print(skills)
+    # # Save Skills
+    # print(skills)

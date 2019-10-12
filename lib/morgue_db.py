@@ -2,7 +2,7 @@ TABLE_NAME = "morguebot"
 
 
 class MorgueDB:
-   def __init__(self, character=character):
+    def __init__(self, character=character):
         self.character = character
         self.client = boto3.client("dynamodb")
 
