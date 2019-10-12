@@ -69,10 +69,10 @@ morgue_parser_lambda_role_policy = iam.RolePolicy(
 
 # TODO: Add the source_hash_code thang to trigger updates
 morgue_parser_lambda = lambda_.Function(
-    "morgue-parser",
+    "morgue-bot",
     role=morgue_parser_lambda_role.arn,
     runtime="python3.6",
-    handler="morgue_parser.handler",
+    handler="morgue_bot.handler",
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
     timeout=200,

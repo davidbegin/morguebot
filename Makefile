@@ -14,16 +14,22 @@ l:
 dependencies:
 	cd /Users/begin/code/morguebot/.morguebot2/lib/python3.7/site-packages/; zip -r9 ../../../../build/dependencies.zip .;
 
+
+ARTIFACT_NAME := handler_$(shell date +%s).zip
 # artifact: dependencies
 artifact:
 	cp build/dependencies.zip build/$(ARTIFACT_NAME)
 	zip -rg build/$(ARTIFACT_NAME) lib/
 	zip -g build/$(ARTIFACT_NAME) lambda_handler.py
-	zip -g build/$(ARTIFACT_NAME) morgue_parser.py
+	zip -g build/$(ARTIFACT_NAME) morgue_bot.py
+	zip -g build/$(ARTIFACT_NAME) morgue_stalker.py
+	zip -g build/$(ARTIFACT_NAME) twitch_chat_bot.py
+	zip -g build/$(ARTIFACT_NAME) xl_bot.py
+	zip -g build/$(ARTIFACT_NAME) god_bot.py
 
 
-# make artifact_deploy ARTIFACT_NAME=handler422.zip
-artifact_deploy: artifact
+# make artifact_deploy
+deploy: artifact
 	aws s3 cp build/$(ARTIFACT_NAME) s3://morgue-artifacts/$(ARTIFACT_NAME)
 	cd deploy; source venv/bin/activate; echo $(ARTIFACT_NAME) | pulumi config set artifact_name; pulumi up --yes
 
