@@ -29,6 +29,10 @@ s3_lambda_role = iam.Role(
     }""",
 )
 
+kms_key_arn = (
+    "arn:aws:kms:us-west-2:851075464416:key/6d11ced0-ca8c-4057-bc61-4fd8d27da705"
+)
+
 
 def lambda_role_policy(bucket_arn):
     return json.dumps(
@@ -43,7 +47,13 @@ def lambda_role_policy(bucket_arn):
                         "logs:PutLogEvents",
                     ],
                     "Resource": "arn:aws:logs:*:*:*",
-                }
+                },
+                {
+                    "Sid": "Allow",
+                    "Effect": "Allow",
+                    "Action": "kms:Decrypt",
+                    "Resource": kms_key_arn,
+                },
             ],
         }
     )
@@ -76,7 +86,9 @@ cloudwatch_lambda = lambda_.Function(
     environment={
         "variables": {
             "MORGUE_BUCKETNAME": bucket.id,
-            "TWITCH_OAUTH_TOKEN": twitch_oauth_token.ciphertext_blob,
+            "MORGUEBOT_TWITCH_OAUTH_TOKEN": twitch_oauth_token.ciphertext_blob,
+            "MORGUEBOT_BOT_NAME": "beginbotbot",
+            "MORGUEBOT_CHANNEL": "beginbot",
         }
     },
 )

@@ -74,7 +74,7 @@ class Printer:
             channel = "#beginbot"
 
             if msg:
-                self.server.send(
+                result = self.server.send(
                     bytes("PRIVMSG " + channel + " :" + msg + "\n", "utf-8")
                 )
 

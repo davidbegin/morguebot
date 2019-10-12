@@ -6,9 +6,9 @@ from base64 import b64decode
 
 def _handshake(server):
     # TODO: add error handling around not having the required environment variables
-    # TODO: add some conncection debug information
+    # TODO: add some connection debug information
     if "AWS_LAMBDA_FUNCTION_NAME" in os.environ:
-        print("We are going to unencrypt the Oauth Token!")
+        print("We are going to Decrypt the Oauth Token!")
 
         encrypted_token = os.environ["MORGUEBOT_TWITCH_OAUTH_TOKEN"]
         raw_token = boto3.client("kms").decrypt(
@@ -23,9 +23,9 @@ def _handshake(server):
 
     print(f"Connecting to #{channel} as {bot}")
 
-    server.send(bytes("PASS " + token + "\r\n", "utf-8"))
-    server.send(bytes("NICK " + bot + "\r\n", "utf-8"))
-    server.send(bytes("JOIN " + f"#{channel}" + "\r\n", "utf-8"))
+    print(server.send(bytes("PASS " + token + "\r\n", "utf-8")))
+    print(server.send(bytes("NICK " + bot + "\r\n", "utf-8")))
+    print(server.send(bytes("JOIN " + f"#{channel}" + "\r\n", "utf-8")))
 
 
 def connect_to_twitch():
