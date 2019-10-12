@@ -42,7 +42,9 @@ lambda_role_arn = lambda_role.arn
 
 # ========================================================================================
 
-kms_key_arn = "arn:aws:kms:us-west-2:851075464416:key/6d11ced0-ca8c-4057-bc61-4fd8d27da705"
+kms_key_arn = (
+    "arn:aws:kms:us-west-2:851075464416:key/6d11ced0-ca8c-4057-bc61-4fd8d27da705"
+)
 
 
 policy = Output.all(lambda_role.arn, bucket.arn, kms_key_arn).apply(
@@ -71,6 +73,7 @@ policy = Output.all(lambda_role.arn, bucket.arn, kms_key_arn).apply(
 )
 
 s3.BucketPolicy("morgue-file-bucket-policy", bucket=bucket.id, policy=policy)
+
 
 def lambda_role_policy(bucket_arn):
     return json.dumps(
@@ -118,8 +121,6 @@ morgue_save_lambda = lambda_.Function(
 )
 
 
-
-
 # ========================================================================================
 # MORGUE PARSER
 # ========================================================================================
@@ -161,14 +162,20 @@ def morgue_parser_lambda_role_policy(bucket_arn):
                     "Resource": "arn:aws:logs:*:*:*",
                 },
                 {"Effect": "Allow", "Action": ["s3:GetObject"], "Resource": bucket_arn},
-                {"Effect": "Allow", "Action": ["dynamodb:GetItem"], "Resource": "arn:aws:dynamodb:us-west-2:851075464416:table/morguebot"},
+                {
+                    "Effect": "Allow",
+                    "Action": ["dynamodb:GetItem", "dynamodb:UpdateItem"],
+                    "Resource": "arn:aws:dynamodb:us-west-2:851075464416:table/morguebot",
+                },
             ],
         }
     )
 
 
 morgue_parser_lambda_role_policy = iam.RolePolicy(
-    "morgue-parser-lambda-role-policy", role=morgue_parser_lambda_role.id, policy=bucket_arn.apply(morgue_parser_lambda_role_policy)
+    "morgue-parser-lambda-role-policy",
+    role=morgue_parser_lambda_role.id,
+    policy=bucket_arn.apply(morgue_parser_lambda_role_policy),
 )
 
 
@@ -177,7 +184,7 @@ morgue_parser_lambda = lambda_.Function(
     "morgue-parser",
     role=morgue_parser_lambda_role.arn,
     runtime="python3.6",
-    handler="lambda_handler.status",
+    handler="lambda_handler.morgue_parser",
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
     timeout=200,
