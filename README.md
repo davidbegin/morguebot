@@ -56,6 +56,14 @@ You can disable sending bot messages to twitch and output to STDOUT with `-d` or
 python bot.py -e mutations -d
 ```
 
+## Deploying
+
+```
+time make artifact_deploy ARTIFACT_NAME=handler_v1.zip 
+```
+
 ## Deployed Architecture
+
+More Info in the [Deploy README](deploy/README.md)
 
 ![Morguebot](images/MorgueArch.png)
