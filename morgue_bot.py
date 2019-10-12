@@ -6,7 +6,7 @@ from lib.morgue_db import MorgueDB
 
 # This should be getting a message about S3
 def handler(event, handler):
-    pass
+    print("I'm morgue_bot!")
     # if "character" in event.keys():
     #     character_name = event["character"]
     # else:
