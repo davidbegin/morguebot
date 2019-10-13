@@ -4,11 +4,10 @@ from pulumi import Output
 from modules.s3 import bucket
 from modules.kinesis import chat_stream
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
+from modules.iam import CREATE_CW_LOGS_POLICY
 from pulumi_aws import kms, iam, lambda_
 
 config = pulumi.Config()
-
-pulumi.log.info(f"{config.require_secret('oauth_token')}")
 
 key_id = "arn:aws:kms:us-west-2:851075464416:key/6d11ced0-ca8c-4057-bc61-4fd8d27da705"
 twitch_oauth_token = kms.Ciphertext(
@@ -28,15 +27,7 @@ lambda_role_policy = Output.all(bucket.arn, chat_stream.arn).apply(
         {
             "Version": "2012-10-17",
             "Statement": [
-                {
-                    "Effect": "Allow",
-                    "Action": [
-                        "logs:CreateLogGroup",
-                        "logs:CreateLogStream",
-                        "logs:PutLogEvents",
-                    ],
-                    "Resource": "arn:aws:logs:*:*:*",
-                },
+                CREATE_CW_LOGS_POLICY,
                 {
                     "Sid": "AllowKms",
                     "Effect": "Allow",
@@ -65,14 +56,8 @@ lambda_role_policy = iam.RolePolicy(
     "twitch-chat-bot-role-policy", role=s3_lambda_role.id, policy=lambda_role_policy
 )
 
-# ============
-# Lambda
-# ============
-
-
 # source_code_hash=None
 # https://morgue-artifacts.s3-us-west-2.amazonaws.com/handler.zip
-
 # TODO: Add the source_hash_code thang to trigger updates
 cloudwatch_lambda = lambda_.Function(
     "twitch-chat-bot",

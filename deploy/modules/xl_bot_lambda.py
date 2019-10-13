@@ -1,46 +1,20 @@
 import pulumi
 import json
 from modules.s3 import bucket
+from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
+from modules.iam import CREATE_CW_LOGS_POLICY
 from pulumi_aws import iam, lambda_
 
 config = pulumi.Config()
 
 
 s3_lambda_role = iam.Role(
-    "xl-bot-lambda-role",
-    assume_role_policy="""{
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Action": "sts:AssumeRole",
-                "Principal": {
-                    "Service": "lambda.amazonaws.com"
-                },
-                "Effect": "Allow",
-                "Sid": ""
-            }
-        ]
-    }""",
+    "xl-bot-lambda-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
 )
 
 
 def lambda_role_policy(bucket_arn):
-    return json.dumps(
-        {
-            "Version": "2012-10-17",
-            "Statement": [
-                {
-                    "Effect": "Allow",
-                    "Action": [
-                        "logs:CreateLogGroup",
-                        "logs:CreateLogStream",
-                        "logs:PutLogEvents",
-                    ],
-                    "Resource": "arn:aws:logs:*:*:*",
-                }
-            ],
-        }
-    )
+    return json.dumps({"Version": "2012-10-17", "Statement": [CREATE_CW_LOGS_POLICY]})
 
 
 # TODO: comeback and fix this string interpolation
@@ -50,14 +24,8 @@ lambda_role_policy = iam.RolePolicy(
     policy=bucket.arn.apply(lambda_role_policy),
 )
 
-# ============
-# Lambda
-# ============
-
-
 # source_code_hash=None
 # https://morgue-artifacts.s3-us-west-2.amazonaws.com/handler.zip
-
 # TODO: Add the source_hash_code thang to trigger updates
 cloudwatch_lambda = lambda_.Function(
     "xl-bot",

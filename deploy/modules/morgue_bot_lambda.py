@@ -1,5 +1,6 @@
 from modules.s3 import bucket
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
+from modules.iam import CREATE_CW_LOGS_POLICY
 
 import json
 
@@ -8,9 +9,6 @@ import pulumi
 
 config = pulumi.Config()
 
-# ========================================================================================
-# MORGUE PARSER
-# ========================================================================================
 morgue_parser_lambda_role = iam.Role(
     "morgue-bot-lambda-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
 )
@@ -21,15 +19,7 @@ def morgue_parser_lambda_role_policy(bucket_arn):
         {
             "Version": "2012-10-17",
             "Statement": [
-                {
-                    "Effect": "Allow",
-                    "Action": [
-                        "logs:CreateLogGroup",
-                        "logs:CreateLogStream",
-                        "logs:PutLogEvents",
-                    ],
-                    "Resource": "arn:aws:logs:*:*:*",
-                },
+                CREATE_CW_LOGS_POLICY,
                 {"Effect": "Allow", "Action": ["s3:*"], "Resource": bucket_arn},
                 {
                     "Effect": "Allow",
@@ -50,8 +40,6 @@ def morgue_parser_lambda_role_policy(bucket_arn):
     )
 
 
-# How do we hook this up to an S3 Object Notifcation
-
 morgue_parser_lambda_role_policy = iam.RolePolicy(
     "morgue-bot-lambda-role-policy",
     role=morgue_parser_lambda_role.id,
@@ -70,8 +58,6 @@ morgue_parser_lambda = lambda_.Function(
     timeout=200,
     environment={"variables": {"MORGUE_BUCKETNAME": bucket.id}},
 )
-
-# class pulumi_aws.lambda_.Permission(resource_name, opts=None, action=None, event_source_token=None, function=None, principal=None, qualifier=None, source_account=None, source_arn=None, statement_id=None, statement_id_prefix=None, __props__=None, __name__=None, __opts__=None
 
 lambda_.Permission(
     "AllowInvocationFromMorgueFileBucket",

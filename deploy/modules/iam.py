@@ -9,3 +9,9 @@ LAMBDA_ASSUME_ROLE_POLICY = {
         }
     ],
 }
+
+CREATE_CW_LOGS_POLICY = {
+    "Effect": "Allow",
+    "Action": ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"],
+    "Resource": "arn:aws:logs:*:*:*",
+}

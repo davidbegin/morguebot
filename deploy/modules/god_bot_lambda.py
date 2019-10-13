@@ -1,84 +1,53 @@
 import pulumi
+from pulumi import Output
 import json
 from modules.s3 import bucket
+from modules.kinesis import chat_stream
+from modules.sqs import gods_queue
 from pulumi_aws import iam, lambda_
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
+from modules.iam import CREATE_CW_LOGS_POLICY
 
 config = pulumi.Config()
 
+module_name = "god-bot"
 
 s3_lambda_role = iam.Role(
-    "god-bot-lambda-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
+    f"{module_name}-lambda-role",
+    assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY),
 )
 
-
-# bucket_policy = Output.all(s3_bucket.arn, role_arns).apply(
-#     lambda args: json.dumps(
-#         {
-#             "Version": "2012-10-17",
-#             "Id": "MorgueFileBucketPolicy",
-#             "Statement": [
-#                 {
-#                     "Sid": "Allow",
-#                     "Effect": "Allow",
-#                     "Principal": {"AWS": args[1]},
-#                     "Action": "s3:*",
-#                     "Resource": f"{args[0]}/*",
-#                 }
-#             ],
-#         }
-#     )
-# )
-
-
-def lambda_role_policy(bucket_arn):
-    return json.dumps(
+lambda_role_policy = Output.all(bucket.arn, gods_queue.arn, chat_stream.arn).apply(
+    lambda args: json.dumps(
         {
             "Version": "2012-10-17",
+            "Id": f"{module_name}-policy",
             "Statement": [
-                {
-                    "Effect": "Allow",
-                    "Action": [
-                        "logs:CreateLogGroup",
-                        "logs:CreateLogStream",
-                        "logs:PutLogEvents",
-                    ],
-                    "Resource": "arn:aws:logs:*:*:*",
-                },
-                {"Effect": "Allow", "Action": ["s3:PutObject"], "Resource": bucket_arn},
-                {
-                    "Effect": "Allow",
-                    "Action": ["sqs:*"],
-                    "Resource": "arn:aws:sqs:us-west-2:851075464416:new-gods-queue-6fecb43",
-                },
+                CREATE_CW_LOGS_POLICY,
+                {"Effect": "Allow", "Action": ["s3:PutObject"], "Resource": args[0]},
+                {"Effect": "Allow", "Action": ["sqs:*"], "Resource": args[1]},
                 {
                     "Effect": "Allow",
                     "Action": ["kinesis:PutRecord"],
-                    "Resource": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
+                    "Resource": args[2],
                 },
             ],
         }
     )
-
-
-# TODO: comeback and fix this string interpolation
-lambda_role_policy = iam.RolePolicy(
-    "god-bot-lambda-role-policy",
-    role=s3_lambda_role.id,
-    policy=bucket.arn.apply(lambda_role_policy),
 )
 
-# ============
-# Lambda
-# ============
 
+lambda_role_policy = iam.RolePolicy(
+    f"{module_name}-lambda-role-policy",
+    role=s3_lambda_role.id,
+    policy=lambda_role_policy,
+)
 
 # source_code_hash=None
 # https://morgue-artifacts.s3-us-west-2.amazonaws.com/handler.zip
-
 # TODO: Add the source_hash_code thang to trigger updates
 cloudwatch_lambda = lambda_.Function(
-    "god-bot",
+    f"{module_name}",
     role=s3_lambda_role.arn,
     runtime="python3.6",
     handler="god_bot.handler",

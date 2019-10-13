@@ -2,6 +2,7 @@ import pulumi
 import json
 from modules.s3 import bucket
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
+from modules.iam import CREATE_CW_LOGS_POLICY
 from pulumi_aws import iam, lambda_
 
 config = pulumi.Config()
@@ -17,15 +18,7 @@ def lambda_role_policy(bucket_arn):
         {
             "Version": "2012-10-17",
             "Statement": [
-                {
-                    "Effect": "Allow",
-                    "Action": [
-                        "logs:CreateLogGroup",
-                        "logs:CreateLogStream",
-                        "logs:PutLogEvents",
-                    ],
-                    "Resource": "arn:aws:logs:*:*:*",
-                },
+                CREATE_CW_LOGS_POLICY,
                 {"Effect": "Allow", "Action": ["s3:PutObject"], "Resource": bucket_arn},
             ],
         }
@@ -39,14 +32,9 @@ lambda_role_policy = iam.RolePolicy(
     policy=bucket.arn.apply(lambda_role_policy),
 )
 
-# ============
-# Lambda
-# ============
-
 
 # source_code_hash=None
 # https://morgue-artifacts.s3-us-west-2.amazonaws.com/handler.zip
-
 # TODO: Add the source_hash_code thang to trigger updates
 cloudwatch_lambda = lambda_.Function(
     "morgue-stalker",
@@ -64,5 +52,4 @@ lambda_.Permission(
     action="lambda:InvokeFunction",
     function=cloudwatch_lambda.arn,
     principal="events.amazonaws.com",
-    # source_arn="arn:aws:s3:::morgue-files-2944dfb",
 )
