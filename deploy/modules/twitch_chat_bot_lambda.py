@@ -1,6 +1,8 @@
 import pulumi
 import json
+from pulumi import Output
 from modules.s3 import bucket
+from modules.kinesis import chat_stream
 from pulumi_aws import kms, iam, lambda_
 
 config = pulumi.Config()
@@ -33,9 +35,8 @@ kms_key_arn = (
     "arn:aws:kms:us-west-2:851075464416:key/6d11ced0-ca8c-4057-bc61-4fd8d27da705"
 )
 
-
-def lambda_role_policy(bucket_arn):
-    return json.dumps(
+lambda_role_policy = Output.all(bucket.arn, chat_stream.arn).apply(
+    lambda args: json.dumps(
         {
             "Version": "2012-10-17",
             "Statement": [
@@ -49,21 +50,31 @@ def lambda_role_policy(bucket_arn):
                     "Resource": "arn:aws:logs:*:*:*",
                 },
                 {
-                    "Sid": "Allow",
+                    "Sid": "AllowKms",
                     "Effect": "Allow",
                     "Action": "kms:Decrypt",
                     "Resource": kms_key_arn,
                 },
+                {
+                    "Sid": "AllowKinesis",
+                    "Effect": "Allow",
+                    "Action": "kinesis:*",
+                    "Resource": f"{args[1]}",
+                },
+                {
+                    "Sid": "AllowS3",
+                    "Effect": "Allow",
+                    "Action": "s3:*",
+                    "Resource": f"{args[0]}/*",
+                },
             ],
         }
     )
-
+)
 
 # TODO: comeback and fix this string interpolation
 lambda_role_policy = iam.RolePolicy(
-    "twitch-chat-bot-role-policy",
-    role=s3_lambda_role.id,
-    policy=bucket.arn.apply(lambda_role_policy),
+    "twitch-chat-bot-role-policy", role=s3_lambda_role.id, policy=lambda_role_policy
 )
 
 # ============

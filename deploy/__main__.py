@@ -21,4 +21,6 @@ import modules.god_bot_lambda
 import modules.morgue_stalker_lambda
 import modules.twitch_chat_bot_lambda
 
+import modules.kinesis
+
 allow_s3_bucket_access(bucket, [morgue_parser_lambda_role])
