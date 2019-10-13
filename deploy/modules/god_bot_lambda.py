@@ -2,25 +2,13 @@ import pulumi
 import json
 from modules.s3 import bucket
 from pulumi_aws import iam, lambda_
+from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 
 config = pulumi.Config()
 
 
 s3_lambda_role = iam.Role(
-    "god-bot-lambda-role",
-    assume_role_policy="""{
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Action": "sts:AssumeRole",
-                "Principal": {
-                    "Service": "lambda.amazonaws.com"
-                },
-                "Effect": "Allow",
-                "Sid": ""
-            }
-        ]
-    }""",
+    "god-bot-lambda-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
 )
 
 

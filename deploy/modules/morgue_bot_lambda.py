@@ -1,4 +1,5 @@
 from modules.s3 import bucket
+from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 
 import json
 
@@ -11,20 +12,7 @@ config = pulumi.Config()
 # MORGUE PARSER
 # ========================================================================================
 morgue_parser_lambda_role = iam.Role(
-    "morgue-bot-lambda-role",
-    assume_role_policy="""{
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Action": "sts:AssumeRole",
-                "Principal": {
-                    "Service": "lambda.amazonaws.com"
-                },
-                "Effect": "Allow",
-                "Sid": ""
-            }
-        ]
-    }""",
+    "morgue-bot-lambda-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
 )
 
 

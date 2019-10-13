@@ -1,26 +1,14 @@
 import pulumi
 import json
 from modules.s3 import bucket
+from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from pulumi_aws import iam, lambda_
 
 config = pulumi.Config()
 
 
 s3_lambda_role = iam.Role(
-    "morgue-stalker-role",
-    assume_role_policy="""{
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Action": "sts:AssumeRole",
-                "Principal": {
-                    "Service": "lambda.amazonaws.com"
-                },
-                "Effect": "Allow",
-                "Sid": ""
-            }
-        ]
-    }""",
+    "morgue-stalker-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
 )
 
 

@@ -3,6 +3,7 @@ import json
 from pulumi import Output
 from modules.s3 import bucket
 from modules.kinesis import chat_stream
+from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from pulumi_aws import kms, iam, lambda_
 
 config = pulumi.Config()
@@ -15,20 +16,7 @@ twitch_oauth_token = kms.Ciphertext(
 )
 
 s3_lambda_role = iam.Role(
-    "twitch-chat-bot-role",
-    assume_role_policy="""{
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Action": "sts:AssumeRole",
-                "Principal": {
-                    "Service": "lambda.amazonaws.com"
-                },
-                "Effect": "Allow",
-                "Sid": ""
-            }
-        ]
-    }""",
+    "twitch-chat-bot-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
 )
 
 kms_key_arn = (
