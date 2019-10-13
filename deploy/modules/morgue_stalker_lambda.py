@@ -70,3 +70,11 @@ cloudwatch_lambda = lambda_.Function(
     timeout=200,
     environment={"variables": {"MORGUE_BUCKETNAME": bucket.id}},
 )
+
+lambda_.Permission(
+    "AllowInvocationFromCloudWatch",
+    action="lambda:InvokeFunction",
+    function=cloudwatch_lambda.arn,
+    principal="events.amazonaws.com",
+    # source_arn="arn:aws:s3:::morgue-files-2944dfb",
+)

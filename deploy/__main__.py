@@ -12,6 +12,7 @@ from modules.morgue_bot_lambda import morgue_parser_lambda_role
 from modules.morgue_bot_lambda import morgue_parser_lambda
 
 from modules.morgue_stalker_lambda import cloudwatch_lambda
+from modules.morgue_stalker_lambda import s3_lambda_role
 
 from modules.s3 import allow_s3_bucket_access
 
@@ -23,4 +24,7 @@ import modules.twitch_chat_bot_lambda
 
 import modules.kinesis
 
-allow_s3_bucket_access(bucket, [morgue_parser_lambda_role])
+import modules.sqs
+import modules.sns
+
+allow_s3_bucket_access(bucket, [morgue_parser_lambda_role, s3_lambda_role])

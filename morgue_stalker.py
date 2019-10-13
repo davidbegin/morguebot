@@ -2,17 +2,19 @@ import os
 from lib.character import Character
 from lib.morgue_parser import fetch_skills
 from lib.morgue_db import MorgueDB
+from lib.morgue_saver import morgue_saver
 
 
 def handler(event, handler):
-    print("I'm morgue_stalker Bot!")
-    # if "character" in event.keys():
-    #     character_name = event["character"]
-    # else:
-    #     character_name = os.environ.get("CHARACTER", None)
+    if "character" in event.keys():
+        character_name = event["character"]
+    elif "CHARACTER" in os.environ:
+        character_name = os.environ.get("CHARACTER", None)
+    else:
+        character_name = "beginbot"
 
-    # character = Character(character=character_name)
-    # skills = fetch_skills(character.morgue_file())
+    character = Character(character=character_name)
+    morgue_saver(character, character.morgue_file())
     # print(skills)
     # db = MorgueDB(character=character)
     # db._store_skills(skills)

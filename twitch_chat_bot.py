@@ -1,4 +1,5 @@
 import time
+
 import json
 import os
 from lib.command_parser import execute_command
@@ -18,32 +19,38 @@ def handler(event, context):
     server = connect_to_twitch()
     printer = Printer(server, disable_twitch=False, character=character)
 
-    for record in event["Records"]:
+    if "Records" not in event:
+        printer.send_msg("Testing")
+    else:
+        for record in event["Records"]:
 
-        if "kinesis" in record:
-            import base64
+            if "kinesis" in record:
+                import base64
 
-            data = record["kinesis"]["data"]
-            base64_decoded = base64.b64decode(data)
-            message = base64_decoded.decode("utf")
+                kinesis_record = record["kinesis"]
 
-            print("=========================\n")
-            print(message)
-            print("=========================\n")
+                if "data" in kinesis_record:
+                    data = record["kinesis"]["data"]
+                    base64_decoded = base64.b64decode(data)
+                    message = base64_decoded.decode("utf")
 
-            message_info = json.loads(message)
+                    m = json.loads(message)
+                    print(f"message64: {m}")
+                    print(f"message63: {m['Message']}")
+                    printer.send_msg(m["Message"])
 
-            print("=========================\n")
-            print(message_info)
-            print("=========================\n")
-
-            msg = message_info["message"]
-            printer.send_msg(msg)
-            time.sleep(1)
-        else:
-            print("=========================\n")
-            print(record)
-            print("=========================\n")
+                elif "message":
+                    msq = json.loads(kinesis_record["message"])["Message"]
+                    printer.send_msg(msg)
+                else:
+                    print("=========================\n")
+                    print(kinesis_record)
+                    print("=========================\n")
+                time.sleep(1)
+            else:
+                print("=========================\n")
+                print(record)
+                print("=========================\n")
 
 
 # handler({}, {})

@@ -4,6 +4,16 @@ import time
 
 # ========================================================================================
 
+
+def fetch_spells(morgue_file):
+    x = "Your spell library contains the following spells:"
+    y = "Dungeon Overview and Level Annotations"
+    split_morgue_file = morgue_file.split("\n")
+    start_index = split_morgue_file.index(x) + 3
+    end_index = split_morgue_file.index(y) - 1
+    return split_morgue_file[start_index:end_index]
+
+
 # TODO: Figure out how ot combine this with _extract_skills
 def _extract_inventory(morgue_file, start_cat, end_cat):
     split_morgue_file = morgue_file.split("\n")

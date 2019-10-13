@@ -13,6 +13,7 @@ from lib.morgue_parser import fetch_potions
 from lib.morgue_parser import fetch_weapons
 from lib.morgue_parser import fetch_armour
 from lib.morgue_parser import fetch_skills
+from lib.morgue_parser import fetch_spells
 from lib.morgue_parser import fetch_altars
 
 
@@ -93,6 +94,23 @@ class Printer:
             self.send_msg(f"MercyWing1 Gods MercyWing2")
             self.send_msg(", ".join(sorted(altars)))
             self.send_msg(f"You have {gods_remaining} to be found")
+
+    def print_spells(self, morgue_file):
+        self.send_msg(f"TakeNRG Listing All Spells TakeNRG")
+        spells = fetch_spells(morgue_file)
+        self.sleep()
+
+        for spell in spells:
+
+            words = spell.split()
+            for word in words:
+                if "#" in word:
+                    power_index = words.index(word)
+                    spell_type = words[power_index - 1]
+                    spell_boundry = power_index - 1
+                    spell_name = " ".join(words[:spell_boundry])
+                    self.send_msg(spell_name)
+                    self.sleep()
 
     def print_skills(self, morgue_file):
         self.send_msg(f"PowerUpL Listing All Skills PowerUpR")

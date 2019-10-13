@@ -10,9 +10,8 @@ config = pulumi.Config()
 # ========================================================================================
 # MORGUE PARSER
 # ========================================================================================
-
 morgue_parser_lambda_role = iam.Role(
-    "morgue-parser-lambda-role",
+    "morgue-bot-lambda-role",
     assume_role_policy="""{
         "Version": "2012-10-17",
         "Statement": [
@@ -46,6 +45,11 @@ def morgue_parser_lambda_role_policy(bucket_arn):
                 {"Effect": "Allow", "Action": ["s3:*"], "Resource": bucket_arn},
                 {
                     "Effect": "Allow",
+                    "Action": ["sns:Publish"],
+                    "Resource": "arn:aws:sns:us-west-2:851075464416:god-queue-topic-a3644eb",
+                },
+                {
+                    "Effect": "Allow",
                     "Action": [
                         "dynamodb:GetItem",
                         "dynamodb:PutItem",
@@ -61,7 +65,7 @@ def morgue_parser_lambda_role_policy(bucket_arn):
 # How do we hook this up to an S3 Object Notifcation
 
 morgue_parser_lambda_role_policy = iam.RolePolicy(
-    "morgue-parser-lambda-role-policy",
+    "morgue-bot-lambda-role-policy",
     role=morgue_parser_lambda_role.id,
     policy=bucket.arn.apply(morgue_parser_lambda_role_policy),
 )
@@ -79,4 +83,12 @@ morgue_parser_lambda = lambda_.Function(
     environment={"variables": {"MORGUE_BUCKETNAME": bucket.id}},
 )
 
-# How do we get triggered on S3???
+# class pulumi_aws.lambda_.Permission(resource_name, opts=None, action=None, event_source_token=None, function=None, principal=None, qualifier=None, source_account=None, source_arn=None, statement_id=None, statement_id_prefix=None, __props__=None, __name__=None, __opts__=None
+
+lambda_.Permission(
+    "AllowInvocationFromMorgueFileBucket",
+    action="lambda:InvokeFunction",
+    function=morgue_parser_lambda.arn,
+    principal="s3.amazonaws.com",
+    source_arn="arn:aws:s3:::morgue-files-2944dfb",
+)

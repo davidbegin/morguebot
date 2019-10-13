@@ -15,6 +15,7 @@ COMMANDS_WITH_NO_ARGS = (
         "!weapons",
         "!armour",
         "!skills",
+        "!spells",
         "!h?",
         "!maxR",
         "!mf",
@@ -75,6 +76,8 @@ def execute_command(printer, msg, character):
             printer.print_max_resistance(morgue_file)
         elif command == "!gods":
             printer.print_gods(morgue_file)
+        elif command == "!spells":
+            printer.print_spells(morgue_file)
         elif command == "!mf":
             pass
             # printer.print_morgue_file_location(morgue_file)

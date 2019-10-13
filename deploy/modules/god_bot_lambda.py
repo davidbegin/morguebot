@@ -24,6 +24,25 @@ s3_lambda_role = iam.Role(
 )
 
 
+# bucket_policy = Output.all(s3_bucket.arn, role_arns).apply(
+#     lambda args: json.dumps(
+#         {
+#             "Version": "2012-10-17",
+#             "Id": "MorgueFileBucketPolicy",
+#             "Statement": [
+#                 {
+#                     "Sid": "Allow",
+#                     "Effect": "Allow",
+#                     "Principal": {"AWS": args[1]},
+#                     "Action": "s3:*",
+#                     "Resource": f"{args[0]}/*",
+#                 }
+#             ],
+#         }
+#     )
+# )
+
+
 def lambda_role_policy(bucket_arn):
     return json.dumps(
         {
@@ -39,6 +58,16 @@ def lambda_role_policy(bucket_arn):
                     "Resource": "arn:aws:logs:*:*:*",
                 },
                 {"Effect": "Allow", "Action": ["s3:PutObject"], "Resource": bucket_arn},
+                {
+                    "Effect": "Allow",
+                    "Action": ["sqs:*"],
+                    "Resource": "arn:aws:sqs:us-west-2:851075464416:new-gods-queue-6fecb43",
+                },
+                {
+                    "Effect": "Allow",
+                    "Action": ["kinesis:PutRecord"],
+                    "Resource": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
+                },
             ],
         }
     )
