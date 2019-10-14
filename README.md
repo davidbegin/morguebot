@@ -67,3 +67,29 @@ time make artifact_deploy ARTIFACT_NAME=handler_v1.zip
 More Info in the [Deploy README](deploy/README.md)
 
 ![Morguebot](images/MorgueArch.png)
+
+
+
+
+
+
+Invoking the Morgue Stalker
+
+```
+aws lambda invoke --function-name morgue-stalker-fce7e1b output.txt --payload '{"character":"artmatt"}' 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -20,8 +20,7 @@ def send_chat(msg):
 
 
 def handler(event, handler):
-    print("I'm god_bot!")
-    print(f"event: {event}")
+    print(json.dumps(event))
 
     for record in event["Records"]:
         body = record["body"]
