@@ -33,17 +33,19 @@ def handler(event, context):
                     message = base64_decoded.decode("utf")
 
                     m = json.loads(message)
-                    print(m)
+                    # print(m)
                     printer.send_msg(m["Message"])
 
                 elif "message":
                     msq = json.loads(kinesis_record["message"])["Message"]
                     printer.send_msg(msg)
                 else:
-                    print(kinesis_record)
+                    pass
+                    # print(kinesis_record)
                 time.sleep(1)
             else:
-                print(record)
+                pass
+                # print(record)
 
 
 # handler({}, {})

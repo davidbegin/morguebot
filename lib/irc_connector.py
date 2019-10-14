@@ -1,3 +1,4 @@
+import json
 import socket
 import os
 import boto3
@@ -21,11 +22,11 @@ def _handshake(server):
     bot = os.environ["MORGUEBOT_BOT_NAME"]
     channel = os.environ["MORGUEBOT_CHANNEL"]
 
-    print(f"Connecting to #{channel} as {bot}")
+    print(json.dumps({"message": f"Connecting to #{channel} as {bot}"}))
 
-    print(server.send(bytes("PASS " + token + "\r\n", "utf-8")))
-    print(server.send(bytes("NICK " + bot + "\r\n", "utf-8")))
-    print(server.send(bytes("JOIN " + f"#{channel}" + "\r\n", "utf-8")))
+    server.send(bytes("PASS " + token + "\r\n", "utf-8"))
+    server.send(bytes("NICK " + bot + "\r\n", "utf-8"))
+    server.send(bytes("JOIN " + f"#{channel}" + "\r\n", "utf-8"))
 
 
 def connect_to_twitch():

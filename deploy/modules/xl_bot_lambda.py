@@ -7,9 +7,11 @@ from pulumi_aws import iam, lambda_
 
 config = pulumi.Config()
 
+module_name = "xl-bot"
 
 s3_lambda_role = iam.Role(
-    "xl-bot-lambda-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
+    f"{module_name}-lambda-role",
+    assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY),
 )
 
 
@@ -17,9 +19,8 @@ def lambda_role_policy(bucket_arn):
     return json.dumps({"Version": "2012-10-17", "Statement": [CREATE_CW_LOGS_POLICY]})
 
 
-# TODO: comeback and fix this string interpolation
 lambda_role_policy = iam.RolePolicy(
-    "xl-bot-lambda-policy",
+    f"{module_name}-lambda-policy",
     role=s3_lambda_role.id,
     policy=bucket.arn.apply(lambda_role_policy),
 )
@@ -28,7 +29,7 @@ lambda_role_policy = iam.RolePolicy(
 # https://morgue-artifacts.s3-us-west-2.amazonaws.com/handler.zip
 # TODO: Add the source_hash_code thang to trigger updates
 cloudwatch_lambda = lambda_.Function(
-    "xl-bot",
+    f"{module_name}",
     role=s3_lambda_role.arn,
     runtime="python3.6",
     handler="xl_bot.handler",

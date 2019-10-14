@@ -9,30 +9,31 @@ from pulumi_aws import kms, iam, lambda_
 
 config = pulumi.Config()
 
-key_id = "arn:aws:kms:us-west-2:851075464416:key/6d11ced0-ca8c-4057-bc61-4fd8d27da705"
+kms_key = kms.Key("twitch-chat-bot")
+
+module_name = "twitch-chat-bot"
+
 twitch_oauth_token = kms.Ciphertext(
-    "twitch_oauth_token,", key_id=key_id, plaintext=config.require_secret("oauth_token")
+    "twitch_oauth_token,",
+    key_id=kms_key.arn,
+    plaintext=config.require_secret("oauth_token"),
 )
 
 s3_lambda_role = iam.Role(
-    "twitch-chat-bot-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
+    f"{module_name}-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
 )
 
-kms_key_arn = (
-    "arn:aws:kms:us-west-2:851075464416:key/6d11ced0-ca8c-4057-bc61-4fd8d27da705"
-)
-
-lambda_role_policy = Output.all(bucket.arn, chat_stream.arn).apply(
+lambda_role_policy = Output.all(bucket.arn, chat_stream.arn, kms_key.arn).apply(
     lambda args: json.dumps(
         {
             "Version": "2012-10-17",
             "Statement": [
                 CREATE_CW_LOGS_POLICY,
                 {
-                    "Sid": "AllowKms",
+                    "Sid": "AllowS3",
                     "Effect": "Allow",
-                    "Action": "kms:Decrypt",
-                    "Resource": kms_key_arn,
+                    "Action": "s3:*",
+                    "Resource": f"{args[0]}/*",
                 },
                 {
                     "Sid": "AllowKinesis",
@@ -41,10 +42,10 @@ lambda_role_policy = Output.all(bucket.arn, chat_stream.arn).apply(
                     "Resource": f"{args[1]}",
                 },
                 {
-                    "Sid": "AllowS3",
+                    "Sid": "AllowKms",
                     "Effect": "Allow",
-                    "Action": "s3:*",
-                    "Resource": f"{args[0]}/*",
+                    "Action": "kms:Decrypt",
+                    "Resource": f"{args[2]}",
                 },
             ],
         }
@@ -53,14 +54,14 @@ lambda_role_policy = Output.all(bucket.arn, chat_stream.arn).apply(
 
 # TODO: comeback and fix this string interpolation
 lambda_role_policy = iam.RolePolicy(
-    "twitch-chat-bot-role-policy", role=s3_lambda_role.id, policy=lambda_role_policy
+    f"{module_name}-role-policy", role=s3_lambda_role.id, policy=lambda_role_policy
 )
 
 # source_code_hash=None
 # https://morgue-artifacts.s3-us-west-2.amazonaws.com/handler.zip
 # TODO: Add the source_hash_code thang to trigger updates
 cloudwatch_lambda = lambda_.Function(
-    "twitch-chat-bot",
+    f"{module_name}",
     role=s3_lambda_role.arn,
     runtime="python3.6",
     handler="twitch_chat_bot.handler",
