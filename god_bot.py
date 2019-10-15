@@ -1,15 +1,15 @@
 import json
 import os
+
+import boto3
+
 from lib.character import Character
 from lib.morgue_parser import fetch_skills
 from lib.morgue_db import MorgueDB
 
-import boto3
-
-
 def send_chat(msg):
-    kinesis_arn = "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c"
-    kinesis_name = "twitch-chat-877759c"
+    kinesis_arn = os.environ["CHAT_STREAM_ARN"]
+    kinesis_name = os.environ["CHAT_STREAM_NAME"]
 
     client = boto3.client("kinesis")
     response = client.put_record(
@@ -24,4 +24,6 @@ def handler(event, handler):
 
     for record in event["Records"]:
         body = record["body"]
+
+        # For the future, we are going to modify this message
         send_chat(body)

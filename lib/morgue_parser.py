@@ -134,7 +134,8 @@ def fetch_turns(morgue_file):
 
 
 def fetch_overview(morgue_file):
-    xl_level = fetch_xl_level(morgue_file)
-    m = re.search(f".* Turns:\s(.*)", str(morgue_file))
+    # xl_level = fetch_xl_level(morgue_file)
+    m = re.search(f"(.*) Turns:\s(.*)", str(morgue_file))
     if m:
-        return f"{m.group(0)} XL: {xl_level}"
+        return m.group(1)
+        # return f"{m.group(0)} XL: {xl_level}"

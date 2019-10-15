@@ -23,8 +23,8 @@ def save_a_buncha_info(character_name):
     weapons = fetch_weapons(morgue_file)
     morgue_db.save_stuff("SS", "weapons", weapons)
 
-    gods = fetch_altars(morgue_file)
-    morgue_db.save_stuff("SS", "gods", gods)
+    # gods = fetch_altars(morgue_file)
+    # morgue_db.save_stuff("SS", "gods", gods)
 
     armour = fetch_armour(morgue_file)
     morgue_db.save_stuff("SS", "armour", armour)

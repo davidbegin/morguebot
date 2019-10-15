@@ -34,8 +34,17 @@ def handler(event, context):
             message = base64_decoded.decode("utf")
 
             if "Message" in message:
-                msg = json.loads(message)["Message"]
-                printer.send_msg(msg)
+                try:
+                    msg = json.loads(message)["Message"]
+                    printer.send_msg(msg)
+                except:
+                    print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+                    # This is a morgue file
+                    print(message)
+                    print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+                    # print(message)
+                    # printer.send_msg("HERE I AM ALL SAD")
+                    # printer.send_msg(message)
             elif "default" in message:
                 printer.send_msg(message["default"])
             else:

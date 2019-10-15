@@ -2,6 +2,7 @@ from modules.s3 import bucket
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
 from modules.sns import sns_topic
+from modules.kinesis import chat_stream
 from modules.s3 import bucket
 from modules.sqs import gods_queue
 from modules.dynamodb import dynamodb_table
@@ -21,7 +22,7 @@ morgue_parser_lambda_role = iam.Role(
     assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY),
 )
 
-lambda_role_policy = Output.all(bucket.arn, sns_topic.arn, dynamodb_table.arn).apply(
+lambda_role_policy = Output.all(bucket.arn, sns_topic.arn, dynamodb_table.arn, chat_stream.arn).apply(
     lambda args: json.dumps(
         {
             "Version": "2012-10-17",
@@ -37,6 +38,11 @@ lambda_role_policy = Output.all(bucket.arn, sns_topic.arn, dynamodb_table.arn).a
                         "dynamodb:UpdateItem",
                     ],
                     "Resource": args[2],
+                },
+                {
+                    "Effect": "Allow",
+                    "Action": ["kinesis:PutRecord"],
+                    "Resource": args[3],
                 },
             ],
         }
@@ -63,6 +69,8 @@ morgue_parser_lambda = lambda_.Function(
             "CHARACTER_DB": dynamodb_table.name,
             "TOPIC_ARN": sns_topic.arn,
             "MORGUE_BUCKETNAME": bucket.id,
+            "CHAT_STREAM_ARN": chat_stream.arn,
+            "CHAT_STREAM_NAME": chat_stream.name,
         }
     },
 )

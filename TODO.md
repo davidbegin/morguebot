@@ -9,6 +9,15 @@ TOP TODO:
   - Add a Better Dungeon Crawl Overview
   - Compare Files before saving in s3
   - Add X-Ray
+  - Add a Fargate twitch IRC bot listening for all messages
+  - Hook up local IRC to the Lambda Architecture
+  - Fix Tests and Add Many More
+  - Add SNS fitering on message type
+
+
+QA Section:
+===========
+   - Server Gods Version
 
 
 TODO:
