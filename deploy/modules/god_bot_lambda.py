@@ -54,5 +54,5 @@ cloudwatch_lambda = lambda_.Function(
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
     timeout=200,
-    environment={"variables": {"MORGUE_BUCKETNAME": bucket.id}},
+    environment={"variables": {"MORGUE_BUCKETNAME": bucket.id, "CHAT_STREAM_ARN": chat_stream.arn, "CHAT_STREAM_NAME": chat_stream.name}},
 )

@@ -76,7 +76,7 @@ More Info in the [Deploy README](deploy/README.md)
 Invoking the Morgue Stalker
 
 ```
-aws lambda invoke --function-name morgue-stalker-fce7e1b output.txt --payload '{"character":"artmatt"}' 
+aws lambda invoke --function-name morgue-stalker-fce7e1b --payload '{"character":"artmatt"}' output.txt 
 ```
 
 

@@ -1,4 +1,4 @@
-mport json
+import json
 import boto3
 
 # WE need to write ot that kinesis stream
@@ -6,28 +6,28 @@ import boto3
 # Thats it
 
 # client = boto3.client("kinesis")
-client = boto3.client("sns")
+# client = boto3.client("sns")
 
 
-topic_arn = "arn:aws:sns:us-west-2:851075464416:god-queue-topic-a3644eb"
-# msg = {"message": "Testing From SNS to SQS to Kinsesis!"}
-msg = json.dumps({"default": "We are getting closer"})
-response = client.publish(
-    TopicArn=topic_arn,
-    Message=msg,
-    MessageStructure='json',
+# topic_arn = "arn:aws:sns:us-west-2:851075464416:god-queue-topic-a3644eb"
+# # msg = {"message": "Testing From SNS to SQS to Kinsesis!"}
+# msg = json.dumps({"default": "We are getting closer"})
+# response = client.publish(
+#     TopicArn=topic_arn,
+#     Message=msg,
+#     MessageStructure='json',
 
-    # Subject='Testing',
-    # MessageAttributes={
-    #     'string': {
-    #         'DataType': 'string',
-    #         'StringValue': 'string',
-    #         'BinaryValue': b'bytes'
-    #     }
-    # }
-)
+#     # Subject='Testing',
+#     # MessageAttributes={
+#     #     'string': {
+#     #         'DataType': 'string',
+#     #         'StringValue': 'string',
+#     #         'BinaryValue': b'bytes'
+#     #     }
+#     # }
+# )
 
-print(response)
+# print(response)
 
 # {
 #   "Records": [
@@ -62,26 +62,27 @@ print(response)
 # }
 
 
-def sqs():
-    client = boto3.client("sqs")
-    sqs_arn = "arn:aws:sqs:us-west-2:851075464416:new-gods-queue-6fecb43"
+# def sqs():
+#     client = boto3.client("sqs")
+#     sqs_arn = "arn:aws:sqs:us-west-2:851075464416:new-gods-queue-6fecb43"
 
-    msg = json.dumps({"message": "Testing with SQS!"})
-    sqs_url = "https://sqs.us-west-2.amazonaws.com/851075464416/new-gods-queue-6fecb43"
+#     msg = json.dumps({"message": "Testing with SQS!"})
+#     sqs_url = "https://sqs.us-west-2.amazonaws.com/851075464416/new-gods-queue-6fecb43"
 
-    client.send_message(QueueUrl=sqs_url, MessageBody=msg)
+#     client.send_message(QueueUrl=sqs_url, MessageBody=msg)
 
 
-# kinesis_arn = "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-f5f8ef7"
-# kinesis_name= "twitch-chat-f5f8ef7"
+client = boto3.client("kinesis")
+kinesis_arn = "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c"
+kinesis_name= "twitch-chat-877759c"
 
-# response = client.put_record(
-#     StreamName=kinesis_name,
-#     Data=json.dumps({"name":"begin", "message": "Testing with Kinesis!"}),
-#     PartitionKey='alpha',
-# )
+response = client.put_record(
+    StreamName=kinesis_name,
+    Data=json.dumps({"name":"begin", "default": "Testing with Kinesis!"}),
+    PartitionKey='alpha',
+)
 
-# print(response)
+print(response)
 
 
 # # shard_id=response["ShardId"]
