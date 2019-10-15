@@ -112,6 +112,15 @@ def fetch_resistance(morgue_file, resistance):
 # ========================================================================================
 
 
+def fetch_xl_level(morgue_file):
+    m = re.search(
+        f"Health:\s+(.*)AC:\s+(.*)Str:\s+(.*)XL:\s+(.*)\s+Next:\s+(.*)",
+        str(morgue_file),
+    )
+    if m:
+        return m.group(4)
+
+
 def fetch_seed(morgue_file):
     m = re.search(f"Game seed:\s(.*)", str(morgue_file))
     if m:
@@ -125,6 +134,7 @@ def fetch_turns(morgue_file):
 
 
 def fetch_overview(morgue_file):
+    xl_level = fetch_xl_level(morgue_file)
     m = re.search(f".* Turns:\s(.*)", str(morgue_file))
     if m:
-        return m.group(0)
+        return f"{m.group(0)} XL: {xl_level}"

@@ -17,6 +17,7 @@ def parse_json(item):
     except:
         return None
 
+
 def handler(event, context):
     print(json.dumps(event))
 
@@ -24,40 +25,23 @@ def handler(event, context):
     server = connect_to_twitch()
     printer = Printer(server, disable_twitch=False, character=character)
 
-    if "Records" not in event:
-        printer.send_msg("Testing")
-    else:
-        for record in event["Records"]:
-            if "kinesis" in record:
-                kinesis_record = record["kinesis"]
-                if "data" in kinesis_record:
-                    data = record["kinesis"]["data"]
-                    base64_decoded = base64.b64decode(data)
-                    message = base64_decoded.decode("utf")
-                    if "default" in message:
-                        printer.send_msg(message["default"])
-                    else:
-                        printer.send_msg(message)
+    for record in event["Records"]:
+        kinesis_record = record["kinesis"]
 
-                    # if parse_json(message):
-                    #     m = json.loads(message)
-                    #     import pdb; pdb.set_trace()
-                    #     # print(m)
-                    #     printer.send_msg(m["Message"])
-                    # else:
-                    #     print("NOT PARSEABLE BY JSON")
-                    #     print(message)
+        if "data" in kinesis_record:
+            data = kinesis_record["data"]
+            base64_decoded = base64.b64decode(data)
+            message = base64_decoded.decode("utf")
 
-                elif "default" in kinesis:
-                    msq = json.loads(kinesis_record["default"])["Message"]
-                    printer.send_msg(msg)
-                else:
-                    pass
-                    # print(kinesis_record)
-                time.sleep(1)
+            if "Message" in message:
+                msg = json.loads(message)["Message"]
+                printer.send_msg(msg)
+            elif "default" in message:
+                printer.send_msg(message["default"])
             else:
-                pass
-                # print(record)
-
-
-# handler({}, {})
+                printer.send_msg(json.dumps(message))
+        elif "default" in kinesis:
+            msq = json.loads(kinesis_record["default"])["Message"]
+            printer.send_msg(msg)
+        else:
+            print(kinesis_record)

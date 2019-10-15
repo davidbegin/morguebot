@@ -17,7 +17,8 @@ config = pulumi.Config()
 module_name = "morgue-bot"
 
 morgue_parser_lambda_role = iam.Role(
-    f"{module_name}-lambda-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
+    f"{module_name}-lambda-role",
+    assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY),
 )
 
 lambda_role_policy = Output.all(bucket.arn, sns_topic.arn, dynamodb_table.arn).apply(
@@ -58,7 +59,11 @@ morgue_parser_lambda = lambda_.Function(
     s3_bucket="morgue-artifacts",
     timeout=200,
     environment={
-        "variables": {"TOPIC_ARN": sns_topic.arn, "MORGUE_BUCKETNAME": bucket.id}
+        "variables": {
+            "CHARACTER_DB": dynamodb_table.name,
+            "TOPIC_ARN": sns_topic.arn,
+            "MORGUE_BUCKETNAME": bucket.id,
+        }
     },
 )
 

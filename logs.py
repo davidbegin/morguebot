@@ -13,25 +13,26 @@ client = boto3.client("logs")
 
 
 def _filter_out_xray_warnings(events):
-    log_strs = [
-	"Closing unclosed subsegment", "Attempt to add subsegment", "Attempt to end subsegment",
-	"Redefining metrics instrumentation"
-        "START",
-        "REPORT",
-        "END"
-    ]
+    log_strs = ["START", "REPORT", "END"]
 
-    return list(filter(lambda event: all(log_str not in event["message"] for log_str in log_strs), events))
+    return list(
+        filter(
+            lambda event: all(log_str not in event["message"] for log_str in log_strs),
+            events,
+        )
+    )
+
 
 def convert_from_epoch(unix_time: int) -> str:
     return time.strftime("%Y-%m-%d %I:%M:%S %p %Z", time.localtime(unix_time / 1000))
 
+
 def _print_events(log_group_name, events) -> None:
     for event in events:
-        if "[ERROR]" in event['message']:
+        if "[ERROR]" in event["message"]:
             fg_color = "red"
             nl = True
-        elif "[WARNING]" in event['message']:
+        elif "[WARNING]" in event["message"]:
             fg_color = "yellow"
             nl = True
         else:
@@ -39,30 +40,49 @@ def _print_events(log_group_name, events) -> None:
             nl = False
 
         formatted_log_group_name = log_group_name
-        _print_event(formatted_log_group_name, event['timestamp'], event['message'], fg_color, nl)
+        _print_event(
+            formatted_log_group_name, event["timestamp"], event["message"], fg_color, nl
+        )
 
-def _print_event(log_group_name, timestamp, message, fg_color, nl,):
+
+# Kinesis Messsage
+# SNS Message VIA SQS Messaage
+# S3 Message
+# Regular Event???
+
+
+def is_kinesis_message(message):
+    return True
+    # We need to figure out what the heck is a Kinesis Message
+    pass
+
+
+def _print_event(log_group_name, timestamp, message, fg_color, nl):
+
+    if is_kinesis_message(message):
+        print("KINESIISSISISISISISI")
+
     formatted_timestamp = convert_from_epoch(timestamp)
     click.echo(
-            f"{click.style(f'{log_group_name} | ', bold=True, fg='white')}"
-            f"{click.style(f'{formatted_timestamp} | ', fg='cyan')}"
-            f"{click.style(f'{message}', fg=fg_color)}",
-            nl=nl
-            )
+        f"{click.style(f'💌 {log_group_name} | ', bold=True, fg='white')}"
+        f"{click.style(f'{formatted_timestamp} | ', fg='cyan')}"
+        f"{click.style(f'{message}', fg=fg_color)}",
+        nl=nl,
+    )
+
 
 def _fetch_log_steam_names(log_group_name):
     try:
         response = client.describe_log_streams(
-                logGroupName=log_group_name,
-                descending=True,
-                orderBy='LastEventTime'
-                )
+            logGroupName=log_group_name, descending=True, orderBy="LastEventTime"
+        )
 
         log_streams = response["logStreams"]
-        return [stream['logStreamName'] for stream in log_streams]
+        return [stream["logStreamName"] for stream in log_streams]
     except Exception as e:
         print(f"Error calling describe_log_streams: {e}")
         return None
+
 
 def monitor_those_logs(log_group):
     filter_pattern = ""
@@ -79,30 +99,31 @@ def monitor_those_logs(log_group):
     response = {}
     events = []
 
-    while not response or 'nextToken' in response:
+    while not response or "nextToken" in response:
         extra_args = {}
-        if 'nextToken' in response:
-            extra_args['nextToken'] = response['nextToken']
+        if "nextToken" in response:
+            extra_args["nextToken"] = response["nextToken"]
 
         end_time = int(time.time()) * 1000
 
         response = client.filter_log_events(
-                logGroupName=log_group,
-                logStreamNames=stream_names,
-                startTime=start_time,
-                endTime=end_time,
-                filterPattern=filter_pattern,
-                limit=limit,
-                interleaved=True
+            logGroupName=log_group,
+            logStreamNames=stream_names,
+            startTime=start_time,
+            endTime=end_time,
+            filterPattern=filter_pattern,
+            limit=limit,
+            interleaved=True,
         )
-        if response and 'events' in response:
-            events += response['events']
+        if response and "events" in response:
+            events += response["events"]
 
     events = _filter_out_xray_warnings(events)
 
     if events:
         _print_events(log_group, events)
         # print(f"\033[36;1m{log_group}:\033[0m {events}")
+
 
 def _convert_duration_string_to_time_delta(duration_str: str) -> int:
     delta = durationpy.from_str(duration_str)
@@ -120,6 +141,7 @@ def parse_json(item):
         return json.loads(item)
     except:
         return None
+
 
 def destroy():
     response = client.describe_log_groups()
@@ -144,26 +166,35 @@ if __name__ == "__main__":
         new_log_groups = response["logGroups"]
         log_group_names = [log_group["logGroupName"] for log_group in new_log_groups]
 
-        for log_group_name in log_group_names:
-            print(log_group_name)
+        # for log_group_name in log_group_names:
+        #     print(log_group_name)
 
         if options.log_group:
             command = "tmux select-layout tiled"
             call_bash(command)
+            print(f"\033[37mMonitoring: {options.log_group}\033[0m")
             while True:
                 monitor_those_logs(options.log_group)
                 time.sleep(2)
         else:
+            log_group_names = [
+                "/aws/lambda/morgue-stalker-fce7e1b",
+                "/aws/lambda/morgue-bot-2fc463f",
+                "/aws/lambda/god-bot-62a15fe",
+                "/aws/lambda/twitch-chat-bot-82104fd",
+                # '/aws/lambda/weapons-bot-b08077f',
+                # '/aws/lambda/xl-bot-00f604b'
+            ]
+
             first_log_group, *other_log_groups = log_group_names
 
             for log_group_name in other_log_groups:
                 command = f"tmux split-window -h python logs.py -l {log_group_name}"
                 call_bash(command)
 
-            commmand = "tmux select-layout tiled"
+            command = "tmux select-layout tiled"
             call_bash(command)
+            print(f"\033[37mMonitoring: {first_log_group}\033[0m")
             while True:
                 monitor_those_logs(first_log_group)
-                time.sleep(2)
-
-
+                time.sleep(1)

@@ -1,3 +1,16 @@
+TOP TODO:
+=========
+  - Pulumi the Event Source Mappings
+  - Deploy a 2nd Stack
+  - Parse each of the Message Types in the Log Watching
+  - Clean Up the Main Bot Code
+  - Start having them monitor 10+ characters at a time
+  - Start Using the God Bot Properly
+  - Add a Better Dungeon Crawl Overview
+  - Compare Files before saving in s3
+  - Add X-Ray
+
+
 TODO:
 =====
   - Respond to all IRC messages (PING!)

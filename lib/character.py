@@ -3,6 +3,7 @@ import sys
 import subprocess
 
 import requests
+import boto3
 
 from lib.morgue_parser import fetch_seed
 from lib.morgue_parser import fetch_turns
@@ -31,10 +32,19 @@ class Character:
         self.character = character
         self.local_mode = local_mode
         self._find_character_and_morguefile()
+        if "MORGUE_BUCKETNAME" in os.environ:
+            self.bucket = os.environ["MORGUE_BUCKETNAME"]
+        else:
+            self.bucket = None
+        self.key = f"{character}/morguefile.txt"
 
     def morgue_file(self):
         if self.local_mode:
             morgue = open(self.morgue_filepath).read()
+        elif self.bucket and self.key:
+            client = boto3.client("s3")
+            response = client.get_object(Bucket=self.bucket, Key=self.key)
+            morgue = response["Body"].read()
         else:
             morgue = self._fetch_online_morgue(self.morgue_url)
         self.seed = fetch_seed(morgue)

@@ -19,6 +19,7 @@ from modules.s3 import allow_s3_bucket_access
 
 import modules.xl_bot_lambda
 import modules.god_bot_lambda
+import modules.weapons_bot_lambda
 import modules.morgue_stalker_lambda
 import modules.twitch_chat_bot_lambda
 

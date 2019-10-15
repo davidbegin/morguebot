@@ -6,6 +6,7 @@ from modules.kinesis import chat_stream
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
 from pulumi_aws import kms, iam, lambda_
+from modules.dynamodb import dynamodb_table
 
 config = pulumi.Config()
 
@@ -70,6 +71,7 @@ cloudwatch_lambda = lambda_.Function(
     timeout=200,
     environment={
         "variables": {
+            "CHARACTER_DB": dynamodb_table.name,
             "MORGUE_BUCKETNAME": bucket.id,
             "MORGUEBOT_TWITCH_OAUTH_TOKEN": twitch_oauth_token.ciphertext_blob,
             "MORGUEBOT_BOT_NAME": "beginbotbot",

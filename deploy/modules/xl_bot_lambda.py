@@ -5,6 +5,8 @@ from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
 from pulumi_aws import iam, lambda_
 
+# This needs an SQS event source
+
 config = pulumi.Config()
 
 module_name = "xl-bot"

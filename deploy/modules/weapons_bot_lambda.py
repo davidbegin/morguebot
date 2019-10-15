@@ -7,11 +7,10 @@ from modules.sqs import gods_queue
 from pulumi_aws import iam, lambda_
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
-from modules.dynamodb import dynamodb_table
 
 config = pulumi.Config()
 
-module_name = "god-bot"
+module_name = "weapons-bot"
 
 s3_lambda_role = iam.Role(
     f"{module_name}-lambda-role",
@@ -57,7 +56,6 @@ cloudwatch_lambda = lambda_.Function(
     timeout=200,
     environment={
         "variables": {
-            "CHARACTER_DB": dynamodb_table.name,
             "MORGUE_BUCKETNAME": bucket.id,
             "CHAT_STREAM_ARN": chat_stream.arn,
             "CHAT_STREAM_NAME": chat_stream.name,

@@ -9,8 +9,6 @@ def _handshake(server):
     # TODO: add error handling around not having the required environment variables
     # TODO: add some connection debug information
     if "AWS_LAMBDA_FUNCTION_NAME" in os.environ:
-        print("We are going to Decrypt the Oauth Token!")
-
         encrypted_token = os.environ["MORGUEBOT_TWITCH_OAUTH_TOKEN"]
         raw_token = boto3.client("kms").decrypt(
             CiphertextBlob=b64decode(encrypted_token)
@@ -22,7 +20,7 @@ def _handshake(server):
     bot = os.environ["MORGUEBOT_BOT_NAME"]
     channel = os.environ["MORGUEBOT_CHANNEL"]
 
-    print(json.dumps({"message": f"Connecting to #{channel} as {bot}"}))
+    # print(json.dumps({"message": f"Connecting to #{channel} as {bot}"}))
 
     server.send(bytes("PASS " + token + "\r\n", "utf-8"))
     server.send(bytes("NICK " + bot + "\r\n", "utf-8"))
