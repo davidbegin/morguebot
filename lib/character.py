@@ -38,6 +38,13 @@ class Character:
             self.bucket = None
         self.key = f"{character}/morguefile.txt"
 
+    def non_saved_morgue_file(self):
+        if self.local_mode:
+            morgue = open(self.morgue_filepath).read()
+        else:
+            morgue = self._fetch_online_morgue(self.morgue_url)
+        return morgue
+
     def morgue_file(self):
         if self.local_mode:
             morgue = open(self.morgue_filepath).read()

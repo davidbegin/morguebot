@@ -7,6 +7,7 @@ from lib.character import Character
 from lib.morgue_parser import fetch_skills
 from lib.morgue_db import MorgueDB
 
+
 def send_chat(msg):
     kinesis_arn = os.environ["CHAT_STREAM_ARN"]
     kinesis_name = os.environ["CHAT_STREAM_NAME"]

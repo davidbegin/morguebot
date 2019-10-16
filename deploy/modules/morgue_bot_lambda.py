@@ -22,7 +22,9 @@ morgue_parser_lambda_role = iam.Role(
     assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY),
 )
 
-lambda_role_policy = Output.all(bucket.arn, sns_topic.arn, dynamodb_table.arn, chat_stream.arn).apply(
+lambda_role_policy = Output.all(
+    bucket.arn, sns_topic.arn, dynamodb_table.arn, chat_stream.arn
+).apply(
     lambda args: json.dumps(
         {
             "Version": "2012-10-17",

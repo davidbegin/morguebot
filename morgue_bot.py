@@ -12,7 +12,6 @@ from lib.morgue_parser import fetch_overview
 TOPIC_ARN = os.environ["TOPIC_ARN"]
 
 
-
 def send_morguefile_notification(character):
     # Does it matter we make multiple
     client = boto3.client("sns")

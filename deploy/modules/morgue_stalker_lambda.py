@@ -20,6 +20,11 @@ def lambda_role_policy(bucket_arn):
             "Statement": [
                 CREATE_CW_LOGS_POLICY,
                 {"Effect": "Allow", "Action": ["s3:PutObject"], "Resource": bucket_arn},
+                {
+                    "Effect": "Allow",
+                    "Action": ["s3:GetObject"],
+                    "Resource": f"{bucket_arn}/*",
+                },
             ],
         }
     )

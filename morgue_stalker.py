@@ -16,4 +16,4 @@ def handler(event, handler):
         character_name = "beginbot"
 
     character = Character(character=character_name)
-    morgue_saver(character, character.morgue_file())
+    morgue_saver(character, character.non_saved_morgue_file())
