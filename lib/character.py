@@ -107,7 +107,6 @@ class Character:
             print(f"\033[031;1mCould not find the Character at {url}\033[0m")
             sys.exit()
 
-
     def _test(self):
         client = boto3.client("s3")
         response = client.get_object(Bucket=self.bucket, Key=self.key)
@@ -115,4 +114,3 @@ class Character:
 
         morgue2 = self._fetch_online_morgue(self.morgue_url)
         # import pdb; pdb.set_trace()
-

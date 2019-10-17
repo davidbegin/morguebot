@@ -20,11 +20,32 @@ from lib.morgue_parser import fetch_altars
 # I Need a better data struct for aliases
 ALIASES = {"rF": "rFire", "rE": "rElec", "rC": "rCold", "rP": "rPois", "MR": "TODO"}
 
+RESISTANCES = ["!rF", "!rFire", "!rCold", "!rNeg", "!rPois", "!rE", "!rElec", "!rCorr"]
+TRAITS = ["!SeeInvis", "!Gourm", "!Faith", "!Spirit", "!Reflect", "!Harm"]
 
-# TODO: The Printer does too much!!!
-# It fetches everything!
-# it should be instansiated with a morgue_file,
-# or continually updated
+WORKING_COMMANDS = ["!overview", "!h?", "!weapons", "!armour", "!jewellery"]
+
+COMMANDS_WITH_NO_ARGS = (
+    [
+        "!overview",
+        "!mr",
+        "!stlth",
+        "!mutations",
+        "!jewellery",
+        "!scrolls",
+        "!potions",
+        "!weapons",
+        "!armour",
+        "!skills",
+        "!spells",
+        "!h?",
+        "!maxR",
+        "!mf",
+        "!gods",
+    ]
+    + RESISTANCES
+    + TRAITS
+)
 
 
 class Formatter:
@@ -32,47 +53,40 @@ class Formatter:
         self.character = character
 
     def construct_message(self, command):
-        # if command == "overview":
-        #     return self.print_overview()
-        # elif command == "h?":
-        #     return "WE WILL HELP SOON"
-        # else:
-        #     return "COMING SOON"
-
         if command == "!overview":
             return self.print_overview()
-        # elif command in RESISTANCES:
-        #     return self.print_resistance(command[1:])
-        # elif command in TRAITS:
-        #     return self.print_traits(command)
         elif command == "!h?":
-            return self.print_help(COMMANDS_WITH_NO_ARGS)
-        elif command == "!skills":
-            return self.print_skills()
+            return self.print_help()
         elif command == "!weapons":
             return self.print_weapons()
         elif command == "!armour":
             return self.print_armour()
-        elif command == "!potions":
-            return self.print_potions()
         elif command == "!jewellery":
             return self.print_jewellery()
-        elif command == "!scrolls":
-            return self.print_scrolls()
-        elif command == "!mutations":
-            return self.print_mutations()
-        elif command == "!stlth":
-            self.print_stealth()
-        elif command == "!mr":
-            return self.print_mr()
-        elif command == "!maxR":
-            return self.print_max_resistance()
-        elif command == "!gods":
-            return self.print_gods()
-        elif command == "!spells":
-            return self.print_spells()
-        elif command == "!mf":
-            pass
+        # elif command == "!skills":
+        #     return self.print_skills()
+        # elif command in RESISTANCES:
+        #     return self.print_resistance(command[1:])
+        # elif command in TRAITS:
+        #     return self.print_traits(command)
+        # elif command == "!potions":
+        #     return self.print_potions()
+        # elif command == "!scrolls":
+        #     return self.print_scrolls()
+        # elif command == "!mutations":
+        #     return self.print_mutations()
+        # elif command == "!stlth":
+        #     self.print_stealth()
+        # elif command == "!mr":
+        #     return self.print_mr()
+        # elif command == "!maxR":
+        #     return self.print_max_resistance()
+        # elif command == "!gods":
+        #     return self.print_gods()
+        # elif command == "!spells":
+        #     return self.print_spells()
+        # elif command == "!mf":
+        #     pass
 
     def print_command(self, name, value):
         fmt_str = f"{name}: {value}"
@@ -170,45 +184,38 @@ class Formatter:
     def print_missionary(self, new_altars):
         return ["MercyWing1 New Gods! MercyWing2", ", ".join(new_altars)]
 
-    def print_help(self, commands):
-        return ["TheIlluminati Valid Commands: TheIlluminati", ", ".join(commands)]
+    def print_help(self):
+        return [
+            "TheIlluminati Valid Commands: TheIlluminati",
+            ", ".join(WORKING_COMMANDS),
+        ]
 
     # ========================================================================================
 
-    def print_unique_items(self, morgue_file, title, items, regex):
-        self.send_msg(title)
-
+    def find_unique_items(self, items, regex):
+        uniq_items = []
         for item in items:
             m = re.search(regex, item)
             if m:
-
                 # This should check for the amout of groups to know whether it has amounts
                 msg = m.group(1)
-                print(msg)
-                self.send_msg(msg)
+                uniq_items.append(m.group(1))
 
-    def print_weapons(self, morgue_file):
-        self.print_unique_items(
-            morgue_file,
-            f"twitchRaid Listing All Weapons twitchRaid",
-            fetch_weapons(morgue_file),
-            f"\w\s-\s(.*)",
+        return uniq_items
+
+    def print_weapons(self):
+        return ["twitchRaid Listing All Weapons twitchRaid"] + self.find_unique_items(
+            fetch_weapons(self.character.morgue_file()), "\w\s-\s(.*)"
         )
 
-    def print_armour(self, morgue_file):
-        self.print_unique_items(
-            morgue_file,
-            f"BloodTrail Listing All Armour BloodTrail",
-            fetch_armour(morgue_file),
-            f"\w\s-\s(.*)",
+    def print_armour(self):
+        return ["BloodTrail Listing All Armour BloodTrail"] + self.find_unique_items(
+            fetch_armour(self.character.morgue_file()), "\w\s-\s(.*)"
         )
 
     def print_jewellery(self, morgue_file):
-        self.print_unique_items(
-            morgue_file,
-            f"CoolCat Listing All Jewellery CoolCat",
-            fetch_jewellery(morgue_file),
-            f"\w\s-\s(.*)",
+        return ["CoolCat Listing All Jewellery CoolCat"] + self.find_unique_items(
+            fetch_jewellery(self.character.morgue_file()), "\w\s-\s(.*)"
         )
 
     # ========================================================================================

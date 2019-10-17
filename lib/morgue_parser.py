@@ -144,7 +144,7 @@ def fetch_turns(morgue_file):
 
 def fetch_overview(morgue_file):
     xl_level = fetch_xl_level(morgue_file)
-    health   = fetch_health(morgue_file)
+    health = fetch_health(morgue_file)
     location = fetch_location(morgue_file)
 
     m = re.search(f"(.*) Turns:\s(.*)", str(morgue_file))
@@ -163,4 +163,3 @@ def fetch_location(morgue_file):
 def fetch_god(morgue_file):
     pass
     # You worship Vehumet.
-

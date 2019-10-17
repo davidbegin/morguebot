@@ -38,11 +38,10 @@ lambda_role_policy = Output.all(bucket.arn, gods_queue.arn, chat_stream.arn).app
 )
 
 
-
 iam.RolePolicyAttachment(
     f"{module_name}-xray",
-    policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
-    role = s3_lambda_role.id
+    policy_arn="arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+    role=s3_lambda_role.id,
 )
 
 lambda_role_policy = iam.RolePolicy(

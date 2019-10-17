@@ -13,7 +13,6 @@ def morgue_file():
     return open(morgue_file_path).read()
 
 
-
 def test_morgue_parser_altar_finding(morgue_file):
     pass
 
@@ -21,7 +20,9 @@ def test_morgue_parser_altar_finding(morgue_file):
 def test_morgue_parser_overview(morgue_file):
     character = Character(character="None")
     x = fetch_overview(character.morgue_file())
-    import pdb; pdb.set_trace()
+    import pdb
+
+    pdb.set_trace()
     # client = boto3.client("s3")
     # response = client.get_object(Bucket=self.bucket, Key=self.key)
     # morgue = response["Body"].read()

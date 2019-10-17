@@ -53,8 +53,8 @@ lambda_role_policy = Output.all(
 
 iam.RolePolicyAttachment(
     f"{module_name}-xray",
-    policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
-    role = morgue_parser_lambda_role.id
+    policy_arn="arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+    role=morgue_parser_lambda_role.id,
 )
 morgue_parser_lambda_role_policy = iam.RolePolicy(
     f"{module_name}-lambda-role-policy",

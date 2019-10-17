@@ -45,8 +45,8 @@ lambda_role_policy = iam.RolePolicy(
 
 iam.RolePolicyAttachment(
     f"{module_name}-xray",
-    policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
-    role = s3_lambda_role.id
+    policy_arn="arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+    role=s3_lambda_role.id,
 )
 
 # source_code_hash=None
