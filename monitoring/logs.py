@@ -50,17 +50,15 @@ def _print_events(log_group_name, events) -> None:
 # S3 Message
 # Regular Event???
 
-
 def is_kinesis_message(message):
     return True
     # We need to figure out what the heck is a Kinesis Message
-    pass
 
 
 def _print_event(log_group_name, timestamp, message, fg_color, nl):
 
-    if is_kinesis_message(message):
-        print("KINESIISSISISISISISI")
+    # if is_kinesis_message(message):
+    #     print("KINESIISSISISISISISI")
 
     formatted_timestamp = convert_from_epoch(timestamp)
     click.echo(

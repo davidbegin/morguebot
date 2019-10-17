@@ -1,3 +1,7 @@
+import json
+
+import boto3
+
 from lib.printer import Printer
 
 
@@ -32,9 +36,26 @@ def process_msg(printer, irc_response, character):
     user, msg = _parse_user_and_msg(irc_response)
 
     if _is_command_msg(msg):
-        execute_command(printer, msg, character)
+        # execute_command(printer, msg, character)
+        split_command = msg.split()
+        command = split_command[0]
+        # this will always be what you start the bot with,
+        # meaning chat can't change it
+
+        if len(split_command) > 1:
+            invoke_morgue_bot(split_command[1], command)
+        else:
+            invoke_morgue_bot(character.character, command)
     else:
         print(f"{user}: {msg}")
+
+
+def invoke_morgue_bot(character, command):
+    print("invoke_morgue_bot")
+    client = boto3.client("lambda")
+
+    payload = {"character": character, "command": command}
+    client.invoke(FunctionName="morgue-bot-2fc463f", Payload=json.dumps(payload))
 
 
 def execute_command(printer, msg, character):

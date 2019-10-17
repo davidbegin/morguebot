@@ -12,7 +12,9 @@ bucket = s3.Bucket("morgue-files")
 pulumi.export("bucket_arn", bucket.arn)
 
 
-def allow_s3_bucket_access(s3_bucket, roles):
+def allow_s3_bucket_access(s3_bucket, roles, lamda_function_arn):
+    # s3.BucketNotification("new-morgue-file", bucket=s3_bucket.arn, lambda_functions=[lamda_function_arn])
+
     role_arns = [role.arn for role in roles]
 
     bucket_policy = Output.all(s3_bucket.arn, role_arns).apply(

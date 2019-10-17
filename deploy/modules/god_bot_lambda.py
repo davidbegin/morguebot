@@ -38,6 +38,13 @@ lambda_role_policy = Output.all(bucket.arn, gods_queue.arn, chat_stream.arn).app
 )
 
 
+
+iam.RolePolicyAttachment(
+    f"{module_name}-xray",
+    policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+    role = s3_lambda_role.id
+)
+
 lambda_role_policy = iam.RolePolicy(
     f"{module_name}-lambda-role-policy",
     role=s3_lambda_role.id,
@@ -55,6 +62,7 @@ cloudwatch_lambda = lambda_.Function(
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
     timeout=200,
+    tracing_config={"mode": "Active"},
     environment={
         "variables": {
             "CHARACTER_DB": dynamodb_table.name,
@@ -64,3 +72,14 @@ cloudwatch_lambda = lambda_.Function(
         }
     },
 )
+
+lambda_.EventSourceMapping(
+    f"{module_name}-sqs-esm",
+    event_source_arn=gods_queue.arn,
+    function_name=cloudwatch_lambda.name,
+    # starting_position="AT_TIMESTAMP",
+    # starting_position_timestamp="AT_TIMESTAMP",
+)
+
+# def __init__(batch_size=None, enabled=None,
+#         starting_position=None, starting_position_timestamp=None, __props__=None, __name__=None, __opts__=None):

@@ -8,8 +8,10 @@ from lib.character import Character
 from lib.printer import Printer
 from lib.command_parser import execute_command
 from lib.morgue_parser import fetch_overview
+from lib.formatter import Formatter
 
 TOPIC_ARN = os.environ["TOPIC_ARN"]
+KINESIS_NAME = os.environ["CHAT_STREAM_NAME"]
 
 
 def send_morguefile_notification(character):
@@ -24,15 +26,19 @@ def send_morguefile_notification(character):
 def handler(event, handler):
     print(json.dumps(event))
 
+    # RESPOND TO S3
     if "Records" in event:
         for record in event["Records"]:
             character = record["s3"]["object"]["key"].split("/")[0]
             # save_a_buncha_info(character)
             send_morguefile_notification(character)
+    # RESPOND TO S3
     elif "s3" in event:
         character = event["s3"]["object"]["key"].split("/")[0]
         # save_a_buncha_info(character)
         send_morguefile_notification(character)
+
+    # This is direct invocation
     else:
         if "character" in event.keys():
             character_name = event["character"]
@@ -43,24 +49,17 @@ def handler(event, handler):
 
         command = event["command"]
         character = Character(character=character_name)
-        kinesis_arn = os.environ["CHAT_STREAM_ARN"]
-        kinesis_name = os.environ["CHAT_STREAM_NAME"]
 
         client = boto3.client("kinesis")
 
-        if command == "overview":
-            overview = fetch_overview(character.morgue_file())
-            print("=============")
-            print("overview")
-            print(f"{overview}")
-            print("=============")
+        formatter = Formatter(character)
 
-            response = client.put_record(
-                StreamName=kinesis_name, Data=f"{overview}", PartitionKey="alpha"
-            )
-        else:
-            response = client.put_record(
-                StreamName=kinesis_name, Data="WE ARE CLOSE", PartitionKey="alpha"
-            )
+        msg = formatter.construct_message(command)
+
+        response = client.put_record(
+            StreamName=KINESIS_NAME,
+            Data=json.dumps({"Message": msg}),
+            PartitionKey="alpha",
+        )
 
         print(response)

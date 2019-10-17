@@ -58,6 +58,12 @@ lambda_role_policy = iam.RolePolicy(
     f"{module_name}-role-policy", role=s3_lambda_role.id, policy=lambda_role_policy
 )
 
+iam.RolePolicyAttachment(
+    f"{module_name}-xray",
+    policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+    role = s3_lambda_role.id
+)
+
 # source_code_hash=None
 # https://morgue-artifacts.s3-us-west-2.amazonaws.com/handler.zip
 # TODO: Add the source_hash_code thang to trigger updates
@@ -68,6 +74,7 @@ cloudwatch_lambda = lambda_.Function(
     handler="twitch_chat_bot.handler",
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
+    tracing_config={"mode": "Active"},
     timeout=200,
     environment={
         "variables": {
@@ -79,3 +86,15 @@ cloudwatch_lambda = lambda_.Function(
         }
     },
 )
+
+lambda_.EventSourceMapping(
+    f"{module_name}-kinesis-esm",
+    event_source_arn=chat_stream.arn,
+    function_name=cloudwatch_lambda.name,
+    starting_position="LATEST",
+    # starting_position="AT_TIMESTAMP",
+    # starting_position_timestamp="AT_TIMESTAMP",
+)
+
+# def __init__(batch_size=None, enabled=None,
+#         starting_position=None, starting_position_timestamp=None, __props__=None, __name__=None, __opts__=None):

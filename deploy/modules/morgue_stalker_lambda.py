@@ -7,9 +7,10 @@ from pulumi_aws import iam, lambda_
 
 config = pulumi.Config()
 
+module_name = "morgue-stalker"
 
 s3_lambda_role = iam.Role(
-    "morgue-stalker-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
+    f"{module_name}-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
 )
 
 
@@ -32,9 +33,15 @@ def lambda_role_policy(bucket_arn):
 
 # TODO: comeback and fix this string interpolation
 lambda_role_policy = iam.RolePolicy(
-    "morgue-stalker-role-policy",
+    f"{module_name}-role-policy",
     role=s3_lambda_role.id,
     policy=bucket.arn.apply(lambda_role_policy),
+)
+
+iam.RolePolicyAttachment(
+    f"{module_name}-xray",
+    policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+    role = s3_lambda_role.id
 )
 
 
@@ -42,12 +49,13 @@ lambda_role_policy = iam.RolePolicy(
 # https://morgue-artifacts.s3-us-west-2.amazonaws.com/handler.zip
 # TODO: Add the source_hash_code thang to trigger updates
 cloudwatch_lambda = lambda_.Function(
-    "morgue-stalker",
+    f"{module_name}",
     role=s3_lambda_role.arn,
     runtime="python3.6",
     handler="morgue_stalker.handler",
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
+    tracing_config={"mode": "Active"},
     timeout=200,
     environment={"variables": {"MORGUE_BUCKETNAME": bucket.id}},
 )

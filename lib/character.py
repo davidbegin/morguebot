@@ -7,6 +7,7 @@ import boto3
 
 from lib.morgue_parser import fetch_seed
 from lib.morgue_parser import fetch_turns
+from lib.morgue_saver import morgue_saver
 
 
 def _find_user():
@@ -45,13 +46,23 @@ class Character:
             morgue = self._fetch_online_morgue(self.morgue_url)
         return morgue
 
+    def s3_morgue_file(self):
+        try:
+            client = boto3.client("s3")
+            response = client.get_object(Bucket=self.bucket, Key=self.key)
+            return response["Body"].read().decode()
+        except Exception as e:
+            print(f"Error fetching morguefile: {self.bucket} {self.key}")
+            return None
+
     def morgue_file(self):
         if self.local_mode:
             morgue = open(self.morgue_filepath).read()
         elif self.bucket and self.key:
-            client = boto3.client("s3")
-            response = client.get_object(Bucket=self.bucket, Key=self.key)
-            morgue = response["Body"].read()
+            morgue = self.s3_morgue_file()
+            if morgue is None:
+                morgue = self._fetch_online_morgue(self.morgue_url)
+                morgue_saver(self, morgue)
         else:
             morgue = self._fetch_online_morgue(self.morgue_url)
         self.seed = fetch_seed(morgue)
@@ -95,3 +106,13 @@ class Character:
         else:
             print(f"\033[031;1mCould not find the Character at {url}\033[0m")
             sys.exit()
+
+
+    def _test(self):
+        client = boto3.client("s3")
+        response = client.get_object(Bucket=self.bucket, Key=self.key)
+        morgue1 = response["Body"].read()
+
+        morgue2 = self._fetch_online_morgue(self.morgue_url)
+        # import pdb; pdb.set_trace()
+

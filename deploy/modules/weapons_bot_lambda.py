@@ -43,6 +43,12 @@ lambda_role_policy = iam.RolePolicy(
     policy=lambda_role_policy,
 )
 
+iam.RolePolicyAttachment(
+    f"{module_name}-xray",
+    policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+    role = s3_lambda_role.id
+)
+
 # source_code_hash=None
 # https://morgue-artifacts.s3-us-west-2.amazonaws.com/handler.zip
 # TODO: Add the source_hash_code thang to trigger updates
@@ -53,6 +59,7 @@ cloudwatch_lambda = lambda_.Function(
     handler="god_bot.handler",
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
+    tracing_config={"mode": "Active"},
     timeout=200,
     environment={
         "variables": {

@@ -51,6 +51,11 @@ lambda_role_policy = Output.all(
     )
 )
 
+iam.RolePolicyAttachment(
+    f"{module_name}-xray",
+    policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+    role = morgue_parser_lambda_role.id
+)
 morgue_parser_lambda_role_policy = iam.RolePolicy(
     f"{module_name}-lambda-role-policy",
     role=morgue_parser_lambda_role.id,
@@ -66,6 +71,7 @@ morgue_parser_lambda = lambda_.Function(
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
     timeout=200,
+    tracing_config={"mode": "Active"},
     environment={
         "variables": {
             "CHARACTER_DB": dynamodb_table.name,
