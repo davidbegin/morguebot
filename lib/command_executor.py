@@ -10,8 +10,20 @@ from lib.command_parser import execute_command
 from lib.morgue_parser import fetch_overview
 from lib.formatter import Formatter
 
-TOPIC_ARN = os.environ["TOPIC_ARN"]
-KINESIS_NAME = os.environ["CHAT_STREAM_NAME"]
+TOPIC_ARN = os.environ.get(
+    "TOPIC_ARN", "arn:aws:sns:us-west-2:851075464416:gods-queue-topic-94691e5"
+)
+KINESIS_NAME = os.environ.get("CHAT_STREAM_NAME", "twitch-chat-877759c")
+
+
+def execute_command(event):
+    if "Records" in event or "s3" in event:
+        process_s3_events(event)
+    else:
+        process_event(event)
+
+
+# ========================================================================================
 
 
 def send_morguefile_notification(character):
@@ -51,6 +63,8 @@ def find_character_name(event):
     else:
         character_name = "beginbot"
 
+    return character_name
+
 
 def process_event(event):
     character_name = find_character_name(event)
@@ -59,11 +73,8 @@ def process_event(event):
 
     formatter = Formatter(character)
     msg = formatter.construct_message(command)
-    send_chat_to_stream(msg)
 
-
-def execute_command(event, handler):
-    if "Records" in event or "s3" in event:
-        process_s3_events(event)
+    if msg:
+        send_chat_to_stream(msg)
     else:
-        process_event(event)
+        print(f"Formatter return None for {command}")

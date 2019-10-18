@@ -53,6 +53,8 @@ class Formatter:
         self.character = character
 
     def construct_message(self, command):
+        print(f"Formatter construct_message {command} for {self.character.character}")
+
         if command == "!overview":
             return self.print_overview()
         elif command == "!h?":
@@ -193,6 +195,9 @@ class Formatter:
     # ========================================================================================
 
     def find_unique_items(self, items, regex):
+        if items is None:
+            return None
+
         uniq_items = []
         for item in items:
             m = re.search(regex, item)
@@ -204,19 +209,31 @@ class Formatter:
         return uniq_items
 
     def print_weapons(self):
-        return ["twitchRaid Listing All Weapons twitchRaid"] + self.find_unique_items(
+        weapons = self.find_unique_items(
             fetch_weapons(self.character.morgue_file()), "\w\s-\s(.*)"
         )
+        if weapons:
+            return ["twitchRaid Listing All Weapons twitchRaid"] + weapons
+        else:
+            return ["No Weapons Found!"]
 
     def print_armour(self):
-        return ["BloodTrail Listing All Armour BloodTrail"] + self.find_unique_items(
+        armour = self.find_unique_items(
             fetch_armour(self.character.morgue_file()), "\w\s-\s(.*)"
         )
+        if armour:
+            return ["BloodTrail Listing All Armour BloodTrail"] + armour
+        else:
+            return ["No Armour Found!"]
 
-    def print_jewellery(self, morgue_file):
-        return ["CoolCat Listing All Jewellery CoolCat"] + self.find_unique_items(
+    def print_jewellery(self):
+        jewellery = self.find_unique_items(
             fetch_jewellery(self.character.morgue_file()), "\w\s-\s(.*)"
         )
+        if jewellery:
+            return ["CoolCat Listing All Jewellery CoolCat"] + jewellery
+        else:
+            return ["No Jewellery Found!"]
 
     # ========================================================================================
 

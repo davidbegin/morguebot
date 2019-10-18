@@ -87,7 +87,6 @@ def monitor_those_logs(log_group):
     limit = 10000
     duration_str = "5m"
     print_header = False
-    start_time = _convert_duration_string_to_time_delta(duration_str)
 
     stream_names = _fetch_log_steam_names(log_group)
 
@@ -98,6 +97,7 @@ def monitor_those_logs(log_group):
     events = []
 
     while not response or "nextToken" in response:
+        start_time = _convert_duration_string_to_time_delta(duration_str)
         extra_args = {}
         if "nextToken" in response:
             extra_args["nextToken"] = response["nextToken"]

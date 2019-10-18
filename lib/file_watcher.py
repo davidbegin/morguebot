@@ -1,3 +1,5 @@
+import sys
+import os
 from os.path import getmtime
 
 WATCHED_FILES = ["lib/morgue_parser.py", __file__]

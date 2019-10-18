@@ -1,65 +1,51 @@
-import time
 import base64
 import json
-import os
-
-from lib.command_parser import execute_command
-from lib.character import Character
-from lib.morgue_parser import fetch_skills
-from lib.morgue_db import MorgueDB
 
 from lib.irc_connector import connect_to_twitch
 
 
-def send_msg(self, msg):
-    # TODO: Make this configurable
-    channel = "#beginbot"
+def send_twitch_message(event):
+    for record in event["Records"]:
+        process_kinesis_record(record)
 
-    if not self.disable_twitch:
-        if msg:
-            result = self.server.send(
-                bytes("PRIVMSG " + channel + " :" + msg + "\n", "utf-8")
-            )
+
+# ========================================================================================
 
 
 def process_kinesis_message(message):
     try:
+        # TODO: Check Json parsibility
         msg = json.loads(message)["Message"]
         if msg:
             print(f"msg {type(msg)}: {msg}")
             if type(msg) is list:
                 for m in msg:
                     print(f"m: {m}")
-                    printer.send_msg(m)
+                    send_msg(m)
             else:
-                printer.send_msg(msg)
+                send_msg(msg)
 
         else:
-            print("YO YOUR MESSAGE IS NONE")
+            print(f"Kinesis Message does not contain the 'Message' key.")
+            print(f"{message}")
     except Exception as e:
         print(e)
+        print(message)
 
 
 def process_kinesis_record(record):
-    kinesis_record = record["kinesis"]
-    data = kinesis_record["data"]
+    data = record["kinesis"]["data"]
     base64_decoded = base64.b64decode(data)
     message = base64_decoded.decode("utf")
+
+    print(json.dumps({"action": "process_kinesis_record", "message": message}))
 
     if "Message" in message:
         process_kinesis_message(message)
     elif "default" in message:
-        printer.send_msg(message["default"])
+        send_msg(message["default"])
     else:
-        printer.send_msg(json.dumps(message))
-
-
-def send_twitch_message(event):
-    server = connect_to_twitch()
-    character = Character(character=None)
-
-    for record in event["Records"]:
-        process_kinesis_record(record)
+        send_msg(json.dumps(message))
 
 
 def parse_json(item):
@@ -67,3 +53,17 @@ def parse_json(item):
         return json.loads(item)
     except:
         return None
+
+
+def send_msg(msg):
+    # TODO: Make this configurable
+    server = connect_to_twitch()
+    channel = "#beginbot"
+
+    disable_twitch = False
+
+    if not disable_twitch:
+        if msg:
+            result = server.send(
+                bytes("PRIVMSG " + channel + " :" + msg + "\n", "utf-8")
+            )

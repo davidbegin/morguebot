@@ -8,7 +8,7 @@ from lib.morgue_parser import fetch_altars
 from lib.morgue_parser import fetch_armour
 
 
-TABLE_NAME = os.environ["CHARACTER_DB"]
+TABLE_NAME = os.environ.get("CHARACTER_DB", "characters-696d3eb")
 
 
 def save_a_buncha_info(character_name):

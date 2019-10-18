@@ -31,3 +31,6 @@ import modules.sns
 allow_s3_bucket_access(
     bucket, [morgue_parser_lambda_role, s3_lambda_role], morgue_parser_lambda
 )
+
+
+import modules.outputs

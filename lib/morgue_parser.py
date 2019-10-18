@@ -16,10 +16,13 @@ def fetch_spells(morgue_file):
 
 # TODO: Figure out how ot combine this with _extract_skills
 def _extract_inventory(morgue_file, start_cat, end_cat):
-    split_morgue_file = morgue_file.split("\n")
-    start_index = split_morgue_file.index(start_cat) + 1
-    end_index = split_morgue_file.index(end_cat) + 1
-    return split_morgue_file[start_index:end_index]
+    try:
+        split_morgue_file = morgue_file.split("\n")
+        start_index = split_morgue_file.index(start_cat) + 1
+        end_index = split_morgue_file.index(end_cat) + 1
+        return split_morgue_file[start_index:end_index]
+    except:
+        return None
 
 
 def _extract_skills(morgue_file, start_cat, end_cat):

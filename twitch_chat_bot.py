@@ -1,4 +1,6 @@
-from lib.twitch_bot_chat import send_twitch_message
+import json
+
+from lib.twitch_chat_bot import send_twitch_message
 
 
 def handler(event, context):

@@ -4,7 +4,7 @@ import time
 
 from optparse import OptionParser
 
-from lib.command_parser import execute_command
+from lib.command_executor import execute_command
 from lib.irc_connector import connect_to_twitch
 from lib.printer import Printer
 from lib.runners import run_bot
@@ -55,7 +55,11 @@ def main():
     )
 
     if options.exec_command:
-        execute_command(printer, f"!{options.exec_command}", character)
+        event = {
+            "character": character.character,
+            "command": f"!{options.exec_command}",
+        }
+        execute_command(event)
     elif options.status_checker:
         while True:
             validate_seed(character)

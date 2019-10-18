@@ -24,3 +24,7 @@ def run_bot(server, printer, character):
             pass
         elif irc_response[1] == "PRIVMSG":
             process_msg(printer, irc_response, character)
+        elif irc_response[0] == "PING":
+            import pdb
+
+            pdb.set_trace()

@@ -1,4 +1,6 @@
+import pulumi
 from pulumi_aws import dynamodb
+
 
 dynamodb_table = dynamodb.Table(
     "characters",
@@ -7,3 +9,5 @@ dynamodb_table = dynamodb.Table(
     write_capacity=5,
     attributes=[{"name": "character", "type": "S"}],
 )
+
+pulumi.export("dyanmodb_table", dynamodb_table.name)
