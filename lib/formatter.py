@@ -23,7 +23,7 @@ ALIASES = {"rF": "rFire", "rE": "rElec", "rC": "rCold", "rP": "rPois", "MR": "TO
 RESISTANCES = ["!rF", "!rFire", "!rCold", "!rNeg", "!rPois", "!rE", "!rElec", "!rCorr"]
 TRAITS = ["!SeeInvis", "!Gourm", "!Faith", "!Spirit", "!Reflect", "!Harm"]
 
-WORKING_COMMANDS = ["!overview", "!h?", "!weapons", "!armour", "!jewellery"]
+WORKING_COMMANDS = ["!overview", "!h?", "!weapons", "!armour", "!jewellery", "!skills"]
 
 COMMANDS_WITH_NO_ARGS = (
     [
@@ -65,8 +65,8 @@ class Formatter:
             return self.print_armour()
         elif command == "!jewellery":
             return self.print_jewellery()
-        # elif command == "!skills":
-        #     return self.print_skills()
+        elif command == "!skills":
+            return self.print_skills()
         # elif command in RESISTANCES:
         #     return self.print_resistance(command[1:])
         # elif command in TRAITS:
@@ -123,10 +123,10 @@ class Formatter:
 
         return ["TakeNRG Listing All Spells TakeNRG"] + spell_names
 
-    def print_skills(self, morgue_file):
-        self.send_msg(f"PowerUpL Listing All Skills PowerUpR")
-        skills = fetch_skills(morgue_file)
+    def print_skills(self):
+        skills = fetch_skills(self.character.morgue_file())
 
+        formatted_skills = []
         for skill in skills:
             split_skills = skill.split()
             if len(split_skills) == 3:
@@ -134,10 +134,9 @@ class Formatter:
             else:
                 _, _, level, *skill = skill.split()
 
-        return [
-            "PowerUpL Listing All Skills PowerUpR",
-            f"Level {level} {' '.join(skill)}",
-        ]
+            formatted_skills.append(f"Level {level} {' '.join(skill)}")
+
+        return ["PowerUpL Listing All Skills PowerUpR"] + formatted_skills
 
     def print_stealth(self, morgue_file):
         return self.print_command("Stealth", fetch_stealth(morgue_file))
