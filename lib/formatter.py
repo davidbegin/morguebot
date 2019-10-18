@@ -67,16 +67,12 @@ class Formatter:
             return self.print_jewellery()
         elif command == "!skills":
             return self.print_skills()
-        # elif command in RESISTANCES:
-        #     return self.print_resistance(command[1:])
-        # elif command in TRAITS:
-        #     return self.print_traits(command)
-        # elif command == "!potions":
-        #     return self.print_potions()
+        elif command == "!mutations":
+            return self.print_mutations()
+        elif command == "!potions":
+            return self.print_potions()
         # elif command == "!scrolls":
         #     return self.print_scrolls()
-        # elif command == "!mutations":
-        #     return self.print_mutations()
         # elif command == "!stlth":
         #     self.print_stealth()
         # elif command == "!mr":
@@ -89,6 +85,10 @@ class Formatter:
         #     return self.print_spells()
         # elif command == "!mf":
         #     pass
+        # elif command in RESISTANCES:
+        #     return self.print_resistance(command[1:])
+        # elif command in TRAITS:
+        #     return self.print_traits(command)
 
     def print_command(self, name, value):
         fmt_str = f"{name}: {value}"
@@ -176,11 +176,10 @@ class Formatter:
         print("\n\033[35m" + str(overview) + "\033[0m")
         return overview
 
-    def print_mutations(self, morgue_file):
+    def print_mutations(self):
         return [
             f"Squid1 Squid2 Listing All Mutations Squid4",
-            self.print_command("Mutations", fetch_mutations(morgue_file)),
-        ]
+        ] + self.print_command("Mutations", fetch_mutations(self.character.morgue_file()))
 
     def print_missionary(self, new_altars):
         return ["MercyWing1 New Gods! MercyWing2", ", ".join(new_altars)]
@@ -237,10 +236,10 @@ class Formatter:
     # ========================================================================================
 
     # TODO: combing the capture into, or branch on amout
-    def print_potions(self, morgue_file):
-        self.send_msg(f"DrinkPurple Listing All Potions DrinkPurple")
-        potions = fetch_potions(morgue_file)
+    def print_potions(self):
+        potions = fetch_potions(self.character.morgue_file())
 
+        formatted_potions = []
         for potion in potions:
             m = re.search(f"\w\s-\s(\d+)\s(.*)", potion)
             if m:
@@ -248,7 +247,12 @@ class Formatter:
                 potion_name = m.group(2)
                 msg = f"{amount} {potion_name}"
                 print(msg)
-                self.send_msg(msg)
+
+                formatted_potions.append(msg)
+
+        return [
+            f"DrinkPurple Listing All Potions DrinkPurple"
+        ] + formatted_potions
 
     def print_scrolls(self, morgue_file):
         scrolls = fetch_scrolls(morgue_file)

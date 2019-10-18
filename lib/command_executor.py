@@ -9,11 +9,8 @@ from lib.printer import Printer
 from lib.command_parser import execute_command
 from lib.morgue_parser import fetch_overview
 from lib.formatter import Formatter
-
-TOPIC_ARN = os.environ.get(
-    "TOPIC_ARN", "arn:aws:sns:us-west-2:851075464416:gods-queue-topic-94691e5"
-)
-KINESIS_NAME = os.environ.get("CHAT_STREAM_NAME", "twitch-chat-877759c")
+from lib.kinesis import send_chat_to_stream
+from lib.sns import send_morguefile_notification
 
 
 def execute_command(event):
@@ -24,21 +21,6 @@ def execute_command(event):
 
 
 # ========================================================================================
-
-
-def send_morguefile_notification(character):
-    client = boto3.client("sns")
-    msg = json.dumps({"default": f"New Morgue File for {character}"})
-    response = client.publish(TopicArn=TOPIC_ARN, Message=msg, MessageStructure="json")
-    print(json.dumps(response))
-
-
-def send_chat_to_stream(msg):
-    client = boto3.client("kinesis")
-    response = client.put_record(
-        StreamName=KINESIS_NAME, Data=json.dumps({"Message": msg}), PartitionKey="alpha"
-    )
-    print(json.dumps(response))
 
 
 def process_s3_events(event):
@@ -53,6 +35,9 @@ def process_s3_event():
     character = event["s3"]["object"]["key"].split("/")[0]
     # save_a_buncha_info(character)
     send_morguefile_notification(character)
+
+
+# ========================================================================================
 
 
 def find_character_name(event):

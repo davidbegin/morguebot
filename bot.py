@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+
 import time
 
 from optparse import OptionParser
@@ -12,6 +13,7 @@ from lib.runners import run_bot
 from lib.character import Character
 from lib.status_checkers import check_for_new_gods
 from lib.status_checkers import validate_seed
+from lib.kinesis import send_chat_to_stream
 
 
 def main():
@@ -59,6 +61,8 @@ def main():
             "character": character.character,
             "command": f"!{options.exec_command}",
         }
+
+        send_chat_to_stream(f"pastaThat Character: {character.character} pastaThat")
         execute_command(event)
     elif options.status_checker:
         while True:
