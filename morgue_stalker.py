@@ -4,6 +4,14 @@ from lib.character import Character
 from lib.morgue_parser import fetch_skills
 from lib.morgue_saver import morgue_saver
 
+import boto3
+import botocore
+import requests
+
+from aws_xray_sdk.core import xray_recorder
+from aws_xray_sdk.core import patch_all
+
+patch_all()
 
 def handler(event, handler):
     print(json.dumps(event))

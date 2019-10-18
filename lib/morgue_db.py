@@ -1,5 +1,11 @@
 import os
 import boto3
+import botocore
+
+from aws_xray_sdk.core import xray_recorder
+from aws_xray_sdk.core import patch_all
+
+patch_all()
 
 from lib.character import Character
 from lib.morgue_parser import fetch_xl_level

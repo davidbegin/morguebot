@@ -12,7 +12,7 @@ l:
 # We needs this to take a random thang
 # make artifact ARTIFACT_NAME=handler422.zip
 dependencies:
-	cd /Users/begin/code/morguebot/.morguebot2/lib/python3.7/site-packages/; zip -r9 ../../../../build/dependencies.zip .;
+	cd /Users/begin/code/morguebot/.morguebot2/lib/python3.7/site-packages/; zip -r9 ../../../../build/dependencies2.zip .;
 
 
 ARTIFACT_NAME := handler_$(shell date +%s).zip

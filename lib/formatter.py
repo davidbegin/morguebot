@@ -23,7 +23,7 @@ ALIASES = {"rF": "rFire", "rE": "rElec", "rC": "rCold", "rP": "rPois", "MR": "TO
 RESISTANCES = ["!rF", "!rFire", "!rCold", "!rNeg", "!rPois", "!rE", "!rElec", "!rCorr"]
 TRAITS = ["!SeeInvis", "!Gourm", "!Faith", "!Spirit", "!Reflect", "!Harm"]
 
-WORKING_COMMANDS = ["!overview", "!h?", "!weapons", "!armour", "!jewellery", "!skills"]
+WORKING_COMMANDS = ["!overview", "!h?", "!weapons", "!armour", "!jewellery", "!skills", "!potions", "!scrolls", "!spells"]
 
 COMMANDS_WITH_NO_ARGS = (
     [
@@ -71,8 +71,10 @@ class Formatter:
             return self.print_mutations()
         elif command == "!potions":
             return self.print_potions()
-        # elif command == "!scrolls":
-        #     return self.print_scrolls()
+        elif command == "!scrolls":
+            return self.print_scrolls()
+        elif command == "!spells":
+            return self.print_spells()
         # elif command == "!stlth":
         #     self.print_stealth()
         # elif command == "!mr":
@@ -81,8 +83,6 @@ class Formatter:
         #     return self.print_max_resistance()
         # elif command == "!gods":
         #     return self.print_gods()
-        # elif command == "!spells":
-        #     return self.print_spells()
         # elif command == "!mf":
         #     pass
         # elif command in RESISTANCES:
@@ -108,20 +108,18 @@ class Formatter:
                 f"You have {gods_remaining} to be found",
             ]
 
-    def print_spells(self, morgue_file):
-        spells = fetch_spells(morgue_file)
-        spell_names = []
+    def print_spells(self):
+        raw_spells = fetch_spells(self.character.morgue_file())
+        spells = [spell for spell in raw_spells if (len(spell.split()) >= 5)]
+        formatted_spells = []
         for spell in spells:
-            words = spell.split()
-            for word in words:
-                if "#" in word:
-                    power_index = words.index(word)
-                    spell_type = words[power_index - 1]
-                    spell_boundry = power_index - 1
-                    spell_name = " ".join(words[:spell_boundry])
-                    spell_names.append(spell_name)
+            spell_parts = spell.split()
+            spell_parts.reverse()
+            hunger, level, failure, power, spell_type, *spell = spell_parts
+            formatted_spells.append(f"{' '.join(spell)} - {spell_type} - {power} - {failure}")
 
-        return ["TakeNRG Listing All Spells TakeNRG"] + spell_names
+        return ["TakeNRG Listing All Spells TakeNRG", "Spell Type Power Failure"] + formatted_spells
+
 
     def print_skills(self):
         skills = fetch_skills(self.character.morgue_file())
@@ -254,10 +252,10 @@ class Formatter:
             f"DrinkPurple Listing All Potions DrinkPurple"
         ] + formatted_potions
 
-    def print_scrolls(self, morgue_file):
-        scrolls = fetch_scrolls(morgue_file)
-        self.send_msg(f"copyThis Listing All Scrolls copyThis")
+    def print_scrolls(self):
+        scrolls = fetch_scrolls(self.character.morgue_file())
 
+        formatted_scrolls = []
         for scroll in scrolls:
             m = re.search(f"\w\s-\s(\d+)\s(.*)", scroll)
             if m:
@@ -265,4 +263,8 @@ class Formatter:
                 scroll_name = m.group(2)
                 msg = f"{amount} {scroll_name}"
                 print(msg)
-                self.send_msg(msg)
+                formatted_scrolls.append(msg)
+
+        return [
+            "copyThis Listing All Scrolls copyThis"
+        ] + formatted_scrolls
