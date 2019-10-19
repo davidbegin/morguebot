@@ -16,7 +16,8 @@ dependencies:
 
 
 run_bot:
-	pulumi stack output --json
+	# cd deploy; pulumi stack output --json
+	python bot.py -c artmatt
 
 ARTIFACT_NAME := handler_$(shell date +%s).zip
 # artifact: dependencies

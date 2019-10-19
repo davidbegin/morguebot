@@ -11,7 +11,6 @@ from optparse import OptionParser
 
 client = boto3.client("logs")
 
-
 def _filter_out_xray_warnings(events):
     log_strs = ["START", "REPORT", "END"]
 
@@ -164,9 +163,6 @@ if __name__ == "__main__":
         new_log_groups = response["logGroups"]
         log_group_names = [log_group["logGroupName"] for log_group in new_log_groups]
 
-        # for log_group_name in log_group_names:
-        #     print(log_group_name)
-
         if options.log_group:
             command = "tmux select-layout tiled"
             call_bash(command)
@@ -175,6 +171,7 @@ if __name__ == "__main__":
                 monitor_those_logs(options.log_group)
                 time.sleep(2)
         else:
+            # We should take these in from command Land Args in JSON
             log_group_names = [
 		"/aws/lambda/morgue-stalker-341e60e",
 		"/aws/lambda/morgue-bot-2fc463f",

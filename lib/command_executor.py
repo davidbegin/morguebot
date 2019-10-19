@@ -6,6 +6,7 @@ from lib.formatter import Formatter
 from lib.kinesis import send_chat_to_stream
 from lib.sns import send_morguefile_notification
 from lib.morgue_parser import fetch_overview
+from lib.morgue_saver import morgue_saver
 
 
 def execute_command(event):
@@ -51,10 +52,14 @@ def process_event(event):
     command = event["command"]
     character = Character(character=character_name)
 
-    formatter = Formatter(character)
-    msg = formatter.construct_message(command)
-
-    if msg:
-        send_chat_to_stream(msg)
+    if command == "!fetch":
+        # send_chat_to_stream("Fetching ")
+        morgue_saver(character, character.non_saved_morgue_file())
     else:
-        print(f"Formatter return None for {command}")
+        formatter = Formatter(character)
+        msg = formatter.construct_message(command)
+
+        if msg:
+            send_chat_to_stream(msg)
+        else:
+            print(f"Formatter return None for {command}")

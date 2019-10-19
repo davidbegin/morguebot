@@ -152,17 +152,15 @@ def fetch_overview(morgue_file):
 
     m = re.search(f"(.*) Turns:\s(.*)", str(morgue_file))
     if m:
-        # return m.group(1)
         return f"{m.group(1).strip()}  XL: {xl_level}  Health: {health}  Location: {location}".strip()
 
 
 def fetch_location(morgue_file):
-    # You are on level 7 of the Dungeon.
     m = re.search(f"You are on (.*)", str(morgue_file))
     if m:
         return m.group(1)
 
 
 def fetch_god(morgue_file):
-    pass
     # You worship Vehumet.
+    pass

@@ -31,7 +31,7 @@ def run_bot(server, character):
 # ========================================================================================
 
 
-def process_msg(irc_response, character):
+def _process_msg(irc_response, character):
     user, msg = _parse_user_and_msg(irc_response)
 
     if _is_command_msg(msg):
@@ -49,10 +49,13 @@ def process_msg(irc_response, character):
 
 
 def invoke_morgue_bot(character, command):
-    print("invoke_morgue_bot")
+    print(
+        f"invoke_morgue_bot for \033[037mcharacter: {character}\033[0m \033[36mcommand: {command}\033[0m"
+    )
     client = boto3.client("lambda")
 
     payload = {"character": character, "command": command}
+    # We need to pull this in from Pulumi
     client.invoke(FunctionName="morgue-bot-2fc463f", Payload=json.dumps(payload))
 
 
