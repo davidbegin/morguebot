@@ -39,4 +39,3 @@ def god_bot(event, context):
 
 def xl_bot(event, handler):
     print("I'm xl_bot!")
-

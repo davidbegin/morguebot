@@ -1,5 +1,4 @@
 from lib.status_checkers import check_for_new_gods
-from support.fake_printer import FakePrinter
 from lib.character import Character
 
 
@@ -31,7 +30,6 @@ def test_check_for_new_gods():
     # old_altars = {"Xom"}
     # morgue_filepath = "Support/WilliamGates.txt"
     # character = Character(morgue_filepath=morgue_filepath)
-    # printer = FakePrinter()
 
     # # TODO: Come back and update these tests
     # check_for_new_gods(character, printer)

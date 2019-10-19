@@ -24,6 +24,7 @@ def stalk(event):
             character = Character(character=character_name)
             morgue_saver(character, character.non_saved_morgue_file())
 
+
 # ========================================================================================
 
 

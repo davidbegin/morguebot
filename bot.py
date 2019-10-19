@@ -1,17 +1,15 @@
 #!/usr/bin/python
 
-
 import time
 
 from optparse import OptionParser
 
 from lib.command_executor import execute_command
 from lib.irc_connector import connect_to_twitch
-from lib.printer import Printer
-from lib.runners import run_bot
+from lib.irc_bot import run_bot
 
 from lib.character import Character
-from lib.status_checkers import check_for_new_gods
+from lib.status_checkers import check_status
 from lib.status_checkers import validate_seed
 from lib.kinesis import send_chat_to_stream
 
@@ -37,7 +35,7 @@ def main():
         "-s", "--status-checker", action="store_true", dest="status_checker"
     )
 
-    # Printer Options
+    # Whether to have the bot post back to Twitch
     parser.add_option(
         "-d", "--disable-twitch", action="store_true", dest="disable_twitch"
     )
@@ -45,9 +43,6 @@ def main():
     (options, args) = parser.parse_args()
 
     server = connect_to_twitch()
-    printer = Printer(
-        server, disable_twitch=options.disable_twitch, character=options.character
-    )
 
     character = Character(
         morgue_filepath=options.morgue_filepath,
@@ -57,20 +52,14 @@ def main():
     )
 
     if options.exec_command:
-        event = {
-            "character": character.character,
-            "command": f"!{options.exec_command}",
-        }
-
         send_chat_to_stream(f"pastaThat Character: {character.character} pastaThat")
-        execute_command(event)
+        execute_command(
+            {"character": character.character, "command": f"!{options.exec_command}"}
+        )
     elif options.status_checker:
-        while True:
-            validate_seed(character)
-            check_for_new_gods(character, printer)
-            time.sleep(3)
+        check_status(character)
     else:
-        run_bot(server, printer, character=character)
+        run_bot(server, character=character)
 
 
 if __name__ == "__main__":

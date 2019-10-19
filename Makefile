@@ -15,6 +15,9 @@ dependencies:
 	cd /Users/begin/code/morguebot/.morguebot2/lib/python3.7/site-packages/; zip -r9 ../../../../build/dependencies2.zip .;
 
 
+run_bot:
+	pulumi stack output --json
+
 ARTIFACT_NAME := handler_$(shell date +%s).zip
 # artifact: dependencies
 artifact:

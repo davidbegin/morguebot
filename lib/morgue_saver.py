@@ -1,18 +1,11 @@
 import os
 import boto3
-import botocore
-
-# from aws_xray_sdk.core import xray_recorder
-# from aws_xray_sdk.core import patch_all
-
-# patch_all()
 
 
 def morgue_saver(character, morgue):
     if "MORGUE_BUCKETNAME" in os.environ:
         client = boto3.client("s3")
 
-        # We Need to find the Pulumi output
         key = f"{character.character}/morguefile.txt"
 
         # TODO: Learn how we can extract this name from Pulumi outputs
@@ -23,7 +16,6 @@ def morgue_saver(character, morgue):
             Bucket=os.environ["MORGUE_BUCKETNAME"],
             Key=key,
         )
-
         print(response)
     else:
         print(
