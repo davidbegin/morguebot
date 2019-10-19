@@ -20,4 +20,3 @@ def send_chat_to_stream(msg):
     )
 
     print(json.dumps(response))
-

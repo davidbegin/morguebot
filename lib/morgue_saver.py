@@ -7,6 +7,7 @@ import botocore
 
 # patch_all()
 
+
 def morgue_saver(character, morgue):
     if "MORGUE_BUCKETNAME" in os.environ:
         client = boto3.client("s3")

@@ -23,7 +23,17 @@ ALIASES = {"rF": "rFire", "rE": "rElec", "rC": "rCold", "rP": "rPois", "MR": "TO
 RESISTANCES = ["!rF", "!rFire", "!rCold", "!rNeg", "!rPois", "!rE", "!rElec", "!rCorr"]
 TRAITS = ["!SeeInvis", "!Gourm", "!Faith", "!Spirit", "!Reflect", "!Harm"]
 
-WORKING_COMMANDS = ["!overview", "!h?", "!weapons", "!armour", "!jewellery", "!skills", "!potions", "!scrolls", "!spells"]
+WORKING_COMMANDS = [
+    "!overview",
+    "!h?",
+    "!weapons",
+    "!armour",
+    "!jewellery",
+    "!skills",
+    "!potions",
+    "!scrolls",
+    "!spells",
+]
 
 COMMANDS_WITH_NO_ARGS = (
     [
@@ -116,10 +126,14 @@ class Formatter:
             spell_parts = spell.split()
             spell_parts.reverse()
             hunger, level, failure, power, spell_type, *spell = spell_parts
-            formatted_spells.append(f"{' '.join(spell)} - {spell_type} - {power} - {failure}")
+            formatted_spells.append(
+                f"{' '.join(spell)} - {spell_type} - {power} - {failure}"
+            )
 
-        return ["TakeNRG Listing All Spells TakeNRG", "Spell Type Power Failure"] + formatted_spells
-
+        return [
+            "TakeNRG Listing All Spells TakeNRG",
+            "Spell Type Power Failure",
+        ] + formatted_spells
 
     def print_skills(self):
         skills = fetch_skills(self.character.morgue_file())
@@ -175,9 +189,9 @@ class Formatter:
         return overview
 
     def print_mutations(self):
-        return [
-            f"Squid1 Squid2 Listing All Mutations Squid4",
-        ] + self.print_command("Mutations", fetch_mutations(self.character.morgue_file()))
+        return [f"Squid1 Squid2 Listing All Mutations Squid4"] + self.print_command(
+            "Mutations", fetch_mutations(self.character.morgue_file())
+        )
 
     def print_missionary(self, new_altars):
         return ["MercyWing1 New Gods! MercyWing2", ", ".join(new_altars)]
@@ -248,9 +262,7 @@ class Formatter:
 
                 formatted_potions.append(msg)
 
-        return [
-            f"DrinkPurple Listing All Potions DrinkPurple"
-        ] + formatted_potions
+        return [f"DrinkPurple Listing All Potions DrinkPurple"] + formatted_potions
 
     def print_scrolls(self):
         scrolls = fetch_scrolls(self.character.morgue_file())
@@ -265,6 +277,4 @@ class Formatter:
                 print(msg)
                 formatted_scrolls.append(msg)
 
-        return [
-            "copyThis Listing All Scrolls copyThis"
-        ] + formatted_scrolls
+        return ["copyThis Listing All Scrolls copyThis"] + formatted_scrolls

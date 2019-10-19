@@ -13,6 +13,7 @@ from aws_xray_sdk.core import patch_all
 
 patch_all()
 
+
 def handler(event, handler):
     print(json.dumps(event))
 

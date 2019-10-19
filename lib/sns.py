@@ -7,7 +7,6 @@ import botocore
 # from aws_xray_sdk.core import patch_all
 
 
-
 TOPIC_ARN = os.environ.get(
     "TOPIC_ARN", "arn:aws:sns:us-west-2:851075464416:gods-queue-topic-94691e5"
 )
@@ -21,4 +20,3 @@ def send_morguefile_notification(character):
     response = client.publish(TopicArn=TOPIC_ARN, Message=msg, MessageStructure="json")
 
     print(json.dumps(response))
-
