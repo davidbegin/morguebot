@@ -51,7 +51,7 @@ aws_lambda = lambda_.Function(
     f"{MODULE_NAME}",
     role=role.arn,
     runtime="python3.6",
-    handler="morgue_stalker.chandler",
+    handler="lambda_handler.morgue_stalker",
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
     tracing_config={"mode": "Active"},

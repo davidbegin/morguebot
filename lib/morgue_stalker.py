@@ -1,33 +1,14 @@
 import os
 import json
+
+import boto3
+
 from lib.character import Character
 from lib.morgue_parser import fetch_skills
 from lib.morgue_saver import morgue_saver
 
-import boto3
-import botocore
-import requests
 
-if os.environ.get("AWS_LAMBDA_FUNCTION_NAME", None):
-    from aws_xray_sdk.core import xray_recorder
-    from aws_xray_sdk.core import patch_all
-
-    patch_all()
-
-
-def stalk_character(event):
-    if "character" in event.keys():
-        character_name = event["character"]
-    elif "CHARACTER" in os.environ:
-        character_name = os.environ.get("CHARACTER", None)
-    else:
-        character_name = "beginbot"
-
-    character = Character(character=character_name)
-    morgue_saver(character, character.non_saved_morgue_file())
-
-
-def chandler(event, handler):
+def stalk(event):
     print(json.dumps(event))
 
     if "single_character_mode" in event:
@@ -42,6 +23,20 @@ def chandler(event, handler):
         for character_name in characters_to_stalk:
             character = Character(character=character_name)
             morgue_saver(character, character.non_saved_morgue_file())
+
+# ========================================================================================
+
+
+def stalk_character(event):
+    if "character" in event.keys():
+        character_name = event["character"]
+    elif "CHARACTER" in os.environ:
+        character_name = os.environ.get("CHARACTER", None)
+    else:
+        character_name = "beginbot"
+
+    character = Character(character=character_name)
+    morgue_saver(character, character.non_saved_morgue_file())
 
 
 def sanitize_them_keys(morgue_keys):
@@ -58,6 +53,3 @@ def filter_out_morgue_keys(s3_objects):
         for s3_object in s3_objects
         if s3_object["Key"].endswith("morguefile.txt")
     ]
-
-
-# chandler({}, {})

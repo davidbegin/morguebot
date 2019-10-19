@@ -1,10 +1,13 @@
 import os
 import json
 
-
 import boto3
 import botocore
 import requests
+
+from lib.twitch_chat_bot import send_twitch_message
+from lib.command_executor import execute_command
+from lib.morgue_stalker import stalk
 
 if os.environ.get("AWS_LAMBDA_FUNCTION_NAME", None):
     from aws_xray_sdk.core import xray_recorder
@@ -12,8 +15,10 @@ if os.environ.get("AWS_LAMBDA_FUNCTION_NAME", None):
 
     patch_all()
 
-from lib.twitch_chat_bot import send_twitch_message
-from lib.command_executor import execute_command
+
+def morgue_stalker(event, handler):
+    print(json.dumps(event))
+    stalk(event)
 
 
 def twitch_chat_bot(event, context):
