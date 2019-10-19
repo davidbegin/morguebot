@@ -18,9 +18,9 @@ def _handshake(server):
         token = os.environ["MORGUEBOT_TWITCH_OAUTH_TOKEN"]
 
     bot = os.environ["MORGUEBOT_BOT_NAME"]
-    channel = os.environ["MORGUEBOT_CHANNEL"]
+    channel = os.environ.get("MORGUEBOT_CHANNEL", "beginbot")
 
-    # print(json.dumps({"message": f"Connecting to #{channel} as {bot}"}))
+    print(json.dumps({"message": f"Connecting to #{channel} as {bot}"}))
 
     server.send(bytes("PASS " + token + "\r\n", "utf-8"))
     server.send(bytes("NICK " + bot + "\r\n", "utf-8"))

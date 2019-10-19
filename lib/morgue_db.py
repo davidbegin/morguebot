@@ -18,22 +18,25 @@ TABLE_NAME = os.environ.get("CHARACTER_DB", "characters-696d3eb")
 
 
 def save_a_buncha_info(character_name):
-    print(f"WE inside save_a_buncha_info: {character_name}")
-    character = Character(character=character_name)
-    morgue_db = MorgueDB(character)
-    morgue_file = character.morgue_file()
+    try:
+        print(f"WE inside save_a_buncha_info: {character_name}")
+        character = Character(character=character_name)
+        morgue_db = MorgueDB(character)
+        morgue_file = character.morgue_file()
 
-    xl_level = fetch_xl_level(morgue_file)
-    morgue_db.save_stuff("S", "xl_xl", xl_level.strip())
+        xl_level = fetch_xl_level(morgue_file)
+        morgue_db.save_stuff("S", "xl_xl", xl_level.strip())
 
-    weapons = fetch_weapons(morgue_file)
-    morgue_db.save_stuff("SS", "weapons", weapons)
+        weapons = fetch_weapons(morgue_file)
+        morgue_db.save_stuff("SS", "weapons", weapons)
 
-    # gods = fetch_altars(morgue_file)
-    # morgue_db.save_stuff("SS", "gods", gods)
+        # gods = fetch_altars(morgue_file)
+        # morgue_db.save_stuff("SS", "gods", gods)
 
-    armour = fetch_armour(morgue_file)
-    morgue_db.save_stuff("SS", "armour", armour)
+        armour = fetch_armour(morgue_file)
+        morgue_db.save_stuff("SS", "armour", armour)
+    except Exception as e:
+        print(f"Error in save_a_buncha_info: {e}")
 
 
 class MorgueDB:
@@ -65,11 +68,24 @@ class MorgueDB:
         )
 
     def save_weapons(self, character_name, weapons):
-        response = self.client.update_item(
-            TableName=TABLE_NAME,
-            Key={"character": {"S": character_name}},
-            AttributeUpdates={"weapons": {"Value": {"SS": weapons}, "Action": "PUT"}},
-        )
+        # "L": [ {"S": "Cookies"}
+
+        try:
+            response = self.client.update_item(
+                TableName=TABLE_NAME,
+                Key={"character": {"S": character_name}},
+                # AttributeUpdates={"weapons": {"Value": {"SS": weapons}, "Action": "PUT"}},
+                AttributeUpdates={
+                    "weapons": {
+                        "Value": {"L": [({"S": weapon}) for weapon in weapons]},
+                        "Action": "PUT",
+                    }
+                },
+            )
+        except:
+            print("TROUBLE IN PARADISE")
+            print(weapons)
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
     def save_xl(self, character_name, xl_level):
         response = self.client.update_item(

@@ -17,7 +17,7 @@ def run_bot(server, printer, character):
         irc_response = server.recv(2048).decode("utf-8").split()
 
         # How do we wan to control these prints better
-        print(irc_response)
+        # print(irc_response)
 
         if len(irc_response) < 2:
             # print(irc_response)
@@ -26,5 +26,4 @@ def run_bot(server, printer, character):
             process_msg(printer, irc_response, character)
         elif irc_response[0] == "PING":
             print("WE NEED TO PONG")
-            # import pdb
-            # pdb.set_trace()
+            server.send(bytes("PONG" + "\r\n", "utf-8"))

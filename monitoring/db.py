@@ -8,6 +8,15 @@ client = boto3.client("dynamodb")
 TABLE_NAME = "characters-696d3eb"
 
 
+def monitor_characters():
+    while True:
+        response = client.scan(
+            TableName=TABLE_NAME
+        )
+        characters_in_db = [ character['character']['S'] for character in response['Items'] ]
+        print(characters_in_db)
+        time.sleep(5)
+
 def monitor_character(character):
     while True:
         response = client.get_item(
@@ -22,4 +31,5 @@ def monitor_character(character):
 
 
 # monitor_character("None")
-monitor_character("artmatt")
+# monitor_character("artmatt")
+monitor_characters()

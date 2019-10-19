@@ -47,7 +47,7 @@ def process_msg(printer, irc_response, character):
         else:
             invoke_morgue_bot(character.character, command)
     else:
-        print(f"{user}: {msg}")
+        print(f"\033[37;1m{user}:\033[0m {msg}")
 
 
 def invoke_morgue_bot(character, command):

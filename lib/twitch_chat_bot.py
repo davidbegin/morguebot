@@ -1,3 +1,4 @@
+import os
 import base64
 import json
 
@@ -56,14 +57,13 @@ def parse_json(item):
 
 
 def send_msg(msg):
-    # TODO: Make this configurable
     server = connect_to_twitch()
-    channel = "#beginbot"
+    channel = os.environ.get("MORGUEBOT_CHANNEL", "beginbot")
 
     disable_twitch = False
 
     if not disable_twitch:
         if msg:
             result = server.send(
-                bytes("PRIVMSG " + channel + " :" + msg + "\n", "utf-8")
+                bytes("PRIVMSG " + f"#{channel}" + " :" + msg + "\n", "utf-8")
             )
