@@ -2,10 +2,10 @@ import os
 import boto3
 import botocore
 
-from aws_xray_sdk.core import xray_recorder
-from aws_xray_sdk.core import patch_all
+# from aws_xray_sdk.core import xray_recorder
+# from aws_xray_sdk.core import patch_all
 
-patch_all()
+# patch_all()
 
 def morgue_saver(character, morgue):
     if "MORGUE_BUCKETNAME" in os.environ:

@@ -3,8 +3,8 @@ import json
 import boto3
 import botocore
 
-from aws_xray_sdk.core import xray_recorder
-from aws_xray_sdk.core import patch_all
+# from aws_xray_sdk.core import xray_recorder
+# from aws_xray_sdk.core import patch_all
 
 
 
