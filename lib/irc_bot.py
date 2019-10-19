@@ -15,11 +15,7 @@ def run_bot(server, character):
         # We might want to add a timeout and retry or something
         irc_response = server.recv(2048).decode("utf-8").split()
 
-        # How do we wan to control these prints better
-        # print(irc_response)
-
         if len(irc_response) < 2:
-            # print(irc_response)
             pass
         elif irc_response[1] == "PRIVMSG":
             _process_msg(irc_response, character)
@@ -50,11 +46,12 @@ def _process_msg(irc_response, character):
 
 def invoke_morgue_bot(character, command):
     print(
-        f"invoke_morgue_bot for \033[037mcharacter: {character}\033[0m \033[36mcommand: {command}\033[0m"
+        f"\033[33mInvoking Morgue Bot\033[0m \033[037;1mcharacter:\033[0m \033[36m{character}\033[0m \033[37;1mcommand:\033[0m \033[36m{command}\033[0m"
     )
     client = boto3.client("lambda")
 
     payload = {"character": character, "command": command}
+
     # We need to pull this in from Pulumi
     client.invoke(FunctionName="morgue-bot-2fc463f", Payload=json.dumps(payload))
 

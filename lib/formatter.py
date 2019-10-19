@@ -33,6 +33,7 @@ WORKING_COMMANDS = [
     "!potions",
     "!scrolls",
     "!spells",
+    "!version",
 ]
 
 COMMANDS_WITH_NO_ARGS = (
@@ -85,6 +86,8 @@ class Formatter:
             return self.print_scrolls()
         elif command == "!spells":
             return self.print_spells()
+        elif command == "!version":
+            return self.print_version()
         # elif command == "!stlth":
         #     self.print_stealth()
         # elif command == "!mr":
@@ -182,6 +185,9 @@ class Formatter:
             print("\n\033[35m" + "No Resistance FOUND! " + "\033[0m")
 
     # ========================================================================================
+
+    def print_version(self):
+        return self.character.morgue_file().split("\n")[0]
 
     def print_overview(self):
         overview = fetch_overview(self.character.morgue_file())

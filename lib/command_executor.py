@@ -19,6 +19,31 @@ def execute_command(event):
 # ========================================================================================
 
 
+def process_event(event):
+    character_name = find_character_name(event)
+    command = event["command"]
+    character = Character(character=character_name)
+
+    if command == "!fetch":
+        # send_chat_to_stream("Fetching ")
+        morgue_saver(character, character.non_saved_morgue_file())
+    elif command == "!save_morgue":
+        f = character.non_saved_morgue_file()
+        with open(f"tmp/{character}_morguefile.txt", "w") as morguefile:
+            morguefile.write(f)
+    else:
+        formatter = Formatter(character)
+        msg = formatter.construct_message(command)
+
+        if msg:
+            send_chat_to_stream(msg)
+        else:
+            print(f"Formatter return None for {command}")
+
+
+# ========================================================================================
+
+
 def process_s3_events(event):
     if "Records" in event:
         for record in event["Records"]:
@@ -45,21 +70,3 @@ def find_character_name(event):
         character_name = "beginbot"
 
     return character_name
-
-
-def process_event(event):
-    character_name = find_character_name(event)
-    command = event["command"]
-    character = Character(character=character_name)
-
-    if command == "!fetch":
-        # send_chat_to_stream("Fetching ")
-        morgue_saver(character, character.non_saved_morgue_file())
-    else:
-        formatter = Formatter(character)
-        msg = formatter.construct_message(command)
-
-        if msg:
-            send_chat_to_stream(msg)
-        else:
-            print(f"Formatter return None for {command}")
