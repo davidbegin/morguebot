@@ -20,7 +20,7 @@ def lambda_role_policy(bucket_arn):
             "Version": "2012-10-17",
             "Statement": [
                 CREATE_CW_LOGS_POLICY,
-                {"Effect": "Allow", "Action": ["s3:PutObject"], "Resource": bucket_arn},
+                {"Effect": "Allow", "Action": ["s3:PutObject", "s3:ListObjectsV2"], "Resource": bucket_arn},
                 {
                     "Effect": "Allow",
                     "Action": ["s3:GetObject"],
@@ -52,7 +52,7 @@ cloudwatch_lambda = lambda_.Function(
     f"{module_name}",
     role=s3_lambda_role.arn,
     runtime="python3.6",
-    handler="morgue_stalker.handler",
+    handler="morgue_stalker.chandler",
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
     tracing_config={"mode": "Active"},

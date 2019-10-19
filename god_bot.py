@@ -7,6 +7,11 @@ from lib.character import Character
 from lib.morgue_parser import fetch_skills
 from lib.morgue_db import MorgueDB
 
+from aws_xray_sdk.core import xray_recorder
+from aws_xray_sdk.core import patch_all
+
+patch_all()
+
 
 def send_chat(msg):
     kinesis_arn = os.environ["CHAT_STREAM_ARN"]

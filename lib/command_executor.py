@@ -1,16 +1,11 @@
 import os
-import json
-import boto3
 
 from lib.morgue_db import save_a_buncha_info
-from lib.irc_connector import connect_to_twitch
 from lib.character import Character
-from lib.printer import Printer
-from lib.command_parser import execute_command
-from lib.morgue_parser import fetch_overview
 from lib.formatter import Formatter
 from lib.kinesis import send_chat_to_stream
 from lib.sns import send_morguefile_notification
+from lib.morgue_parser import fetch_overview
 
 
 def execute_command(event):
