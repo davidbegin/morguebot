@@ -2,7 +2,6 @@ import time
 
 import boto3
 
-from lib.command_parser import execute_command
 from lib.command_parser import process_msg
 from lib.file_watcher import watch_for_changes
 from lib.morgue_parser import fetch_altars

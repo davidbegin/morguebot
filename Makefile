@@ -21,11 +21,7 @@ artifact:
 	cp build/dependencies.zip build/$(ARTIFACT_NAME)
 	zip -rg build/$(ARTIFACT_NAME) lib/
 	zip -g build/$(ARTIFACT_NAME) lambda_handler.py
-	zip -g build/$(ARTIFACT_NAME) morgue_bot.py
 	zip -g build/$(ARTIFACT_NAME) morgue_stalker.py
-	zip -g build/$(ARTIFACT_NAME) twitch_chat_bot.py
-	zip -g build/$(ARTIFACT_NAME) xl_bot.py
-	zip -g build/$(ARTIFACT_NAME) god_bot.py
 
 
 # make artifact_deploy

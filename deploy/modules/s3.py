@@ -1,15 +1,8 @@
 import json
-import pulumi
 from pulumi_aws import s3
 from pulumi import Output
 
-# ============
-# S3
-# ============
-
 bucket = s3.Bucket("morgue-files")
-# pulumi.export("bucket_name", bucket.id)
-pulumi.export("bucket_arn", bucket.arn)
 
 
 def allow_s3_bucket_access(s3_bucket, roles, lamda_function_arn):

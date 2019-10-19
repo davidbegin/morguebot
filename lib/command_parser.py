@@ -30,22 +30,19 @@ COMMANDS_WITH_NO_ARGS = (
 )
 
 
-# This is not a Parser
-# it is an exeuctor
 def process_msg(printer, irc_response, character):
     user, msg = _parse_user_and_msg(irc_response)
 
     if _is_command_msg(msg):
-        # execute_command(printer, msg, character)
         split_command = msg.split()
         command = split_command[0]
-        # this will always be what you start the bot with,
-        # meaning chat can't change it
 
         if len(split_command) > 1:
-            invoke_morgue_bot(split_command[1], command)
+            character_name = split_command[1]
         else:
-            invoke_morgue_bot(character.character, command)
+            character_name = character.character
+
+        invoke_morgue_bot(character_name, command)
     else:
         print(f"\033[37;1m{user}:\033[0m {msg}")
 

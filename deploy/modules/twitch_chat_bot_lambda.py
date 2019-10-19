@@ -10,9 +10,9 @@ from modules.dynamodb import dynamodb_table
 
 config = pulumi.Config()
 
-kms_key = kms.Key("twitch-chat-bot")
+MODULE_NAME = "twitch-chat-bot"
 
-module_name = "twitch-chat-bot"
+kms_key = kms.Key(f"{MODULE_NAME}")
 
 twitch_oauth_token = kms.Ciphertext(
     "twitch_oauth_token,",
@@ -20,11 +20,11 @@ twitch_oauth_token = kms.Ciphertext(
     plaintext=config.require_secret("oauth_token"),
 )
 
-s3_lambda_role = iam.Role(
-    f"{module_name}-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
+role = iam.Role(
+    f"{MODULE_NAME}-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
 )
 
-lambda_role_policy = Output.all(bucket.arn, chat_stream.arn, kms_key.arn).apply(
+policy = Output.all(bucket.arn, chat_stream.arn, kms_key.arn).apply(
     lambda args: json.dumps(
         {
             "Version": "2012-10-17",
@@ -53,25 +53,19 @@ lambda_role_policy = Output.all(bucket.arn, chat_stream.arn, kms_key.arn).apply(
     )
 )
 
-# TODO: comeback and fix this string interpolation
-lambda_role_policy = iam.RolePolicy(
-    f"{module_name}-role-policy", role=s3_lambda_role.id, policy=lambda_role_policy
-)
+iam.RolePolicy(f"{MODULE_NAME}-role-policy", role=role.id, policy=policy)
 
 iam.RolePolicyAttachment(
-    f"{module_name}-xray",
+    f"{MODULE_NAME}-xray",
     policy_arn="arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
-    role=s3_lambda_role.id,
+    role=role.id,
 )
 
-# source_code_hash=None
-# https://morgue-artifacts.s3-us-west-2.amazonaws.com/handler.zip
-# TODO: Add the source_hash_code thang to trigger updates
-cloudwatch_lambda = lambda_.Function(
-    f"{module_name}",
-    role=s3_lambda_role.arn,
+aws_lambda = lambda_.Function(
+    f"{MODULE_NAME}",
+    role=role.arn,
     runtime="python3.6",
-    handler="twitch_chat_bot.handler",
+    handler="lambda_handler.twitch_chat_bot",
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
     tracing_config={"mode": "Active"},
@@ -88,13 +82,8 @@ cloudwatch_lambda = lambda_.Function(
 )
 
 lambda_.EventSourceMapping(
-    f"{module_name}-kinesis-esm",
+    f"{MODULE_NAME}-kinesis-esm",
     event_source_arn=chat_stream.arn,
-    function_name=cloudwatch_lambda.name,
+    function_name=aws_lambda.name,
     starting_position="LATEST",
-    # starting_position="AT_TIMESTAMP",
-    # starting_position_timestamp="AT_TIMESTAMP",
 )
-
-# def __init__(batch_size=None, enabled=None,
-#         starting_position=None, starting_position_timestamp=None, __props__=None, __name__=None, __opts__=None):

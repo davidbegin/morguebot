@@ -1,3 +1,9 @@
+import json
+
+from pulumi_aws import iam, lambda_
+import pulumi
+from pulumi import Output
+
 from modules.s3 import bucket
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
@@ -7,22 +13,17 @@ from modules.s3 import bucket
 from modules.sqs import gods_queue
 from modules.dynamodb import dynamodb_table
 
-import json
-
-from pulumi_aws import iam, lambda_
-import pulumi
-from pulumi import Output
+MODULE_NAME = "morgue-bot"
 
 config = pulumi.Config()
 
-module_name = "morgue-bot"
 
-morgue_parser_lambda_role = iam.Role(
-    f"{module_name}-lambda-role",
+role = iam.Role(
+    f"{MODULE_NAME}-lambda-role",
     assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY),
 )
 
-lambda_role_policy = Output.all(
+policy = Output.all(
     bucket.arn, sns_topic.arn, dynamodb_table.arn, chat_stream.arn
 ).apply(
     lambda args: json.dumps(
@@ -52,22 +53,18 @@ lambda_role_policy = Output.all(
 )
 
 iam.RolePolicyAttachment(
-    f"{module_name}-xray",
+    f"{MODULE_NAME}-xray",
     policy_arn="arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
-    role=morgue_parser_lambda_role.id,
-)
-morgue_parser_lambda_role_policy = iam.RolePolicy(
-    f"{module_name}-lambda-role-policy",
-    role=morgue_parser_lambda_role.id,
-    policy=lambda_role_policy,
+    role=role.id,
 )
 
-# TODO: Add the source_hash_code thang to trigger updates
-morgue_parser_lambda = lambda_.Function(
-    f"{module_name}",
-    role=morgue_parser_lambda_role.arn,
+iam.RolePolicy(f"{MODULE_NAME}-lambda-role-policy", role=role.id, policy=policy)
+
+aws_lambda = lambda_.Function(
+    f"{MODULE_NAME}",
+    role=role.arn,
     runtime="python3.6",
-    handler="morgue_bot.handler",
+    handler="lambda_handler.morgue_bot",
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
     timeout=200,
@@ -86,7 +83,7 @@ morgue_parser_lambda = lambda_.Function(
 lambda_.Permission(
     "AllowInvocationFromMorgueFileBucket",
     action="lambda:InvokeFunction",
-    function=morgue_parser_lambda.arn,
+    function=aws_lambda.arn,
     principal="s3.amazonaws.com",
     source_arn="arn:aws:s3:::morgue-files-2944dfb",
 )

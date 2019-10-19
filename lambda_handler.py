@@ -1,82 +1,51 @@
 import os
 import json
-from lib.irc_connector import connect_to_twitch
-from lib.printer import Printer
-from lib.command_parser import execute_command
-from lib.character import Character
-from lib.status_checkers import check_for_new_gods
-from lib.morgue_parser import fetch_skills
-from lib.morgue_db import MorgueDB
+
 
 import boto3
+import botocore
+import requests
+
+if os.environ.get("AWS_LAMBDA_FUNCTION_NAME", None):
+    from aws_xray_sdk.core import xray_recorder
+    from aws_xray_sdk.core import patch_all
+
+    patch_all()
+
+from lib.twitch_chat_bot import send_twitch_message
+from lib.command_executor import execute_command
 
 
-def save_morgue(event, context):
-    print("SAVE tHE MORGUE!!!!!!!!!")
-    # print("Received event: " + json.dumps(event, indent=2))
-
-    server = connect_to_twitch()
-
-    if "command" in event.keys():
-        command = f"!{event['command']}"
-    else:
-        command = "!overview"
-
-    if "character" in event.keys():
-        character = event["character"]
-    else:
-        character = None
-
-    character = Character(character=character)
-    print(f"character: {character.character}")
-    character.morgue_file()
+def twitch_chat_bot(event, context):
+    print(json.dumps(event))
+    send_twitch_message(event)
 
 
-def lambda_handler(event, context):
-    print("Received event: " + json.dumps(event, indent=2))
-
-    server = connect_to_twitch()
-
-    if "command" in event.keys():
-        command = f"!{event['command']}"
-    else:
-        command = "!overview"
-
-    if "character" in event.keys():
-        character = event["character"]
-    else:
-        character = None
-
-    printer = Printer(server, disable_twitch=False, character=character)
-    character = Character(character=character)
-    execute_command(printer, command, character.morgue_file())
+def morgue_bot(event, handler):
+    print(json.dumps(event))
+    execute_command(event)
 
 
-def overview(event, context):
-    print("Received event: " + json.dumps(event, indent=2))
-    server = connect_to_twitch()
+def god_bot(event, context):
+    print(json.dumps(event))
 
-    if "CHARACTER" in os.environ:
-        character = os.environ["CHARACTER"]
-    else:
-        character = None
-    printer = Printer(server, disable_twitch=False, character=character)
-    character = Character(character=character)
-    execute_command(printer, "!overview", character.morgue_file())
+    for record in event["Records"]:
+        body = record["body"]
+        # For the future, we are going to modify this message
+        _send_chat(body)
 
 
-def status(event, context):
-    print("Received event: " + json.dumps(event, indent=2))
+def xl_bot(event, handler):
+    print("I'm xl_bot!")
 
-    server = connect_to_twitch()
 
-    if "CHARACTER" in os.environ:
-        character = os.environ["CHARACTER"]
-    else:
-        character = None
+def _send_chat(msg):
+    kinesis_arn = os.environ["CHAT_STREAM_ARN"]
+    kinesis_name = os.environ["CHAT_STREAM_NAME"]
 
-    print(f"character: {character}")
+    client = boto3.client("kinesis")
+    response = client.put_record(
+        StreamName=kinesis_name, Data=msg, PartitionKey="alpha"
+    )
 
-    printer = Printer(server, disable_twitch=False, character=character)
-    character = Character(character=character)
-    check_for_new_gods(character, printer)
+    print(response)
