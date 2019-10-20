@@ -42,14 +42,12 @@ def process_event(event):
         with open(f"tmp/{character_name}_morguefile.txt", "w") as morguefile:
             morguefile.write(f)
     elif arg1:
-        print("WE found an Arg1!!!")
         formatter = Formatter(character)
         all_values = formatter.construct_message(command)
 
         filtered_values = [value for value in all_values if arg1 in value]
 
         send_chat_to_stream([f"Result of your search for `{arg1}`: "] + filtered_values)
-        # send_chat_to_stream(f"Command '{command} {arg1}': {result}")
     else:
         formatter = Formatter(character)
         msg = formatter.construct_message(command)

@@ -1,25 +1,18 @@
+import re
 import random
 
 from lib.dice import one_d
 
 from lib.morgue_parser import fetch_skill
 from lib.morgue_parser import fetch_strength
+from lib.morgue_parser import fetch_weapon
+from lib.morgue_parser import fetch_weapons
+from lib.item_parser import parse_weapon
+from lib.weapon_stats import WEAPON_STATS
 
-
-WEAPON_STATS = {
-    "long sword": {"base_damage": 9, "hit_modifier": 1, "type": "Long Blades"},
-    "triple sword": {"base_damage": 17, "hit_modifier": -4, "type": "Long Blades"},
-    "falchion": {"base_damage": 7, "hit_modifier": 2, "type": "Long Blades"},
-    "short sword": {"base_damage": 6, "hit_modifier": 4, "type": "Short Blades"},
-    "dagger": {"base_damage": 4, "hit_modifier": 6, "type": "Short Blades"},
-    "trident": {"base_damage": 9, "hit_modifier": 1, "type": "Polearms"},
-    "war axe": {"base_damage": 11, "hit_modifier": 0, "type": "Axes"},
-    "staff": {"base_damage": 5, "hit_modifier": 5, "type": "Staves"},
-}
-
-
-# {"type": "long sword", "modifier": "+9"},
-def max_damage(morgue_file, weapon_info):
+# Damage = {[1d(Base damage * Strength modifier +1)-1] * Weapon skill modifier * Fighting modifier + Misc modifiers + Slaying bonuses} * Final multipliers + Stabbing bonus - AC damage reduction[1]
+def calc_max_damage(weapon, morgue_file):
+    weapon_info = parse_weapon(weapon)
     base_damage = calc_base_damage(weapon_info["name"])
 
     strength = fetch_strength(morgue_file)
@@ -39,7 +32,7 @@ def max_damage(morgue_file, weapon_info):
 
     base_damage + weapon_info["modifier"] + strength_modifier
 
-    return (
+    max_damage = (
         (one_d(base_damage * strength_modifier + 1) - 1)
         * weapon_skill_modifier
         * fighting_skill_modifier
@@ -47,7 +40,44 @@ def max_damage(morgue_file, weapon_info):
         + slaying_bonuses
     )
 
-    # Damage = {[1d(Base damage * Strength modifier +1)-1] * Weapon skill modifier * Fighting modifier + Misc modifiers + Slaying bonuses} * Final multipliers + Stabbing bonus - AC damage reduction[1]
+    return round(max_damage, 2)
+
+
+def max_damage(morgue_file):
+    weapon = fetch_weapon(morgue_file)
+    weapons = fetch_weapons(morgue_file)
+
+    max_damages = [
+        {"weapon": weapon, "max_damage": calc_max_damage(weapon, morgue_file)}
+        for weapon in weapons
+    ]
+
+    def sort_by_max_damage(elem):
+        return elem["max_damage"]
+
+    max_damages.sort(key=sort_by_max_damage)
+
+    if max_damages[-1]["weapon"] == weapon:
+        print("nice you are using your best weapon")
+        extra_msg = []
+    else:
+        extra_msg = ["PixelBob Hey why aren't you using your best weapon??? PixelBob"]
+
+    formatted_max_damages = []
+
+    for weapon_info in max_damages:
+        raw_max_damage = weapon_info["max_damage"]
+        weapon = weapon_info["weapon"]
+
+        if raw_max_damage > 40:
+            emote_l, emote_r = "PowerUpL", "PowerUpR"
+        else:
+            emote_l, emote_r = "-", ""
+
+        formatted_max_damages.append(
+            f"{weapon} {emote_l} Max Damage: {raw_max_damage} {emote_r}"
+        )
+    return formatted_max_damages + extra_msg
 
 
 # Base damage:

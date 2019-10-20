@@ -3,46 +3,6 @@ import sys
 import time
 
 
-def parse_weapon(weapon):
-    m = re.search(f"([-+]\d+)(.*)", weapon)
-    if m:
-        raw_modifier = m.group(1).strip()
-
-        if raw_modifier.startswith("+"):
-            modifier = int(raw_modifier[1:])
-        else:
-            modifier = int(raw_modifier)
-
-        rest_of_the_weapon = m.group(2)
-
-        if "short sword" in rest_of_the_weapon:
-            weapon_name = "short sword"
-        elif "triple sword" in rest_of_the_weapon:
-            weapon_name = "triple sword"
-        elif "sword" in rest_of_the_weapon:
-            weapon_name = "long sword"
-        elif "dagger" in rest_of_the_weapon:
-            weapon_name = "dagger"
-        elif "falchion" in rest_of_the_weapon:
-            weapon_name = "falchion"
-        elif "trident" in rest_of_the_weapon:
-            weapon_name = "trident"
-        elif "war axe" in rest_of_the_weapon:
-            weapon_name = "war axe"
-        elif "staff" in rest_of_the_weapon:
-            weapon_name = "staff"
-        else:
-            print(
-                f"\033[31;1mUnknown Weapon: {rest_of_the_weapon} | Modifier: {modifier}\033[0m"
-            )
-            weapon_name = "unknown"
-    else:
-        modifier = None
-        weapon_name = None
-
-    return {"name": weapon_name, "modifier": modifier}
-
-
 # ========================================================================================
 
 
@@ -118,8 +78,6 @@ def fetch_weapons(morgue_file):
         m = re.search(f"[a-zA-Z]\s+-\s+(.*)", weapon)
         if m:
             formatted_weapons.append(m.group(1))
-        else:
-            print(f"\t\033[36;1m{weapon}\033[0m")
 
     return formatted_weapons
 

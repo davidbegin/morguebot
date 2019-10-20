@@ -16,7 +16,6 @@ from lib.morgue_parser import fetch_skills
 from lib.morgue_parser import fetch_spells
 from lib.morgue_parser import fetch_altars
 from lib.morgue_parser import fetch_weapon
-from lib.morgue_parser import parse_weapon
 
 from lib.damage_calculator import max_damage
 
@@ -293,7 +292,7 @@ class Formatter:
 
     def print_max_damage(self):
         morgue_file = self.character.morgue_file()
-        weapon = fetch_weapon(morgue_file)
-        weapon_info = parse_weapon(weapon)
-        maximum_damage = max_damage(morgue_file, weapon_info)
-        return [f"CurseLit Maximum Damage for: {weapon}: {maximum_damage} CurseLit"]
+
+        maximum_damage = max_damage(morgue_file)
+        return max_damage(morgue_file)
+        # return [f"CurseLit {maximum_damage} CurseLit"]
