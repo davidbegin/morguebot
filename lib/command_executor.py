@@ -7,6 +7,7 @@ from lib.kinesis import send_chat_to_stream
 from lib.sns import send_morguefile_notification
 from lib.morgue_parser import fetch_overview
 from lib.morgue_saver import morgue_saver
+from lib.morgue_db import fetch_and_save_weapons
 
 
 def execute_command(event):
@@ -25,13 +26,28 @@ def process_event(event):
     character = Character(character=character_name)
 
     if command == "!fetch":
-        # send_chat_to_stream("Fetching ")
+
         morgue_saver(character, character.non_saved_morgue_file())
+
+    elif command == "!save_info":
+        print("Saving Info")
+        morguefile = character.s3_morgue_file()
+        fetch_and_save_weapons(character_name, morguefile)
+
+        # Or read from S3
+        # with open(f"tmp/{character_name}_morguefile.txt") as morguefile:
+        #     morguefile = morguefile.read()
+        #     fetch_and_save_weapons(character_name, morguefile)
+
     elif command == "!save_morgue":
+
         f = character.non_saved_morgue_file()
-        with open(f"tmp/{character}_morguefile.txt", "w") as morguefile:
+        os.makedirs("tmp", exist_ok=True)
+        with open(f"tmp/{character_name}_morguefile.txt", "w") as morguefile:
             morguefile.write(f)
+
     else:
+
         formatter = Formatter(character)
         msg = formatter.construct_message(command)
 

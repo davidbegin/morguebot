@@ -4,6 +4,8 @@ from lib.morgue_parser import fetch_resistance
 from lib.morgue_parser import fetch_trait
 from lib.morgue_parser import fetch_mr
 from lib.morgue_parser import fetch_altars
+from lib.morgue_parser import parse_weapon
+
 from lib.character import Character
 
 
@@ -11,6 +13,21 @@ from lib.character import Character
 def morgue_file():
     morgue_file_path = "Support/GucciMane.txt"
     return open(morgue_file_path).read()
+
+
+@pytest.mark.parametrize(
+    "weapon,expected",
+    [
+        (
+            "the +9 sword of Zonguldrok (weapon) {reap}",
+            {"type": "sword", "modifier": "+9"},
+        )
+    ],
+)
+def test_parsing_weapons(weapon, expected):
+    assert parse_weapon(weapon) == expected
+    # "a +9 dagger of speed"
+    # "a +3 antimagic broad axe"
 
 
 def test_morgue_parser_altar_finding(morgue_file):

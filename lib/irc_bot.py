@@ -20,7 +20,6 @@ def run_bot(server, character):
         elif irc_response[1] == "PRIVMSG":
             _process_msg(irc_response, character)
         elif irc_response[0] == "PING":
-            print("WE NEED TO PONG")
             server.send(bytes("PONG" + "\r\n", "utf-8"))
 
 

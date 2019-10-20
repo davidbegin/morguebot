@@ -2,6 +2,32 @@ import re
 import sys
 import time
 
+
+SHORT_BLADES = ["dagger", "quick blade", "short sword", "rapier"]
+
+
+# type: "Long Blades"
+
+# Name	Dmg	Hit	Speed	One-handed min. size	Two-handed min. size	Dam Type	Prob	Notes
+
+# Dagger	4	+6	10	Little	Little	Piercing	10
+# Quick blade	5	+6	7	Little	Little	Piercing	2	Cannot receive speed brand
+# Short sword	6	+4	11	Little	Little	Piercing	10
+# Rapier	8	+4	12	Little	Little	Piercing	10	Min delay is 5
+
+
+def parse_weapon(weapon):
+    modifier_search = re.search(f"([-+]\d+)", weapon)
+    if m:
+        modifier = m.group(1)
+    else:
+        modifier = None
+
+    # type_search =
+
+    return {"type": "sword", "modifier": modifier}
+
+
 # ========================================================================================
 
 
@@ -51,7 +77,22 @@ def fetch_armour(morgue_file):
 
 
 def fetch_weapons(morgue_file):
-    return _extract_inventory(morgue_file, "Hand Weapons", "Armour")
+    # Sometimes its Missiles, Sometimes it's Armour
+    raw_weapons = _extract_inventory(morgue_file, "Hand Weapons", "Missiles")
+    import pdb
+
+    pdb.set_trace()
+
+    formatted_weapons = []
+    for weapon in raw_weapons:
+        m = re.search(f"[a-zA-Z]\s+-\s+(.*)", weapon)
+        if m:
+            # formatted_weapons.append(m.group(1))
+            print(m.group(1))
+        else:
+            formatted_weapons.append(weapon)
+
+    return formatted_weapons
 
 
 def fetch_jewellery(morgue_file):

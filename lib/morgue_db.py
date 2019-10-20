@@ -11,11 +11,22 @@ from lib.morgue_parser import fetch_armour
 TABLE_NAME = os.environ.get("CHARACTER_DB", "characters-696d3eb")
 
 
+def fetch_and_save_weapons(character_name, morguefile):
+    weapons = fetch_weapons(morguefile)
+    import pdb
+
+    pdb.set_trace()
+    morgue_db = MorgueDB(character_name)
+    # morgue_db.delete_stuff("SS", "weapons")
+    # morgue_db._create_character()
+    # morgue_db.save_stuff("SS", "weapons", weapons)
+
+
 def save_a_buncha_info(character_name):
     try:
         print(f"WE inside save_a_buncha_info: {character_name}")
-        character = Character(character=character_name)
-        morgue_db = MorgueDB(character)
+        character = Character(character_name=character_name)
+        morgue_db = MorgueDB(character_name)
         morgue_file = character.morgue_file()
 
         xl_level = fetch_xl_level(morgue_file)
@@ -34,25 +45,30 @@ def save_a_buncha_info(character_name):
 
 
 class MorgueDB:
-    def __init__(self, character):
-        self.character = character
-        self.character_name = character.character
+    def __init__(self, character_name):
+        self.character_name = character_name
         self.client = boto3.client("dynamodb")
 
     # ========================================================================================
 
+    def delete_stuff(self, db_type, name):
+        response = self.client.delete_item(
+            TableName=TABLE_NAME, Key={"character": {"S": self.character_name}}
+        )
+        print(f"\033[35m{response}\033[0m")
+
     def save_stuff(self, db_type, name, objects):
-        if objects:
-            response = self.client.update_item(
-                TableName=TABLE_NAME,
-                Key={"character": {"S": self.character_name}},
-                AttributeUpdates={
-                    name: {"Value": {f"{db_type}": objects}, "Action": "PUT"}
-                },
-            )
-            print(response)
-        else:
-            print(f"NOTHING TO SAVE: {name}")
+        # if objects:
+        response = self.client.update_item(
+            TableName=TABLE_NAME,
+            Key={"character": {"S": self.character_name}},
+            AttributeUpdates={
+                name: {"Value": {f"{db_type}": objects}, "Action": "PUT"}
+            },
+        )
+        print(f"\033[35m{response}\033[0m")
+        # else:
+        #     print(f"NOTHING TO SAVE: {name}")
 
     def save_armour(self, character_name, armour):
         response = self.client.update_item(
@@ -89,6 +105,12 @@ class MorgueDB:
         )
 
     # ========================================================================================
+
+    def _create_character(self):
+        response = self.client.put_item(
+            TableName=TABLE_NAME, Item={"character": {"S": self.character_name}}
+        )
+        print(response)
 
     def _fetch_seed(self):
         response = self.client.get_item(

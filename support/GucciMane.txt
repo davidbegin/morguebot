@@ -1,4 +1,4 @@
-Dungeon Crawl Stone Soup version 0.23.2 (tiles) character file.
+Dungeon Crawl Stone Soup version 0.23.2 (tiles) character filtype_search = 
 
 Game seed: 27535284806467565
 

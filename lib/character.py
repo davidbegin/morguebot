@@ -36,7 +36,7 @@ class Character:
         if "MORGUE_BUCKETNAME" in os.environ:
             self.bucket = os.environ["MORGUE_BUCKETNAME"]
         else:
-            self.bucket = None
+            self.bucket = "morgue-files-2944dfb"
         self.key = f"{character}/morguefile.txt"
 
     def non_saved_morgue_file(self):
