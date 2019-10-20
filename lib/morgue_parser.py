@@ -17,15 +17,28 @@ SHORT_BLADES = ["dagger", "quick blade", "short sword", "rapier"]
 
 
 def parse_weapon(weapon):
-    modifier_search = re.search(f"([-+]\d+)", weapon)
+    m = re.search(f"([-+]\d+)(.*)", weapon)
     if m:
-        modifier = m.group(1)
+        raw_modifier = m.group(1).strip()
+
+        if raw_modifier.startswith("+"):
+            modifier = int(raw_modifier[1:])
+        else:
+            modifier = int(raw_modifier)
+
+        rest_of_the_weapon = m.group(2)
+
+        if "short sword" in rest_of_the_weapon:
+            weapon_type = "short sword"
+        elif "sword" in rest_of_the_weapon:
+            weapon_type = "long sword"
+        else:
+            weapon_type = "unknown"
     else:
         modifier = None
+        weapon_type = None
 
-    # type_search =
-
-    return {"type": "sword", "modifier": modifier}
+    return {"type": weapon_type, "modifier": modifier}
 
 
 # ========================================================================================

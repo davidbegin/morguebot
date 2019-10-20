@@ -6,6 +6,8 @@ from lib.morgue_parser import fetch_mr
 from lib.morgue_parser import fetch_altars
 from lib.morgue_parser import parse_weapon
 
+from lib.damage_calculator import max_damage
+
 from lib.character import Character
 
 
@@ -15,19 +17,31 @@ def morgue_file():
     return open(morgue_file_path).read()
 
 
+# "a +9 dagger of speed"
+# "a +3 antimagic broad axe"
 @pytest.mark.parametrize(
     "weapon,expected",
     [
         (
             "the +9 sword of Zonguldrok (weapon) {reap}",
-            {"type": "sword", "modifier": "+9"},
-        )
+            {"type": "long sword", "modifier": 9},
+        ),
+        ("the -5 short sword of Begin {slay}", {"type": "short sword", "modifier": -5}),
     ],
 )
 def test_parsing_weapons(weapon, expected):
     assert parse_weapon(weapon) == expected
-    # "a +9 dagger of speed"
-    # "a +3 antimagic broad axe"
+
+
+@pytest.mark.parametrize(
+    "weapon_info,expected",
+    [
+        ({"type": "long sword", "modifier": 9}, 18),
+        ({"type": "short sword", "modifier": -5}, 1),
+    ],
+)
+def test_max_damage(weapon_info, expected):
+    assert max_damage(weapon_info) == expected
 
 
 def test_morgue_parser_altar_finding(morgue_file):
