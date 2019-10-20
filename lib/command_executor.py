@@ -45,9 +45,7 @@ def process_event(event):
         os.makedirs("tmp", exist_ok=True)
         with open(f"tmp/{character_name}_morguefile.txt", "w") as morguefile:
             morguefile.write(f)
-
     else:
-
         formatter = Formatter(character)
         msg = formatter.construct_message(command)
 

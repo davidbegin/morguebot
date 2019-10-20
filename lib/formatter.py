@@ -15,6 +15,10 @@ from lib.morgue_parser import fetch_armour
 from lib.morgue_parser import fetch_skills
 from lib.morgue_parser import fetch_spells
 from lib.morgue_parser import fetch_altars
+from lib.morgue_parser import fetch_weapon
+from lib.morgue_parser import parse_weapon
+
+from lib.damage_calculator import max_damage
 
 
 # I Need a better data struct for aliases
@@ -34,6 +38,7 @@ WORKING_COMMANDS = [
     "!scrolls",
     "!spells",
     "!version",
+    "!max_damage",
 ]
 
 COMMANDS_WITH_NO_ARGS = (
@@ -88,6 +93,8 @@ class Formatter:
             return self.print_spells()
         elif command == "!version":
             return self.print_version()
+        elif command == "!max_damage":
+            return self.print_max_damage()
         # elif command == "!stlth":
         #     self.print_stealth()
         # elif command == "!mr":
@@ -283,3 +290,10 @@ class Formatter:
                 formatted_scrolls.append(msg)
 
         return ["copyThis Listing All Scrolls copyThis"] + formatted_scrolls
+
+    def print_max_damage(self):
+        morgue_file = self.character.morgue_file()
+        weapon = fetch_weapon(morgue_file)
+        weapon_info = parse_weapon(weapon)
+        maximum_damage = max_damage(morgue_file, weapon_info)
+        return [f"CurseLit Maximum Damage for: {weapon}: {maximum_damage} CurseLit"]

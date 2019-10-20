@@ -9,16 +9,21 @@ from unittest.mock import MagicMock
 import lib.damage_calculator
 
 
+@pytest.fixture
+def morgue_file():
+    morgue_file_path = "Support/GucciMane.txt"
+    return open(morgue_file_path).read()
+
+
 @pytest.mark.parametrize(
-    "weapon_info,character_info, expected",
+    "weapon_info,expected",
     [
-        ({"name": "long sword", "modifier": 9}, {"str": 5}, 18.53846153846154),
+        ({"name": "long sword", "modifier": 9}, 13.846153846153847),
         # ({"type": "short sword", "modifier": -5}, 1),
     ],
 )
-def test_max_damage(weapon_info, character_info, expected):
+def test_max_damage(morgue_file, weapon_info, expected):
     # with patch('lib.dice') as MockClass:
     #     instance = MockClass.return_value
     #     instance.one_d.return_value = 20
-    assert max_damage(character_info, weapon_info) == expected
-
+    assert max_damage(morgue_file, weapon_info) == expected

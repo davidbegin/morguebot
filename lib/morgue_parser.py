@@ -89,13 +89,20 @@ def fetch_armour(morgue_file):
     return _extract_inventory(morgue_file, "Armour", "Jewellery")
 
 
-def fetch_weapon_skill(morgue_file, weapon_type):
-    m = re.search(f"[\+\-\*] Level (.*) {weapon_type}" , morgue_file)
+def fetch_skill(morgue_file, skill):
+    m = re.search(f"[\+\-\*] Level (.*) {skill}", morgue_file)
 
     if m:
         return float(m.group(1))
+    else:
+        return 0
 
 
+def fetch_weapon(morgue_file):
+    weapons = fetch_weapons(morgue_file)
+    for weapon in weapons:
+        if "(weapon)":
+            return weapon
 
 
 def fetch_weapons(morgue_file):
@@ -154,12 +161,14 @@ def fetch_mr(morgue_file):
 
 def fetch_strength(morgue_file):
     user_stats = fetch_user_stats(morgue_file)
-    return int(user_stats["str"])
+    raw_strength = user_stats["str"].strip()
+    return int(raw_strength.split()[0])
 
 
 def fetch_user_stats(morgue_file):
-    user_stats_regex = "Health:\s+(.*)\s+AC:\s+(\d+)\s+Str:\s+(\d+)\s+XL:\s+(\d+)"
-    m = re.search(user_stats_regex, str(morgue_file))
+    # Health: 192/192    AC: 25    Str: 21    XL:     27
+    user_stats_regex = "Health:(.*)AC:(.*)Str:(.*)XL:(.*)"
+    m = re.search(user_stats_regex, morgue_file)
 
     if m:
         return {

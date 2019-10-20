@@ -52,7 +52,7 @@ def main():
     )
 
     if options.exec_command:
-        send_chat_to_stream(f"pastaThat Character: {character.character} pastaThat")
+        # send_chat_to_stream(f"pastaThat Character: {character.character} pastaThat")
         execute_command(
             {"character": character.character, "command": f"!{options.exec_command}"}
         )
