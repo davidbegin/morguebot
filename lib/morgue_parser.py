@@ -29,16 +29,16 @@ def parse_weapon(weapon):
         rest_of_the_weapon = m.group(2)
 
         if "short sword" in rest_of_the_weapon:
-            weapon_type = "short sword"
+            weapon_name = "short sword"
         elif "sword" in rest_of_the_weapon:
-            weapon_type = "long sword"
+            weapon_name = "long sword"
         else:
-            weapon_type = "unknown"
+            weapon_name = "unknown"
     else:
         modifier = None
-        weapon_type = None
+        weapon_name = None
 
-    return {"type": weapon_type, "modifier": modifier}
+    return {"name": weapon_name, "modifier": modifier}
 
 
 # ========================================================================================
@@ -89,21 +89,28 @@ def fetch_armour(morgue_file):
     return _extract_inventory(morgue_file, "Armour", "Jewellery")
 
 
-def fetch_weapons(morgue_file):
-    # Sometimes its Missiles, Sometimes it's Armour
-    raw_weapons = _extract_inventory(morgue_file, "Hand Weapons", "Missiles")
-    import pdb
+def fetch_weapon_skill(morgue_file, weapon_type):
+    m = re.search(f"[\+\-\*] Level (.*) {weapon_type}" , morgue_file)
 
-    pdb.set_trace()
+    if m:
+        return float(m.group(1))
+
+
+
+
+def fetch_weapons(morgue_file):
+    raw_weapons = _extract_inventory(morgue_file, "Hand Weapons", "Missiles")
+
+    if raw_weapons is None:
+        raw_weapons = _extract_inventory(morgue_file, "Hand Weapons", "Armour")
 
     formatted_weapons = []
     for weapon in raw_weapons:
         m = re.search(f"[a-zA-Z]\s+-\s+(.*)", weapon)
         if m:
-            # formatted_weapons.append(m.group(1))
-            print(m.group(1))
+            formatted_weapons.append(m.group(1))
         else:
-            formatted_weapons.append(weapon)
+            print(f"\t\033[36;1m{weapon}\033[0m")
 
     return formatted_weapons
 

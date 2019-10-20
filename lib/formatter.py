@@ -225,9 +225,8 @@ class Formatter:
         return uniq_items
 
     def print_weapons(self):
-        weapons = self.find_unique_items(
-            fetch_weapons(self.character.morgue_file()), "\w\s-\s(.*)"
-        )
+        weapons = fetch_weapons(self.character.morgue_file())
+        # weapons = self.find_unique_items(raw_weapons, "\w\s-\s(.*)")
         if weapons:
             return ["twitchRaid Listing All Weapons twitchRaid"] + weapons
         else:

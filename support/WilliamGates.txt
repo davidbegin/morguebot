@@ -95,6 +95,7 @@ Comestibles
    Skills:
  - Level 2.4 Dodging
  - Level 2.4 Stealth
+ - Level 2.4 Stealth
  + Level 9.6 Spellcasting
  * Level 11.6 Conjurations
 

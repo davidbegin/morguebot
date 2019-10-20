@@ -13,9 +13,7 @@ TABLE_NAME = os.environ.get("CHARACTER_DB", "characters-696d3eb")
 
 def fetch_and_save_weapons(character_name, morguefile):
     weapons = fetch_weapons(morguefile)
-    import pdb
 
-    pdb.set_trace()
     morgue_db = MorgueDB(character_name)
     # morgue_db.delete_stuff("SS", "weapons")
     # morgue_db._create_character()

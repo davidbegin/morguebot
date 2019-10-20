@@ -6,6 +6,7 @@ from lib.morgue_parser import fetch_mr
 from lib.morgue_parser import fetch_altars
 from lib.morgue_parser import parse_weapon
 from lib.morgue_parser import fetch_strength
+from lib.morgue_parser import fetch_weapon_skill
 
 from lib.damage_calculator import max_damage
 
@@ -25,9 +26,9 @@ def morgue_file():
     [
         (
             "the +9 sword of Zonguldrok (weapon) {reap}",
-            {"type": "long sword", "modifier": 9},
+            {"name": "long sword", "modifier": 9},
         ),
-        ("the -5 short sword of Begin {slay}", {"type": "short sword", "modifier": -5}),
+        ("the -5 short sword of Begin {slay}", {"name": "short sword", "modifier": -5}),
     ],
 )
 def test_parsing_weapons(weapon, expected):
@@ -36,6 +37,12 @@ def test_parsing_weapons(weapon, expected):
 
 def test_fetch_strength(morgue_file):
     assert fetch_strength(morgue_file) == 5
+
+
+def test_fetch_weapon_skill(morgue_file):
+    weapon_type = "Conjurations"
+    weapon_skill = fetch_weapon_skill(morgue_file, weapon_type)
+    assert weapon_skill == 4.6
 
 
 def test_morgue_parser_altar_finding(morgue_file):
