@@ -5,6 +5,7 @@ from lib.morgue_parser import fetch_trait
 from lib.morgue_parser import fetch_mr
 from lib.morgue_parser import fetch_altars
 from lib.morgue_parser import parse_weapon
+from lib.morgue_parser import fetch_strength
 
 from lib.damage_calculator import max_damage
 
@@ -33,15 +34,8 @@ def test_parsing_weapons(weapon, expected):
     assert parse_weapon(weapon) == expected
 
 
-@pytest.mark.parametrize(
-    "weapon_info,expected",
-    [
-        ({"type": "long sword", "modifier": 9}, 18),
-        ({"type": "short sword", "modifier": -5}, 1),
-    ],
-)
-def test_max_damage(weapon_info, expected):
-    assert max_damage(weapon_info) == expected
+def test_fetch_strength(morgue_file):
+    assert fetch_strength(morgue_file) == 5
 
 
 def test_morgue_parser_altar_finding(morgue_file):

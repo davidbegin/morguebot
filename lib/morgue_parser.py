@@ -145,6 +145,24 @@ def fetch_mr(morgue_file):
         return m.group(1)
 
 
+def fetch_strength(morgue_file):
+    user_stats = fetch_user_stats(morgue_file)
+    return int(user_stats["str"])
+
+
+def fetch_user_stats(morgue_file):
+    user_stats_regex = "Health:\s+(.*)\s+AC:\s+(\d+)\s+Str:\s+(\d+)\s+XL:\s+(\d+)"
+    m = re.search(user_stats_regex, str(morgue_file))
+
+    if m:
+        return {
+            "health": m.group(1),
+            "ac": m.group(2),
+            "str": m.group(3),
+            "xl": m.group(4),
+        }
+
+
 # ========================================================================================
 
 
