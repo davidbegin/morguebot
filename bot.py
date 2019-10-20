@@ -27,6 +27,8 @@ def main():
         "-u", "--morgue-url", action="store", type="string", dest="morgue_url"
     )
 
+    parser.add_option("-a", "--arg1", action="store", type="string", dest="arg1")
+
     # Run in Different Modes
     parser.add_option(
         "-e", "--exec-cmd", action="store", type="string", dest="exec_command"
@@ -54,7 +56,11 @@ def main():
     if options.exec_command:
         # send_chat_to_stream(f"pastaThat Character: {character.character} pastaThat")
         execute_command(
-            {"character": character.character, "command": f"!{options.exec_command}"}
+            {
+                "character": character.character,
+                "command": f"!{options.exec_command}",
+                "arg1": options.arg1,
+            }
         )
     elif options.status_checker:
         check_status(character)

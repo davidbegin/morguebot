@@ -3,19 +3,6 @@ import sys
 import time
 
 
-SHORT_BLADES = ["dagger", "quick blade", "short sword", "rapier"]
-
-
-# type: "Long Blades"
-
-# Name	Dmg	Hit	Speed	One-handed min. size	Two-handed min. size	Dam Type	Prob	Notes
-
-# Dagger	4	+6	10	Little	Little	Piercing	10
-# Quick blade	5	+6	7	Little	Little	Piercing	2	Cannot receive speed brand
-# Short sword	6	+4	11	Little	Little	Piercing	10
-# Rapier	8	+4	12	Little	Little	Piercing	10	Min delay is 5
-
-
 def parse_weapon(weapon):
     m = re.search(f"([-+]\d+)(.*)", weapon)
     if m:
@@ -30,9 +17,24 @@ def parse_weapon(weapon):
 
         if "short sword" in rest_of_the_weapon:
             weapon_name = "short sword"
+        elif "triple sword" in rest_of_the_weapon:
+            weapon_name = "triple sword"
         elif "sword" in rest_of_the_weapon:
             weapon_name = "long sword"
+        elif "dagger" in rest_of_the_weapon:
+            weapon_name = "dagger"
+        elif "falchion" in rest_of_the_weapon:
+            weapon_name = "falchion"
+        elif "trident" in rest_of_the_weapon:
+            weapon_name = "trident"
+        elif "war axe" in rest_of_the_weapon:
+            weapon_name = "war axe"
+        elif "staff" in rest_of_the_weapon:
+            weapon_name = "staff"
         else:
+            print(
+                f"\033[31;1mUnknown Weapon: {rest_of_the_weapon} | Modifier: {modifier}\033[0m"
+            )
             weapon_name = "unknown"
     else:
         modifier = None

@@ -30,6 +30,7 @@ def morgue_file():
             {"name": "long sword", "modifier": 9},
         ),
         ("the -5 short sword of Begin {slay}", {"name": "short sword", "modifier": -5}),
+        # "+4 Makhleb's Approval (weapon) {speed, MP+9 Str+4 Dex-3}", {}
     ],
 )
 def test_parsing_weapons(weapon, expected):

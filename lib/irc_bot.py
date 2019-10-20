@@ -31,6 +31,11 @@ def _process_msg(irc_response, character):
 
     if _is_command_msg(msg):
         split_command = msg.split()
+        if len(split_command) > 2:
+            arguments = split_command[2:]
+        else:
+            arguments = None
+
         command = split_command[0]
 
         if len(split_command) > 1:
@@ -38,21 +43,9 @@ def _process_msg(irc_response, character):
         else:
             character_name = character.character
 
-        invoke_morgue_bot(character_name, command)
+        invoke_morgue_bot(character_name, command, arguments)
     else:
         print(f"\033[37;1m{user}:\033[0m {msg}")
-
-
-def invoke_morgue_bot(character, command):
-    print(
-        f"\033[33mInvoking Morgue Bot\033[0m \033[037;1mcharacter:\033[0m \033[36m{character}\033[0m \033[37;1mcommand:\033[0m \033[36m{command}\033[0m"
-    )
-    client = boto3.client("lambda")
-
-    payload = {"character": character, "command": command}
-
-    # We need to pull this in from Pulumi
-    client.invoke(FunctionName="morgue-bot-2fc463f", Payload=json.dumps(payload))
 
 
 # TODO: refactor this sillyness
@@ -68,3 +61,18 @@ def _parse_user_and_msg(irc_response):
 
 def _is_command_msg(msg):
     return msg[0] == "!" and msg[1] != "!"
+
+
+def invoke_morgue_bot(character, command, arguments):
+    print(
+        f"\033[33mInvoking Morgue Bot\033[0m \033[037;1mcharacter:\033[0m \033[36m{character}\033[0m \033[37;1mcommand:\033[0m \033[36m{command}\033[0m"
+    )
+    client = boto3.client("lambda")
+
+    if arguments:
+        payload = {"character": character, "command": command, "arg1": arguments[0]}
+    else:
+        payload = {"character": character, "command": command}
+
+    # We need to pull this in from Pulumi
+    client.invoke(FunctionName="morgue-bot-2fc463f", Payload=json.dumps(payload))

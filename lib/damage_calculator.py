@@ -8,7 +8,13 @@ from lib.morgue_parser import fetch_strength
 
 WEAPON_STATS = {
     "long sword": {"base_damage": 9, "hit_modifier": 1, "type": "Long Blades"},
+    "triple sword": {"base_damage": 17, "hit_modifier": -4, "type": "Long Blades"},
+    "falchion": {"base_damage": 7, "hit_modifier": 2, "type": "Long Blades"},
     "short sword": {"base_damage": 6, "hit_modifier": 4, "type": "Short Blades"},
+    "dagger": {"base_damage": 4, "hit_modifier": 6, "type": "Short Blades"},
+    "trident": {"base_damage": 9, "hit_modifier": 1, "type": "Polearms"},
+    "war axe": {"base_damage": 11, "hit_modifier": 0, "type": "Axes"},
+    "staff": {"base_damage": 5, "hit_modifier": 5, "type": "Staves"},
 }
 
 
@@ -41,8 +47,7 @@ def max_damage(morgue_file, weapon_info):
         + slaying_bonuses
     )
 
-
-# Damage = {[1d(Base damage * Strength modifier +1)-1] * Weapon skill modifier * Fighting modifier + Misc modifiers + Slaying bonuses} * Final multipliers + Stabbing bonus - AC damage reduction[1]
+    # Damage = {[1d(Base damage * Strength modifier +1)-1] * Weapon skill modifier * Fighting modifier + Misc modifiers + Slaying bonuses} * Final multipliers + Stabbing bonus - AC damage reduction[1]
 
 
 # Base damage:
@@ -50,7 +55,10 @@ def max_damage(morgue_file, weapon_info):
 # Using a weapon: Base damage of the weapon
 # TODO: come back handle these no weapon jerks
 def calc_base_damage(weapon_type):
-    return WEAPON_STATS[weapon_type]["base_damage"]
+    if weapon_type in WEAPON_STATS:
+        return WEAPON_STATS[weapon_type]["base_damage"]
+    else:
+        raise Exception(f"\033[31;1mUnknown Weapon: {weapon_type}\033[0m")
 
 
 # Strength modifier:
@@ -94,6 +102,8 @@ def calc_slay_bonuses(enchantment):
         return one_d(1 + eff_enchantment) - 1
     elif enchantment < 0:
         return -(one_d(1 - eff_enchantment) + 1)
+    else:
+        return 0
 
 
 # Final multipliers:
