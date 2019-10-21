@@ -57,7 +57,7 @@ def main():
         # send_chat_to_stream(f"pastaThat Character: {character.character} pastaThat")
         execute_command(
             {
-                "character": character.character,
+                "character": options.character,
                 "command": f"!{options.exec_command}",
                 "arg1": options.arg1,
             }

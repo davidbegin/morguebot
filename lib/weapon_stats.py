@@ -43,4 +43,10 @@ WEAPON_STATS = {
     "hand crossbow": {"base_damage": 12, "hit_modifier": 5, "type": "Crossbows"},
     "arbalest": {"base_damage": 18, "hit_modifier": 2, "type": "Crossbows"},
     "triple crossbow": {"base_damage": 22, "hit_modifier": 0, "type": "Crossbows"},
+    "hunting sling": {"base_damage": 5, "hit_modifier": 2, "type": "Slings"},
+    "fustibalus": {"base_damage": 8, "hit_modifier": -1, "type": "Slings"},
+    "blowgun": {"base_damage": 0, "hit_modifier": 2, "type": "Throwing"},
+    "longbow": {"base_damage": 15, "hit_modifier": 0, "type": "Bows"},
+    "shortbow": {"base_damage": 9, "hit_modifier": 2, "type": "Bows"},
+    "sdaf": {"base_damage": 9, "hit_modifier": 2, "type": "Bows"},
 }

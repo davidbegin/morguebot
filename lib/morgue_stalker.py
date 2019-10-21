@@ -8,6 +8,63 @@ from lib.morgue_parser import fetch_skills
 from lib.morgue_saver import morgue_saver
 
 
+def fetch_characters():
+    if False:
+        client = boto3.client("s3")
+        response = client.list_objects_v2(Bucket="morgue-files-2944dfb")
+        s3_objects = response["Contents"]
+        morgue_keys = filter_out_morgue_keys(s3_objects)
+        return sanitize_them_keys(morgue_keys)
+    else:
+        return [
+            "12feetdeep",
+            "4zero4",
+            "AIVN",
+            "Abyss000",
+            "Airwolf",
+            "BackslashEcho",
+            "Bootz",
+            "CoolOtter",
+            "Harvey",
+            "JFunk",
+            "Jeffwins",
+            "MAWL",
+            "None",
+            "Nublar",
+            "Slevren",
+            "Splatt",
+            "Wexler",
+            "Zebrazen",
+            "ahab",
+            "artmatt",
+            "beginbot",
+            "candlehand",
+            "carwin",
+            "collin38",
+            "ddaybell",
+            "deathblob",
+            "dioxide",
+            "disciplinedyoungman",
+            "drj",
+            "emf",
+            "enop",
+            "foxor",
+            "gorper",
+            "grinrain",
+            "haverford",
+            "ilovepuk",
+            "jomj",
+            "jtro",
+            "matticus",
+            "nebn339",
+            "perc",
+            "perf",
+            "redmage",
+            "shittywizard",
+            "simcity",
+        ]
+
+
 def stalk(event):
     print(json.dumps(event))
 
@@ -20,9 +77,17 @@ def stalk(event):
 
         morgue_keys = filter_out_morgue_keys(s3_objects)
         characters_to_stalk = sanitize_them_keys(morgue_keys)
-        for character_name in characters_to_stalk:
-            character = Character(character=character_name)
-            morgue_saver(character, character.non_saved_morgue_file())
+
+        max_damages = [
+            max_damage(Character(character=character_name).morgue_file())
+            for character_name in characters_to_stalk
+        ]
+        x = max_damages
+        import pdb
+
+        pdb.set_trace()
+        # character = Character(character=character_name)
+        # morgue_saver(character, character.non_saved_morgue_file())
 
 
 # ========================================================================================

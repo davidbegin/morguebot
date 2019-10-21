@@ -4,7 +4,7 @@ from lib.morgue_parser import fetch_resistance
 from lib.morgue_parser import fetch_trait
 from lib.morgue_parser import fetch_mr
 from lib.morgue_parser import fetch_altars
-from lib.morgue_parser import parse_weapon
+from lib.damage_calculator import parse_weapon
 from lib.morgue_parser import fetch_strength
 from lib.morgue_parser import fetch_skill
 from lib.morgue_parser import fetch_weapon
@@ -22,6 +22,7 @@ def morgue_file():
 
 # "a +9 dagger of speed"
 # "a +3 antimagic broad axe"
+@pytest.mark.focus
 @pytest.mark.parametrize(
     "weapon,expected",
     [

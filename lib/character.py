@@ -43,8 +43,14 @@ class Character:
         if self.local_mode:
             morgue = open(self.morgue_filepath).read()
         else:
-            morgue = self._fetch_online_morgue(self.morgue_url)
+            morgue = self._fetch_online_morgue()
         return morgue
+
+    def __str__(self):
+        return self.character
+
+    def __repr__(self):
+        return f"{super().__repr__()}: {self.character}"
 
     def s3_morgue_file(self):
         try:
@@ -61,10 +67,10 @@ class Character:
         elif self.bucket and self.key:
             morgue = self.s3_morgue_file()
             if morgue is None:
-                morgue = self._fetch_online_morgue(self.morgue_url)
+                morgue = self._fetch_online_morgue()
                 morgue_saver(self, morgue)
         else:
-            morgue = self._fetch_online_morgue(self.morgue_url)
+            morgue = self._fetch_online_morgue()
         self.seed = fetch_seed(morgue)
         self.turns = fetch_turns(morgue)
 
@@ -99,18 +105,23 @@ class Character:
         return f"{morgue_folder}/{self.character}.txt"
 
     # TODO: add suggestions for fun!
-    def _fetch_online_morgue(self, url):
-        response = requests.get(url)
+    def _fetch_online_morgue(self):
+        response = requests.get(self.morgue_url)
         if response.status_code == 200:
             return response.text
         else:
-            print(f"\033[031;1mCould not find the Character at {url}\033[0m")
-            sys.exit()
+            import pdb
+
+            pdb.set_trace()
+            print(
+                f"\033[031;1mCould not find the Character at {self.morgue_url}\033[0m"
+            )
+            # sys.exit()
 
     def _test(self):
         client = boto3.client("s3")
         response = client.get_object(Bucket=self.bucket, Key=self.key)
         morgue1 = response["Body"].read()
 
-        morgue2 = self._fetch_online_morgue(self.morgue_url)
+        morgue2 = self._fetch_online_morgue()
         # import pdb; pdb.set_trace()

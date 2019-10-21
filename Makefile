@@ -1,6 +1,9 @@
 t:
 		python3 -m pytest test/ -s
 
+f:
+		python3 -m pytest test/ -s -m focus
+
 l:
 		black deploy/*.py
 		black lib/
