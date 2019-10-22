@@ -4,6 +4,16 @@ from lib.weapon_stats import WEAPON_STATS
 from lib.weapon import Weapon
 
 
+class UnidentifiedWeapon:
+    def __init__(self, name):
+        self.name = name
+        self.full_name = name
+        self.weapon_type = "Unknown"
+
+    def max_damage(self):
+        return 0
+
+
 class WeaponFactory:
     @staticmethod
     def new(character, raw_weapon):
@@ -28,7 +38,8 @@ class WeaponFactory:
                 character=character,
             )
         else:
-            return None
+            print(f"\033[31;1mError Building a Weapon: {raw_weapon}\033[0m")
+            return UnidentifiedWeapon(name=raw_weapon)
 
     @staticmethod
     def find_weapon_name(rest_of_the_weapon):

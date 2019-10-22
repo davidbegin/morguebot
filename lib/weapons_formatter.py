@@ -9,8 +9,7 @@ from lib.weapon_stats import WEAPON_STATS
 from lib.damage_calculator import calc_max_damage
 
 
-# This could all Live in Character
-class WeaponsClassifier:
+class WeaponsFormatter:
     def __init__(self, character):
         self.character = character
         self.character_name = character.character

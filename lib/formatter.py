@@ -15,7 +15,7 @@ from lib.morgue_parser import fetch_altars
 from lib.morgue_parser import fetch_weapon
 from lib.character import Character
 
-from lib.weapon_analyzer import MaxDamageCalculator
+from lib.weapons_formatter import WeaponsFormatter
 
 WORKING_COMMANDS = [
     "!overview",
@@ -212,7 +212,9 @@ class Formatter:
 
     def print_max_damage(self):
         if True:
-            return MaxDamageCalculator(self.character).max_damage()
+            max_damages = self.character.calc_max_damages()
+            weapons_formatter = WeaponsFormatter(self.character)
+            return weapons_formatter.format_max_damages(max_damages)
         else:
             max_damages = {}
             from morgue_stalker import fetch_characters

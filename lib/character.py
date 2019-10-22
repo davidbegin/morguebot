@@ -44,8 +44,10 @@ class Character:
         self._find_character_and_morguefile()
 
         self.key = f"{character}/morguefile.txt"
-        self.wielded_weapon = fetch_weapon(self.morgue_file)
-        self.weapons = fetch_weapons(self.morgue_file)
+
+        # These Morgue Files!
+        self.wielded_weapon = fetch_weapon(self.non_saved_morgue_file())
+        self.weapons = fetch_weapons(self.non_saved_morgue_file())
 
     # This returns the max damages for all weapons
     def calc_max_damages(self):
@@ -60,16 +62,19 @@ class Character:
     def _find_max_damages(self):
         max_damages = []
         for weapon in self.weapons:
-            weapon = WeaponFactory(self.character, weapon)
+            weapon = WeaponFactory.new(self, weapon)
             max_damage = weapon.max_damage()
-            max_damages.append(
-                {
-                    "weapon": weapon.name,
-                    "max_damage": max_damage,
-                    "type": weapon.weapon_type,
-                    "character": self.character_name,
-                }
-            )
+
+            # TODO: Come back and handle telling people about unidentified weapons
+            if max_damage:
+                max_damages.append(
+                    {
+                        "weapon": weapon.full_name,
+                        "max_damage": max_damage,
+                        "type": weapon.weapon_type,
+                        "character": self.character,
+                    }
+                )
 
         def sort_by_max_damage(elem):
             return elem["max_damage"]
@@ -152,12 +157,3 @@ class Character:
             print(
                 f"\033[031;1mCould not find the Character at {self.morgue_url}\033[0m"
             )
-            # sys.exit()
-
-    def _test(self):
-        client = boto3.client("s3")
-        response = client.get_object(Bucket=BUCKET, Key=self.key)
-        morgue1 = response["Body"].read()
-
-        morgue2 = self._fetch_online_morgue()
-        # import pdb; pdb.set_trace()

@@ -11,8 +11,6 @@ from lib.morgue_saver import morgue_saver
 from lib.morgue_db import fetch_and_save_weapons
 from lib.morgue_stalker import fetch_characters
 
-from lib.weapons_classifier import WeaponsClassifier
-
 
 def execute_command(event):
     if "Records" in event or "s3" in event:
