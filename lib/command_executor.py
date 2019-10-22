@@ -74,6 +74,7 @@ def process_event(event):
         else:
             print(f"Formatter return None for {command}")
 
+
 # ========================================================================================
 
 

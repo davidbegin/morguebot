@@ -16,7 +16,6 @@ WEAPON_STATS = {
     "broad axe": {"base_damage": 13, "hit_modifier": -2, "type": "Axes"},
     "battleaxe": {"base_damage": 15, "hit_modifier": -4, "type": "Axes"},
     "executioner's axe": {"base_damage": 18, "hit_modifier": -6, "type": "Axes"},
-
     "whip": {"base_damage": 6, "hit_modifier": 2, "type": "Maces & Flails"},
     "club": {"base_damage": 5, "hit_modifier": 3, "type": "Maces & Flails"},
     "mace": {"base_damage": 8, "hit_modifier": 3, "type": "Maces & Flails"},
@@ -28,8 +27,11 @@ WEAPON_STATS = {
     "eveningstar": {"base_damage": 15, "hit_modifier": -1, "type": "Maces & Flails"},
     "great mace": {"base_damage": 17, "hit_modifier": -4, "type": "Maces & Flails"},
     "giant club": {"base_damage": 20, "hit_modifier": -6, "type": "Maces & Flails"},
-    "giant spiked club": {"base_damage": 22, "hit_modifier": -7, "type": "Maces & Flails"},
-
+    "giant spiked club": {
+        "base_damage": 22,
+        "hit_modifier": -7,
+        "type": "Maces & Flails",
+    },
     "spear": {"base_damage": 6, "hit_modifier": 4, "type": "Polearms"},
     "trident": {"base_damage": 9, "hit_modifier": 1, "type": "Polearms"},
     "halberd": {"base_damage": 13, "hit_modifier": -3, "type": "Polearms"},

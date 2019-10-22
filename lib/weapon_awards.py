@@ -2,6 +2,7 @@ from lib.morgue_stalker import fetch_characters
 from lib.character import Character
 from lib.kinesis import send_chat_to_stream
 
+from lib.weapons_formatter import WeaponsFormatter
 
 
 def find_the_max_damage_for_all_characters():
@@ -23,16 +24,37 @@ def find_the_max_damage_for_all_characters():
     max_by_type = find_max_by_type(all_max_damages)
 
     send_chat_to_stream(["PorscheWIN Second Annual Weapon Awards!!! PorscheWIN"])
-    for the_best in max_by_type:
+
+    for weapon_info in max_by_type:
+        emoji = find_emoji(weapon_info["type"])
         send_chat_to_stream(
             [
-                f"Kreygasm Winner {the_best['character']} Kreygasm - Category: {the_best['type']}",
-                f"{the_best['weapon']} - {the_best['max_damage']}",
+                f"{emoji} Winner {weapon_info['character']} {emoji} - Category: {weapon_info['type']}",
+                # f"Kreygasm Winner {weapon_info['character']} Kreygasm - Category: {weapon_info['type']}",
+                WeaponsFormatter(character).format_weapon(weapon_info)
+                # f"{weapon_info['weapon']} - {weapon_info['max_damage']}",
             ]
         )
 
 
 # ========================================================================================
+
+
+def find_emoji(category):
+    emoji_map = {
+        "Short Blades": "🗡",
+        "Long Blades": "⚔",
+        "Axes": "🌲",
+        "Polearms": "🖌",
+        "Maces & Flails": "⚒",
+        "Throwing": "🤽",
+        "Staves": "🚏",
+        "Crossbows": "🏹 🏹",
+        "Bows": "🏹",
+        "Slings": "🤹",
+    }
+    return emoji_map.get(category, "Kreygasm")
+
 
 def sort_by_max_damage(elem):
     return elem["max_damage"]
@@ -56,5 +78,3 @@ def find_max_by_type(max_damages):
         most_powerful_weapons.append(weapons[-1])
 
     return most_powerful_weapons
-
-
