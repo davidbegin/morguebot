@@ -1,7 +1,6 @@
 import random
 import pytest
 
-from lib.damage_calculator import max_damage
 from lib.damage_calculator import calc_max_damage
 
 from unittest.mock import patch
