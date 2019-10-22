@@ -16,6 +16,8 @@ from lib.command_executor import execute_command
 from lib.morgue_stalker import stalk
 from lib.god_bot import monitor_the_gods
 
+from lib.command_executor import process_s3_events
+
 
 def morgue_stalker(event, handler):
     print(json.dumps(event))
@@ -29,7 +31,10 @@ def twitch_chat_bot(event, context):
 
 def morgue_bot(event, handler):
     print(json.dumps(event))
-    execute_command(event)
+    if "Records" in event or "s3" in event:
+        process_s3_events(event)
+    else:
+        process_event(event)
 
 
 def god_bot(event, context):

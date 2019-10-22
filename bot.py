@@ -4,7 +4,7 @@ import time
 
 from optparse import OptionParser
 
-from lib.command_executor import execute_command
+from lib.command_executor import process_event
 from lib.irc_connector import connect_to_twitch
 from lib.irc_bot import run_bot
 
@@ -55,7 +55,7 @@ def main():
 
     if options.exec_command:
         # send_chat_to_stream(f"pastaThat Character: {character.character} pastaThat")
-        execute_command(
+        process_event(
             {
                 "character": options.character,
                 "command": f"!{options.exec_command}",
