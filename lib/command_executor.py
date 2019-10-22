@@ -4,13 +4,11 @@ import os
 from lib.character import Character
 from lib.formatter import Formatter
 from lib.kinesis import send_chat_to_stream
-from lib.morgue_parser import fetch_overview
 from lib.morgue_saver import morgue_saver
-from lib.morgue_db import fetch_and_save_weapons
-from lib.morgue_stalker import fetch_characters
-from lib.weapon_awards import find_the_max_damage_for_all_characters
 
 from lib.config import find_character_name
+
+from lib.weapon_awards import find_the_max_damage_for_all_characters
 
 
 def process_event(event):
@@ -29,20 +27,27 @@ def process_event(event):
     elif command == "!weapon_awards":
         find_the_max_damage_for_all_characters()
     elif arg1:
-        call_command_with_arg(formatter, command)
+        call_command_with_arg(formatter, command, arg1)
     else:
-        msg = formatter.construct_message(command)
-        if msg:
-            send_chat_to_stream(msg)
-        else:
-            print(f"Error building message {command} for {character_name}")
+        call_command(formatter, command)
 
 
-def call_command_with_arg(formatter, command):
+# ========================================================================================
+
+
+def call_command(formatter, command):
+    msg = formatter.construct_message(command)
+    if msg:
+        send_chat_to_stream(msg)
+    else:
+        print(f"Error building message {command} for {character_name}")
+
+
+def call_command_with_arg(formatter, command, arg1):
     all_values = formatter.construct_message(command)
     filtered_values = [value for value in all_values if arg1 in value]
     if filtered_values:
-        send_chat_to_stream([f"Result of your search for `{arg1}`: "] + filtered_values)
+        send_chat_to_stream([f"Result of your search for '{arg1}': "] + filtered_values)
 
 
 def save_morgue(character):

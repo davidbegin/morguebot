@@ -53,6 +53,8 @@ class WeaponFactory:
         if weapon_name is None:
             if "sword" in rest_of_the_weapon:
                 weapon_name = "long sword"
+            elif "katana" in rest_of_the_weapon:
+                weapon_name = "long sword"
             elif "storm bow" in rest_of_the_weapon:
                 weapon_name = "longbow"
             elif "lance" in rest_of_the_weapon:

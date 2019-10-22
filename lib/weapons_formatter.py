@@ -6,7 +6,6 @@ from lib.morgue_parser import fetch_strength
 from lib.morgue_parser import fetch_weapon
 from lib.morgue_parser import fetch_weapons
 from lib.weapon_stats import WEAPON_STATS
-from lib.damage_calculator import calc_max_damage
 
 
 class WeaponsFormatter:

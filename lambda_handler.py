@@ -11,12 +11,11 @@ if os.environ.get("AWS_LAMBDA_FUNCTION_NAME", None):
 
     patch_all()
 
-from lib.twitch_chat_bot import send_twitch_message
-from lib.command_executor import execute_command
-from lib.morgue_stalker import stalk
+from lib.command_executor import process_event
+from lib.execute_s3_command import process_s3_events
 from lib.god_bot import monitor_the_gods
-
-from lib.command_executor import process_s3_events
+from lib.morgue_stalker import stalk
+from lib.twitch_chat_bot import send_twitch_message
 
 
 def morgue_stalker(event, handler):
