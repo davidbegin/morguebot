@@ -43,6 +43,7 @@ class WeaponFactory:
 
     @staticmethod
     def find_weapon_name(rest_of_the_weapon):
+        rest_of_the_weapon = rest_of_the_weapon.lower()
         weapon_name = None
 
         for weapon in WEAPON_STATS.keys():
@@ -54,5 +55,7 @@ class WeaponFactory:
                 weapon_name = "long sword"
             elif "storm bow" in rest_of_the_weapon:
                 weapon_name = "longbow"
+            elif "lance" in rest_of_the_weapon:
+                weapon_name = "spear"
 
         return weapon_name

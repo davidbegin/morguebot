@@ -14,7 +14,11 @@ class Weapon:
         self.character = character
         self.morgue_file = self.character.morgue_file()
 
-        self.weapon_type = WEAPON_STATS[self.name]["type"]
+        try:
+            self.weapon_type = WEAPON_STATS[self.name]["type"]
+        except Exception as e:
+            import pdb; pdb.set_trace()
+            print(f"\033[031mError Looking Up Weapon Type: {full_name} | {self.name}\033[0m")
 
     def max_damage(self):
         if self.enchantment is None:

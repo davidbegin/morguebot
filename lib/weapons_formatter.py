@@ -17,7 +17,6 @@ class WeaponsFormatter:
         self.wielded_weapon = fetch_weapon(self.morgue_file)
         self.weapons = fetch_weapons(self.morgue_file)
 
-    # This Formatted Belongs Somewhere else
     def format_max_damages(self, max_damages):
         if max_damages[-1]["weapon"] == self.wielded_weapon:
             extra_msg = [

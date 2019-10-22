@@ -10,6 +10,7 @@ from lib.morgue_parser import fetch_overview
 from lib.morgue_saver import morgue_saver
 from lib.morgue_db import fetch_and_save_weapons
 from lib.morgue_stalker import fetch_characters
+from lib.weapon_awards import find_the_max_damage_for_all_characters
 
 
 def execute_command(event):
@@ -48,7 +49,7 @@ def process_event(event):
             morguefile.write(f)
     elif command == "!clean_morgue":
         clean_the_morgue()
-    elif event.get("character", None) is None and command == "!weapon_awards":
+    elif command == "!weapon_awards":
         find_the_max_damage_for_all_characters()
     elif arg1:
         character_name = find_character_name(event)
@@ -72,84 +73,6 @@ def process_event(event):
             send_chat_to_stream(msg)
         else:
             print(f"Formatter return None for {command}")
-
-
-# ========================================================================================
-
-
-def sort_by_max_damage(elem):
-    return elem["max_damage"]
-
-
-def find_max_by_type(max_damages):
-    # {'weapon': 'a +3 dagger of speed (weapon)', 'max_damage': 9.25, 'type': 'Short Blades'}
-    types = set([weapon_info["type"] for weapon_info in max_damages])
-
-    most_powerful_weapons = []
-
-    for weapon_type in types:
-        weapons = [
-            weapon_info
-            for weapon_info in max_damages
-            if weapon_info["type"] == weapon_type
-        ]
-        weapons.sort(key=sort_by_max_damage)
-        # weapons.sort(key=lambda: elem: elem["max_damage"])
-        weapons[-1].update({"score": len(weapons)})
-        most_powerful_weapons.append(weapons[-1])
-
-    return most_powerful_weapons
-
-
-def find_the_max_damage_for_all_characters():
-    characters = fetch_characters()
-
-    most_powerful_weapon = {"max_damage": 0}
-
-    all_max_damages = []
-    for character_name in characters:
-        character = Character(character=character_name)
-        max_damages = MaxDamageCalculator(character).max_damage()
-        if max_damages == ["No Weapons Found!"]:
-            print(
-                f"\033[37mIt's ok get some weapons and come back: {character_name}\033[0m"
-            )
-        else:
-            all_max_damages.extend(max_damages)
-
-    max_by_type = find_max_by_type(all_max_damages)
-
-    send_chat_to_stream(["PorscheWIN Second Annual Weapon Awards!!! PorscheWIN"])
-    for the_best in max_by_type:
-        send_chat_to_stream(
-            [
-                f"Kreygasm Winner {the_best['character']} Kreygasm - Category: {the_best['type']}",
-                f"{the_best['weapon']} - {the_best['max_damage']}",
-            ]
-        )
-
-    # send_chat_to_stream(
-    #     [
-    #         f"MOST POWERFUL WEAPON: {most_powerful_weapon['character']} - {most_powerful_weapon['weapon']} - {most_powerful_weapon['max_damage']}"
-    #     ]
-    # )
-
-    # import pdb; pdb.set_trace()
-    # {'weapon': 'a +3 dagger of speed (weapon)', 'max_damage': 9.25}
-    # # TODO: Might want to double check on the sorting
-    # contender = max_damages[-1]["max_damage"]
-    # defender = most_powerful_weapon["max_damage"]
-    # if contender > defender:
-    #     most_powerful_weapon["max_damage"] = contender
-    #     most_powerful_weapon["weapon"] = max_damages[-1]["weapon"]
-    #     most_powerful_weapon["character"] = character_name
-
-    # send_chat_to_stream(
-    #     [
-    #         f"MOST POWERFUL WEAPON: {most_powerful_weapon['character']} - {most_powerful_weapon['weapon']} - {most_powerful_weapon['max_damage']}"
-    #     ]
-    # )
-
 
 # ========================================================================================
 
