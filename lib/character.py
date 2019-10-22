@@ -7,7 +7,11 @@ import boto3
 
 from lib.morgue_parser import fetch_seed
 from lib.morgue_parser import fetch_turns
+from lib.morgue_parser import fetch_weapon
+from lib.morgue_parser import fetch_weapons
 from lib.morgue_saver import morgue_saver
+
+from lib.weapon_factory import WeaponFactory
 
 
 def _find_user():
@@ -23,6 +27,11 @@ else:
 
 MORGUE_DOMAIN = "http://crawl.akrasiac.org/rawdata"
 
+if "MORGUE_BUCKETNAME" in os.environ:
+    BUCKET = os.environ["MORGUE_BUCKETNAME"]
+else:
+    BUCKET = "morgue-files-2944dfb"
+
 
 class Character:
     def __init__(
@@ -33,11 +42,41 @@ class Character:
         self.character = character
         self.local_mode = local_mode
         self._find_character_and_morguefile()
-        if "MORGUE_BUCKETNAME" in os.environ:
-            self.bucket = os.environ["MORGUE_BUCKETNAME"]
-        else:
-            self.bucket = "morgue-files-2944dfb"
+
         self.key = f"{character}/morguefile.txt"
+        self.wielded_weapon = fetch_weapon(self.morgue_file)
+        self.weapons = fetch_weapons(self.morgue_file)
+
+    # This returns the max damages for all weapons
+    def calc_max_damages(self):
+        if not self.weapons:
+            return ["No Weapons Found!"]
+
+        max_damages = self._find_max_damages()
+
+        if max_damages:
+            return max_damages
+
+    def _find_max_damages(self):
+        max_damages = []
+        for weapon in self.weapons:
+            weapon = WeaponFactory(self.character, weapon)
+            max_damage = weapon.max_damage()
+            max_damages.append(
+                {
+                    "weapon": weapon.name,
+                    "max_damage": max_damage,
+                    "type": weapon.weapon_type,
+                    "character": self.character_name,
+                }
+            )
+
+        def sort_by_max_damage(elem):
+            return elem["max_damage"]
+
+        max_damages.sort(key=sort_by_max_damage)
+
+        return max_damages
 
     def non_saved_morgue_file(self):
         if self.local_mode:
@@ -55,16 +94,16 @@ class Character:
     def s3_morgue_file(self):
         try:
             client = boto3.client("s3")
-            response = client.get_object(Bucket=self.bucket, Key=self.key)
+            response = client.get_object(Bucket=BUCKET, Key=self.key)
             return response["Body"].read().decode()
         except Exception as e:
-            print(f"Error fetching morguefile: {self.bucket} {self.key}")
+            print(f"Error fetching morguefile: {BUCKET} {self.key}")
             return None
 
     def morgue_file(self):
         if self.local_mode:
             morgue = open(self.morgue_filepath).read()
-        elif self.bucket and self.key:
+        elif BUCKET and self.key:
             morgue = self.s3_morgue_file()
             if morgue is None:
                 morgue = self._fetch_online_morgue()
@@ -110,9 +149,6 @@ class Character:
         if response.status_code == 200:
             return response.text
         else:
-            import pdb
-
-            pdb.set_trace()
             print(
                 f"\033[031;1mCould not find the Character at {self.morgue_url}\033[0m"
             )
@@ -120,7 +156,7 @@ class Character:
 
     def _test(self):
         client = boto3.client("s3")
-        response = client.get_object(Bucket=self.bucket, Key=self.key)
+        response = client.get_object(Bucket=BUCKET, Key=self.key)
         morgue1 = response["Body"].read()
 
         morgue2 = self._fetch_online_morgue()

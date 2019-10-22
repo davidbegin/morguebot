@@ -15,7 +15,6 @@ def morgue_file():
     return open(morgue_file_path).read()
 
 
-@pytest.mark.focus
 def test_max_damage(morgue_file):
     weapon_info = {"name": "long sword", "modifier": 5}
     result = calc_max_damage(weapon_info, morgue_file)

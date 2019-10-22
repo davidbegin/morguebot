@@ -1,4 +1,5 @@
 import re
+
 import random
 
 from lib.dice import one_d
@@ -7,7 +8,6 @@ from lib.morgue_parser import fetch_skill
 from lib.morgue_parser import fetch_strength
 from lib.morgue_parser import fetch_weapon
 from lib.morgue_parser import fetch_weapons
-from lib.item_parser import parse_weapon
 from lib.weapon_stats import WEAPON_STATS
 
 # Damage = {[1d(Base damage * Strength modifier +1)-1] * Weapon skill modifier * Fighting modifier + Misc modifiers + Slaying bonuses} * Final multipliers + Stabbing bonus - AC damage reduction[1]

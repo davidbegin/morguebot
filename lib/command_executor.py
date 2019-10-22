@@ -11,7 +11,7 @@ from lib.morgue_saver import morgue_saver
 from lib.morgue_db import fetch_and_save_weapons
 from lib.morgue_stalker import fetch_characters
 
-from lib.weapon_analyzer import MaxDamageCalculator
+from lib.weapons_classifier import WeaponsClassifier
 
 
 def execute_command(event):
