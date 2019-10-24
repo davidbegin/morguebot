@@ -212,9 +212,7 @@ class Formatter:
 
     def print_max_damage(self):
         if True:
-            max_damages = self.character.calc_max_damages()
-            weapons_formatter = WeaponsFormatter(self.character)
-            return weapons_formatter.format_max_damages(max_damages)
+            return WeaponsFormatter(self.character).format_max_damages()
         else:
             max_damages = {}
             from morgue_stalker import fetch_characters

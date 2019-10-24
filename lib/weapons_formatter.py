@@ -12,18 +12,21 @@ class WeaponsFormatter:
     def __init__(self, character):
         self.character = character
         self.character_name = character.character
+
+        # This is a Fresh Morgue File
         self.morgue_file = character.morgue_file()
-        self.wielded_weapon = fetch_weapon(self.morgue_file)
         self.weapons = fetch_weapons(self.morgue_file)
 
-    def format_max_damages(self, max_damages):
+    def format_max_damages(self):
+        max_damages = self.character.calc_max_damages()
         formatted_max_damages = []
 
         for weapon_info in max_damages:
             formatted_weapon = self.format_weapon(weapon_info)
             formatted_max_damages.append(formatted_weapon)
 
-        if max_damages[-1]["weapon"] == self.wielded_weapon:
+        # Why don't these strings match
+        if "(weapon)" in max_damages[-1]["weapon"]:
             extra_msg = [
                 "CoolCat Noice you are using your highest Damage Weapon! CoolCat"
             ]

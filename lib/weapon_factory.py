@@ -59,5 +59,7 @@ class WeaponFactory:
                 weapon_name = "longbow"
             elif "lance" in rest_of_the_weapon:
                 weapon_name = "spear"
+            elif "maxwell's thermic engine" in rest_of_the_weapon:
+                weapon_name = "double sword"
 
         return weapon_name

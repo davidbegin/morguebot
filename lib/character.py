@@ -12,20 +12,8 @@ from lib.morgue_parser import fetch_weapons
 from lib.morgue_saver import morgue_saver
 
 from lib.weapon_factory import WeaponFactory
+from lib.morgue_folder_finder import find_morgue_folder
 
-
-def _find_user():
-    process = subprocess.Popen("whoami", stdout=subprocess.PIPE)
-    output, error = process.communicate()
-    return output.decode("utf-8").strip()
-
-
-if "DEFAULT_MORGUE_FOLDER" in os.environ:
-    DEFAULT_MORGUE_FOLDER = os.environ["DEFAULT_MORGUE_FOLDER"]
-else:
-    DEFAULT_MORGUE_FOLDER = f"/Users/{_find_user()}/Library/Application Support/Dungeon Crawl Stone Soup/morgue"
-
-MORGUE_DOMAIN = "http://crawl.akrasiac.org/rawdata"
 
 if "MORGUE_BUCKETNAME" in os.environ:
     BUCKET = os.environ["MORGUE_BUCKETNAME"]
@@ -40,6 +28,8 @@ class Character:
         self.morgue_filepath = morgue_filepath
         self.morgue_url = morgue_url
         self.character = character
+
+        # This upsets me past begin, what were you thinking?
         self.local_mode = local_mode
         self._find_character_and_morguefile()
 
@@ -83,18 +73,22 @@ class Character:
 
         return max_damages
 
-    def non_saved_morgue_file(self):
-        if self.local_mode:
-            morgue = open(self.morgue_filepath).read()
-        else:
-            morgue = self._fetch_online_morgue()
-        return morgue
+    # ========================================================================================
 
     def __str__(self):
         return self.character
 
     def __repr__(self):
         return f"{super().__repr__()}: {self.character}"
+
+    # ========================================================================================
+
+    def non_saved_morgue_file(self):
+        if self.local_mode:
+            morgue = open(self.morgue_filepath).read()
+        else:
+            morgue = self._fetch_online_morgue()
+        return morgue
 
     def s3_morgue_file(self):
         try:
@@ -120,6 +114,10 @@ class Character:
 
         return morgue
 
+    # We need a website morgue method
+
+    # ========================================================================================
+
     def _find_character_and_morguefile(self):
         if self.local_mode:
             if self.morgue_filepath is None:
@@ -142,13 +140,12 @@ class Character:
         self.character = morgue_path.split("/")[-1].replace(".txt", "")
 
     def _find_morgue_url(self):
+        MORGUE_DOMAIN = "http://crawl.akrasiac.org/rawdata"
         return f"{MORGUE_DOMAIN}/{self.character}/{self.character}.txt"
 
     def _find_morgue_filepath(self):
-        morgue_folder = os.environ.get("MORGUE_FOLDER", DEFAULT_MORGUE_FOLDER)
-        return f"{morgue_folder}/{self.character}.txt"
+        return f"{find_morgue_folder()}/{self.character}.txt"
 
-    # TODO: add suggestions for fun!
     def _fetch_online_morgue(self):
         response = requests.get(self.morgue_url)
         if response.status_code == 200:

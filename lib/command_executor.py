@@ -29,13 +29,13 @@ def process_event(event):
     elif arg1:
         call_command_with_arg(formatter, command, arg1)
     else:
-        call_command(formatter, command)
+        call_command(formatter, command, character_name)
 
 
 # ========================================================================================
 
 
-def call_command(formatter, command):
+def call_command(formatter, command, character_name):
     msg = formatter.construct_message(command)
     if msg:
         send_chat_to_stream(msg)
@@ -53,5 +53,5 @@ def call_command_with_arg(formatter, command, arg1):
 def save_morgue(character):
     f = character.non_saved_morgue_file()
     os.makedirs("tmp", exist_ok=True)
-    with open(f"tmp/{character_name}_morguefile.txt", "w") as morguefile:
+    with open(f"tmp/{character.character}_morguefile.txt", "w") as morguefile:
         morguefile.write(f)

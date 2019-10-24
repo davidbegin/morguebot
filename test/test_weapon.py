@@ -3,7 +3,7 @@ import pytest
 from lib.weapon import Weapon
 from lib.character import Character
 
-# @pytest.mark.focus
+
 def test_weapon():
     full_name = "the +9 sword of Zonguldrok (weapon) {reap}"
     name = "long sword"
@@ -15,6 +15,16 @@ def test_weapon():
     )
 
     assert subject.max_damage() == 18.04
+
+
+def test_initializing_an_invalid_weapon_type():
+    character = Character(character="artmatt")
+
+    with pytest.raises(KeyError) as exc:
+        full_name = "Not a real +0 weapon"
+        Weapon(full_name=full_name, name="fake", enchantment=0, character=character)
+    exception_msg = exc.value.args[0]
+    assert exception_msg == f"Error Looking Up Weapon Type: {full_name}, fake"
 
 
 # @pytest.fixture

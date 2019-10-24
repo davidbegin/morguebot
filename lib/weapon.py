@@ -16,12 +16,8 @@ class Weapon:
 
         try:
             self.weapon_type = WEAPON_STATS[self.name]["type"]
-        except Exception as e:
-            # import pdb
-            # pdb.set_trace()
-            print(
-                f"\033[031mError Looking Up Weapon Type: {full_name} | {self.name}\033[0m"
-            )
+        except KeyError:
+            raise KeyError(f"Error Looking Up Weapon Type: {full_name}, {name}")
 
     def max_damage(self):
         if self.enchantment is None:

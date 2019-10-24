@@ -27,6 +27,12 @@ from lib.character import Character
         ),
         ("the +7 Singing Sword {slice, sonic wave}", "long sword", 7, "Long Blades"),
         ("the +8 autumn katana {slice, Clar}", "long sword", 8, "Long Blades"),
+        (
+            "the +2 Maxwell's thermic engine {flame, freeze}",
+            "double sword",
+            2,
+            "Long Blades",
+        ),
     ],
 )
 @pytest.mark.focus

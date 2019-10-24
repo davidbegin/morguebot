@@ -149,6 +149,12 @@ def destroy():
         print(log_group_name)
 
 
+def sanitize_those_cw_names(log_group_name):
+    if "/aws/lambda" in log_group_name:
+        return log_group_name.replace("/aws/lambda", "")
+    else:
+        return log_group_name
+
 if __name__ == "__main__":
     parser = OptionParser()
 
@@ -166,7 +172,7 @@ if __name__ == "__main__":
         if options.log_group:
             command = "tmux select-layout tiled"
             call_bash(command)
-            print(f"\033[37mMonitoring: {options.log_group}\033[0m")
+            print(f"\033[37m{sanitize_those_cw_names(options.log_group)}\033[0m")
             while True:
                 monitor_those_logs(options.log_group)
                 time.sleep(2)
@@ -189,7 +195,7 @@ if __name__ == "__main__":
 
             command = "tmux select-layout tiled"
             call_bash(command)
-            print(f"\033[37mMonitoring: {first_log_group}\033[0m")
+            print(f"\033[37m{sanitize_those_cw_names(first_log_group)}\033[0m")
             while True:
                 monitor_those_logs(first_log_group)
                 time.sleep(1)
