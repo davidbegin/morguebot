@@ -49,12 +49,12 @@ def main():
     character = Character(
         morgue_filepath=options.morgue_filepath,
         morgue_url=options.morgue_url,
-        character=options.character,
+        name=options.character,
         local_mode=options.local_mode,
     )
 
     if options.exec_command:
-        # send_chat_to_stream(f"pastaThat Character: {character.character} pastaThat")
+        # send_chat_to_stream(f"pastaThat Character: {character.name} pastaThat")
         process_event(
             {
                 "character": options.character,

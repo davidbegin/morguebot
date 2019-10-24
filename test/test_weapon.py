@@ -8,7 +8,7 @@ def test_weapon():
     full_name = "the +9 sword of Zonguldrok (weapon) {reap}"
     name = "long sword"
     enchantment = 9
-    character = Character(character="artmatt")
+    character = Character(name="artmatt")
 
     subject = Weapon(
         full_name=full_name, name=name, enchantment=enchantment, character=character
@@ -18,7 +18,7 @@ def test_weapon():
 
 
 def test_initializing_an_invalid_weapon_type():
-    character = Character(character="artmatt")
+    character = Character(name="artmatt")
 
     with pytest.raises(KeyError) as exc:
         full_name = "Not a real +0 weapon"

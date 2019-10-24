@@ -11,7 +11,7 @@ from lib.weapon_stats import WEAPON_STATS
 class WeaponsFormatter:
     def __init__(self, character):
         self.character = character
-        self.character_name = character.character
+        self.character_name = character.name
 
         # This is a Fresh Morgue File
         self.morgue_file = character.morgue_file()

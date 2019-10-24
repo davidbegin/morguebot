@@ -79,14 +79,14 @@ def stalk(event):
         characters_to_stalk = sanitize_them_keys(morgue_keys)
 
         max_damages = [
-            max_damage(Character(character=character_name).morgue_file())
+            max_damage(Character(name=character_name).morgue_file())
             for character_name in characters_to_stalk
         ]
         x = max_damages
         import pdb
 
         pdb.set_trace()
-        # character = Character(character=character_name)
+        # character = Character(name=character_name)
         # morgue_saver(character, character.non_saved_morgue_file())
 
 
@@ -101,7 +101,7 @@ def stalk_character(event):
     else:
         character_name = "beginbot"
 
-    character = Character(character=character_name)
+    character = Character(name=character_name)
     morgue_saver(character, character.non_saved_morgue_file())
 
 

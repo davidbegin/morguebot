@@ -23,7 +23,7 @@ def fetch_and_save_weapons(character_name, morguefile):
 def save_a_buncha_info(character_name):
     try:
         print(f"WE inside save_a_buncha_info: {character_name}")
-        character = Character(character_name=character_name)
+        character = Character(name=character_name)
         morgue_db = MorgueDB(character_name)
         morgue_file = character.morgue_file()
 

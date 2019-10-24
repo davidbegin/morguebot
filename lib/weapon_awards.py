@@ -12,7 +12,7 @@ def find_the_max_damage_for_all_characters():
 
     all_max_damages = []
     for character_name in characters:
-        character = Character(character=character_name)
+        character = Character(name=character_name)
         max_damages = character.calc_max_damages()
         if max_damages == ["No Weapons Found!"]:
             print(

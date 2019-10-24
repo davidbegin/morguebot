@@ -23,17 +23,17 @@ else:
 
 class Character:
     def __init__(
-        self, morgue_filepath=None, morgue_url=None, character=None, local_mode=None
+        self, morgue_filepath=None, morgue_url=None, name=None, local_mode=None
     ):
         self.morgue_filepath = morgue_filepath
         self.morgue_url = morgue_url
-        self.character = character
+        self.name = name
 
         # This upsets me past begin, what were you thinking?
         self.local_mode = local_mode
-        self._find_character_and_morguefile()
+        self._find_name_and_morguefile()
 
-        self.key = f"{character}/morguefile.txt"
+        self.key = f"{name}/morguefile.txt"
 
         # These Morgue Files!
         self.wielded_weapon = fetch_weapon(self.non_saved_morgue_file())
@@ -62,7 +62,7 @@ class Character:
                         "weapon": weapon.full_name,
                         "max_damage": max_damage,
                         "type": weapon.weapon_type,
-                        "character": self.character,
+                        "character": self.name,
                     }
                 )
 
@@ -76,10 +76,10 @@ class Character:
     # ========================================================================================
 
     def __str__(self):
-        return self.character
+        return self.name
 
     def __repr__(self):
-        return f"{super().__repr__()}: {self.character}"
+        return f"{super().__repr__()}: {self.name}"
 
     # ========================================================================================
 
@@ -118,33 +118,30 @@ class Character:
 
     # ========================================================================================
 
-    def _find_character_and_morguefile(self):
+    def _find_name_and_morguefile(self):
         if self.local_mode:
             if self.morgue_filepath is None:
                 self.morgue_filepath = self._find_morgue_filepath()
         else:
-            if self.character and self.morgue_url is None:
-                self.morgue_url = self._find_morgue_url()
-            if self.morgue_url is None:
-                self.morgue_url = self._find_morgue_url()
-        self._find_character()
+            self.morgue_url = self._find_morgue_url()
+        self._find_name()
 
-    def _find_character(self):
-        if self.character:
+    def _find_name(self):
+        if self.name:
             pass
 
         if self.local_mode:
             morgue_path = self.morgue_filepath
         else:
             morgue_path = self.morgue_url
-        self.character = morgue_path.split("/")[-1].replace(".txt", "")
+        self.name = morgue_path.split("/")[-1].replace(".txt", "")
 
     def _find_morgue_url(self):
         MORGUE_DOMAIN = "http://crawl.akrasiac.org/rawdata"
-        return f"{MORGUE_DOMAIN}/{self.character}/{self.character}.txt"
+        return f"{MORGUE_DOMAIN}/{self.name}/{self.name}.txt"
 
     def _find_morgue_filepath(self):
-        return f"{find_morgue_folder()}/{self.character}.txt"
+        return f"{find_morgue_folder()}/{self.name}.txt"
 
     def _fetch_online_morgue(self):
         response = requests.get(self.morgue_url)

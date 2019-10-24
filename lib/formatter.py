@@ -37,7 +37,7 @@ class Formatter:
         self.character = character
 
     def construct_message(self, command):
-        print(f"Formatter construct_message {command} for {self.character.character}")
+        print(f"Formatter construct_message {command} for {self.character.name}")
 
         if command == "!overview":
             return self.print_overview()
@@ -221,6 +221,6 @@ class Formatter:
 
             for character in characters:
                 max_damages[character] = max_damage(
-                    Character(character=character).morgue_file()
+                    Character(name=character).morgue_file()
                 )
             return max_damages

@@ -28,7 +28,12 @@ from lib.character import Character
         ("the +7 Singing Sword {slice, sonic wave}", "long sword", 7, "Long Blades"),
         ("the +8 Wrath of Trog {antimagic, *Rage}", "battleaxe", 8, "Axes"),
         ("the +8 autumn katana {slice, Clar}", "long sword", 8, "Long Blades"),
-        ('the +9 heavy crossbow "Sniper" {velocity, Acc+∞ SInv}', "arbalest", 9, "Crossbows"),
+        (
+            'the +9 heavy crossbow "Sniper" {velocity, Acc+∞ SInv}',
+            "arbalest",
+            9,
+            "Crossbows",
+        ),
         (
             "the +2 Maxwell's thermic engine {flame, freeze}",
             "double sword",
@@ -39,7 +44,7 @@ from lib.character import Character
 )
 @pytest.mark.focus
 def test_creating_new_weapon(raw_weapon, name, enchantment, weapon_type):
-    character = Character(character="beginbot")
+    character = Character(name="beginbot")
     weapon = WeaponFactory.new(character, raw_weapon)
 
     assert weapon.name == name

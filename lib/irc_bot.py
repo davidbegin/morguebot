@@ -41,7 +41,7 @@ def _process_msg(irc_response, character):
         if len(split_command) > 1:
             character_name = split_command[1]
         else:
-            character_name = character.character
+            character_name = character.name
 
         invoke_morgue_bot(character_name, command, arguments)
     else:

@@ -39,7 +39,7 @@ def test_morgue_parser_altar_finding(morgue_file):
 
 
 def test_morgue_parser_overview(morgue_file):
-    character = Character(character="None")
+    character = Character(name="None")
     overview = fetch_overview(character.morgue_file())
     expected_overview = "None the Carver (Minotaur Gladiator)  XL:      11   Next: 58%  Health:  102/102      Location: level 2 of the Lair of Beasts."
     assert overview == expected_overview

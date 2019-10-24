@@ -14,7 +14,7 @@ from lib.weapon_awards import find_the_max_damage_for_all_characters
 def process_event(event):
     command = event["command"]
     character_name = find_character_name(event)
-    character = Character(character=character_name)
+    character = Character(name=character_name)
     formatter = Formatter(character)
     arg1 = event.get("arg1", None)
 
@@ -53,5 +53,5 @@ def call_command_with_arg(formatter, command, arg1):
 def save_morgue(character):
     f = character.non_saved_morgue_file()
     os.makedirs("tmp", exist_ok=True)
-    with open(f"tmp/{character.character}_morguefile.txt", "w") as morguefile:
+    with open(f"tmp/{character.name}_morguefile.txt", "w") as morguefile:
         morguefile.write(f)
