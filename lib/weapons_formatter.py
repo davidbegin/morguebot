@@ -6,19 +6,24 @@ from lib.morgue_parser import fetch_strength
 from lib.morgue_parser import fetch_weapon
 from lib.morgue_parser import fetch_weapons
 from lib.weapon_stats import WEAPON_STATS
+from lib.weapons_appraiser import WeaponsAppraiser
 
 
 class WeaponsFormatter:
-    def __init__(self, character):
+    def __init__(self, character, weapons):
         self.character = character
         self.character_name = character.name
-
-        # This is a Fresh Morgue File
-        self.morgue_file = character.morgue_file()
-        self.weapons = fetch_weapons(self.morgue_file)
+        self.weapons = weapons
 
     def format_max_damages(self):
-        max_damages = self.character.calc_max_damages()
+        weapons_appraiser = WeaponsAppraiser(
+            character=self.character, weapons=self.weapons
+        )
+        max_damages = weapons_appraiser.calc_max_damages()
+        import pdb
+
+        pdb.set_trace()
+
         formatted_max_damages = []
 
         for weapon_info in max_damages:
