@@ -61,5 +61,7 @@ class WeaponFactory:
                 weapon_name = "spear"
             elif "maxwell's thermic engine" in rest_of_the_weapon:
                 weapon_name = "double sword"
+            elif "wrath of trog" in rest_of_the_weapon:
+                weapon_name = "battleaxe"
 
         return weapon_name

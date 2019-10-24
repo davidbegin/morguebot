@@ -26,6 +26,7 @@ from lib.character import Character
             "Maces & Flails",
         ),
         ("the +7 Singing Sword {slice, sonic wave}", "long sword", 7, "Long Blades"),
+        ("the +8 Wrath of Trog {antimagic, *Rage}", "battleaxe", 8, "Axes"),
         ("the +8 autumn katana {slice, Clar}", "long sword", 8, "Long Blades"),
         (
             "the +2 Maxwell's thermic engine {flame, freeze}",
