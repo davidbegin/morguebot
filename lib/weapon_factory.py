@@ -63,5 +63,7 @@ class WeaponFactory:
                 weapon_name = "double sword"
             elif "wrath of trog" in rest_of_the_weapon:
                 weapon_name = "battleaxe"
+            elif "heavy crossbow" in rest_of_the_weapon:
+                weapon_name = "arbalest"
 
         return weapon_name
