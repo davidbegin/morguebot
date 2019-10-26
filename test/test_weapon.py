@@ -14,7 +14,7 @@ def test_weapon():
         full_name=full_name, name=name, enchantment=enchantment, character=character
     )
 
-    assert subject.max_damage() == 18.04
+    assert subject.max_damage() == 31.38
 
 
 def test_initializing_an_invalid_weapon_type():

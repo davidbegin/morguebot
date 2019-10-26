@@ -26,6 +26,9 @@ def process_event(event):
         clean_the_morgue()
     elif command == "!weapon_awards":
         find_the_max_damage_for_all_characters()
+    elif command == "!search":
+        for c in ["!armour", "!weapons", "!jewellery"]:
+            call_command_with_arg(formatter, c, arg1)
     elif arg1:
         call_command_with_arg(formatter, command, arg1)
     else:

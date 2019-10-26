@@ -29,7 +29,7 @@ class WeaponsAppraiser:
                         "weapon": weapon.full_name,
                         "max_damage": max_damage,
                         "type": weapon.weapon_type,
-                        "character": self.name,
+                        "character": self.character.name,
                     }
                 )
 

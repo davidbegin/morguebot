@@ -9,7 +9,7 @@ from lib.morgue_saver import morgue_saver
 
 
 def fetch_characters():
-    if False:
+    if True:
         client = boto3.client("s3")
         response = client.list_objects_v2(Bucket="morgue-files-2944dfb")
         s3_objects = response["Contents"]
@@ -17,51 +17,51 @@ def fetch_characters():
         return sanitize_them_keys(morgue_keys)
     else:
         return [
-            "12feetdeep",
-            "4zero4",
-            "AIVN",
-            "Abyss000",
-            "Airwolf",
-            "BackslashEcho",
-            "Bootz",
-            "CoolOtter",
-            "Harvey",
-            "JFunk",
-            "Jeffwins",
-            "MAWL",
-            "None",
-            "Nublar",
-            "Slevren",
-            "Splatt",
-            "Wexler",
-            "Zebrazen",
-            "ahab",
+            # "12feetdeep",
+            # "4zero4",
+            # "AIVN",
+            # "Abyss000",
+            # "Airwolf",
+            # "BackslashEcho",
+            # "Bootz",
+            # "CoolOtter",
+            # "Harvey",
+            # "JFunk",
+            # "Jeffwins",
+            # "MAWL",
+            # "None",
+            # "Nublar",
+            # "Slevren",
+            # "Splatt",
+            # "Wexler",
+            # "Zebrazen",
+            # "ahab",
             "artmatt",
-            "beginbot",
-            "candlehand",
-            "carwin",
-            "collin38",
-            "ddaybell",
-            "deathblob",
-            "dioxide",
-            "disciplinedyoungman",
-            "drj",
-            "emf",
-            "enop",
-            "foxor",
-            "gorper",
-            "grinrain",
-            "haverford",
-            "ilovepuk",
-            "jomj",
-            "jtro",
-            "matticus",
-            "nebn339",
-            "perc",
-            "perf",
-            "redmage",
-            "shittywizard",
-            "simcity",
+            # "beginbot",
+            # "candlehand",
+            # "carwin",
+            # "collin38",
+            # "ddaybell",
+            # "deathblob",
+            # "dioxide",
+            # "disciplinedyoungman",
+            # "drj",
+            # "emf",
+            # "enop",
+            # "foxor",
+            # "gorper",
+            # "grinrain",
+            # "haverford",
+            # "ilovepuk",
+            # "jomj",
+            # "jtro",
+            # "matticus",
+            # "nebn339",
+            # "perc",
+            # "perf",
+            # "redmage",
+            # "shittywizard",
+            # "simcity",
         ]
 
 
@@ -83,9 +83,6 @@ def stalk(event):
             for character_name in characters_to_stalk
         ]
         x = max_damages
-        import pdb
-
-        pdb.set_trace()
         # character = Character(name=character_name)
         # morgue_saver(character, character.non_saved_morgue_file())
 

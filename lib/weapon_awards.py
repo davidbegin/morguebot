@@ -3,6 +3,8 @@ from lib.character import Character
 from lib.kinesis import send_chat_to_stream
 
 from lib.weapons_formatter import WeaponsFormatter
+from lib.weapons_appraiser import WeaponsAppraiser
+from lib.morgue_parser import fetch_weapons
 
 
 def find_the_max_damage_for_all_characters():
@@ -13,7 +15,13 @@ def find_the_max_damage_for_all_characters():
     all_max_damages = []
     for character_name in characters:
         character = Character(name=character_name)
-        max_damages = character.calc_max_damages()
+        weapons = fetch_weapons(character.morgue_file())
+
+        weapons_appraiser = WeaponsAppraiser(character=character, weapons=weapons)
+        max_damages = weapons_appraiser.calc_max_damages()
+
+        # max_damages = character.calc_max_damages()
+
         if max_damages == ["No Weapons Found!"]:
             print(
                 f"\033[37mIt's ok get some weapons and come back: {character_name}\033[0m"
@@ -23,7 +31,7 @@ def find_the_max_damage_for_all_characters():
 
     max_by_type = find_max_by_type(all_max_damages)
 
-    send_chat_to_stream(["PorscheWIN Second Annual Weapon Awards!!! PorscheWIN"])
+    send_chat_to_stream(["PorscheWIN Third Annual Weapon Awards!!! PorscheWIN"])
 
     for weapon_info in max_by_type:
         emoji = find_emoji(weapon_info["type"])
@@ -31,7 +39,7 @@ def find_the_max_damage_for_all_characters():
             [
                 f"{emoji} Winner {weapon_info['character']} {emoji} - Category: {weapon_info['type']}",
                 # f"Kreygasm Winner {weapon_info['character']} Kreygasm - Category: {weapon_info['type']}",
-                WeaponsFormatter(character).format_weapon(weapon_info)
+                WeaponsFormatter(character, []).format_weapon(weapon_info)
                 # f"{weapon_info['weapon']} - {weapon_info['max_damage']}",
             ]
         )

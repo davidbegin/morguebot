@@ -60,6 +60,15 @@ iam.RolePolicyAttachment(
 
 iam.RolePolicy(f"{MODULE_NAME}-lambda-role-policy", role=role.id, policy=policy)
 
+
+lambda_variables = {
+    "CHARACTER_DB": dynamodb_table.name,
+    "TOPIC_ARN": sns_topic.arn,
+    "MORGUE_BUCKETNAME": bucket.id,
+    "CHAT_STREAM_ARN": chat_stream.arn,
+    "CHAT_STREAM_NAME": chat_stream.name,
+}
+
 aws_lambda = lambda_.Function(
     f"{MODULE_NAME}",
     role=role.arn,
@@ -69,15 +78,7 @@ aws_lambda = lambda_.Function(
     s3_bucket="morgue-artifacts",
     timeout=200,
     tracing_config={"mode": "Active"},
-    environment={
-        "variables": {
-            "CHARACTER_DB": dynamodb_table.name,
-            "TOPIC_ARN": sns_topic.arn,
-            "MORGUE_BUCKETNAME": bucket.id,
-            "CHAT_STREAM_ARN": chat_stream.arn,
-            "CHAT_STREAM_NAME": chat_stream.name,
-        }
-    },
+    environment={"variables": lambda_variables},
 )
 
 lambda_.Permission(

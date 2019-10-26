@@ -12,6 +12,9 @@ l:
 		black deploy/ --exclude venv
 		black deploy/modules
 
+set_env_vars:
+	cd deploy; pulumi stack output --json | jq '.lambda_env_vars' | tee ../.env
+
 # We needs this to take a random thang
 # make artifact ARTIFACT_NAME=handler422.zip
 dependencies:

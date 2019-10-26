@@ -20,9 +20,6 @@ class WeaponsFormatter:
             character=self.character, weapons=self.weapons
         )
         max_damages = weapons_appraiser.calc_max_damages()
-        import pdb
-
-        pdb.set_trace()
 
         formatted_max_damages = []
 

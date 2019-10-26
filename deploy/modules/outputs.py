@@ -1,4 +1,6 @@
 import pulumi
+
+import json
 from pulumi import Output
 
 from modules.dynamodb import dynamodb_table
@@ -31,12 +33,23 @@ pulumi.export("morguebot_lambda", modules.morgue_bot_lambda.aws_lambda.name),
 pulumi.export("god_bot_lambda", modules.god_bot_lambda.aws_lambda.name),
 pulumi.export("twitch_chat_bot_lambda", modules.twitch_chat_bot_lambda.aws_lambda.name)
 
+
+pulumi.export(
+    "lambda_env_vars",
+    {
+        **modules.god_bot_lambda.lambda_variables,
+        **modules.morgue_bot_lambda.lambda_variables,
+    },
+)
+
 pulumi.export(
     "cloudwatch_logs",
     [
-        Output.concat("/aws/lambds/", modules.morgue_stalker_lambda.aws_lambda.name),
-        Output.concat("/aws/lambds/", modules.morgue_bot_lambda.aws_lambda.name),
-        Output.concat("/aws/lambds/", modules.god_bot_lambda.aws_lambda.name),
-        Output.concat("/aws/lambds/", modules.twitch_chat_bot_lambda.aws_lambda.name),
+        Output.concat("/aws/lambda/", modules.morgue_stalker_lambda.aws_lambda.name),
+        Output.concat("/aws/lambda/", modules.morgue_bot_lambda.aws_lambda.name),
+        Output.concat("/aws/lambda/", modules.god_bot_lambda.aws_lambda.name),
+        Output.concat("/aws/lambda/", modules.twitch_chat_bot_lambda.aws_lambda.name),
     ],
 )
+
+# Export the Lambda environment variables to a file!
