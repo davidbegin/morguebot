@@ -11,8 +11,13 @@ from lib.morgue_parser import fetch_weapon
 from lib.morgue_parser import fetch_weapons
 from lib.morgue_saver import morgue_saver
 
+from lib.the_real_morgue_parser import MorgueParser
+
 from lib.weapon_factory import WeaponFactory
 from lib.morgue_folder_finder import find_morgue_folder
+
+from lib.spell import Spell
+from lib.spell_factory import SpellFactory
 
 
 if "MORGUE_BUCKETNAME" in os.environ:
@@ -36,6 +41,7 @@ class Character:
         self.key = f"{name}/morguefile.txt"
 
         self.weapons = fetch_weapons(self.non_saved_morgue_file())
+        self.morgue_parser = MorgueParser(self.non_saved_morgue_file())
 
     # ========================================================================================
 
@@ -47,8 +53,10 @@ class Character:
 
     # ========================================================================================
 
+    def spells(self):
+        return [SpellFactory(spell).new() for spell in self.morgue_parser.spells()]
+
     def spells_above(self, level):
-        # What spells does Morgue Parse introduce
         spells = self.morgue_parser.spells()
 
         # for each spell

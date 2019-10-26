@@ -13,7 +13,6 @@ def test_spell_is_real():
     )
 
 
-@pytest.mark.focus
 def test_spell_at_least_level_3():
     spell = Spell(
         name="Animate Skeleton",

@@ -1,4 +1,6 @@
+import pytest
 from lib.character import Character
+from lib.spell import Spell
 
 
 def test_morgue_filepath():
@@ -12,3 +14,11 @@ def test_morgue_url():
     character = Character(name="GucciMane")
     expected_url = "http://crawl.akrasiac.org/rawdata/GucciMane/GucciMane.txt"
     assert character.morgue_url == expected_url
+
+
+@pytest.mark.focus
+def test_spells():
+    character = Character(name="GucciMane", local_mode=True)
+    spells = character.spells()
+    assert type(spells[0]) == Spell
+    # This should return Spell objects
