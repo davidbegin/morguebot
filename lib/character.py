@@ -35,13 +35,11 @@ class Character:
         self.morgue_url = morgue_url
         self.name = name
 
-        # This upsets me past begin, what were you thinking?
         self.local_mode = local_mode
+
         self._find_morguefile()
         self._find_name()
-
         self.key = f"{name}/morguefile.txt"
-
         self.weapons = fetch_weapons(self.non_saved_morgue_file())
         self.morgue_parser = MorgueParser(self.non_saved_morgue_file())
 
@@ -67,15 +65,12 @@ class Character:
     def morgue_file(self):
         if self.local_mode:
             morgue = open(self.morgue_filepath).read()
-        elif BUCKET and self.key:
+        else:
             morgue = self.s3_morgue_file()
             if morgue is None:
                 morgue = self.fetch_online_morgue()
-        else:
-            morgue = self.fetch_online_morgue()
 
-        # How do we stop running this when in pytest mode
-        if False:
+        if not os.environ.get("TEST_MODE", False):
             morgue_saver(self, morgue)
 
         return morgue
@@ -86,7 +81,6 @@ class Character:
         else:
             return self.fetch_online_morgue()
 
-    # We want to Mock this
     def s3_morgue_file(self):
         try:
             client = boto3.client("s3")
@@ -96,17 +90,15 @@ class Character:
             print(f"Error fetching morguefile: {BUCKET} {self.key}")
             return None
 
-    # We want to Mock this
     def fetch_online_morgue(self):
         response = requests.get(self.morgue_url)
         if response.status_code == 200:
             return response.text
         else:
-            pass
-            # We only want to print tihs in some cases
-            # print(
-            #     f"\033[031;1mCould not find the Character at {self.morgue_url}\033[0m"
-            # )
+            if not os.environ.get("TEST_MODE", False):
+                print(
+                    f"\033[031;1mCould not find the Character at {self.morgue_url}\033[0m"
+                )
 
     # ========================================================================================
 

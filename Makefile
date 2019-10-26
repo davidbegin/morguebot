@@ -1,8 +1,8 @@
 t:
-		python3 -m pytest test/ -s
+		TEST_MODE=true python3 -m pytest --cov=lib test/ -s
 
 f:
-		python3 -m pytest test/ -s -m focus
+		TEST_MODE=true python3 -m pytest test/ -s -m focus
 
 l:
 		black deploy/*.py
