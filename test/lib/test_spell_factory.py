@@ -1,8 +1,11 @@
 import pytest
 from lib.spell_factory import SpellFactory
 
+# Parser -> Raw String
+# Factory -> Takes Raw String -> Returns an Object
+# Object -> JSON Serializable
 
-@pytest.mark.focus
+
 def test_spell_factory_is_real():
     raw_spell = "Animate Skeleton  Necr  N/A  98%  1   ##....."
     spell = SpellFactory(raw_spell).new()

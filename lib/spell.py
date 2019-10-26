@@ -9,3 +9,6 @@ class Spell:
 
     def at_least_level(self, desired_level):
         return self.level >= desired_level
+
+    def overview(self):
+        return f"{self.name} {spell_type} {self.power} {self.failure} {self.level} {self.hunger}"

@@ -5,6 +5,7 @@ import subprocess
 import requests
 import boto3
 
+
 from lib.morgue_parser import fetch_seed
 from lib.morgue_parser import fetch_turns
 from lib.morgue_parser import fetch_weapon
@@ -57,13 +58,10 @@ class Character:
         return [SpellFactory(spell).new() for spell in self.morgue_parser.spells()]
 
     def spells_above(self, level):
-        spells = self.morgue_parser.spells()
-
-        # for each spell
-        # is it above
-        import pdb
-
-        pdb.set_trace()
+        print(f"Spells Above!: {level}")
+        return [
+            spell.overview for spell in self.spells() if spell.level >= float(level)
+        ]
 
     # ========================================================================================
 

@@ -49,3 +49,11 @@ def test_parse_spells():
     ]
 
     assert spells == expected_spells
+
+
+def test_overview():
+    morgue_file = open("support/Fa.txt").read()
+    morgue_parser = MorgueParser(morgue_file)
+    overview = morgue_parser.overview()
+    expected_overview = "Fa the Merry Centaur (Centaur Hunter)  XL:      27  Health:  243/243      Location: Pandemonium."
+    assert overview == expected_overview

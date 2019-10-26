@@ -16,7 +16,6 @@ def test_morgue_url():
     assert character.morgue_url == expected_url
 
 
-@pytest.mark.focus
 def test_spells():
     character = Character(name="GucciMane", local_mode=True)
     spells = character.spells()

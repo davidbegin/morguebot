@@ -13,6 +13,7 @@ TOP TODO:
   - Add some code coverage
   - Hey now, since its open source, why don't you use some of those cool
     free open source tools like Travis, for cool patches
+  - Report no weapons when calling max damage and no weapons
 
 
 Deployment TODO:

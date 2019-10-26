@@ -10,6 +10,8 @@ from lib.config import find_character_name
 
 from lib.weapon_awards import find_the_max_damage_for_all_characters
 
+from lib.the_real_morgue_parser import MorgueParser
+
 
 def process_event(event):
     command = event["command"]
@@ -21,10 +23,22 @@ def process_event(event):
 
     if command == "!fetch":
         morgue_saver(character, character.non_saved_morgue_file())
+
     elif command == "!spells":
+        print("We about to print some spells")
+
         if arg1 == "level":
-            character.spells_above(arg2)
-            # Hey you want to know the spells above X for Character
+            msg = character.spells_above(arg2)
+            print(f"msg: {msg}")
+            send_chat_to_stream(msg)
+        else:
+            print(f"Oh no arg1: {arg1}")
+
+    elif command == "!overview":
+        morgue_parser = MorgueParser(character.non_saved_morgue_file())
+        msg = morgue_parser.overview()
+        send_chat_to_stream(msg)
+
     elif command == "!save_morgue":
         save_morgue(character)
     elif command == "!clean_morgue":
@@ -37,8 +51,6 @@ def process_event(event):
     elif arg1:
         call_command_with_arg(formatter, command, arg1)
     else:
-        # !spells artmatt level 4
-        # 4 and up
         call_command(formatter, command, character_name)
 
 

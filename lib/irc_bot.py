@@ -70,6 +70,7 @@ def invoke_morgue_bot(character, command, arguments):
     client = boto3.client("lambda")
 
     if arguments:
+
         if len(arguments) > 1:
             payload = {
                 "character": character,
@@ -77,7 +78,7 @@ def invoke_morgue_bot(character, command, arguments):
                 "arg1": arguments[0],
                 "arg2": arguments[1],
             }
-        if len(arguments) == 1:
+        elif len(arguments) == 1:
             payload = {"character": character, "command": command, "arg1": arguments[0]}
         else:
             payload = {"character": character, "command": command, "arg1": arguments[1]}
