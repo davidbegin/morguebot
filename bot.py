@@ -28,6 +28,7 @@ def main():
     )
 
     parser.add_option("-a", "--arg1", action="store", type="string", dest="arg1")
+    parser.add_option("-b", "--arg2", action="store", type="string", dest="arg2")
 
     # Run in Different Modes
     parser.add_option(
@@ -60,6 +61,7 @@ def main():
                 "character": options.character,
                 "command": f"!{options.exec_command}",
                 "arg1": options.arg1,
+                "arg2": options.arg2,
             }
         )
     elif options.status_checker:

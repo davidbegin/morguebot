@@ -37,8 +37,8 @@ pulumi.export("twitch_chat_bot_lambda", modules.twitch_chat_bot_lambda.aws_lambd
 pulumi.export(
     "lambda_env_vars",
     {
-        **modules.god_bot_lambda.lambda_variables,
         **modules.morgue_bot_lambda.lambda_variables,
+        **modules.god_bot_lambda.lambda_variables,
     },
 )
 

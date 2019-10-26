@@ -1,0 +1,620 @@
+ Dungeon Crawl Stone Soup version 0.24.0-1-gfbc8707 (webtiles) character file.
+
+kilrfish the Marksminotaur (Minotaur Berserker)    Turns: 35312, Time: 02:46:11
+
+Health: 108/163    AC: 31    Str: 25    XL:     17   Next: 94%
+Magic:  16/16      EV: 19    Int:  4    God:    Trog [******]
+Gold:   1035       SH:  0    Dex: 20    Spells: 16/16 levels left
+
+rFire    . . .     SeeInvis +   X - +8 longbow "Zephyr" {speed, Dex+3 SInv}
+rCold    . . .     Gourm    .   (shield currently unavailable)
+rNeg     . . .     Faith    .   v - +0 plate armour
+rPois    +         Spirit   .   k - +2 hat
+rElec    .         Reflect  .   J - +2 cloak {MR+}
+rCorr    .         Harm     .   d - +2 pair of gloves
+MR       ++++.                  l - +2 pair of boots
+Stlth    ..........             G - amulet of regeneration
+HPRegen  1.77/turn              r - +3 ring of strength
+MPRegen  0.15/turn              w - ring of poison resistance
+
+@: regenerating
+A: retaliatory headbutt, horns 2
+}: 1/15 runes: gossamer
+a: Berserk, Trog's Hand, Brothers in Arms, Renounce Religion
+
+
+You are on level 4 of the Shoals.
+You worship Trog.
+Trog is exalted by your worship.
+You are not hungry.
+
+You have visited 6 branches of the dungeon, and seen 32 of its levels.
+You have also visited: Bailey.
+
+You have collected 2312 gold pieces.
+You have spent 1277 gold pieces at shops.
+
+Inventory:
+
+Hand Weapons
+ P - a +2 antimagic triple sword
+ X - the +8 longbow "Zephyr" (weapon) {speed, Dex+3 SInv}
+   (You found it on level 6 of the Lair of Beasts)   
+   
+   Attacks with this weapon are significantly faster.
+   
+   It affects your dexterity (+3).
+   It lets you see invisible.
+Missiles
+ i - 440 arrows (quivered)
+Armour
+ d - a +2 pair of gloves (worn)
+ k - a +2 hat (worn)
+ l - a +2 pair of boots (worn)
+ v - a +0 plate armour (worn)
+ J - a +2 cloak of magic resistance (worn)
+Jewellery
+ o - an uncursed ring of resist corrosion
+ r - a +3 ring of strength (left hand)
+ w - a ring of poison resistance (right hand)
+ G - an amulet of regeneration (around neck)
+ M - an uncursed ring of fire
+ W - an uncursed ring of flight
+Wands
+ K - a wand of acid (31)
+ U - a wand of digging (7)
+Scrolls
+ f - 5 scrolls of enchant armour
+ h - a scroll of enchant weapon
+ q - 14 scrolls of identify
+ t - 3 scrolls of fog
+ u - 6 scrolls of blinking
+ y - 5 scrolls of remove curse
+ B - a scroll of silence
+ D - 9 scrolls of teleportation
+ Q - a scroll of fear
+ Y - a scroll of holy word
+Potions
+ a - 4 potions of haste
+ b - a potion of agility
+ e - 2 potions of mutation
+ g - 8 potions of heal wounds
+ j - 2 potions of brilliance
+ m - 3 potions of flight
+ p - 8 potions of might
+ s - 6 potions of curing
+ x - 3 potions of resistance
+ A - a potion of berserk rage
+ H - 2 potions of invisibility
+ S - 2 potions of magic
+Miscellaneous
+ n - 2 phantom mirrors
+Comestibles
+ c - 55 rations
+ z - 7 chunks of flesh
+
+
+   Skills:
+ - Level 18.0 Fighting
+ - Level 3.6 Long Blades
+ - Level 20.0 Bows
+ - Level 18.0 Armour
+ + Level 15.9 Dodging
+
+
+You have 16 spell levels left.
+You don't know any spells.
+Your spell library contains the following spells:
+
+ Spells                   Type           Power        Failure   Level  Hunger
+ Animate Skeleton         Necr           N/A          98%         1    ##.....
+ Apportation              Tloc           #.....       98%         1    ##.....
+ Confusing Touch          Hex            #.....       98%         1    ##.....
+ Corona                   Hex            #......      98%         1    ##.....
+ Infusion                 Chrm           #...         98%         1    ##.....
+ Shock                    Conj/Air       #...         98%         1    ##.....
+ Summon Small Mammal      Summ           #...         98%         1    ##.....
+ Call Imp                 Summ           #.......     99%         2    ###....
+ Ensorcelled Hibernation  Hex/Ice        #.....       99%         2    ###....
+ Shroud of Golubria       Chrm/Tloc      #.....       99%         2    ###....
+ Song of Slaying          Chrm           #.......     99%         2    ###....
+ Swiftness                Chrm/Air       #.......     99%         2    ###....
+ Call Canine Familiar     Summ           #.......     100%        3    ####...
+ Confuse                  Hex            #.......     100%        3    ####...
+ Dazzling Spray           Conj/Hex       #.....       100%        3    ####...
+ Portal Projectile        Hex/Tloc       #.....       100%        3    ####...
+ Regeneration             Chrm/Necr      #.........   100%        3    ####...
+ Spectral Weapon          Hex/Chrm       #.......     100%        3    ####...
+ Static Discharge         Conj/Air       #.......     100%        3    ####...
+ Summon Guardian Golem    Hex/Summ       #.......     100%        3    ####...
+ Tukima's Dance           Hex            #.......     100%        3    ####...
+ Airstrike                Air            #.........   100%        4    #####..
+ Ice Form                 Ice/Tmut       #.......     100%        4    #####..
+ Leda's Liquefaction      Hex/Erth       #.........   100%        4    #####..
+ Summon Ice Beast         Ice/Summ       #.......     100%        4    #####..
+ Summon Lightning Spire   Summ/Air       #.......     100%        4    #####..
+ Lightning Bolt           Conj/Air       #.........   100%        5    ######.
+ Metabolic Englaciation   Hex/Ice        #.........   100%        5    ######.
+ Bolt of Cold             Conj/Ice       #.........   100%        6    #######
+ Freezing Cloud           Conj/Ice/Air   #.........   100%        6    #######
+ Ozocubu's Refrigeration  Ice            #.........   100%        6    #######
+ Simulacrum               Ice/Necr       #.........   100%        6    #######
+
+
+Dungeon Overview and Level Annotations
+
+Branches:
+Dungeon (15/15)            Temple (1/1) D:6            Lair (6/6) D:11
+ Shoals (4/4) Lair:4       Spider (4/4) Lair:4        Slime (0/5) Lair:5
+    Orc (2/2) D:11            Elf (0/3) Orc:2        Vaults (0/5) D:13
+ Depths (0/5) D:15         Bailey (visited)         
+
+Altars:
+Ashenzari
+Cheibriados
+Elyvilon
+Fedhas
+Gozag
+Hepliaklqana
+Kikubaaqudgha
+Makhleb
+Nemelex Xobeh
+Okawaru
+Qazlal
+Ru
+Sif Muna
+Trog
+Vehumet
+Xom
+Yredelemnul
+Zin
+The Shining One
+Beogh
+Jiyva
+Lugonu
+
+Shops:
+D:4 ?   D:7 ![?   D:8 =   D:11 [   Orc:2 (*%[(
+
+Annotations:
+D:4 exclusion: downstairs
+D:5 exclusion: downstairs
+D:6 exclusion: downstairs
+Lair:1 exclusion: oklob plant
+Lair:5 1 runed translucent door
+Shoals:1 exclusion: downstairs
+Shoals:2 exclusion: downstairs
+Shoals:3 exclusion: downstairs
+Shoals:4 3 runed translucent doors, Pwnan's ghost, journeyman HOFi
+
+
+Innate Abilities, Weirdness & Mutations
+
+You reflexively headbutt those who attack you in melee.
+You have a pair of horns on your head.
+
+
+Message History
+
+Firing (i - inventory) i - 442 arrows (quivered)
+Press: ? - help, Shift-Dir - straight line, f/p - merfolk javelineer
+Aim: a merfolk javelineer, wielding a +2 spear of flaming and wearing a +0
+leather armour (lightly wounded)
+You shoot an arrow. The arrow hits the merfolk javelineer!!
+The merfolk javelineer is heavily wounded.
+You hear a splash.
+Firing (i - inventory) i - 441 arrows (quivered)
+Press: ? - help, Shift-Dir - straight line, f/p - merfolk javelineer
+Aim: a merfolk javelineer, wielding a +2 spear of flaming and wearing a +0
+leather armour (heavily wounded)
+You shoot an arrow.
+The arrow closely misses the merfolk javelineer.
+You hear a splash.
+The merfolk javelineer throws a javelin.
+The javelin barely misses you.
+Saving game... please wait.
+Level annotation: 3 runed translucent doors, Pwnan's ghost, journeyman HOFi
+Welcome back, kilrfish the Minotaur Berserker.
+Trog says: Kill them all!
+Press ? for a list of commands and other information.
+Saving game... please wait.
+
+                               ..
+.≈≈≈≈≈≈ ≈≈≈≈....(..(#(
+..≈≈≈....≈≈≈.......((
+...... ...?≈≈.....m(#
+..... #.....≈≈....≈(##
+.#..##.# ...≈≈....≈≈≈#####
+.......# .....%...?≈≈≈≈≈≈≈
+≈...≈.###.......(...≈≈≈≈≈≈
+≈...≈≈.....#   #@....≈≈≈≈≈
+≈≈≈≈≈≈....##   ##.....≈≈≈≈
+≈≈≈≈≈≈....#     #......≈≈≈
+≈≈≈≈≈≈.)≈≈#     +../.....≈
+≈≈≈≈≈≈≈≈≈≈#     #........≈
+##≈≈≈≈≈≈≈≈##   ##.......≈≈
+.##...<..≈≈#####.[........
+..#........≈≈......^.^.###
+..'.....)..≈....)(.....#
+
+
+You can see a merfolk javelineer.
+
+Vanquished Creatures
+  Arachne (Spider:4)
+  Jorgrun (Spider:3)
+  Ilsuiw (Shoals:2)
+  An orc warlord (Orc:1)
+  2 ghost moths (Spider:4)
+  3 emperor scorpions (Spider:4)
+  5 entropy weavers
+  Nessos (Orc:2)
+  2 spark wasps (Spider:4)
+  Snorg (Lair:3)
+  5 merfolk javelineers
+  9 merfolk impalers
+  A fire dragon (Lair:6)
+  Erolcha (D:11)
+  Harold (D:7)
+  2 vault guards (D:13)
+  5 hydras
+  4 merfolk avatars (Shoals:4)
+  An alligator snapping turtle (Shoals:4)
+  3 merfolk aquamancers
+  2 catoblepae
+  8 two-headed ogres
+  2 tengu warriors (D:14)
+  3 centaur warriors
+  2 satyrs (Shoals:3)
+  2 orc high priests (Orc:2)
+  A death drake (shapeshifter) (D:15)
+  4 unseen horrors
+  4 skeletal warriors (D:14)
+  A glowing orange brain (D:15)
+  A wizard (D:15)
+  13 sea snakes
+  A lindwurm (Lair:6)
+  5 orc knights
+  8 harpies
+  An orb spider (shapeshifter) (D:15)
+  20 orb spiders
+  11 fauns
+  2 orc sorcerers (Orc:2)
+  7 cyclopes
+  4 ugly things
+  27 wolf spiders
+  8 manticores
+  4 moths of wrath
+  3 black mambas
+  9 merfolk sirens
+  Maurice (D:11)
+  3 molten gargoyles (Lair:6)
+  5 water nymphs
+  3 centaur zombies
+  Psyche (D:11)
+  2 torpor snails (Spider:4)
+  9 spiny frogs
+  6 kobold demonologists
+  A rime drake (Lair:5)
+  14 demonic crawlers
+  5 yaktaurs (D:14)
+  11 komodo dragons
+  A tengu conjurer (D:14)
+  44 jumping spiders
+  3 meliai
+  6 trolls
+  A jumping spider (shapeshifter) (D:15)
+  30 merfolk
+  3 wind drakes
+  10 hornets
+  A polar bear (Lair:2)
+  6 slime creatures (D:15)
+  4 snapping turtles
+  A raiju (shapeshifter) (D:15)
+  14 hippogriffs
+  13 water elementals
+  42 yaks
+  3 hogs (D:8)
+  A centaur simulacrum (D:15)
+  50 redbacks
+  10 humans
+  26 tarantellas
+  10 wyverns
+  3 steam dragons (Lair:6)
+  7 wargs (Orc:2)
+  12 basilisks
+  2 hungry ghosts
+  Menkaure (D:5)
+  2 vampire mosquitoes (D:12)
+  2 soldier ants
+  4 hell hounds (Lair:6)
+  9 water moccasins
+  10 porcupines
+  36 orc warriors
+  3 sky beasts
+  2 ice beasts
+  2 phantoms
+  44 wolves
+  A black bear (D:6)
+  22 centaurs
+  4 ogres
+  13 crocodiles
+  3 big kobolds
+  14 bullfrogs
+  2 wyvern zombies
+  4 scorpions
+  5 killer bees
+  25 wights
+  2 electric eels
+  8 howler monkeys
+  4 crimson imps
+  5 lava snakes (Lair:6)
+  A bullfrog zombie (D:8)
+  A quasit (D:10)
+  9 jellies
+  13 orc priests
+  32 orc wizards
+  3 centaur skeletons
+  8 hounds
+  6 bullfrog skeletons
+  3 iguanas
+  17 worker ants
+  2 hound skeletons (D:9)
+  A worker ant zombie (D:9)
+  6 gnolls
+  12 adders
+  3 shadow imps
+  4 oozes
+  3 adder skeletons
+  6 worms
+  3 dart slugs (D:1)
+  5 leopard geckos
+  118 orcs
+  3 ball pythons
+  9 bats
+  4 giant cockroaches
+  7 goblins
+  8 hobgoblins
+  7 jackals
+  25 kobolds
+  4 quokkas
+  5 frilled lizards
+  7 rats
+  A plant (Shoals:3)
+  A withered plant (D:14)
+1131 creatures vanquished.
+
+Vanquished Creatures (collateral kills)
+  4 jumping spiders (Lair:4)
+  A polar bear (Lair:4)
+  A hornet (D:10)
+  A yak (Lair:4)
+7 creatures vanquished.
+
+Vanquished Creatures (others)
+  A redback (Spider:2)
+  A human (D:13)
+  4 fungi
+  5 plants
+11 creatures vanquished.
+
+Grand Total: 1149 creatures vanquished
+
+Notes
+Turn   | Place    | Note
+-------+----------+-------------------------------------------
+     0 | D:1      | kilrfish the Minotaur Berserker began the quest for the
+                  | Orb.
+     0 | D:1      | Reached XP level 1. HP: 19/19 MP: 0/0
+   278 | D:1      | Reached XP level 2. HP: 26/28 MP: 1/1
+   773 | D:1      | Reached skill level 5 in Fighting
+   950 | D:1      | Reached XP level 3. HP: 36/36 MP: 2/2
+  1021 | D:1      | Reached ** piety under Trog
+  1404 | D:2      | Found a sparkling altar of Nemelex Xobeh.
+  1636 | D:2      | Reached XP level 4. HP: 44/44 MP: 3/3
+  2079 | D:3      | Reached XP level 5. HP: 52/52 MP: 4/4
+  2343 | D:3      | Reached *** piety under Trog
+  2593 | D:3      | Found a stormy altar of Qazlal.
+  2675 | D:3      | Reached XP level 6. HP: 60/60 MP: 5/5
+  3133 | D:3      | Found an opulent altar of Gozag.
+  3316 | D:4      | Reached skill level 5 in Armour
+  3331 | D:4      | Reached **** piety under Trog
+  3621 | D:4      | Found Attog's Magic Scroll Boutique.
+  3649 | D:4      | Bought a scroll of enchant armour for 90 gold pieces
+  3686 | D:4      | Reached XP level 7. HP: 66/66 MP: 6/6
+  3990 | D:5      | Entered Level 5 of the Dungeon
+  3996 | D:5      | Noticed Menkaure
+  4843 | D:5      | Reached XP level 8. HP: 74/75 MP: 7/7
+  4975 | D:5      | Killed Menkaure
+  5572 | D:6      | Found a shimmering altar of Xom.
+  5592 | D:6      | Found a staircase to the Ecumenical Temple.
+  5638 | Temple   | Entered the Ecumenical Temple
+  5905 | D:6      | Reached ***** piety under Trog
+  5908 | D:6      | Found a shimmering altar of Xom.
+  5956 | D:6      | Reached skill level 10 in Fighting
+  6024 | D:6      | Noticed a hippogriff
+  6030 | D:6      | Killed a hippogriff
+  6030 | D:6      | Reached XP level 9. HP: 85/85 MP: 8/8
+  6272 | D:7      | Found Uwow's Magic Scroll Emporium.
+  6278 | D:7      | Bought a scroll of enchant armour for 112 gold pieces
+  6278 | D:7      | Bought a scroll of teleportation for 45 gold pieces
+  6278 | D:7      | Bought a scroll of teleportation for 45 gold pieces
+  6279 | D:7      | Noticed Harold
+  6285 | D:7      | Found Eptoss's Armour Shop.
+  6455 | D:7      | Found a white marble altar of Elyvilon.
+  6457 | D:7      | Found a basalt altar of Yredelemnul.
+  6457 | D:7      | Found a hazy altar of Hepliaklqana.
+  6458 | D:7      | Found a snail-covered altar of Cheibriados.
+  6520 | D:7      | Reached skill level 10 in Armour
+  6696 | D:7      | Found a flagged portal.
+  6705 | Bailey   | Entered a bailey
+  6725 | Bailey   | Noticed an orc knight
+  6940 | D:7      | Reached skill level 5 in Dodging
+  7053 | D:7      | Found Xoas's Distillery.
+  7083 | D:7      | Killed Harold
+  7167 | D:7      | Bought a potion of heal wounds for 70 gold pieces
+  7391 | D:8      | Reached XP level 10. HP: 97/97 MP: 9/9
+  7511 | D:8      | Found Kosuot's Jewellery Shoppe.
+  8022 | D:9      | Received a gift from Trog
+  8863 | D:9      | Noticed a two-headed ogre
+  8871 | D:9      | Killed a two-headed ogre
+  8871 | D:9      | Reached XP level 11. HP: 110/110 MP: 10/10
+  9045 | D:10     | Entered Level 10 of the Dungeon
+  9803 | D:10     | Killed an unseen horror
+ 10000 | D:11     | Noticed a five-headed hydra
+ 10008 | D:11     | Killed a five-headed hydra
+ 10048 | D:11     | Found Riego's Antique Armour Shop.
+ 10140 | D:11     | Noticed Erolcha
+ 10148 | D:11     | Killed Erolcha
+ 10253 | D:11     | Found a staircase to the Orcish Mines.
+ 10279 | D:11     | Reached skill level 15 in Fighting
+ 10287 | D:11     | Received a gift from Trog
+ 10338 | D:11     | Found a staircase to the Lair.
+ 10798 | D:11     | Noticed Psyche
+ 10815 | D:11     | Killed Psyche
+ 10942 | Lair:1   | Entered Level 1 of the Lair of Beasts
+ 11013 | Lair:1   | Reached XP level 12. HP: 98/119 MP: 3/11
+ 11157 | Lair:1   | Reached skill level 10 in Dodging
+ 11765 | Lair:2   | Noticed a four-headed hydra
+ 11774 | Lair:2   | Killed a four-headed hydra
+ 13047 | Lair:3   | Found a bloodstained altar of Trog.
+ 13144 | Lair:3   | Noticed Snorg
+ 13154 | Lair:3   | Killed Snorg
+ 13154 | Lair:3   | Reached skill level 15 in Armour
+ 13990 | Lair:4   | Found a staircase to the Shoals.
+ 14186 | Lair:4   | Reached XP level 13. HP: 59/130 MP: 4/12
+ 14767 | Lair:4   | Found a hole to the Spider Nest.
+ 15035 | Lair:5   | Found a runed translucent door.
+ 15035 | Lair:5   | Found a viscous altar of Jiyva.
+ 15100 | Lair:5   | Found a staircase to the Slime Pits.
+ 15723 | Lair:5   | Found a runed translucent door.
+ 16449 | Lair:6   | Entered Level 6 of the Lair of Beasts
+ 17763 | Lair:6   | Found a large runed translucent door.
+ 18051 | Lair:6   | Found the +8 longbow "Zephyr" {speed, Dex+3 SInv}
+ 18190 | Lair:6   | Noticed a fire dragon
+ 18192 | Lair:6   | Found a large runed translucent door.
+ 19058 | Lair:6   | Killed a fire dragon
+ 19328 | Orc:1    | Entered Level 1 of the Orcish Mines
+ 19328 | Orc:1    | Noticed Maurice
+ 19346 | D:11     | Killed Maurice
+ 19346 | D:11     | Reached skill level 1 in Bows
+ 19415 | Orc:1    | Reached skill level 2 in Bows
+ 19473 | Orc:1    | Found a roughly hewn altar of Beogh.
+ 19542 | Orc:2    | Entered Level 2 of the Orcish Mines
+ 19547 | Orc:2    | Reached skill level 3 in Bows
+ 19555 | Orc:2    | Noticed Nessos
+ 19561 | Orc:2    | Killed Nessos
+ 19561 | Orc:2    | Reached skill level 4 in Bows
+ 19661 | Orc:2    | Reached skill level 5 in Bows
+ 19678 | Orc:2    | Reached ****** piety under Trog
+ 19678 | Orc:2    | Received a gift from Trog
+ 19738 | Orc:2    | Found Evumuafe's Food Emporium.
+ 19853 | Orc:2    | Reached XP level 14. HP: 143/143 MP: 13/13
+ 19903 | Orc:2    | Reached skill level 6 in Bows
+ 19963 | Orc:2    | Found a staircase to the Elven Halls.
+ 20023 | Orc:2    | Found a roughly hewn altar of Beogh.
+ 20036 | Orc:2    | Found a roughly hewn altar of Beogh.
+ 20098 | Orc:2    | Found Ileon's Assorted Antiques.
+ 20464 | Orc:2    | Reached skill level 7 in Bows
+ 20481 | Orc:2    | Noticed an orc warlord
+ 20551 | Orc:1    | Killed an orc warlord
+ 20640 | Orc:1    | Reached skill level 8 in Bows
+ 20848 | Orc:2    | Received a gift from Trog
+ 20889 | Orc:2    | Found Weacsionn's Antique Armour Shoppe.
+ 20895 | Orc:2    | Found Heidet's Antique Weapon Emporium.
+ 20898 | Orc:2    | Found a roughly hewn altar of Beogh.
+ 20940 | Orc:2    | Found a roughly hewn altar of Beogh.
+ 21050 | Orc:2    | Found a roughly hewn altar of Beogh.
+ 21102 | Orc:2    | Found a roughly hewn altar of Beogh.
+ 21108 | Orc:2    | Received a gift from Trog
+ 21131 | Orc:2    | Found Macuam's Weapon Shop.
+ 21221 | Orc:2    | Bought a scroll labeled VAFRIE SAPH for 24 gold pieces
+ 21282 | Orc:2    | Bought a pair of gloves for 121 gold pieces
+ 21295 | Orc:2    | Bought a dazzling battleaxe for 322 gold pieces
+ 21295 | Orc:2    | Identified the cursed +2 battleaxe "Pise" {freeze, rElec
+                  | Str+4 Stlth+} (You bought it in a shop on level 2 of the
+                  | Orcish Mines)
+ 21482 | D:7      | Bought a potion of agility for 56 gold pieces
+ 21482 | D:7      | Bought a potion of invisibility for 112 gold pieces
+ 21482 | D:7      | Bought a potion of might for 56 gold pieces
+ 21482 | D:7      | Bought 2 potions of mutation for 224 gold pieces
+ 21742 | D:12     | Reached skill level 9 in Bows
+ 22102 | D:12     | Reached skill level 10 in Bows
+ 22225 | D:12     | Found a glowing golden altar of the Shining One.
+ 22357 | D:13     | Found a corrupted altar of Lugonu.
+ 22500 | D:13     | Received a gift from Trog
+ 22927 | D:13     | Reached skill level 11 in Bows
+ 23379 | D:13     | Identified the +7 large shield of the Mind {rF+ rCorr}
+ 23594 | D:13     | Found a gate to the Vaults.
+ 23935 | D:14     | Reached skill level 12 in Bows
+ 24230 | D:14     | Received a gift from Trog
+ 24471 | D:14     | Reached skill level 13 in Bows
+ 24835 | D:14     | Reached XP level 15. HP: 149/149 MP: 14/14
+ 25229 | D:15     | Entered Level 15 of the Dungeon
+ 25259 | D:15     | Reached skill level 14 in Bows
+ 25668 | D:15     | Received a gift from Trog
+ 26006 | D:15     | Reached skill level 15 in Bows
+ 26395 | D:15     | Found a staircase to the Depths.
+ 26687 | Spider:1 | Entered Level 1 of the Spider Nest
+ 26964 | Spider:1 | Reached skill level 16 in Bows
+ 27442 | Spider:2 | Received a gift from Trog
+ 27656 | Spider:2 | Reached skill level 17 in Bows
+ 27929 | Spider:2 | Received a gift from Trog
+ 28490 | Spider:3 | Reached XP level 16. HP: 157/157 MP: 15/15
+ 28703 | Spider:3 | Noticed Jorgrun
+ 28711 | Spider:3 | Killed Jorgrun
+ 28711 | Spider:3 | Reached skill level 18 in Bows
+ 28935 | Spider:4 | Entered Level 4 of the Spider Nest
+ 29674 | Spider:4 | Received a gift from Trog
+ 29691 | Spider:4 | Reached skill level 19 in Bows
+ 29783 | Spider:4 | Noticed Arachne
+ 29808 | Spider:4 | Killed Arachne
+ 30466 | Spider:4 | Reached skill level 20 in Bows
+ 30923 | Spider:4 | Got a gossamer rune of Zot
+ 31335 | Spider:4 | Reached XP level 17. HP: 163/163 MP: 16/16
+ 31737 | Shoals:1 | Entered Level 1 of the Shoals
+ 31954 | Shoals:1 | Received a gift from Trog
+ 32332 | Shoals:2 | Noticed Ilsuiw
+ 32791 | Shoals:2 | Received a gift from Trog
+ 33053 | Shoals:2 | Killed Ilsuiw
+ 33960 | Shoals:3 | Reached skill level 15 in Dodging
+ 34217 | Shoals:3 | Received a gift from Trog
+ 34608 | Shoals:4 | Entered Level 4 of the Shoals
+ 34723 | Shoals:4 | Found a runed translucent gate.
+ 34723 | Shoals:4 | Found a runed translucent gate.
+ 34723 | Shoals:4 | Found a runed translucent gate.
+ 34744 | Shoals:4 | Noticed Pwnan's ghost (journeyman HOFi)
+ 34930 | Shoals:4 | Identified Ohyipoto's Volume of Enchantment
+
+Skill      XL: |  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 |
+---------------+----------------------------------------------------+-----
+Fighting       |  4  5  6  7        8 10 12 14 15 16 18             | 18.0
+Dodging        |              3     4     5  8  9 12          13 15 | 15.9
+Armour         |              3  6  7  9 11 12 14 15 16          18 | 18.0
+Bows           |                                      5 13 17 20    | 20.0
+Long Blades    |                                                    |  3.6
+
+Action                   |  1- 3 |  4- 6 |  7- 9 | 10-12 | 13-15 | 16-18 || total
+-------------------------+-------+-------+-------+-------+-------+-------++-------
+Melee: Short sword       |    77 |    98 |   195 |   225 |    11 |       ||   606
+       Headbutt          |    17 |    21 |    44 |   134 |    78 |     1 ||   295
+       Falchion          |     4 |       |       |     9 |       |       ||    13
+       Triple sword      |       |       |       |   198 |   242 |     4 ||   444
+ Fire: Hunting sling     |       |    66 |    31 |   142 |    57 |       ||   296
+       Shortbow          |       |       |    79 |    30 |       |       ||   109
+       Longbow           |       |       |       |       |  1169 |  1153 ||  2322
+Throw: Stone             |    51 |    66 |       |     1 |     5 |       ||   123
+Invok: Berserk           |     2 |     4 |     8 |    17 |     4 |       ||    35
+       Trog's Hand       |       |       |     3 |     7 |     2 |     3 ||    15
+       Brothers in Arms  |       |       |       |     3 |       |       ||     3
+  Use: Scroll            |     5 |     3 |     4 |    10 |    15 |     6 ||    43
+       Potion            |       |       |       |       |     1 |       ||     1
+  Eat: Chunk             |     3 |    11 |    19 |    33 |    42 |    21 ||   129
+       Ration            |       |       |       |     3 |     2 |       ||     5
+Armor: Animal skin       |    12 |       |       |       |       |       ||    12
+       Leather armour    |    11 |     6 |       |       |       |       ||    17
+       Plate armour      |       |    25 |   151 |   448 |   418 |   284 ||  1326
+Dodge: Dodged            |    52 |    38 |    81 |   457 |   564 |   324 ||  1516
+Rpst.: Falchion          |     1 |       |       |     4 |       |       ||     5
+       Triple sword      |       |       |       |   107 |    59 |       ||   166
+g

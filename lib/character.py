@@ -47,6 +47,18 @@ class Character:
 
     # ========================================================================================
 
+    def spells_above(self, level):
+        # What spells does Morgue Parse introduce
+        spells = self.morgue_parser.spells()
+
+        # for each spell
+        # is it above
+        import pdb
+
+        pdb.set_trace()
+
+    # ========================================================================================
+
     def non_saved_morgue_file(self):
         if self.local_mode:
             morgue = open(self.morgue_filepath).read()

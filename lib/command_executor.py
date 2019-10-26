@@ -17,9 +17,14 @@ def process_event(event):
     character = Character(name=character_name)
     formatter = Formatter(character)
     arg1 = event.get("arg1", None)
+    arg2 = event.get("arg2", None)
 
     if command == "!fetch":
         morgue_saver(character, character.non_saved_morgue_file())
+    elif command == "!spells":
+        if arg1 == "level":
+            character.spells_above(arg2)
+            # Hey you want to know the spells above X for Character
     elif command == "!save_morgue":
         save_morgue(character)
     elif command == "!clean_morgue":
@@ -32,6 +37,8 @@ def process_event(event):
     elif arg1:
         call_command_with_arg(formatter, command, arg1)
     else:
+        # !spells artmatt level 4
+        # 4 and up
         call_command(formatter, command, character_name)
 
 

@@ -42,7 +42,6 @@ from lib.character import Character
         ),
     ],
 )
-@pytest.mark.focus
 def test_creating_new_weapon(raw_weapon, name, enchantment, weapon_type):
     character = Character(name="beginbot")
     weapon = WeaponFactory.new(character, raw_weapon)

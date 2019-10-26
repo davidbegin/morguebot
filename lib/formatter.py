@@ -2,6 +2,7 @@ import boto3
 import os
 import re
 import time
+
 from lib.morgue_parser import fetch_overview
 from lib.morgue_parser import fetch_mutations
 from lib.morgue_parser import fetch_jewellery
@@ -10,9 +11,12 @@ from lib.morgue_parser import fetch_potions
 from lib.morgue_parser import fetch_weapons
 from lib.morgue_parser import fetch_armour
 from lib.morgue_parser import fetch_skills
-from lib.morgue_parser import fetch_spells
 from lib.morgue_parser import fetch_altars
 from lib.morgue_parser import fetch_weapon
+
+from lib.the_real_morgue_parser import MorgueParser
+
+
 from lib.character import Character
 
 from lib.weapons_formatter import WeaponsFormatter
@@ -83,7 +87,8 @@ class Formatter:
             ]
 
     def print_spells(self):
-        raw_spells = fetch_spells(self.character.morgue_file())
+        morgue_parser = MorgueParser(self.character.morgue_file())
+        raw_spells = morgue_parser.spells()
         spells = [spell for spell in raw_spells if (len(spell.split()) >= 5)]
         formatted_spells = []
         for spell in spells:
