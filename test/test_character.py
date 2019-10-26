@@ -21,3 +21,19 @@ def test_spells():
     spells = character.spells()
     assert type(spells[0]) == Spell
     # This should return Spell objects
+
+
+@pytest.mark.focus
+def test_spells_above():
+    character = Character(name="GucciMane", local_mode=True)
+    spells = character.spells_above(4)
+    expected_spells = [
+        "Poison Arrow Conj/Pois #######... 1% 6.0 None",
+        "Throw Icicle Conj/Ice ######.. 1% 4.0 None",
+        "Yara's Violent Unravell Hex/Tmut ######.... 4% 5.0 None",
+        "Invisibility Hex ######.. 14% 6.0 None",
+        "Metabolic Englaciation Hex/Ice ######.... 17% 5.0 None",
+        "Alistair's Intoxication Tmut/Pois #####... 24% 5.0 None",
+        "Petrify Tmut/Erth ####.... 38% 4.0 None",
+    ]
+    assert spells == expected_spells

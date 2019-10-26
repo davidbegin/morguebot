@@ -37,14 +37,13 @@ class Character:
 
         # This upsets me past begin, what were you thinking?
         self.local_mode = local_mode
-        self._find_name_and_morguefile()
+        self._find_morguefile()
+        self._find_name()
 
         self.key = f"{name}/morguefile.txt"
 
         self.weapons = fetch_weapons(self.non_saved_morgue_file())
         self.morgue_parser = MorgueParser(self.non_saved_morgue_file())
-
-    # ========================================================================================
 
     def __str__(self):
         return self.name
@@ -60,18 +59,34 @@ class Character:
     def spells_above(self, level):
         print(f"Spells Above!: {level}")
         return [
-            spell.overview for spell in self.spells() if spell.level >= float(level)
+            spell.overview() for spell in self.spells() if spell.level >= float(level)
         ]
 
     # ========================================================================================
 
-    def non_saved_morgue_file(self):
+    def morgue_file(self):
         if self.local_mode:
             morgue = open(self.morgue_filepath).read()
+        elif BUCKET and self.key:
+            morgue = self.s3_morgue_file()
+            if morgue is None:
+                morgue = self.fetch_online_morgue()
         else:
-            morgue = self._fetch_online_morgue()
+            morgue = self.fetch_online_morgue()
+
+        # How do we stop running this when in pytest mode
+        if False:
+            morgue_saver(self, morgue)
+
         return morgue
 
+    def non_saved_morgue_file(self):
+        if self.local_mode:
+            return open(self.morgue_filepath).read()
+        else:
+            return self.fetch_online_morgue()
+
+    # We want to Mock this
     def s3_morgue_file(self):
         try:
             client = boto3.client("s3")
@@ -81,32 +96,25 @@ class Character:
             print(f"Error fetching morguefile: {BUCKET} {self.key}")
             return None
 
-    def morgue_file(self):
-        if self.local_mode:
-            morgue = open(self.morgue_filepath).read()
-        elif BUCKET and self.key:
-            morgue = self.s3_morgue_file()
-            if morgue is None:
-                morgue = self._fetch_online_morgue()
-                morgue_saver(self, morgue)
+    # We want to Mock this
+    def fetch_online_morgue(self):
+        response = requests.get(self.morgue_url)
+        if response.status_code == 200:
+            return response.text
         else:
-            morgue = self._fetch_online_morgue()
-        self.seed = fetch_seed(morgue)
-        self.turns = fetch_turns(morgue)
-
-        return morgue
-
-    # We need a website morgue method
+            pass
+            # We only want to print tihs in some cases
+            # print(
+            #     f"\033[031;1mCould not find the Character at {self.morgue_url}\033[0m"
+            # )
 
     # ========================================================================================
 
-    def _find_name_and_morguefile(self):
-        if self.local_mode:
-            if self.morgue_filepath is None:
-                self.morgue_filepath = self._find_morgue_filepath()
+    def _find_morguefile(self):
+        if self.local_mode and self.morgue_filepath is None:
+            self.morgue_filepath = self._find_morgue_filepath()
         else:
             self.morgue_url = self._find_morgue_url()
-        self._find_name()
 
     def _find_name(self):
         if self.name:
@@ -124,12 +132,3 @@ class Character:
 
     def _find_morgue_filepath(self):
         return f"{find_morgue_folder()}/{self.name}.txt"
-
-    def _fetch_online_morgue(self):
-        response = requests.get(self.morgue_url)
-        if response.status_code == 200:
-            return response.text
-        else:
-            print(
-                f"\033[031;1mCould not find the Character at {self.morgue_url}\033[0m"
-            )

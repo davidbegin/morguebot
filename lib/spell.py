@@ -11,4 +11,4 @@ class Spell:
         return self.level >= desired_level
 
     def overview(self):
-        return f"{self.name} {spell_type} {self.power} {self.failure} {self.level} {self.hunger}"
+        return f"{self.name} {self.spell_type} {self.power} {self.failure} {self.level} {self.hunger}"

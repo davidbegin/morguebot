@@ -13,4 +13,6 @@ def process_s3_events(event):
 def process_s3_event(event):
     character = event["s3"]["object"]["key"].split("/")[0]
     save_a_buncha_info(character)
-    send_morguefile_notification(character)
+
+    # How do we stop this in certain scenarios
+    # send_morguefile_notification(character)
