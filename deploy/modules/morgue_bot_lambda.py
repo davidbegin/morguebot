@@ -1,6 +1,6 @@
 import json
 
-from pulumi_aws import iam, lambda_
+from pulumi_aws import iam, lambda_, s3
 import pulumi
 from pulumi import Output
 
@@ -90,4 +90,13 @@ lambda_.Permission(
     function=aws_lambda.arn,
     principal="s3.amazonaws.com",
     source_arn=bucket.arn,
+)
+
+
+s3.BucketNotification(
+    f"{MODULE_NAME}-new-morgue-files",
+    bucket=bucket.id,
+    lambda_functions=[
+        {"events": ["s3:ObjectCreated:*"], "lambda_function_arn": aws_lambda.arn}
+    ],
 )

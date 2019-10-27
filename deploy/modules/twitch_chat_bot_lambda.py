@@ -82,7 +82,7 @@ aws_lambda = lambda_.Function(
 )
 
 lambda_.EventSourceMapping(
-    f"{MODULE_NAME}-kinesis-esm",
+    f"{MODULE_NAME}-kinesis-very-cool-esm",
     event_source_arn=chat_stream.arn,
     function_name=aws_lambda.name,
     starting_position="LATEST",

@@ -4,6 +4,7 @@ from modules.s3 import bucket
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
 from pulumi_aws import iam, lambda_
+from pulumi_aws import cloudwatch
 
 config = pulumi.Config()
 
@@ -59,9 +60,20 @@ aws_lambda = lambda_.Function(
     environment={"variables": {"MORGUE_BUCKETNAME": bucket.id}},
 )
 
+event_rule = cloudwatch.EventRule(
+    f"{MODULE_NAME}-event-rule",
+    name=f"{MODULE_NAME}-very-cool-every-minute",
+    schedule_expression="rate(10 minutes)",
+)
+
+event_target = cloudwatch.EventTarget(
+    f"{MODULE_NAME}-event-target", arn=aws_lambda.arn, rule=event_rule.name
+)
+
 lambda_.Permission(
     "AllowInvocationFromCloudWatch",
     action="lambda:InvokeFunction",
     function=aws_lambda.arn,
     principal="events.amazonaws.com",
+    source_arn=event_rule.arn,
 )

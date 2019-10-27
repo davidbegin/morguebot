@@ -6,8 +6,6 @@ bucket = s3.Bucket("morgue-files")
 
 
 def allow_s3_bucket_access(s3_bucket, roles, lamda_function_arn):
-    # s3.BucketNotification("new-morgue-file", bucket=s3_bucket.arn, lambda_functions=[lamda_function_arn])
-
     role_arns = [role.arn for role in roles]
 
     bucket_policy = Output.all(s3_bucket.arn, role_arns).apply(
@@ -17,12 +15,19 @@ def allow_s3_bucket_access(s3_bucket, roles, lamda_function_arn):
                 "Id": "MorgueFileBucketPolicy",
                 "Statement": [
                     {
-                        "Sid": "Allow",
+                        "Sid": "AllowThingsInTheBucket",
                         "Effect": "Allow",
                         "Principal": {"AWS": args[1]},
                         "Action": "s3:*",
                         "Resource": f"{args[0]}/*",
-                    }
+                    },
+                    {
+                        "Sid": "AllowTheBucket",
+                        "Effect": "Allow",
+                        "Principal": {"AWS": args[1]},
+                        "Action": "s3:*",
+                        "Resource": f"{args[0]}",
+                    },
                 ],
             }
         )
