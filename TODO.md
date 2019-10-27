@@ -3,14 +3,11 @@ TOP TODO:
   - Parse each of the Message Types in the Log Watching
   - Clean Up the Main Bot Code
   - Start Using the God Bot Properly
-  - Compare Files before saving in s3
-  - Fix Tests and Add Many More
   - Figure out a cool plan for color library
   - Build a system for banning users from calling commands
   - Update the README
   - Every file having some decent tests
   - Make Installable and all nice and python like
-  - Add some code coverage
   - Hey now, since its open source, why don't you use some of those cool
     free open source tools like Travis, for cool patches
   - Report no weapons when calling max damage and no weapons
@@ -31,7 +28,6 @@ Deployment TODO:
 Dungeon Crawl Specific Features:
 ================================
   - Add a system for calculating your max resistances
-  - Add a system for calculating max weapon amounts
   - Make the bot Celebrate Level upgrades
   - Add auto dumping RC with Lua for Local Games
   - Figure Out Way to grab a random character from the Crawl Server
