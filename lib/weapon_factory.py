@@ -75,8 +75,7 @@ class WeaponFactory:
                 weapon_name = "quarterstaff"
             elif "captain's cutlass" in rest_of_the_weapon:
                 weapon_name = "rapier"
-            elif "spriggan's knife":
+            elif "spriggan's knife" in rest_of_the_weapon:
                 weapon_name = "dagger"
-
 
         return weapon_name

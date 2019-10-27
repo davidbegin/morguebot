@@ -7,14 +7,15 @@ from lib.character import Character
 def test_weapon():
     full_name = "the +9 sword of Zonguldrok (weapon) {reap}"
     name = "long sword"
+
     enchantment = 9
-    character = Character(name="artmatt")
+    character = Character(morgue_filepath="support/GucciMane.txt")
 
     subject = Weapon(
         full_name=full_name, name=name, enchantment=enchantment, character=character
     )
 
-    assert subject.max_damage() == 31.38
+    assert subject.max_damage() == 39.07
 
 
 def test_initializing_an_invalid_weapon_type():
