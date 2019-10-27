@@ -21,8 +21,6 @@ def rune_awards():
     char_runes = [char["runes"] for char in rune_info]
     all_runes = [item for sublist in char_runes for item in sublist]
 
-    # Sort an a List, by the entries
-
     rune_counter = {}
     for rune in all_runes:
         if rune in rune_counter:
@@ -37,15 +35,17 @@ def rune_awards():
     sorted_runes = sorted(sorted_runes, key=lambda k: k["count"])
     sorted_runes.reverse()
 
-    send_chat_to_stream(f"BibleThump Top 5 Least Rare Runes BibleThump")
-    for rune in sorted_runes[0:5]:
-        print(rune)
-        send_chat_to_stream(f"{rune['name']} - Count: {rune['count']}")
-
-    # send_chat_to_stream(f"DxCat Top 5 Rarest Runes DxCat")
+    # send_chat_to_stream(f"BibleThump Top 5 Least Rare Runes BibleThump")
     # for rune in sorted_runes[0:5]:
     #     print(rune)
     #     send_chat_to_stream(f"{rune['name']} - Count: {rune['count']}")
+
+    send_chat_to_stream(f"DxCat Top 5 Rarest Runes DxCat")
+    sorted_runes.reverse()
+    runes = sorted_runes[0:5]
+    for rune in runes:
+        print(rune)
+        send_chat_to_stream(f"{rune['name']} - Count: {rune['count']}")
 
 
 def old_rune_awards():
@@ -59,6 +59,7 @@ def old_rune_awards():
 
 def _top_5_rune_holders():
     runes = _fetch_all_runes()
+    runes.reverse()
     return runes[0:5]
 
 

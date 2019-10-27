@@ -8,7 +8,7 @@ from lib.morgue_parser import fetch_weapons
 
 
 def find_the_max_damage_for_all_characters():
-    characters = fetch_characters()
+    characters = set(fetch_characters())
 
     most_powerful_weapon = {"max_damage": 0}
 

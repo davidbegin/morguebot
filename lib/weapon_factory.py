@@ -65,5 +65,18 @@ class WeaponFactory:
                 weapon_name = "battleaxe"
             elif "heavy crossbow" in rest_of_the_weapon:
                 weapon_name = "arbalest"
+            elif "mithril axe" in rest_of_the_weapon:
+                weapon_name = "broad axe"
+            elif "arc blade" in rest_of_the_weapon:
+                weapon_name = "rapier"
+            elif "dark maul" in rest_of_the_weapon:
+                weapon_name = "great mace"
+            elif "majin-bo" in rest_of_the_weapon:
+                weapon_name = "quarterstaff"
+            elif "captain's cutlass" in rest_of_the_weapon:
+                weapon_name = "rapier"
+            elif "spriggan's knife":
+                weapon_name = "dagger"
+
 
         return weapon_name
