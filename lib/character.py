@@ -51,6 +51,10 @@ class Character:
 
     # ========================================================================================
 
+    def overview(self):
+        morgue_parser = MorgueParser(self.non_saved_morgue_file())
+        return morgue_parser.overview()
+
     def spells(self):
         return [SpellFactory(spell).new() for spell in self.morgue_parser.spells()]
 

@@ -182,9 +182,9 @@ if __name__ == "__main__":
 		"/aws/lambda/morgue-stalker-341e60e",
 		"/aws/lambda/morgue-bot-2fc463f",
                 "/aws/lambda/god-bot-62a15fe",
+                '/aws/lambda/xl-bot-00f604b',
 		"/aws/lambda/twitch-chat-bot-82104fd",
                 # '/aws/lambda/weapons-bot-b08077f',
-                # '/aws/lambda/xl-bot-00f604b'
             ]
 
             first_log_group, *other_log_groups = log_group_names

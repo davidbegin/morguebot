@@ -5,12 +5,11 @@ from lib.character import Character
 from lib.formatter import Formatter
 from lib.kinesis import send_chat_to_stream
 from lib.morgue_saver import morgue_saver
-
 from lib.config import find_character_name
-
 from lib.weapon_awards import find_the_max_damage_for_all_characters
-
+from lib.rune_awards import rune_awards
 from lib.the_real_morgue_parser import MorgueParser
+from lib.rune_fetcher import RuneFetcher
 
 
 def process_event(event):
@@ -23,7 +22,12 @@ def process_event(event):
 
     if command == "!fetch":
         morgue_saver(character, character.non_saved_morgue_file())
-
+    elif command == "!fetch_runes":
+        RuneFetcher().fetch()
+    elif command == "!fetch_s3_morgue":
+        print(f"We are fetching the S3 Morgue for {character.name}")
+        with open(f"tmp/s3_{character.name}.txt", "w") as f:
+            f.write(character.s3_morgue_file())
     elif command == "!spells":
         print("We about to print some spells")
 
@@ -43,6 +47,8 @@ def process_event(event):
         save_morgue(character)
     elif command == "!clean_morgue":
         clean_the_morgue()
+    elif command == "!rune_awards":
+        rune_awards()
     elif command == "!weapon_awards":
         find_the_max_damage_for_all_characters()
     elif command == "!search":

@@ -8,4 +8,6 @@ dynamodb_table = dynamodb.Table(
     read_capacity=5,
     write_capacity=5,
     attributes=[{"name": "character", "type": "S"}],
+    stream_enabled=True,
+    stream_view_type="NEW_AND_OLD_IMAGES",
 )

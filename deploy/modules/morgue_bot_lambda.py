@@ -60,14 +60,17 @@ iam.RolePolicyAttachment(
 
 iam.RolePolicy(f"{MODULE_NAME}-lambda-role-policy", role=role.id, policy=policy)
 
-
-lambda_variables = {
-    "CHARACTER_DB": dynamodb_table.name,
-    "TOPIC_ARN": sns_topic.arn,
-    "MORGUE_BUCKETNAME": bucket.id,
-    "CHAT_STREAM_ARN": chat_stream.arn,
-    "CHAT_STREAM_NAME": chat_stream.name,
-}
+lambda_variables = Output.all(
+    dynamodb_table.name, bucket.id, chat_stream.arn, chat_stream.name, sns_topic.arn
+).apply(
+    lambda args: {
+        "CHARACTER_DB": args[0],
+        "MORGUE_BUCKETNAME": args[1],
+        "CHAT_STREAM_ARN": args[2],
+        "CHAT_STREAM_NAME": args[3],
+        "TOPIC_ARN": args[4],
+    }
+)
 
 aws_lambda = lambda_.Function(
     f"{MODULE_NAME}",
@@ -86,5 +89,5 @@ lambda_.Permission(
     action="lambda:InvokeFunction",
     function=aws_lambda.arn,
     principal="s3.amazonaws.com",
-    source_arn="arn:aws:s3:::morgue-files-2944dfb",
+    source_arn=bucket.arn,
 )

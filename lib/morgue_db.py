@@ -7,6 +7,8 @@ from lib.morgue_parser import fetch_weapons
 from lib.morgue_parser import fetch_altars
 from lib.morgue_parser import fetch_armour
 
+from lib.the_real_morgue_parser import MorgueParser
+
 
 TABLE_NAME = os.environ.get("CHARACTER_DB", "characters-696d3eb")
 
@@ -21,25 +23,32 @@ def fetch_and_save_weapons(character_name, morguefile):
 
 
 def save_a_buncha_info(character_name):
+    character = Character(name=character_name)
+    morgue_db = MorgueDB(character_name)
+    morgue_file = character.s3_morgue_file()
+    morgue_parser = MorgueParser(morgue_file)
     try:
-        print(f"WE inside save_a_buncha_info: {character_name}")
-        character = Character(name=character_name)
-        morgue_db = MorgueDB(character_name)
-        morgue_file = character.morgue_file()
+        runes = morgue_parser.runes()
+        if runes:
+            nice_runes = [rune.strip() for rune in runes.split(",")]
+            morgue_db.save_stuff("SS", "runes", nice_runes)
 
         xl_level = fetch_xl_level(morgue_file)
-        morgue_db.save_stuff("S", "xl_xl", xl_level.strip())
+        if xl_level:
+            morgue_db.save_stuff("S", "xl", xl_level.strip())
 
         weapons = fetch_weapons(morgue_file)
-        morgue_db.save_stuff("SS", "weapons", weapons)
+        if weapons:
+            morgue_db.save_stuff("SS", "weapons", weapons)
 
         # gods = fetch_altars(morgue_file)
         # morgue_db.save_stuff("SS", "gods", gods)
 
         armour = fetch_armour(morgue_file)
-        morgue_db.save_stuff("SS", "armour", armour)
+        if armour:
+            morgue_db.save_stuff("SS", "armour", armour)
     except Exception as e:
-        print(f"Error in save_a_buncha_info: {e}")
+        print(f"Error in save_a_buncha_info by we are ok: {e}")
 
 
 class MorgueDB:

@@ -1,9 +1,14 @@
 import pulumi
+from pulumi import Output
 import json
+from modules.sqs import xl_upgrades_queue
 from modules.s3 import bucket
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
 from pulumi_aws import iam, lambda_
+
+from modules.kinesis import chat_stream
+from modules.dynamodb import dynamodb_table
 
 config = pulumi.Config()
 
@@ -14,19 +19,42 @@ role = iam.Role(
     assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY),
 )
 
-
-def policy(bucket_arn):
-    return json.dumps({"Version": "2012-10-17", "Statement": [CREATE_CW_LOGS_POLICY]})
-
-
-iam.RolePolicy(
-    f"{MODULE_NAME}-lambda-policy", role=role.id, policy=bucket.arn.apply(policy)
+policy = Output.all(bucket.arn, xl_upgrades_queue.arn, chat_stream.arn).apply(
+    lambda args: json.dumps(
+        {
+            "Version": "2012-10-17",
+            "Id": f"{MODULE_NAME}-policy",
+            "Statement": [
+                CREATE_CW_LOGS_POLICY,
+                {"Effect": "Allow", "Action": ["s3:PutObject"], "Resource": args[0]},
+                {"Effect": "Allow", "Action": ["sqs:*"], "Resource": args[1]},
+                {
+                    "Effect": "Allow",
+                    "Action": ["kinesis:PutRecord"],
+                    "Resource": args[2],
+                },
+            ],
+        }
+    )
 )
+
+iam.RolePolicy(f"{MODULE_NAME}-lambda-policy", role=role.id, policy=policy)
 
 iam.RolePolicyAttachment(
     f"{MODULE_NAME}-xray",
     policy_arn="arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
     role=role.id,
+)
+
+lambda_variables = Output.all(
+    dynamodb_table.name, bucket.id, chat_stream.arn, chat_stream.name
+).apply(
+    lambda args: {
+        "CHARACTER_DB": args[0],
+        "MORGUE_BUCKETNAME": args[1],
+        "CHAT_STREAM_ARN": args[2],
+        "CHAT_STREAM_NAME": args[3],
+    }
 )
 
 aws_lambda = lambda_.Function(
@@ -38,5 +66,19 @@ aws_lambda = lambda_.Function(
     tracing_config={"mode": "Active"},
     s3_bucket="morgue-artifacts",
     timeout=200,
-    environment={"variables": {"MORGUE_BUCKETNAME": bucket.id}},
+    environment={"variables": lambda_variables},
+)
+
+lambda_.EventSourceMapping(
+    f"{MODULE_NAME}-sqs-esm",
+    event_source_arn=xl_upgrades_queue.arn,
+    function_name=aws_lambda.name,
+)
+
+lambda_.Permission(
+    "AllowInvocationFromSQSQueue",
+    action="lambda:InvokeFunction",
+    function=aws_lambda.arn,
+    principal="sqs.amazonaws.com",
+    source_arn=xl_upgrades_queue.arn,
 )

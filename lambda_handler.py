@@ -42,4 +42,5 @@ def god_bot(event, context):
 
 
 def xl_bot(event, handler):
-    print("I'm xl_bot!")
+    print(json.dumps(event))
+    monitor_the_gods(event)

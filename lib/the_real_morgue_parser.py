@@ -25,6 +25,15 @@ class MorgueParser:
         end_index = split_morgue_file.index(y) - 2
         return [spell.lstrip() for spell in split_morgue_file[start_index:end_index]]
 
+        # return "13/15 runes: decaying, serpentine, slimy, silver, golden, iron, obsidian, icy, bone, abyssal, demonic, glowing, fiery"
+
+    def runes(self):
+        rune_regex = "(\d+\/\d+) runes: (.*(\n.*)?)\na:\s+"
+
+        m = re.search(rune_regex, self.morgue_file)
+        if m:
+            return m.group(2).strip()
+
     # ========================================================================================
 
     def fetch_user_stats(self):

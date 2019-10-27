@@ -57,3 +57,21 @@ def test_overview():
     overview = morgue_parser.overview()
     expected_overview = "Fa the Merry Centaur (Centaur Hunter)  XL:      27  Health:  243/243      Location: Pandemonium."
     assert overview == expected_overview
+
+
+@pytest.mark.focus
+@pytest.mark.parametrize(
+    "character_name,expected_runes",
+    [
+        (
+            "artmatt",
+            "decaying, serpentine, slimy, silver, golden, iron, obsidian,\nicy, bone, abyssal, demonic, glowing, fiery",
+        ),
+        ("sunspire", "serpentine, barnacled, silver"),
+        ("GucciMane", None),
+    ],
+)
+def test_runes(character_name, expected_runes):
+    morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())
+    runes = morgue_parser.runes()
+    assert runes == expected_runes

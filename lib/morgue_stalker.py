@@ -78,13 +78,9 @@ def stalk(event):
         morgue_keys = filter_out_morgue_keys(s3_objects)
         characters_to_stalk = sanitize_them_keys(morgue_keys)
 
-        max_damages = [
-            max_damage(Character(name=character_name).morgue_file())
-            for character_name in characters_to_stalk
-        ]
-        x = max_damages
-        # character = Character(name=character_name)
-        # morgue_saver(character, character.non_saved_morgue_file())
+        for character_name in characters_to_stalk:
+            character = Character(name=character_name)
+            morgue_saver(character, character.non_saved_morgue_file())
 
 
 # ========================================================================================
