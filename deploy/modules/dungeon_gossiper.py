@@ -27,7 +27,7 @@ policy = Output.all(dynamodb_table.arn, dynamodb_table.stream_arn, sns_topic.arn
                 CREATE_CW_LOGS_POLICY,
                 {"Effect": "Allow", "Action": ["dynamodb:*"], "Resource": args[0]},
                 {"Effect": "Allow", "Action": ["dynamodb:*"], "Resource": args[1]},
-                {"Effect": "Allow", "Action": ["sns:Publish"], "Resource": args[1]},
+                {"Effect": "Allow", "Action": ["sns:Publish"], "Resource": args[2]},
             ],
         }
     )

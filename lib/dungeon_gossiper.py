@@ -5,6 +5,8 @@ UNRANDS = [
     # "ring of the Mage {Wiz MR++ Int+3}",
     "the +12 Vampire's Tooth {vamp}",
     "+14 obsidian axe {chop, +Fly SInv *Curse}",
+    # This is right
+    "the cursed +14 obsidian axe {chop, +Fly SInv *Curse}",
 ]
 
 
@@ -13,8 +15,11 @@ def process_dynamodb_records(event):
         gossiper = DungeonGossiper(record)
         new_unrands = gossiper.new_unrands()
         if new_unrands:
+            print(f"PRINT WE FOUND NEW UNRAND {new_unrands}")
             for unrand in new_unrands:
                 send_unrand_notification(gossiper.character, unrand)
+        else:
+            print("PRINT WE FOUND NO NEW UNRAND")
 
 
 class DungeonGossiper:

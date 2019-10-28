@@ -21,7 +21,7 @@ def process_event(event):
     arg2 = event.get("arg2", None)
 
     if command == "!fetch":
-        morgue_saver(character, character.non_saved_morgue_file())
+        morgue_saver(character, character.non_saved_morgue_file(), arg1)
     elif command == "!fetch_runes":
         RuneFetcher().fetch()
     elif command == "!fetch_s3_morgue":
