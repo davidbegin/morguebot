@@ -52,6 +52,6 @@ def monitor_character(character):
 
 
 # monitor_character("None")
-# monitor_character("artmatt")
+monitor_character("LexAckson")
 # monitor_characters()
-monitor_runes()
+# monitor_runes()

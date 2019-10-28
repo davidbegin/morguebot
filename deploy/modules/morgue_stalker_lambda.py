@@ -56,7 +56,7 @@ aws_lambda = lambda_.Function(
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
     tracing_config={"mode": "Active"},
-    timeout=200,
+    timeout=60,
     environment={"variables": {"MORGUE_BUCKETNAME": bucket.id}},
 )
 

@@ -5,7 +5,6 @@ MORGUE_BUCKETNAME = os.environ.get("MORGUE_BUCKETNAME", "morgue-files-2944dfb")
 
 
 def morgue_saver(character, morgue, refresh=False):
-
     client = boto3.client("s3")
 
     key = f"{character.name}/morguefile.txt"

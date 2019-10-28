@@ -2,14 +2,6 @@ from lib.sns import send_unrand_notification
 from lib.character import Character
 from lib.pawn_star import PawnStar
 
-UNRANDS = [
-    # "ring of the Mage {Wiz MR++ Int+3}",
-    "the +12 Vampire's Tooth {vamp}",
-    "+14 obsidian axe {chop, +Fly SInv *Curse}",
-    # This is right
-    "the cursed +14 obsidian axe {chop, +Fly SInv *Curse}",
-]
-
 
 def process_dynamodb_records(event):
     for record in event["Records"]:
@@ -30,15 +22,32 @@ class DungeonGossiper:
         name = dynamodb_record["Keys"]["character"]["S"]
         self.character = Character(name=name)
 
-    def new_weapons(self):
         dynamodb_record = self.record["dynamodb"]
+
         new_image = dynamodb_record["NewImage"]
-        new_weapons = new_image["weapons"]["SS"]
+        if "weapons" in new_image:
+            self.current_weapons = new_image["weapons"]["SS"]
+        else:
+            self.current_weapons = []
 
-        old_image = dynamodb_record["OldImage"]
-        old_weapons = old_image["weapons"]["SS"]
+        if "OldImage" in dynamodb_record:
+            old_image = dynamodb_record["OldImage"]
+            if "weapons" in old_image:
+                self.old_weapons = old_image["weapons"]["SS"]
+            else:
+                self.old_weapons = []
+        else:
+            self.old_weapons = []
 
-        return list(set(new_weapons) - set(old_weapons))
+    def new_weapons(self):
+        return list(set(self.current_weapons) - set(self.old_weapons))
 
     def new_unrands(self):
-        return [ weapon for weapon in self.new_weapons() if PawnStar(weapon).is_unrand() ]
+        # unrands = [ weapon for weapon in self.current_weapons if PawnStar(weapon).is_unrand() ]
+        unrands = [
+            weapon for weapon in self.new_weapons() if PawnStar(weapon).is_unrand()
+        ]
+        if unrands:
+            return unrands
+        else:
+            return []

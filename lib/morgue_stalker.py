@@ -36,23 +36,23 @@ def fetch_characters():
             # "Wexler",
             # "Zebrazen",
             # "ahab",
-            "artmatt",
+            # "artmatt",
             # "beginbot",
             # "candlehand",
             # "carwin",
             # "collin38",
             # "ddaybell",
-            # "deathblob",
+            "deathblob",
             # "dioxide",
             # "disciplinedyoungman",
             # "drj",
             # "emf",
-            # "enop",
+            "enop",
             # "foxor",
             # "gorper",
             # "grinrain",
             # "haverford",
-            # "ilovepuk",
+            "ilovepuk",
             # "jomj",
             # "jtro",
             # "matticus",
@@ -71,12 +71,7 @@ def stalk(event):
     if "single_character_mode" in event:
         stalk_character(event)
     else:
-        client = boto3.client("s3")
-        response = client.list_objects_v2(Bucket="morgue-files-2944dfb")
-        s3_objects = response["Contents"]
-
-        morgue_keys = filter_out_morgue_keys(s3_objects)
-        characters_to_stalk = sanitize_them_keys(morgue_keys)
+        characters_to_stalk = fetch_characters()
 
         for character_name in characters_to_stalk:
             character = Character(name=character_name)
