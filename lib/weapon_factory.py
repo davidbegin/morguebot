@@ -77,5 +77,7 @@ class WeaponFactory:
                 weapon_name = "rapier"
             elif "spriggan's knife" in rest_of_the_weapon:
                 weapon_name = "dagger"
+            elif "obsidian axe" in rest_of_the_weapon:
+                weapon_name = "broad axe"
 
         return weapon_name

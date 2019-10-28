@@ -16,6 +16,7 @@ from lib.execute_s3_command import process_s3_events
 from lib.god_bot import monitor_the_gods
 from lib.morgue_stalker import stalk
 from lib.twitch_chat_bot import send_twitch_message
+from lib.dungeon_gossiper import process_dynamodb_records
 
 
 def morgue_stalker(event, handler):
@@ -44,3 +45,8 @@ def god_bot(event, context):
 def xl_bot(event, handler):
     print(json.dumps(event))
     monitor_the_gods(event)
+
+
+def dungeon_gossiper(event, context):
+    print(json.dumps(event))
+    process_dynamodb_records(event)

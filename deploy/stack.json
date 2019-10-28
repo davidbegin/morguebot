@@ -2,7 +2,7 @@
     "version": 3,
     "deployment": {
         "manifest": {
-            "time": "2019-10-27T15:12:17.938352-07:00",
+            "time": "2019-10-27T16:29:18.995979-07:00",
             "magic": "34bd659feb530efab079c898eb496cfabe7dfa512811185f24ff115b0263ccff",
             "version": "v1.2.0"
         },
@@ -110,173 +110,6 @@
                 "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0"
             },
             {
-                "urn": "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat",
-                "custom": true,
-                "id": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
-                "type": "aws:kinesis/stream:Stream",
-                "inputs": {
-                    "__defaults": [
-                        "encryptionType",
-                        "enforceConsumerDeletion",
-                        "name",
-                        "retentionPeriod"
-                    ],
-                    "encryptionType": "NONE",
-                    "enforceConsumerDeletion": false,
-                    "name": "twitch-chat-877759c",
-                    "retentionPeriod": 24,
-                    "shardCount": 2
-                },
-                "outputs": {
-                    "__meta": "{\"schema_version\":\"1\"}",
-                    "arn": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
-                    "encryptionType": "NONE",
-                    "enforceConsumerDeletion": false,
-                    "id": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
-                    "kmsKeyId": "",
-                    "name": "twitch-chat-877759c",
-                    "retentionPeriod": 24,
-                    "shardCount": 2,
-                    "tags": {}
-                },
-                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
-                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
-                "propertyDependencies": {
-                    "shardCount": null
-                }
-            },
-            {
-                "urn": "urn:pulumi:dev::morguebot::aws:sqs/queue:Queue::new-gods-queue",
-                "custom": true,
-                "id": "https://sqs.us-west-2.amazonaws.com/851075464416/new-gods-queue-6fecb43",
-                "type": "aws:sqs/queue:Queue",
-                "inputs": {
-                    "__defaults": [
-                        "contentBasedDeduplication",
-                        "delaySeconds",
-                        "fifoQueue",
-                        "maxMessageSize",
-                        "messageRetentionSeconds",
-                        "name",
-                        "receiveWaitTimeSeconds"
-                    ],
-                    "contentBasedDeduplication": false,
-                    "delaySeconds": 0,
-                    "fifoQueue": false,
-                    "maxMessageSize": 262144,
-                    "messageRetentionSeconds": 345600,
-                    "name": "new-gods-queue-6fecb43",
-                    "receiveWaitTimeSeconds": 0,
-                    "visibilityTimeoutSeconds": 200
-                },
-                "outputs": {
-                    "arn": "arn:aws:sqs:us-west-2:851075464416:new-gods-queue-6fecb43",
-                    "contentBasedDeduplication": false,
-                    "delaySeconds": 0,
-                    "fifoQueue": false,
-                    "id": "https://sqs.us-west-2.amazonaws.com/851075464416/new-gods-queue-6fecb43",
-                    "kmsDataKeyReusePeriodSeconds": 300,
-                    "kmsMasterKeyId": "",
-                    "maxMessageSize": 262144,
-                    "messageRetentionSeconds": 345600,
-                    "name": "new-gods-queue-6fecb43",
-                    "policy": "",
-                    "receiveWaitTimeSeconds": 0,
-                    "redrivePolicy": "",
-                    "tags": {},
-                    "visibilityTimeoutSeconds": 200
-                },
-                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
-                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
-                "propertyDependencies": {
-                    "visibilityTimeoutSeconds": null
-                }
-            },
-            {
-                "urn": "urn:pulumi:dev::morguebot::aws:sqs/queue:Queue::xl-upgrades-queue",
-                "custom": true,
-                "id": "https://sqs.us-west-2.amazonaws.com/851075464416/xl-upgrades-queue-d73d0c6",
-                "type": "aws:sqs/queue:Queue",
-                "inputs": {
-                    "__defaults": [
-                        "contentBasedDeduplication",
-                        "delaySeconds",
-                        "fifoQueue",
-                        "maxMessageSize",
-                        "messageRetentionSeconds",
-                        "name",
-                        "receiveWaitTimeSeconds"
-                    ],
-                    "contentBasedDeduplication": false,
-                    "delaySeconds": 0,
-                    "fifoQueue": false,
-                    "maxMessageSize": 262144,
-                    "messageRetentionSeconds": 345600,
-                    "name": "xl-upgrades-queue-d73d0c6",
-                    "receiveWaitTimeSeconds": 0,
-                    "visibilityTimeoutSeconds": 200
-                },
-                "outputs": {
-                    "arn": "arn:aws:sqs:us-west-2:851075464416:xl-upgrades-queue-d73d0c6",
-                    "contentBasedDeduplication": false,
-                    "delaySeconds": 0,
-                    "fifoQueue": false,
-                    "id": "https://sqs.us-west-2.amazonaws.com/851075464416/xl-upgrades-queue-d73d0c6",
-                    "kmsDataKeyReusePeriodSeconds": 300,
-                    "kmsMasterKeyId": "",
-                    "maxMessageSize": 262144,
-                    "messageRetentionSeconds": 345600,
-                    "name": "xl-upgrades-queue-d73d0c6",
-                    "policy": "",
-                    "receiveWaitTimeSeconds": 0,
-                    "redrivePolicy": "",
-                    "tags": {},
-                    "visibilityTimeoutSeconds": 200
-                },
-                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
-                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
-                "propertyDependencies": {
-                    "visibilityTimeoutSeconds": null
-                }
-            },
-            {
-                "urn": "urn:pulumi:dev::morguebot::aws:iam/role:Role::god-bot-lambda-role",
-                "custom": true,
-                "id": "god-bot-lambda-role-c389b77",
-                "type": "aws:iam/role:Role",
-                "inputs": {
-                    "__defaults": [
-                        "forceDetachPolicies",
-                        "maxSessionDuration",
-                        "name",
-                        "path"
-                    ],
-                    "assumeRolePolicy": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Action\": \"sts:AssumeRole\", \"Principal\": {\"Service\": \"lambda.amazonaws.com\"}, \"Effect\": \"Allow\", \"Sid\": \"\"}]}",
-                    "forceDetachPolicies": false,
-                    "maxSessionDuration": 3600,
-                    "name": "god-bot-lambda-role-c389b77",
-                    "path": "/"
-                },
-                "outputs": {
-                    "arn": "arn:aws:iam::851075464416:role/god-bot-lambda-role-c389b77",
-                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
-                    "createDate": "2019-10-12T21:33:08Z",
-                    "description": "",
-                    "forceDetachPolicies": false,
-                    "id": "god-bot-lambda-role-c389b77",
-                    "maxSessionDuration": 3600,
-                    "name": "god-bot-lambda-role-c389b77",
-                    "path": "/",
-                    "tags": {},
-                    "uniqueId": "AROA4MKAM7TQLDLYUJFOO"
-                },
-                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
-                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
-                "propertyDependencies": {
-                    "assumeRolePolicy": null
-                }
-            },
-            {
                 "urn": "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
                 "custom": true,
                 "id": "characters-696d3eb",
@@ -343,6 +176,53 @@
                 }
             },
             {
+                "urn": "urn:pulumi:dev::morguebot::aws:sqs/queue:Queue::new-gods-queue",
+                "custom": true,
+                "id": "https://sqs.us-west-2.amazonaws.com/851075464416/new-gods-queue-6fecb43",
+                "type": "aws:sqs/queue:Queue",
+                "inputs": {
+                    "__defaults": [
+                        "contentBasedDeduplication",
+                        "delaySeconds",
+                        "fifoQueue",
+                        "maxMessageSize",
+                        "messageRetentionSeconds",
+                        "name",
+                        "receiveWaitTimeSeconds"
+                    ],
+                    "contentBasedDeduplication": false,
+                    "delaySeconds": 0,
+                    "fifoQueue": false,
+                    "maxMessageSize": 262144,
+                    "messageRetentionSeconds": 345600,
+                    "name": "new-gods-queue-6fecb43",
+                    "receiveWaitTimeSeconds": 0,
+                    "visibilityTimeoutSeconds": 200
+                },
+                "outputs": {
+                    "arn": "arn:aws:sqs:us-west-2:851075464416:new-gods-queue-6fecb43",
+                    "contentBasedDeduplication": false,
+                    "delaySeconds": 0,
+                    "fifoQueue": false,
+                    "id": "https://sqs.us-west-2.amazonaws.com/851075464416/new-gods-queue-6fecb43",
+                    "kmsDataKeyReusePeriodSeconds": 300,
+                    "kmsMasterKeyId": "",
+                    "maxMessageSize": 262144,
+                    "messageRetentionSeconds": 345600,
+                    "name": "new-gods-queue-6fecb43",
+                    "policy": "",
+                    "receiveWaitTimeSeconds": 0,
+                    "redrivePolicy": "",
+                    "tags": {},
+                    "visibilityTimeoutSeconds": 200
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "visibilityTimeoutSeconds": null
+                }
+            },
+            {
                 "urn": "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-stalker-role",
                 "custom": true,
                 "id": "morgue-stalker-role-39eb325",
@@ -377,6 +257,156 @@
                 "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
                 "propertyDependencies": {
                     "assumeRolePolicy": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat",
+                "custom": true,
+                "id": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
+                "type": "aws:kinesis/stream:Stream",
+                "inputs": {
+                    "__defaults": [
+                        "encryptionType",
+                        "enforceConsumerDeletion",
+                        "name",
+                        "retentionPeriod"
+                    ],
+                    "encryptionType": "NONE",
+                    "enforceConsumerDeletion": false,
+                    "name": "twitch-chat-877759c",
+                    "retentionPeriod": 24,
+                    "shardCount": 2
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
+                    "encryptionType": "NONE",
+                    "enforceConsumerDeletion": false,
+                    "id": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
+                    "kmsKeyId": "",
+                    "name": "twitch-chat-877759c",
+                    "retentionPeriod": 24,
+                    "shardCount": 2,
+                    "tags": {}
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "shardCount": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::morguebot::aws:iam/role:Role::god-bot-lambda-role",
+                "custom": true,
+                "id": "god-bot-lambda-role-c389b77",
+                "type": "aws:iam/role:Role",
+                "inputs": {
+                    "__defaults": [
+                        "forceDetachPolicies",
+                        "maxSessionDuration",
+                        "name",
+                        "path"
+                    ],
+                    "assumeRolePolicy": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Action\": \"sts:AssumeRole\", \"Principal\": {\"Service\": \"lambda.amazonaws.com\"}, \"Effect\": \"Allow\", \"Sid\": \"\"}]}",
+                    "forceDetachPolicies": false,
+                    "maxSessionDuration": 3600,
+                    "name": "god-bot-lambda-role-c389b77",
+                    "path": "/"
+                },
+                "outputs": {
+                    "arn": "arn:aws:iam::851075464416:role/god-bot-lambda-role-c389b77",
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "createDate": "2019-10-12T21:33:08Z",
+                    "description": "",
+                    "forceDetachPolicies": false,
+                    "id": "god-bot-lambda-role-c389b77",
+                    "maxSessionDuration": 3600,
+                    "name": "god-bot-lambda-role-c389b77",
+                    "path": "/",
+                    "tags": {},
+                    "uniqueId": "AROA4MKAM7TQLDLYUJFOO"
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "assumeRolePolicy": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::morguebot::aws:sqs/queue:Queue::xl-upgrades-queue",
+                "custom": true,
+                "id": "https://sqs.us-west-2.amazonaws.com/851075464416/xl-upgrades-queue-d73d0c6",
+                "type": "aws:sqs/queue:Queue",
+                "inputs": {
+                    "__defaults": [
+                        "contentBasedDeduplication",
+                        "delaySeconds",
+                        "fifoQueue",
+                        "maxMessageSize",
+                        "messageRetentionSeconds",
+                        "name",
+                        "receiveWaitTimeSeconds"
+                    ],
+                    "contentBasedDeduplication": false,
+                    "delaySeconds": 0,
+                    "fifoQueue": false,
+                    "maxMessageSize": 262144,
+                    "messageRetentionSeconds": 345600,
+                    "name": "xl-upgrades-queue-d73d0c6",
+                    "receiveWaitTimeSeconds": 0,
+                    "visibilityTimeoutSeconds": 200
+                },
+                "outputs": {
+                    "arn": "arn:aws:sqs:us-west-2:851075464416:xl-upgrades-queue-d73d0c6",
+                    "contentBasedDeduplication": false,
+                    "delaySeconds": 0,
+                    "fifoQueue": false,
+                    "id": "https://sqs.us-west-2.amazonaws.com/851075464416/xl-upgrades-queue-d73d0c6",
+                    "kmsDataKeyReusePeriodSeconds": 300,
+                    "kmsMasterKeyId": "",
+                    "maxMessageSize": 262144,
+                    "messageRetentionSeconds": 345600,
+                    "name": "xl-upgrades-queue-d73d0c6",
+                    "policy": "",
+                    "receiveWaitTimeSeconds": 0,
+                    "redrivePolicy": "",
+                    "tags": {},
+                    "visibilityTimeoutSeconds": 200
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "visibilityTimeoutSeconds": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::morguebot::aws:cloudwatch/eventRule:EventRule::morgue-stalker-event-rule",
+                "custom": true,
+                "id": "morgue-stalker-very-cool-every-minute",
+                "type": "aws:cloudwatch/eventRule:EventRule",
+                "inputs": {
+                    "__defaults": [
+                        "isEnabled"
+                    ],
+                    "isEnabled": true,
+                    "name": "morgue-stalker-very-cool-every-minute",
+                    "scheduleExpression": "rate(10 minutes)"
+                },
+                "outputs": {
+                    "arn": "arn:aws:events:us-west-2:851075464416:rule/morgue-stalker-very-cool-every-minute",
+                    "description": "",
+                    "id": "morgue-stalker-very-cool-every-minute",
+                    "isEnabled": true,
+                    "name": "morgue-stalker-very-cool-every-minute",
+                    "roleArn": "",
+                    "scheduleExpression": "rate(10 minutes)",
+                    "tags": {}
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "name": null,
+                    "scheduleExpression": null
                 }
             },
             {
@@ -592,165 +622,40 @@
                 }
             },
             {
-                "urn": "urn:pulumi:dev::morguebot::aws:iam/rolePolicyAttachment:RolePolicyAttachment::god-bot-xray",
+                "urn": "urn:pulumi:dev::morguebot::aws:iam/role:Role::dungeon_gossiper-lambda-role",
                 "custom": true,
-                "id": "god-bot-lambda-role-c389b77-20191016033029322400000001",
-                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
-                "inputs": {
-                    "__defaults": [],
-                    "policyArn": "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
-                    "role": "god-bot-lambda-role-c389b77"
-                },
-                "outputs": {
-                    "id": "god-bot-lambda-role-c389b77-20191016033029322400000001",
-                    "policyArn": "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
-                    "role": "god-bot-lambda-role-c389b77"
-                },
-                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
-                "dependencies": [
-                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::god-bot-lambda-role"
-                ],
-                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
-                "propertyDependencies": {
-                    "policyArn": null,
-                    "role": [
-                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::god-bot-lambda-role"
-                    ]
-                }
-            },
-            {
-                "urn": "urn:pulumi:dev::morguebot::aws:iam/rolePolicy:RolePolicy::god-bot-lambda-role-policy",
-                "custom": true,
-                "id": "god-bot-lambda-role-c389b77:god-bot-lambda-role-policy-86cd02f",
-                "type": "aws:iam/rolePolicy:RolePolicy",
+                "id": "dungeon_gossiper-lambda-role-8a066df",
+                "type": "aws:iam/role:Role",
                 "inputs": {
                     "__defaults": [
-                        "name"
-                    ],
-                    "name": "god-bot-lambda-role-policy-86cd02f",
-                    "policy": "{\"Version\": \"2012-10-17\", \"Id\": \"god-bot-policy\", \"Statement\": [{\"Effect\": \"Allow\", \"Action\": [\"logs:CreateLogGroup\", \"logs:CreateLogStream\", \"logs:PutLogEvents\"], \"Resource\": \"arn:aws:logs:*:*:*\"}, {\"Effect\": \"Allow\", \"Action\": [\"s3:PutObject\"], \"Resource\": \"arn:aws:s3:::morgue-files-2944dfb\"}, {\"Effect\": \"Allow\", \"Action\": [\"sqs:*\"], \"Resource\": \"arn:aws:sqs:us-west-2:851075464416:new-gods-queue-6fecb43\"}, {\"Effect\": \"Allow\", \"Action\": [\"kinesis:PutRecord\"], \"Resource\": \"arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c\"}]}",
-                    "role": "god-bot-lambda-role-c389b77"
-                },
-                "outputs": {
-                    "id": "god-bot-lambda-role-c389b77:god-bot-lambda-role-policy-86cd02f",
-                    "name": "god-bot-lambda-role-policy-86cd02f",
-                    "policy": "{\"Version\": \"2012-10-17\", \"Id\": \"god-bot-policy\", \"Statement\": [{\"Effect\": \"Allow\", \"Action\": [\"logs:CreateLogGroup\", \"logs:CreateLogStream\", \"logs:PutLogEvents\"], \"Resource\": \"arn:aws:logs:*:*:*\"}, {\"Effect\": \"Allow\", \"Action\": [\"s3:PutObject\"], \"Resource\": \"arn:aws:s3:::morgue-files-2944dfb\"}, {\"Effect\": \"Allow\", \"Action\": [\"sqs:*\"], \"Resource\": \"arn:aws:sqs:us-west-2:851075464416:new-gods-queue-6fecb43\"}, {\"Effect\": \"Allow\", \"Action\": [\"kinesis:PutRecord\"], \"Resource\": \"arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c\"}]}",
-                    "role": "god-bot-lambda-role-c389b77"
-                },
-                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
-                "dependencies": [
-                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::god-bot-lambda-role",
-                    "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat",
-                    "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
-                    "urn:pulumi:dev::morguebot::aws:sqs/queue:Queue::new-gods-queue"
-                ],
-                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
-                "propertyDependencies": {
-                    "policy": [
-                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
-                        "urn:pulumi:dev::morguebot::aws:sqs/queue:Queue::new-gods-queue",
-                        "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat"
-                    ],
-                    "role": [
-                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::god-bot-lambda-role"
-                    ]
-                }
-            },
-            {
-                "urn": "urn:pulumi:dev::morguebot::aws:lambda/function:Function::god-bot",
-                "custom": true,
-                "id": "god-bot-62a15fe",
-                "type": "aws:lambda/function:Function",
-                "inputs": {
-                    "__defaults": [
-                        "memorySize",
+                        "forceDetachPolicies",
+                        "maxSessionDuration",
                         "name",
-                        "publish",
-                        "reservedConcurrentExecutions"
+                        "path"
                     ],
-                    "environment": {
-                        "__defaults": [],
-                        "variables": {
-                            "CHARACTER_DB": "characters-696d3eb",
-                            "CHAT_STREAM_ARN": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
-                            "CHAT_STREAM_NAME": "twitch-chat-877759c",
-                            "MORGUE_BUCKETNAME": "morgue-files-2944dfb",
-                            "__defaults": []
-                        }
-                    },
-                    "handler": "lambda_handler.god_bot",
-                    "memorySize": 128,
-                    "name": "god-bot-62a15fe",
-                    "publish": false,
-                    "reservedConcurrentExecutions": -1,
-                    "role": "arn:aws:iam::851075464416:role/god-bot-lambda-role-c389b77",
-                    "runtime": "python3.6",
-                    "s3Bucket": "morgue-artifacts",
-                    "s3Key": "handler_1572148860.zip",
-                    "timeout": 200,
-                    "tracingConfig": {
-                        "__defaults": [],
-                        "mode": "Active"
-                    }
+                    "assumeRolePolicy": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Action\": \"sts:AssumeRole\", \"Principal\": {\"Service\": \"lambda.amazonaws.com\"}, \"Effect\": \"Allow\", \"Sid\": \"\"}]}",
+                    "forceDetachPolicies": false,
+                    "maxSessionDuration": 3600,
+                    "name": "dungeon_gossiper-lambda-role-8a066df",
+                    "path": "/"
                 },
                 "outputs": {
-                    "arn": "arn:aws:lambda:us-west-2:851075464416:function:god-bot-62a15fe",
+                    "arn": "arn:aws:iam::851075464416:role/dungeon_gossiper-lambda-role-8a066df",
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "createDate": "2019-10-27T23:17:36Z",
                     "description": "",
-                    "environment": {
-                        "variables": {
-                            "CHARACTER_DB": "characters-696d3eb",
-                            "CHAT_STREAM_ARN": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
-                            "CHAT_STREAM_NAME": "twitch-chat-877759c",
-                            "MORGUE_BUCKETNAME": "morgue-files-2944dfb"
-                        }
-                    },
-                    "handler": "lambda_handler.god_bot",
-                    "id": "god-bot-62a15fe",
-                    "invokeArn": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:851075464416:function:god-bot-62a15fe/invocations",
-                    "kmsKeyArn": "",
-                    "lastModified": "2019-10-27T04:01:31.792+0000",
-                    "layers": [],
-                    "memorySize": 128,
-                    "name": "god-bot-62a15fe",
-                    "publish": false,
-                    "qualifiedArn": "arn:aws:lambda:us-west-2:851075464416:function:god-bot-62a15fe:$LATEST",
-                    "reservedConcurrentExecutions": -1,
-                    "role": "arn:aws:iam::851075464416:role/god-bot-lambda-role-c389b77",
-                    "runtime": "python3.6",
-                    "s3Bucket": "morgue-artifacts",
-                    "s3Key": "handler_1572148860.zip",
-                    "sourceCodeHash": "kZDnre8b3q05/xRuhIU2vmHdgb5WETyiH7t2pwxzshk=",
-                    "sourceCodeSize": 14172474,
+                    "forceDetachPolicies": false,
+                    "id": "dungeon_gossiper-lambda-role-8a066df",
+                    "maxSessionDuration": 3600,
+                    "name": "dungeon_gossiper-lambda-role-8a066df",
+                    "path": "/",
                     "tags": {},
-                    "timeout": 200,
-                    "tracingConfig": {
-                        "mode": "Active"
-                    },
-                    "version": "$LATEST"
+                    "uniqueId": "AROA4MKAM7TQPIWYM47GZ"
                 },
                 "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
-                "dependencies": [
-                    "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
-                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::god-bot-lambda-role",
-                    "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat",
-                    "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files"
-                ],
                 "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
                 "propertyDependencies": {
-                    "environment": [
-                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
-                        "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
-                        "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat"
-                    ],
-                    "handler": null,
-                    "role": [
-                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::god-bot-lambda-role"
-                    ],
-                    "runtime": null,
-                    "s3Bucket": null,
-                    "s3Key": null,
-                    "timeout": null,
-                    "tracingConfig": null
+                    "assumeRolePolicy": null
                 }
             },
             {
@@ -841,7 +746,7 @@
                     "role": "arn:aws:iam::851075464416:role/morgue-stalker-role-39eb325",
                     "runtime": "python3.6",
                     "s3Bucket": "morgue-artifacts",
-                    "s3Key": "handler_1572148860.zip",
+                    "s3Key": "handler_1572217737.zip",
                     "timeout": 200,
                     "tracingConfig": {
                         "__defaults": [],
@@ -860,7 +765,7 @@
                     "id": "morgue-stalker-341e60e",
                     "invokeArn": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:851075464416:function:morgue-stalker-341e60e/invocations",
                     "kmsKeyArn": "",
-                    "lastModified": "2019-10-27T04:01:31.691+0000",
+                    "lastModified": "2019-10-27T23:09:52.321+0000",
                     "layers": [],
                     "memorySize": 128,
                     "name": "morgue-stalker-341e60e",
@@ -870,9 +775,9 @@
                     "role": "arn:aws:iam::851075464416:role/morgue-stalker-role-39eb325",
                     "runtime": "python3.6",
                     "s3Bucket": "morgue-artifacts",
-                    "s3Key": "handler_1572148860.zip",
-                    "sourceCodeHash": "kZDnre8b3q05/xRuhIU2vmHdgb5WETyiH7t2pwxzshk=",
-                    "sourceCodeSize": 14172474,
+                    "s3Key": "handler_1572217737.zip",
+                    "sourceCodeHash": "/t3FrB+nv+28N+xPfN9MLeDpK/RRIImssoCkRkGXfYs=",
+                    "sourceCodeSize": 14172753,
                     "tags": {},
                     "timeout": 200,
                     "tracingConfig": {
@@ -893,6 +798,168 @@
                     "handler": null,
                     "role": [
                         "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-stalker-role"
+                    ],
+                    "runtime": null,
+                    "s3Bucket": null,
+                    "s3Key": null,
+                    "timeout": null,
+                    "tracingConfig": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::morguebot::aws:iam/rolePolicyAttachment:RolePolicyAttachment::god-bot-xray",
+                "custom": true,
+                "id": "god-bot-lambda-role-c389b77-20191016033029322400000001",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "inputs": {
+                    "__defaults": [],
+                    "policyArn": "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+                    "role": "god-bot-lambda-role-c389b77"
+                },
+                "outputs": {
+                    "id": "god-bot-lambda-role-c389b77-20191016033029322400000001",
+                    "policyArn": "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+                    "role": "god-bot-lambda-role-c389b77"
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::god-bot-lambda-role"
+                ],
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "policyArn": null,
+                    "role": [
+                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::god-bot-lambda-role"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::morguebot::aws:iam/rolePolicy:RolePolicy::god-bot-lambda-role-policy",
+                "custom": true,
+                "id": "god-bot-lambda-role-c389b77:god-bot-lambda-role-policy-86cd02f",
+                "type": "aws:iam/rolePolicy:RolePolicy",
+                "inputs": {
+                    "__defaults": [
+                        "name"
+                    ],
+                    "name": "god-bot-lambda-role-policy-86cd02f",
+                    "policy": "{\"Version\": \"2012-10-17\", \"Id\": \"god-bot-policy\", \"Statement\": [{\"Effect\": \"Allow\", \"Action\": [\"logs:CreateLogGroup\", \"logs:CreateLogStream\", \"logs:PutLogEvents\"], \"Resource\": \"arn:aws:logs:*:*:*\"}, {\"Effect\": \"Allow\", \"Action\": [\"s3:PutObject\"], \"Resource\": \"arn:aws:s3:::morgue-files-2944dfb\"}, {\"Effect\": \"Allow\", \"Action\": [\"sqs:*\"], \"Resource\": \"arn:aws:sqs:us-west-2:851075464416:new-gods-queue-6fecb43\"}, {\"Effect\": \"Allow\", \"Action\": [\"kinesis:PutRecord\"], \"Resource\": \"arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c\"}]}",
+                    "role": "god-bot-lambda-role-c389b77"
+                },
+                "outputs": {
+                    "id": "god-bot-lambda-role-c389b77:god-bot-lambda-role-policy-86cd02f",
+                    "name": "god-bot-lambda-role-policy-86cd02f",
+                    "policy": "{\"Version\": \"2012-10-17\", \"Id\": \"god-bot-policy\", \"Statement\": [{\"Effect\": \"Allow\", \"Action\": [\"logs:CreateLogGroup\", \"logs:CreateLogStream\", \"logs:PutLogEvents\"], \"Resource\": \"arn:aws:logs:*:*:*\"}, {\"Effect\": \"Allow\", \"Action\": [\"s3:PutObject\"], \"Resource\": \"arn:aws:s3:::morgue-files-2944dfb\"}, {\"Effect\": \"Allow\", \"Action\": [\"sqs:*\"], \"Resource\": \"arn:aws:sqs:us-west-2:851075464416:new-gods-queue-6fecb43\"}, {\"Effect\": \"Allow\", \"Action\": [\"kinesis:PutRecord\"], \"Resource\": \"arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c\"}]}",
+                    "role": "god-bot-lambda-role-c389b77"
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::god-bot-lambda-role",
+                    "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat",
+                    "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
+                    "urn:pulumi:dev::morguebot::aws:sqs/queue:Queue::new-gods-queue"
+                ],
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "policy": [
+                        "urn:pulumi:dev::morguebot::aws:sqs/queue:Queue::new-gods-queue",
+                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
+                        "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat"
+                    ],
+                    "role": [
+                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::god-bot-lambda-role"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::morguebot::aws:lambda/function:Function::god-bot",
+                "custom": true,
+                "id": "god-bot-62a15fe",
+                "type": "aws:lambda/function:Function",
+                "inputs": {
+                    "__defaults": [
+                        "memorySize",
+                        "name",
+                        "publish",
+                        "reservedConcurrentExecutions"
+                    ],
+                    "environment": {
+                        "__defaults": [],
+                        "variables": {
+                            "CHARACTER_DB": "characters-696d3eb",
+                            "CHAT_STREAM_ARN": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
+                            "CHAT_STREAM_NAME": "twitch-chat-877759c",
+                            "MORGUE_BUCKETNAME": "morgue-files-2944dfb",
+                            "__defaults": []
+                        }
+                    },
+                    "handler": "lambda_handler.god_bot",
+                    "memorySize": 128,
+                    "name": "god-bot-62a15fe",
+                    "publish": false,
+                    "reservedConcurrentExecutions": -1,
+                    "role": "arn:aws:iam::851075464416:role/god-bot-lambda-role-c389b77",
+                    "runtime": "python3.6",
+                    "s3Bucket": "morgue-artifacts",
+                    "s3Key": "handler_1572217737.zip",
+                    "timeout": 200,
+                    "tracingConfig": {
+                        "__defaults": [],
+                        "mode": "Active"
+                    }
+                },
+                "outputs": {
+                    "arn": "arn:aws:lambda:us-west-2:851075464416:function:god-bot-62a15fe",
+                    "description": "",
+                    "environment": {
+                        "variables": {
+                            "CHARACTER_DB": "characters-696d3eb",
+                            "CHAT_STREAM_ARN": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
+                            "CHAT_STREAM_NAME": "twitch-chat-877759c",
+                            "MORGUE_BUCKETNAME": "morgue-files-2944dfb"
+                        }
+                    },
+                    "handler": "lambda_handler.god_bot",
+                    "id": "god-bot-62a15fe",
+                    "invokeArn": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:851075464416:function:god-bot-62a15fe/invocations",
+                    "kmsKeyArn": "",
+                    "lastModified": "2019-10-27T23:09:52.198+0000",
+                    "layers": [],
+                    "memorySize": 128,
+                    "name": "god-bot-62a15fe",
+                    "publish": false,
+                    "qualifiedArn": "arn:aws:lambda:us-west-2:851075464416:function:god-bot-62a15fe:$LATEST",
+                    "reservedConcurrentExecutions": -1,
+                    "role": "arn:aws:iam::851075464416:role/god-bot-lambda-role-c389b77",
+                    "runtime": "python3.6",
+                    "s3Bucket": "morgue-artifacts",
+                    "s3Key": "handler_1572217737.zip",
+                    "sourceCodeHash": "/t3FrB+nv+28N+xPfN9MLeDpK/RRIImssoCkRkGXfYs=",
+                    "sourceCodeSize": 14172753,
+                    "tags": {},
+                    "timeout": 200,
+                    "tracingConfig": {
+                        "mode": "Active"
+                    },
+                    "version": "$LATEST"
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
+                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::god-bot-lambda-role",
+                    "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat",
+                    "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files"
+                ],
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "environment": [
+                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
+                        "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
+                        "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat"
+                    ],
+                    "handler": null,
+                    "role": [
+                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::god-bot-lambda-role"
                     ],
                     "runtime": null,
                     "s3Bucket": null,
@@ -960,7 +1027,7 @@
                     "keyId": "arn:aws:kms:us-west-2:851075464416:key/e2296faf-7cda-4017-8bf3-5eab194976b0",
                     "plaintext": {
                         "4dabf18193072939515e22adb298388d": "1b47061264138c4ac30d75fd1eb44270",
-                        "ciphertext": "AAABACC/siQOyVOXOYvW/ZgRnRoLUVub5H4qloRxcwZPE6fROJKPf6G0daFbRTElwsGmrUoOK+MILbYt8rSq9b4tm4uMeA=="
+                        "ciphertext": "AAABANLkivkbkHRUHDCgZtwIkHeJXLr3l65yFmaW2reoalxsCWNXGy6RtxHavxXnWKWxG02biD5xt2Zn08KERKmcxqLkxA=="
                     }
                 },
                 "outputs": {
@@ -1040,9 +1107,9 @@
                 "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
                 "propertyDependencies": {
                     "policy": [
+                        "urn:pulumi:dev::morguebot::aws:kms/key:Key::twitch-chat-bot",
                         "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
-                        "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat",
-                        "urn:pulumi:dev::morguebot::aws:kms/key:Key::twitch-chat-bot"
+                        "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat"
                     ],
                     "role": [
                         "urn:pulumi:dev::morguebot::aws:iam/role:Role::twitch-chat-bot-role"
@@ -1105,8 +1172,8 @@
                 "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
                 "propertyDependencies": {
                     "policy": [
-                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
                         "urn:pulumi:dev::morguebot::aws:sqs/queue:Queue::new-gods-queue",
+                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
                         "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat"
                     ],
                     "role": [
@@ -1143,7 +1210,7 @@
                     "role": "arn:aws:iam::851075464416:role/weapons-bot-lambda-role-d5a6039",
                     "runtime": "python3.6",
                     "s3Bucket": "morgue-artifacts",
-                    "s3Key": "handler_1572148860.zip",
+                    "s3Key": "handler_1572217737.zip",
                     "timeout": 200,
                     "tracingConfig": {
                         "__defaults": [],
@@ -1164,7 +1231,7 @@
                     "id": "weapons-bot-b08077f",
                     "invokeArn": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:851075464416:function:weapons-bot-b08077f/invocations",
                     "kmsKeyArn": "",
-                    "lastModified": "2019-10-27T04:01:31.761+0000",
+                    "lastModified": "2019-10-27T23:09:52.191+0000",
                     "layers": [],
                     "memorySize": 128,
                     "name": "weapons-bot-b08077f",
@@ -1174,9 +1241,9 @@
                     "role": "arn:aws:iam::851075464416:role/weapons-bot-lambda-role-d5a6039",
                     "runtime": "python3.6",
                     "s3Bucket": "morgue-artifacts",
-                    "s3Key": "handler_1572148860.zip",
-                    "sourceCodeHash": "kZDnre8b3q05/xRuhIU2vmHdgb5WETyiH7t2pwxzshk=",
-                    "sourceCodeSize": 14172474,
+                    "s3Key": "handler_1572217737.zip",
+                    "sourceCodeHash": "/t3FrB+nv+28N+xPfN9MLeDpK/RRIImssoCkRkGXfYs=",
+                    "sourceCodeSize": 14172753,
                     "tags": {},
                     "timeout": 200,
                     "tracingConfig": {
@@ -1263,8 +1330,8 @@
                 "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
                 "propertyDependencies": {
                     "policy": [
-                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
                         "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat",
+                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
                         "urn:pulumi:dev::morguebot::aws:sqs/queue:Queue::xl-upgrades-queue"
                     ],
                     "role": [
@@ -1302,7 +1369,7 @@
                     "role": "arn:aws:iam::851075464416:role/xl-bot-lambda-role-565281b",
                     "runtime": "python3.6",
                     "s3Bucket": "morgue-artifacts",
-                    "s3Key": "handler_1572148860.zip",
+                    "s3Key": "handler_1572217737.zip",
                     "timeout": 200,
                     "tracingConfig": {
                         "__defaults": [],
@@ -1324,7 +1391,7 @@
                     "id": "xl-bot-00f604b",
                     "invokeArn": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:851075464416:function:xl-bot-00f604b/invocations",
                     "kmsKeyArn": "",
-                    "lastModified": "2019-10-27T04:01:31.972+0000",
+                    "lastModified": "2019-10-27T23:09:52.453+0000",
                     "layers": [],
                     "memorySize": 128,
                     "name": "xl-bot-00f604b",
@@ -1334,9 +1401,9 @@
                     "role": "arn:aws:iam::851075464416:role/xl-bot-lambda-role-565281b",
                     "runtime": "python3.6",
                     "s3Bucket": "morgue-artifacts",
-                    "s3Key": "handler_1572148860.zip",
-                    "sourceCodeHash": "kZDnre8b3q05/xRuhIU2vmHdgb5WETyiH7t2pwxzshk=",
-                    "sourceCodeSize": 14172474,
+                    "s3Key": "handler_1572217737.zip",
+                    "sourceCodeHash": "/t3FrB+nv+28N+xPfN9MLeDpK/RRIImssoCkRkGXfYs=",
+                    "sourceCodeSize": 14172753,
                     "tags": {},
                     "timeout": 200,
                     "tracingConfig": {
@@ -1397,6 +1464,39 @@
                 }
             },
             {
+                "urn": "urn:pulumi:dev::morguebot::aws:s3/bucketPolicy:BucketPolicy::morgue-file-bucket-policy",
+                "custom": true,
+                "id": "morgue-files-2944dfb",
+                "type": "aws:s3/bucketPolicy:BucketPolicy",
+                "inputs": {
+                    "__defaults": [],
+                    "bucket": "morgue-files-2944dfb",
+                    "policy": "{\"Version\": \"2012-10-17\", \"Id\": \"MorgueFileBucketPolicy\", \"Statement\": [{\"Sid\": \"AllowThingsInTheBucket\", \"Effect\": \"Allow\", \"Principal\": {\"AWS\": [\"arn:aws:iam::851075464416:role/morgue-bot-lambda-role-782df96\", \"arn:aws:iam::851075464416:role/morgue-stalker-role-39eb325\"]}, \"Action\": \"s3:*\", \"Resource\": \"arn:aws:s3:::morgue-files-2944dfb/*\"}, {\"Sid\": \"AllowTheBucket\", \"Effect\": \"Allow\", \"Principal\": {\"AWS\": [\"arn:aws:iam::851075464416:role/morgue-bot-lambda-role-782df96\", \"arn:aws:iam::851075464416:role/morgue-stalker-role-39eb325\"]}, \"Action\": \"s3:*\", \"Resource\": \"arn:aws:s3:::morgue-files-2944dfb\"}]}"
+                },
+                "outputs": {
+                    "bucket": "morgue-files-2944dfb",
+                    "id": "morgue-files-2944dfb",
+                    "policy": "{\"Version\":\"2012-10-17\",\"Id\":\"MorgueFileBucketPolicy\",\"Statement\":[{\"Sid\":\"AllowThingsInTheBucket\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::851075464416:role/morgue-bot-lambda-role-782df96\",\"arn:aws:iam::851075464416:role/morgue-stalker-role-39eb325\"]},\"Action\":\"s3:*\",\"Resource\":\"arn:aws:s3:::morgue-files-2944dfb/*\"},{\"Sid\":\"AllowTheBucket\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::851075464416:role/morgue-bot-lambda-role-782df96\",\"arn:aws:iam::851075464416:role/morgue-stalker-role-39eb325\"]},\"Action\":\"s3:*\",\"Resource\":\"arn:aws:s3:::morgue-files-2944dfb\"}]}"
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-bot-lambda-role",
+                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-stalker-role",
+                    "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files"
+                ],
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "bucket": [
+                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files"
+                    ],
+                    "policy": [
+                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
+                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-stalker-role",
+                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-bot-lambda-role"
+                    ]
+                }
+            },
+            {
                 "urn": "urn:pulumi:dev::morguebot::aws:lambda/eventSourceMapping:EventSourceMapping::god-bot-sqs-esm",
                 "custom": true,
                 "id": "a7e7efb0-1acc-4124-825a-bc31be2f63f1",
@@ -1433,145 +1533,6 @@
                     ],
                     "functionName": [
                         "urn:pulumi:dev::morguebot::aws:lambda/function:Function::god-bot"
-                    ]
-                }
-            },
-            {
-                "urn": "urn:pulumi:dev::morguebot::aws:lambda/function:Function::twitch-chat-bot",
-                "custom": true,
-                "id": "twitch-chat-bot-82104fd",
-                "type": "aws:lambda/function:Function",
-                "inputs": {
-                    "__defaults": [
-                        "memorySize",
-                        "name",
-                        "publish",
-                        "reservedConcurrentExecutions"
-                    ],
-                    "environment": {
-                        "__defaults": [],
-                        "variables": {
-                            "CHARACTER_DB": "characters-696d3eb",
-                            "MORGUEBOT_BOT_NAME": "beginbotbot",
-                            "MORGUEBOT_CHANNEL": "beginbot",
-                            "MORGUEBOT_TWITCH_OAUTH_TOKEN": "AQICAHhcjVxjAYn9rI4gKzC6UmWBhLLtk0pb1gp29kt5u09XjgHf5qfCTwQZTtexG0aecZ1aAAAAgzCBgAYJKoZIhvcNAQcGoHMwcQIBADBsBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDEwbMMkVb7xPj/cUKwIBEIA/21kivWwCZ9EOQIFacjo05gw52k3BP0g8tHyKiBBW8INi+0RAUrlGg8YAAlsQruOWUL4hr2gBI0Op9G6i6nHH",
-                            "MORGUE_BUCKETNAME": "morgue-files-2944dfb",
-                            "__defaults": []
-                        }
-                    },
-                    "handler": "lambda_handler.twitch_chat_bot",
-                    "memorySize": 128,
-                    "name": "twitch-chat-bot-82104fd",
-                    "publish": false,
-                    "reservedConcurrentExecutions": -1,
-                    "role": "arn:aws:iam::851075464416:role/twitch-chat-bot-role-e769d19",
-                    "runtime": "python3.6",
-                    "s3Bucket": "morgue-artifacts",
-                    "s3Key": "handler_1572148860.zip",
-                    "timeout": 200,
-                    "tracingConfig": {
-                        "__defaults": [],
-                        "mode": "Active"
-                    }
-                },
-                "outputs": {
-                    "arn": "arn:aws:lambda:us-west-2:851075464416:function:twitch-chat-bot-82104fd",
-                    "description": "",
-                    "environment": {
-                        "variables": {
-                            "CHARACTER_DB": "characters-696d3eb",
-                            "MORGUEBOT_BOT_NAME": "beginbotbot",
-                            "MORGUEBOT_CHANNEL": "beginbot",
-                            "MORGUEBOT_TWITCH_OAUTH_TOKEN": "AQICAHhcjVxjAYn9rI4gKzC6UmWBhLLtk0pb1gp29kt5u09XjgHf5qfCTwQZTtexG0aecZ1aAAAAgzCBgAYJKoZIhvcNAQcGoHMwcQIBADBsBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDEwbMMkVb7xPj/cUKwIBEIA/21kivWwCZ9EOQIFacjo05gw52k3BP0g8tHyKiBBW8INi+0RAUrlGg8YAAlsQruOWUL4hr2gBI0Op9G6i6nHH",
-                            "MORGUE_BUCKETNAME": "morgue-files-2944dfb"
-                        }
-                    },
-                    "handler": "lambda_handler.twitch_chat_bot",
-                    "id": "twitch-chat-bot-82104fd",
-                    "invokeArn": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:851075464416:function:twitch-chat-bot-82104fd/invocations",
-                    "kmsKeyArn": "",
-                    "lastModified": "2019-10-27T04:01:32.261+0000",
-                    "layers": [],
-                    "memorySize": 128,
-                    "name": "twitch-chat-bot-82104fd",
-                    "publish": false,
-                    "qualifiedArn": "arn:aws:lambda:us-west-2:851075464416:function:twitch-chat-bot-82104fd:$LATEST",
-                    "reservedConcurrentExecutions": -1,
-                    "role": "arn:aws:iam::851075464416:role/twitch-chat-bot-role-e769d19",
-                    "runtime": "python3.6",
-                    "s3Bucket": "morgue-artifacts",
-                    "s3Key": "handler_1572148860.zip",
-                    "sourceCodeHash": "kZDnre8b3q05/xRuhIU2vmHdgb5WETyiH7t2pwxzshk=",
-                    "sourceCodeSize": 14172474,
-                    "tags": {},
-                    "timeout": 200,
-                    "tracingConfig": {
-                        "mode": "Active"
-                    },
-                    "version": "$LATEST"
-                },
-                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
-                "dependencies": [
-                    "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
-                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::twitch-chat-bot-role",
-                    "urn:pulumi:dev::morguebot::aws:kms/ciphertext:Ciphertext::twitch_oauth_token,",
-                    "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files"
-                ],
-                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
-                "propertyDependencies": {
-                    "environment": [
-                        "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
-                        "urn:pulumi:dev::morguebot::aws:kms/ciphertext:Ciphertext::twitch_oauth_token,",
-                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files"
-                    ],
-                    "handler": null,
-                    "role": [
-                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::twitch-chat-bot-role"
-                    ],
-                    "runtime": null,
-                    "s3Bucket": null,
-                    "s3Key": null,
-                    "timeout": null,
-                    "tracingConfig": null
-                }
-            },
-            {
-                "urn": "urn:pulumi:dev::morguebot::aws:lambda/eventSourceMapping:EventSourceMapping::xl-bot-sqs-esm",
-                "custom": true,
-                "id": "d57248fc-a427-49db-9446-1a893cbebab7",
-                "type": "aws:lambda/eventSourceMapping:EventSourceMapping",
-                "inputs": {
-                    "__defaults": [
-                        "enabled"
-                    ],
-                    "enabled": true,
-                    "eventSourceArn": "arn:aws:sqs:us-west-2:851075464416:xl-upgrades-queue-d73d0c6",
-                    "functionName": "xl-bot-00f604b"
-                },
-                "outputs": {
-                    "batchSize": 10,
-                    "enabled": true,
-                    "eventSourceArn": "arn:aws:sqs:us-west-2:851075464416:xl-upgrades-queue-d73d0c6",
-                    "functionArn": "arn:aws:lambda:us-west-2:851075464416:function:xl-bot-00f604b",
-                    "functionName": "arn:aws:lambda:us-west-2:851075464416:function:xl-bot-00f604b",
-                    "id": "d57248fc-a427-49db-9446-1a893cbebab7",
-                    "lastProcessingResult": "",
-                    "state": "Creating",
-                    "stateTransitionReason": "USER_INITIATED",
-                    "uuid": "d57248fc-a427-49db-9446-1a893cbebab7"
-                },
-                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
-                "dependencies": [
-                    "urn:pulumi:dev::morguebot::aws:lambda/function:Function::xl-bot",
-                    "urn:pulumi:dev::morguebot::aws:sqs/queue:Queue::xl-upgrades-queue"
-                ],
-                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
-                "propertyDependencies": {
-                    "eventSourceArn": [
-                        "urn:pulumi:dev::morguebot::aws:sqs/queue:Queue::xl-upgrades-queue"
-                    ],
-                    "functionName": [
-                        "urn:pulumi:dev::morguebot::aws:lambda/function:Function::xl-bot"
                     ]
                 }
             },
@@ -1617,6 +1578,250 @@
                 }
             },
             {
+                "urn": "urn:pulumi:dev::morguebot::aws:iam/rolePolicyAttachment:RolePolicyAttachment::dungeon_gossiper-xray",
+                "custom": true,
+                "id": "dungeon_gossiper-lambda-role-8a066df-20191027231738149800000001",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "inputs": {
+                    "__defaults": [],
+                    "policyArn": "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+                    "role": "dungeon_gossiper-lambda-role-8a066df"
+                },
+                "outputs": {
+                    "id": "dungeon_gossiper-lambda-role-8a066df-20191027231738149800000001",
+                    "policyArn": "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+                    "role": "dungeon_gossiper-lambda-role-8a066df"
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::dungeon_gossiper-lambda-role"
+                ],
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "policyArn": null,
+                    "role": [
+                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::dungeon_gossiper-lambda-role"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::morguebot::aws:lambda/eventSourceMapping:EventSourceMapping::xl-bot-sqs-esm",
+                "custom": true,
+                "id": "d57248fc-a427-49db-9446-1a893cbebab7",
+                "type": "aws:lambda/eventSourceMapping:EventSourceMapping",
+                "inputs": {
+                    "__defaults": [
+                        "enabled"
+                    ],
+                    "enabled": true,
+                    "eventSourceArn": "arn:aws:sqs:us-west-2:851075464416:xl-upgrades-queue-d73d0c6",
+                    "functionName": "xl-bot-00f604b"
+                },
+                "outputs": {
+                    "batchSize": 10,
+                    "enabled": true,
+                    "eventSourceArn": "arn:aws:sqs:us-west-2:851075464416:xl-upgrades-queue-d73d0c6",
+                    "functionArn": "arn:aws:lambda:us-west-2:851075464416:function:xl-bot-00f604b",
+                    "functionName": "arn:aws:lambda:us-west-2:851075464416:function:xl-bot-00f604b",
+                    "id": "d57248fc-a427-49db-9446-1a893cbebab7",
+                    "lastProcessingResult": "",
+                    "state": "Creating",
+                    "stateTransitionReason": "USER_INITIATED",
+                    "uuid": "d57248fc-a427-49db-9446-1a893cbebab7"
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::morguebot::aws:lambda/function:Function::xl-bot",
+                    "urn:pulumi:dev::morguebot::aws:sqs/queue:Queue::xl-upgrades-queue"
+                ],
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "eventSourceArn": [
+                        "urn:pulumi:dev::morguebot::aws:sqs/queue:Queue::xl-upgrades-queue"
+                    ],
+                    "functionName": [
+                        "urn:pulumi:dev::morguebot::aws:lambda/function:Function::xl-bot"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::morguebot::aws:lambda/function:Function::twitch-chat-bot",
+                "custom": true,
+                "id": "twitch-chat-bot-82104fd",
+                "type": "aws:lambda/function:Function",
+                "inputs": {
+                    "__defaults": [
+                        "memorySize",
+                        "name",
+                        "publish",
+                        "reservedConcurrentExecutions"
+                    ],
+                    "environment": {
+                        "__defaults": [],
+                        "variables": {
+                            "CHARACTER_DB": "characters-696d3eb",
+                            "MORGUEBOT_BOT_NAME": "beginbotbot",
+                            "MORGUEBOT_CHANNEL": "beginbot",
+                            "MORGUEBOT_TWITCH_OAUTH_TOKEN": "AQICAHhcjVxjAYn9rI4gKzC6UmWBhLLtk0pb1gp29kt5u09XjgHf5qfCTwQZTtexG0aecZ1aAAAAgzCBgAYJKoZIhvcNAQcGoHMwcQIBADBsBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDEwbMMkVb7xPj/cUKwIBEIA/21kivWwCZ9EOQIFacjo05gw52k3BP0g8tHyKiBBW8INi+0RAUrlGg8YAAlsQruOWUL4hr2gBI0Op9G6i6nHH",
+                            "MORGUE_BUCKETNAME": "morgue-files-2944dfb",
+                            "__defaults": []
+                        }
+                    },
+                    "handler": "lambda_handler.twitch_chat_bot",
+                    "memorySize": 128,
+                    "name": "twitch-chat-bot-82104fd",
+                    "publish": false,
+                    "reservedConcurrentExecutions": -1,
+                    "role": "arn:aws:iam::851075464416:role/twitch-chat-bot-role-e769d19",
+                    "runtime": "python3.6",
+                    "s3Bucket": "morgue-artifacts",
+                    "s3Key": "handler_1572217737.zip",
+                    "timeout": 200,
+                    "tracingConfig": {
+                        "__defaults": [],
+                        "mode": "Active"
+                    }
+                },
+                "outputs": {
+                    "arn": "arn:aws:lambda:us-west-2:851075464416:function:twitch-chat-bot-82104fd",
+                    "description": "",
+                    "environment": {
+                        "variables": {
+                            "CHARACTER_DB": "characters-696d3eb",
+                            "MORGUEBOT_BOT_NAME": "beginbotbot",
+                            "MORGUEBOT_CHANNEL": "beginbot",
+                            "MORGUEBOT_TWITCH_OAUTH_TOKEN": "AQICAHhcjVxjAYn9rI4gKzC6UmWBhLLtk0pb1gp29kt5u09XjgHf5qfCTwQZTtexG0aecZ1aAAAAgzCBgAYJKoZIhvcNAQcGoHMwcQIBADBsBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDEwbMMkVb7xPj/cUKwIBEIA/21kivWwCZ9EOQIFacjo05gw52k3BP0g8tHyKiBBW8INi+0RAUrlGg8YAAlsQruOWUL4hr2gBI0Op9G6i6nHH",
+                            "MORGUE_BUCKETNAME": "morgue-files-2944dfb"
+                        }
+                    },
+                    "handler": "lambda_handler.twitch_chat_bot",
+                    "id": "twitch-chat-bot-82104fd",
+                    "invokeArn": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:851075464416:function:twitch-chat-bot-82104fd/invocations",
+                    "kmsKeyArn": "",
+                    "lastModified": "2019-10-27T23:09:52.523+0000",
+                    "layers": [],
+                    "memorySize": 128,
+                    "name": "twitch-chat-bot-82104fd",
+                    "publish": false,
+                    "qualifiedArn": "arn:aws:lambda:us-west-2:851075464416:function:twitch-chat-bot-82104fd:$LATEST",
+                    "reservedConcurrentExecutions": -1,
+                    "role": "arn:aws:iam::851075464416:role/twitch-chat-bot-role-e769d19",
+                    "runtime": "python3.6",
+                    "s3Bucket": "morgue-artifacts",
+                    "s3Key": "handler_1572217737.zip",
+                    "sourceCodeHash": "/t3FrB+nv+28N+xPfN9MLeDpK/RRIImssoCkRkGXfYs=",
+                    "sourceCodeSize": 14172753,
+                    "tags": {},
+                    "timeout": 200,
+                    "tracingConfig": {
+                        "mode": "Active"
+                    },
+                    "version": "$LATEST"
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
+                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::twitch-chat-bot-role",
+                    "urn:pulumi:dev::morguebot::aws:kms/ciphertext:Ciphertext::twitch_oauth_token,",
+                    "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files"
+                ],
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "environment": [
+                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
+                        "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
+                        "urn:pulumi:dev::morguebot::aws:kms/ciphertext:Ciphertext::twitch_oauth_token,"
+                    ],
+                    "handler": null,
+                    "role": [
+                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::twitch-chat-bot-role"
+                    ],
+                    "runtime": null,
+                    "s3Bucket": null,
+                    "s3Key": null,
+                    "timeout": null,
+                    "tracingConfig": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::morguebot::aws:lambda/permission:Permission::AllowInvocationFromCloudWatch",
+                "custom": true,
+                "id": "AllowInvocationFromCloudWatch-1b77212",
+                "type": "aws:lambda/permission:Permission",
+                "inputs": {
+                    "__defaults": [
+                        "statementId"
+                    ],
+                    "action": "lambda:InvokeFunction",
+                    "function": "arn:aws:lambda:us-west-2:851075464416:function:morgue-stalker-341e60e",
+                    "principal": "events.amazonaws.com",
+                    "sourceArn": "arn:aws:events:us-west-2:851075464416:rule/morgue-stalker-very-cool-every-minute",
+                    "statementId": "AllowInvocationFromCloudWatch-1b77212"
+                },
+                "outputs": {
+                    "action": "lambda:InvokeFunction",
+                    "function": "arn:aws:lambda:us-west-2:851075464416:function:morgue-stalker-341e60e",
+                    "id": "AllowInvocationFromCloudWatch-1b77212",
+                    "principal": "events.amazonaws.com",
+                    "qualifier": "",
+                    "sourceArn": "arn:aws:events:us-west-2:851075464416:rule/morgue-stalker-very-cool-every-minute",
+                    "statementId": "AllowInvocationFromCloudWatch-1b77212"
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::morguebot::aws:cloudwatch/eventRule:EventRule::morgue-stalker-event-rule",
+                    "urn:pulumi:dev::morguebot::aws:lambda/function:Function::morgue-stalker"
+                ],
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "action": null,
+                    "function": [
+                        "urn:pulumi:dev::morguebot::aws:lambda/function:Function::morgue-stalker"
+                    ],
+                    "principal": null,
+                    "sourceArn": [
+                        "urn:pulumi:dev::morguebot::aws:cloudwatch/eventRule:EventRule::morgue-stalker-event-rule"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::morguebot::aws:cloudwatch/eventTarget:EventTarget::morgue-stalker-event-target",
+                "custom": true,
+                "id": "morgue-stalker-very-cool-every-minute-morgue-stalker-event-target-7ba369c",
+                "type": "aws:cloudwatch/eventTarget:EventTarget",
+                "inputs": {
+                    "__defaults": [
+                        "targetId"
+                    ],
+                    "arn": "arn:aws:lambda:us-west-2:851075464416:function:morgue-stalker-341e60e",
+                    "rule": "morgue-stalker-very-cool-every-minute",
+                    "targetId": "morgue-stalker-event-target-7ba369c"
+                },
+                "outputs": {
+                    "arn": "arn:aws:lambda:us-west-2:851075464416:function:morgue-stalker-341e60e",
+                    "id": "morgue-stalker-very-cool-every-minute-morgue-stalker-event-target-7ba369c",
+                    "input": "",
+                    "inputPath": "",
+                    "roleArn": "",
+                    "rule": "morgue-stalker-very-cool-every-minute",
+                    "targetId": "morgue-stalker-event-target-7ba369c"
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::morguebot::aws:cloudwatch/eventRule:EventRule::morgue-stalker-event-rule",
+                    "urn:pulumi:dev::morguebot::aws:lambda/function:Function::morgue-stalker"
+                ],
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "arn": [
+                        "urn:pulumi:dev::morguebot::aws:lambda/function:Function::morgue-stalker"
+                    ],
+                    "rule": [
+                        "urn:pulumi:dev::morguebot::aws:cloudwatch/eventRule:EventRule::morgue-stalker-event-rule"
+                    ]
+                }
+            },
+            {
                 "urn": "urn:pulumi:dev::morguebot::aws:iam/rolePolicy:RolePolicy::morgue-bot-lambda-role-policy",
                 "custom": true,
                 "id": "morgue-bot-lambda-role-782df96:morgue-bot-lambda-role-policy-028354f",
@@ -1647,9 +1852,9 @@
                 "propertyDependencies": {
                     "policy": [
                         "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
+                        "urn:pulumi:dev::morguebot::aws:sns/topic:Topic::gods-queue-topic",
                         "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
-                        "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat",
-                        "urn:pulumi:dev::morguebot::aws:sns/topic:Topic::gods-queue-topic"
+                        "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat"
                     ],
                     "role": [
                         "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-bot-lambda-role"
@@ -1657,9 +1862,45 @@
                 }
             },
             {
-                "urn": "urn:pulumi:dev::morguebot::aws:lambda/function:Function::morgue-bot",
+                "urn": "urn:pulumi:dev::morguebot::aws:iam/rolePolicy:RolePolicy::dungeon_gossiper-lambda-role-policy",
                 "custom": true,
-                "id": "morgue-bot-2fc463f",
+                "id": "dungeon_gossiper-lambda-role-8a066df:dungeon_gossiper-lambda-role-policy-e773714",
+                "type": "aws:iam/rolePolicy:RolePolicy",
+                "inputs": {
+                    "__defaults": [
+                        "name"
+                    ],
+                    "name": "dungeon_gossiper-lambda-role-policy-e773714",
+                    "policy": "{\"Version\": \"2012-10-17\", \"Id\": \"dungeon_gossiper-policy\", \"Statement\": [{\"Effect\": \"Allow\", \"Action\": [\"logs:CreateLogGroup\", \"logs:CreateLogStream\", \"logs:PutLogEvents\"], \"Resource\": \"arn:aws:logs:*:*:*\"}, {\"Effect\": \"Allow\", \"Action\": [\"dynamodb:GetItem\", \"dynamodb:PutItem\", \"dynamodb:UpdateItem\"], \"Resource\": \"arn:aws:dynamodb:us-west-2:851075464416:table/characters-696d3eb\"}, {\"Effect\": \"Allow\", \"Action\": [\"sns:Publish\"], \"Resource\": \"arn:aws:sns:us-west-2:851075464416:gods-queue-topic-94691e5\"}]}",
+                    "role": "dungeon_gossiper-lambda-role-8a066df"
+                },
+                "outputs": {
+                    "id": "dungeon_gossiper-lambda-role-8a066df:dungeon_gossiper-lambda-role-policy-e773714",
+                    "name": "dungeon_gossiper-lambda-role-policy-e773714",
+                    "policy": "{\"Version\": \"2012-10-17\", \"Id\": \"dungeon_gossiper-policy\", \"Statement\": [{\"Effect\": \"Allow\", \"Action\": [\"logs:CreateLogGroup\", \"logs:CreateLogStream\", \"logs:PutLogEvents\"], \"Resource\": \"arn:aws:logs:*:*:*\"}, {\"Effect\": \"Allow\", \"Action\": [\"dynamodb:GetItem\", \"dynamodb:PutItem\", \"dynamodb:UpdateItem\"], \"Resource\": \"arn:aws:dynamodb:us-west-2:851075464416:table/characters-696d3eb\"}, {\"Effect\": \"Allow\", \"Action\": [\"sns:Publish\"], \"Resource\": \"arn:aws:sns:us-west-2:851075464416:gods-queue-topic-94691e5\"}]}",
+                    "role": "dungeon_gossiper-lambda-role-8a066df"
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
+                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::dungeon_gossiper-lambda-role",
+                    "urn:pulumi:dev::morguebot::aws:sns/topic:Topic::gods-queue-topic"
+                ],
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "policy": [
+                        "urn:pulumi:dev::morguebot::aws:sns/topic:Topic::gods-queue-topic",
+                        "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters"
+                    ],
+                    "role": [
+                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::dungeon_gossiper-lambda-role"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::morguebot::aws:lambda/function:Function::dungeon_gossiper",
+                "custom": true,
+                "id": "dungeon_gossiper-67e2768",
                 "type": "aws:lambda/function:Function",
                 "inputs": {
                     "__defaults": [
@@ -1672,22 +1913,19 @@
                         "__defaults": [],
                         "variables": {
                             "CHARACTER_DB": "characters-696d3eb",
-                            "CHAT_STREAM_ARN": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
-                            "CHAT_STREAM_NAME": "twitch-chat-877759c",
-                            "MORGUE_BUCKETNAME": "morgue-files-2944dfb",
                             "TOPIC_ARN": "arn:aws:sns:us-west-2:851075464416:gods-queue-topic-94691e5",
                             "__defaults": []
                         }
                     },
                     "handler": "lambda_handler.morgue_bot",
                     "memorySize": 128,
-                    "name": "morgue-bot-2fc463f",
+                    "name": "dungeon_gossiper-67e2768",
                     "publish": false,
                     "reservedConcurrentExecutions": -1,
-                    "role": "arn:aws:iam::851075464416:role/morgue-bot-lambda-role-782df96",
+                    "role": "arn:aws:iam::851075464416:role/dungeon_gossiper-lambda-role-8a066df",
                     "runtime": "python3.6",
                     "s3Bucket": "morgue-artifacts",
-                    "s3Key": "handler_1572148860.zip",
+                    "s3Key": "handler_1572217737.zip",
                     "timeout": 200,
                     "tracingConfig": {
                         "__defaults": [],
@@ -1695,34 +1933,31 @@
                     }
                 },
                 "outputs": {
-                    "arn": "arn:aws:lambda:us-west-2:851075464416:function:morgue-bot-2fc463f",
+                    "arn": "arn:aws:lambda:us-west-2:851075464416:function:dungeon_gossiper-67e2768",
                     "description": "",
                     "environment": {
                         "variables": {
                             "CHARACTER_DB": "characters-696d3eb",
-                            "CHAT_STREAM_ARN": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
-                            "CHAT_STREAM_NAME": "twitch-chat-877759c",
-                            "MORGUE_BUCKETNAME": "morgue-files-2944dfb",
                             "TOPIC_ARN": "arn:aws:sns:us-west-2:851075464416:gods-queue-topic-94691e5"
                         }
                     },
                     "handler": "lambda_handler.morgue_bot",
-                    "id": "morgue-bot-2fc463f",
-                    "invokeArn": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:851075464416:function:morgue-bot-2fc463f/invocations",
+                    "id": "dungeon_gossiper-67e2768",
+                    "invokeArn": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:851075464416:function:dungeon_gossiper-67e2768/invocations",
                     "kmsKeyArn": "",
-                    "lastModified": "2019-10-27T04:01:32.102+0000",
+                    "lastModified": "2019-10-27T23:17:49.323+0000",
                     "layers": [],
                     "memorySize": 128,
-                    "name": "morgue-bot-2fc463f",
+                    "name": "dungeon_gossiper-67e2768",
                     "publish": false,
-                    "qualifiedArn": "arn:aws:lambda:us-west-2:851075464416:function:morgue-bot-2fc463f:$LATEST",
+                    "qualifiedArn": "arn:aws:lambda:us-west-2:851075464416:function:dungeon_gossiper-67e2768:$LATEST",
                     "reservedConcurrentExecutions": -1,
-                    "role": "arn:aws:iam::851075464416:role/morgue-bot-lambda-role-782df96",
+                    "role": "arn:aws:iam::851075464416:role/dungeon_gossiper-lambda-role-8a066df",
                     "runtime": "python3.6",
                     "s3Bucket": "morgue-artifacts",
-                    "s3Key": "handler_1572148860.zip",
-                    "sourceCodeHash": "kZDnre8b3q05/xRuhIU2vmHdgb5WETyiH7t2pwxzshk=",
-                    "sourceCodeSize": 14172474,
+                    "s3Key": "handler_1572217737.zip",
+                    "sourceCodeHash": "/t3FrB+nv+28N+xPfN9MLeDpK/RRIImssoCkRkGXfYs=",
+                    "sourceCodeSize": 14172753,
                     "tags": {},
                     "timeout": 200,
                     "tracingConfig": {
@@ -1733,22 +1968,18 @@
                 "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
                 "dependencies": [
                     "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
-                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-bot-lambda-role",
-                    "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat",
-                    "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
+                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::dungeon_gossiper-lambda-role",
                     "urn:pulumi:dev::morguebot::aws:sns/topic:Topic::gods-queue-topic"
                 ],
                 "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
                 "propertyDependencies": {
                     "environment": [
-                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
-                        "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
-                        "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat",
-                        "urn:pulumi:dev::morguebot::aws:sns/topic:Topic::gods-queue-topic"
+                        "urn:pulumi:dev::morguebot::aws:sns/topic:Topic::gods-queue-topic",
+                        "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters"
                     ],
                     "handler": null,
                     "role": [
-                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-bot-lambda-role"
+                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::dungeon_gossiper-lambda-role"
                     ],
                     "runtime": null,
                     "s3Bucket": null,
@@ -1756,150 +1987,6 @@
                     "timeout": null,
                     "tracingConfig": null
                 }
-            },
-            {
-                "urn": "urn:pulumi:dev::morguebot::aws:s3/bucketPolicy:BucketPolicy::morgue-file-bucket-policy",
-                "custom": true,
-                "id": "morgue-files-2944dfb",
-                "type": "aws:s3/bucketPolicy:BucketPolicy",
-                "inputs": {
-                    "__defaults": [],
-                    "bucket": "morgue-files-2944dfb",
-                    "policy": "{\"Version\": \"2012-10-17\", \"Id\": \"MorgueFileBucketPolicy\", \"Statement\": [{\"Sid\": \"Allow\", \"Effect\": \"Allow\", \"Principal\": {\"AWS\": [\"arn:aws:iam::851075464416:role/morgue-bot-lambda-role-782df96\", \"arn:aws:iam::851075464416:role/morgue-stalker-role-39eb325\"]}, \"Action\": \"s3:*\", \"Resource\": \"arn:aws:s3:::morgue-files-2944dfb/*\"}]}"
-                },
-                "outputs": {
-                    "bucket": "morgue-files-2944dfb",
-                    "id": "morgue-files-2944dfb",
-                    "policy": "{\"Version\": \"2012-10-17\", \"Id\": \"MorgueFileBucketPolicy\", \"Statement\": [{\"Sid\": \"Allow\", \"Effect\": \"Allow\", \"Principal\": {\"AWS\": [\"arn:aws:iam::851075464416:role/morgue-bot-lambda-role-782df96\", \"arn:aws:iam::851075464416:role/morgue-stalker-role-39eb325\"]}, \"Action\": \"s3:*\", \"Resource\": \"arn:aws:s3:::morgue-files-2944dfb/*\"}]}"
-                },
-                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
-                "dependencies": [
-                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-bot-lambda-role",
-                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-stalker-role",
-                    "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files"
-                ],
-                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
-                "propertyDependencies": {
-                    "bucket": [
-                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files"
-                    ],
-                    "policy": [
-                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-bot-lambda-role",
-                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
-                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-stalker-role"
-                    ]
-                }
-            },
-            {
-                "urn": "urn:pulumi:dev::morguebot::aws:cloudwatch/eventRule:EventRule::morgue-stalker-event-rule",
-                "custom": true,
-                "id": "morgue-stalker-every-minute",
-                "type": "aws:cloudwatch/eventRule:EventRule",
-                "inputs": {
-                    "__defaults": [
-                        "isEnabled"
-                    ],
-                    "isEnabled": true,
-                    "name": "morgue-stalker-every-minute",
-                    "scheduleExpression": "rate(1 minute)"
-                },
-                "outputs": {
-                    "arn": "arn:aws:events:us-west-2:851075464416:rule/morgue-stalker-every-minute",
-                    "description": "",
-                    "id": "morgue-stalker-every-minute",
-                    "isEnabled": true,
-                    "name": "morgue-stalker-every-minute",
-                    "roleArn": "",
-                    "scheduleExpression": "rate(1 minute)",
-                    "tags": {}
-                },
-                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
-                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
-                "propertyDependencies": {
-                    "name": null,
-                    "scheduleExpression": null
-                },
-                "pendingReplacement": true
-            },
-            {
-                "urn": "urn:pulumi:dev::morguebot::aws:cloudwatch/eventTarget:EventTarget::morgue-stalker-event-target",
-                "custom": true,
-                "id": "morgue-stalker-every-minute-morgue-stalker-event-target-b89be2d",
-                "type": "aws:cloudwatch/eventTarget:EventTarget",
-                "inputs": {
-                    "__defaults": [
-                        "targetId"
-                    ],
-                    "arn": "arn:aws:lambda:us-west-2:851075464416:function:morgue-stalker-341e60e",
-                    "rule": "morgue-stalker-every-minute",
-                    "targetId": "morgue-stalker-event-target-b89be2d"
-                },
-                "outputs": {
-                    "arn": "arn:aws:lambda:us-west-2:851075464416:function:morgue-stalker-341e60e",
-                    "id": "morgue-stalker-every-minute-morgue-stalker-event-target-b89be2d",
-                    "input": "",
-                    "inputPath": "",
-                    "roleArn": "",
-                    "rule": "morgue-stalker-every-minute",
-                    "targetId": "morgue-stalker-event-target-b89be2d"
-                },
-                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
-                "dependencies": [
-                    "urn:pulumi:dev::morguebot::aws:cloudwatch/eventRule:EventRule::morgue-stalker-event-rule",
-                    "urn:pulumi:dev::morguebot::aws:lambda/function:Function::morgue-stalker"
-                ],
-                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
-                "propertyDependencies": {
-                    "arn": [
-                        "urn:pulumi:dev::morguebot::aws:lambda/function:Function::morgue-stalker"
-                    ],
-                    "rule": [
-                        "urn:pulumi:dev::morguebot::aws:cloudwatch/eventRule:EventRule::morgue-stalker-event-rule"
-                    ]
-                },
-                "pendingReplacement": true
-            },
-            {
-                "urn": "urn:pulumi:dev::morguebot::aws:lambda/permission:Permission::AllowInvocationFromCloudWatch",
-                "custom": true,
-                "id": "AllowInvocationFromCloudWatch-2d3e649",
-                "type": "aws:lambda/permission:Permission",
-                "inputs": {
-                    "__defaults": [
-                        "statementId"
-                    ],
-                    "action": "lambda:InvokeFunction",
-                    "function": "arn:aws:lambda:us-west-2:851075464416:function:morgue-stalker-341e60e",
-                    "principal": "events.amazonaws.com",
-                    "sourceArn": "arn:aws:events:us-west-2:851075464416:rule/morgue-stalker-every-minute",
-                    "statementId": "AllowInvocationFromCloudWatch-2d3e649"
-                },
-                "outputs": {
-                    "action": "lambda:InvokeFunction",
-                    "function": "arn:aws:lambda:us-west-2:851075464416:function:morgue-stalker-341e60e",
-                    "id": "AllowInvocationFromCloudWatch-2d3e649",
-                    "principal": "events.amazonaws.com",
-                    "qualifier": "",
-                    "sourceArn": "arn:aws:events:us-west-2:851075464416:rule/morgue-stalker-every-minute",
-                    "statementId": "AllowInvocationFromCloudWatch-2d3e649"
-                },
-                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
-                "dependencies": [
-                    "urn:pulumi:dev::morguebot::aws:cloudwatch/eventRule:EventRule::morgue-stalker-event-rule",
-                    "urn:pulumi:dev::morguebot::aws:lambda/function:Function::morgue-stalker"
-                ],
-                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
-                "propertyDependencies": {
-                    "action": null,
-                    "function": [
-                        "urn:pulumi:dev::morguebot::aws:lambda/function:Function::morgue-stalker"
-                    ],
-                    "principal": null,
-                    "sourceArn": [
-                        "urn:pulumi:dev::morguebot::aws:cloudwatch/eventRule:EventRule::morgue-stalker-event-rule"
-                    ]
-                },
-                "pendingReplacement": true
             },
             {
                 "urn": "urn:pulumi:dev::morguebot::aws:lambda/eventSourceMapping:EventSourceMapping::twitch-chat-bot-kinesis-very-cool-esm",
@@ -1945,6 +2032,107 @@
                 }
             },
             {
+                "urn": "urn:pulumi:dev::morguebot::aws:lambda/function:Function::morgue-bot",
+                "custom": true,
+                "id": "morgue-bot-2fc463f",
+                "type": "aws:lambda/function:Function",
+                "inputs": {
+                    "__defaults": [
+                        "memorySize",
+                        "name",
+                        "publish",
+                        "reservedConcurrentExecutions"
+                    ],
+                    "environment": {
+                        "__defaults": [],
+                        "variables": {
+                            "CHARACTER_DB": "characters-696d3eb",
+                            "CHAT_STREAM_ARN": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
+                            "CHAT_STREAM_NAME": "twitch-chat-877759c",
+                            "MORGUE_BUCKETNAME": "morgue-files-2944dfb",
+                            "TOPIC_ARN": "arn:aws:sns:us-west-2:851075464416:gods-queue-topic-94691e5",
+                            "__defaults": []
+                        }
+                    },
+                    "handler": "lambda_handler.morgue_bot",
+                    "memorySize": 128,
+                    "name": "morgue-bot-2fc463f",
+                    "publish": false,
+                    "reservedConcurrentExecutions": -1,
+                    "role": "arn:aws:iam::851075464416:role/morgue-bot-lambda-role-782df96",
+                    "runtime": "python3.6",
+                    "s3Bucket": "morgue-artifacts",
+                    "s3Key": "handler_1572217737.zip",
+                    "timeout": 200,
+                    "tracingConfig": {
+                        "__defaults": [],
+                        "mode": "Active"
+                    }
+                },
+                "outputs": {
+                    "arn": "arn:aws:lambda:us-west-2:851075464416:function:morgue-bot-2fc463f",
+                    "description": "",
+                    "environment": {
+                        "variables": {
+                            "CHARACTER_DB": "characters-696d3eb",
+                            "CHAT_STREAM_ARN": "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c",
+                            "CHAT_STREAM_NAME": "twitch-chat-877759c",
+                            "MORGUE_BUCKETNAME": "morgue-files-2944dfb",
+                            "TOPIC_ARN": "arn:aws:sns:us-west-2:851075464416:gods-queue-topic-94691e5"
+                        }
+                    },
+                    "handler": "lambda_handler.morgue_bot",
+                    "id": "morgue-bot-2fc463f",
+                    "invokeArn": "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:851075464416:function:morgue-bot-2fc463f/invocations",
+                    "kmsKeyArn": "",
+                    "lastModified": "2019-10-27T23:09:53.720+0000",
+                    "layers": [],
+                    "memorySize": 128,
+                    "name": "morgue-bot-2fc463f",
+                    "publish": false,
+                    "qualifiedArn": "arn:aws:lambda:us-west-2:851075464416:function:morgue-bot-2fc463f:$LATEST",
+                    "reservedConcurrentExecutions": -1,
+                    "role": "arn:aws:iam::851075464416:role/morgue-bot-lambda-role-782df96",
+                    "runtime": "python3.6",
+                    "s3Bucket": "morgue-artifacts",
+                    "s3Key": "handler_1572217737.zip",
+                    "sourceCodeHash": "/t3FrB+nv+28N+xPfN9MLeDpK/RRIImssoCkRkGXfYs=",
+                    "sourceCodeSize": 14172753,
+                    "tags": {},
+                    "timeout": 200,
+                    "tracingConfig": {
+                        "mode": "Active"
+                    },
+                    "version": "$LATEST"
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
+                    "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-bot-lambda-role",
+                    "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat",
+                    "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
+                    "urn:pulumi:dev::morguebot::aws:sns/topic:Topic::gods-queue-topic"
+                ],
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "environment": [
+                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files",
+                        "urn:pulumi:dev::morguebot::aws:sns/topic:Topic::gods-queue-topic",
+                        "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters",
+                        "urn:pulumi:dev::morguebot::aws:kinesis/stream:Stream::twitch-chat"
+                    ],
+                    "handler": null,
+                    "role": [
+                        "urn:pulumi:dev::morguebot::aws:iam/role:Role::morgue-bot-lambda-role"
+                    ],
+                    "runtime": null,
+                    "s3Bucket": null,
+                    "s3Key": null,
+                    "timeout": null,
+                    "tracingConfig": null
+                }
+            },
+            {
                 "urn": "urn:pulumi:dev::morguebot::aws:lambda/permission:Permission::AllowInvocationFromMorgueFileBucket",
                 "custom": true,
                 "id": "AllowInvocationFromMorgueFileBucket-0ea048e",
@@ -1984,6 +2172,90 @@
                         "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files"
                     ]
                 }
+            },
+            {
+                "urn": "urn:pulumi:dev::morguebot::aws:s3/bucketNotification:BucketNotification::morgue-bot-new-morgue-files",
+                "custom": true,
+                "id": "morgue-files-2944dfb",
+                "type": "aws:s3/bucketNotification:BucketNotification",
+                "inputs": {
+                    "__defaults": [],
+                    "bucket": "morgue-files-2944dfb",
+                    "lambdaFunctions": [
+                        {
+                            "__defaults": [],
+                            "events": [
+                                "s3:ObjectCreated:*"
+                            ],
+                            "lambdaFunctionArn": "arn:aws:lambda:us-west-2:851075464416:function:morgue-bot-2fc463f"
+                        }
+                    ]
+                },
+                "outputs": {
+                    "bucket": "morgue-files-2944dfb",
+                    "id": "morgue-files-2944dfb",
+                    "lambdaFunctions": [
+                        {
+                            "events": [
+                                "s3:ObjectCreated:*"
+                            ],
+                            "filterPrefix": "",
+                            "filterSuffix": "",
+                            "id": "tf-s3-lambda-20191027223608983900000001",
+                            "lambdaFunctionArn": "arn:aws:lambda:us-west-2:851075464416:function:morgue-bot-2fc463f"
+                        }
+                    ],
+                    "queues": [],
+                    "topics": []
+                },
+                "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                "dependencies": [
+                    "urn:pulumi:dev::morguebot::aws:lambda/function:Function::morgue-bot",
+                    "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files"
+                ],
+                "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                "propertyDependencies": {
+                    "bucket": [
+                        "urn:pulumi:dev::morguebot::aws:s3/bucket:Bucket::morgue-files"
+                    ],
+                    "lambdaFunctions": [
+                        "urn:pulumi:dev::morguebot::aws:lambda/function:Function::morgue-bot"
+                    ]
+                }
+            }
+        ],
+        "pending_operations": [
+            {
+                "resource": {
+                    "urn": "urn:pulumi:dev::morguebot::aws:lambda/eventSourceMapping:EventSourceMapping::dungeon_gossiper-dynamodb-esm",
+                    "custom": true,
+                    "type": "aws:lambda/eventSourceMapping:EventSourceMapping",
+                    "inputs": {
+                        "__defaults": [
+                            "enabled"
+                        ],
+                        "enabled": true,
+                        "eventSourceArn": "arn:aws:dynamodb:us-west-2:851075464416:table/characters-696d3eb/stream/2019-10-26T23:46:17.531",
+                        "functionName": "arn:aws:lambda:us-west-2:851075464416:function:dungeon_gossiper-67e2768",
+                        "startingPosition": "LATEST"
+                    },
+                    "parent": "urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev",
+                    "dependencies": [
+                        "urn:pulumi:dev::morguebot::aws:lambda/function:Function::dungeon_gossiper",
+                        "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters"
+                    ],
+                    "provider": "urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0",
+                    "propertyDependencies": {
+                        "eventSourceArn": [
+                            "urn:pulumi:dev::morguebot::aws:dynamodb/table:Table::characters"
+                        ],
+                        "functionName": [
+                            "urn:pulumi:dev::morguebot::aws:lambda/function:Function::dungeon_gossiper"
+                        ],
+                        "startingPosition": null
+                    }
+                },
+                "type": "creating"
             }
         ]
     }

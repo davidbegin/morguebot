@@ -92,7 +92,6 @@ lambda_.Permission(
     source_arn=bucket.arn,
 )
 
-
 s3.BucketNotification(
     f"{MODULE_NAME}-new-morgue-files",
     bucket=bucket.id,

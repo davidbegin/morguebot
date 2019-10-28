@@ -18,6 +18,15 @@ TOPIC_ARN = os.environ.get(
 )
 
 
+def send_unrand_notification(character, unrand):
+    client = boto3.client("sns")
+    msg = json.dumps(
+        {"default": f"CurseLit New Unrand {unrand} {character.overview()}"}
+    )
+    response = client.publish(TopicArn=TOPIC_ARN, Message=msg, MessageStructure="json")
+    print(json.dumps(response))
+
+
 def send_morguefile_notification(character):
     client = boto3.client("sns")
     msg = json.dumps({"default": f"New Morgue File for {character.overview()}"})
