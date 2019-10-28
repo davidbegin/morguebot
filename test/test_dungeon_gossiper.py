@@ -48,6 +48,7 @@ def test_dungeon_gossiper():
     assert new_weapons == expected_weapons
 
 
+@pytest.mark.focus
 def test_new_unrands():
     record = {
         "eventID": "fef6c6b73fe1805ec5d8c82bb6087997",

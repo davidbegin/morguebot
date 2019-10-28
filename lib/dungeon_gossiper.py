@@ -1,5 +1,6 @@
 from lib.sns import send_unrand_notification
 from lib.character import Character
+from lib.pawn_star import PawnStar
 
 UNRANDS = [
     # "ring of the Mage {Wiz MR++ Int+3}",
@@ -40,5 +41,4 @@ class DungeonGossiper:
         return list(set(new_weapons) - set(old_weapons))
 
     def new_unrands(self):
-        new_unrands = [weapon for weapon in self.new_weapons() if weapon in UNRANDS]
-        return new_unrands
+        return [ weapon for weapon in self.new_weapons() if PawnStar(weapon).is_unrand() ]
