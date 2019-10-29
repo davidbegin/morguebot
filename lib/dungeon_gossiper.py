@@ -1,4 +1,5 @@
 from lib.sns import send_unrand_notification
+from lib.sns import send_morguefile_notification
 from lib.character import Character
 from lib.pawn_star import PawnStar
 

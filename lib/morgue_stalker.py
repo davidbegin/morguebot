@@ -17,6 +17,7 @@ def fetch_characters():
         return sanitize_them_keys(morgue_keys)
     else:
         return [
+            "Fa",
             # "12feetdeep",
             # "4zero4",
             # "AIVN",
@@ -42,17 +43,17 @@ def fetch_characters():
             # "carwin",
             # "collin38",
             # "ddaybell",
-            "deathblob",
+            # "deathblob",
             # "dioxide",
             # "disciplinedyoungman",
             # "drj",
             # "emf",
-            "enop",
+            # "enop",
             # "foxor",
             # "gorper",
             # "grinrain",
             # "haverford",
-            "ilovepuk",
+            # "ilovepuk",
             # "jomj",
             # "jtro",
             # "matticus",

@@ -50,3 +50,8 @@ def xl_bot(event, handler):
 def dungeon_gossiper(event, context):
     print(json.dumps(event))
     process_dynamodb_records(event)
+
+
+def weapons_bot(event, context):
+    print(json.dumps(event))
+    monitor_the_gods(event)

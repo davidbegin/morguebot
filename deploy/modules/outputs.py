@@ -8,6 +8,7 @@ from modules.sqs import gods_queue
 from modules.kinesis import chat_stream
 from modules.s3 import bucket
 from modules.sns import sns_topic
+from modules.sns import weapons_topic
 
 import modules.morgue_bot_lambda
 import modules.morgue_stalker_lambda
@@ -27,6 +28,7 @@ pulumi.export("kinesis_arn", chat_stream.arn)
 pulumi.export("bucket_name", bucket.id)
 pulumi.export("bucket_arn", bucket.arn)
 pulumi.export("sns_topic_arn", sns_topic.arn)
+pulumi.export("weapons_topic_arn", weapons_topic.arn)
 
 pulumi.export("morgue_stalker_lambda", modules.morgue_stalker_lambda.aws_lambda.name),
 pulumi.export("morguebot_lambda", modules.morgue_bot_lambda.aws_lambda.name),

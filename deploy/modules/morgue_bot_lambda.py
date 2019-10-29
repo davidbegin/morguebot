@@ -8,6 +8,7 @@ from modules.s3 import bucket
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
 from modules.sns import sns_topic
+from modules.sns import weapons_topic
 from modules.kinesis import chat_stream
 from modules.s3 import bucket
 from modules.sqs import gods_queue
@@ -24,7 +25,7 @@ role = iam.Role(
 )
 
 policy = Output.all(
-    bucket.arn, sns_topic.arn, dynamodb_table.arn, chat_stream.arn
+    bucket.arn, sns_topic.arn, weapons_topic.arn, dynamodb_table.arn, chat_stream.arn
 ).apply(
     lambda args: json.dumps(
         {
@@ -32,7 +33,11 @@ policy = Output.all(
             "Statement": [
                 CREATE_CW_LOGS_POLICY,
                 {"Effect": "Allow", "Action": ["s3:*"], "Resource": args[0]},
-                {"Effect": "Allow", "Action": ["sns:Publish"], "Resource": args[1]},
+                {
+                    "Effect": "Allow",
+                    "Action": ["sns:Publish"],
+                    "Resource": [args[1], args[2]],
+                },
                 {
                     "Effect": "Allow",
                     "Action": [
@@ -40,12 +45,12 @@ policy = Output.all(
                         "dynamodb:PutItem",
                         "dynamodb:UpdateItem",
                     ],
-                    "Resource": args[2],
+                    "Resource": args[3],
                 },
                 {
                     "Effect": "Allow",
                     "Action": ["kinesis:PutRecord"],
-                    "Resource": args[3],
+                    "Resource": args[4],
                 },
             ],
         }

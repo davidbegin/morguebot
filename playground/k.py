@@ -5,29 +5,32 @@ import boto3
 
 # Thats it
 
+
 # client = boto3.client("kinesis")
-# client = boto3.client("sns")
+client = boto3.client("sns")
 
 
 # topic_arn = "arn:aws:sns:us-west-2:851075464416:god-queue-topic-a3644eb"
+topic_arn = "arn:aws:sns:us-west-2:851075464416:weapons-topic-f819b3f"
+
 # # msg = {"message": "Testing From SNS to SQS to Kinsesis!"}
-# msg = json.dumps({"default": "We are getting closer"})
-# response = client.publish(
-#     TopicArn=topic_arn,
-#     Message=msg,
-#     MessageStructure='json',
+msg = json.dumps({"default": "For REALLLLLL We are getting closer"})
+response = client.publish(
+    TopicArn=topic_arn,
+    Message=msg,
+    MessageStructure='json',
 
-#     # Subject='Testing',
-#     # MessageAttributes={
-#     #     'string': {
-#     #         'DataType': 'string',
-#     #         'StringValue': 'string',
-#     #         'BinaryValue': b'bytes'
-#     #     }
-#     # }
-# )
+    # Subject='Testing',
+    # MessageAttributes={
+    #     'string': {
+    #         'DataType': 'string',
+    #         'StringValue': 'string',
+    #         'BinaryValue': b'bytes'
+    #     }
+    # }
+)
 
-# print(response)
+print(response)
 
 # {
 #   "Records": [
@@ -72,17 +75,17 @@ import boto3
 #     client.send_message(QueueUrl=sqs_url, MessageBody=msg)
 
 
-client = boto3.client("kinesis")
-kinesis_arn = "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c"
-kinesis_name= "twitch-chat-877759c"
+# client = boto3.client("kinesis")
+# kinesis_arn = "arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c"
+# kinesis_name= "twitch-chat-877759c"
 
-response = client.put_record(
-    StreamName=kinesis_name,
-    Data=json.dumps({"name":"begin", "default": "Testing with Kinesis!"}),
-    PartitionKey='alpha',
-)
+# response = client.put_record(
+#     StreamName=kinesis_name,
+#     Data=json.dumps({"name":"begin", "default": "Testing with Kinesis!"}),
+#     PartitionKey='alpha',
+# )
 
-print(response)
+# print(response)
 
 
 # # shard_id=response["ShardId"]

@@ -6,6 +6,7 @@ from pulumi_aws import iam, lambda_
 
 from modules.dynamodb import dynamodb_table
 from modules.sns import sns_topic
+from modules.sns import weapons_topic
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
 
@@ -18,7 +19,9 @@ role = iam.Role(
     assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY),
 )
 
-policy = Output.all(dynamodb_table.arn, dynamodb_table.stream_arn, sns_topic.arn).apply(
+policy = Output.all(
+    dynamodb_table.arn, dynamodb_table.stream_arn, sns_topic.arn, weapons_topic.arn
+).apply(
     lambda args: json.dumps(
         {
             "Version": "2012-10-17",
@@ -27,7 +30,11 @@ policy = Output.all(dynamodb_table.arn, dynamodb_table.stream_arn, sns_topic.arn
                 CREATE_CW_LOGS_POLICY,
                 {"Effect": "Allow", "Action": ["dynamodb:*"], "Resource": args[0]},
                 {"Effect": "Allow", "Action": ["dynamodb:*"], "Resource": args[1]},
-                {"Effect": "Allow", "Action": ["sns:Publish"], "Resource": args[2]},
+                {
+                    "Effect": "Allow",
+                    "Action": ["sns:*"],
+                    "Resource": [args[2], args[3]],
+                },
             ],
         }
     )
@@ -41,8 +48,14 @@ iam.RolePolicyAttachment(
 
 iam.RolePolicy(f"{MODULE_NAME}-lambda-role-policy", role=role.id, policy=policy)
 
-lambda_variables = Output.all(dynamodb_table.name, sns_topic.arn).apply(
-    lambda args: {"CHARACTER_DB": args[0], "TOPIC_ARN": args[1]}
+lambda_variables = Output.all(
+    dynamodb_table.name, sns_topic.arn, weapons_topic.arn
+).apply(
+    lambda args: {
+        "CHARACTER_DB": args[0],
+        "TOPIC_ARN": args[1],
+        "WEAPONS_TOPIC": args[2],
+    }
 )
 
 aws_lambda = lambda_.Function(

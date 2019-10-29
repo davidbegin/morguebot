@@ -1,12 +1,12 @@
 import pulumi
 from pulumi import Output
 import json
-from modules.s3 import bucket
 from modules.kinesis import chat_stream
-from modules.sqs import gods_queue
-from pulumi_aws import iam, lambda_
+from modules.sqs import weapons_queue
+from pulumi_aws import iam, lambda_, sns
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
+from modules.sns import weapons_topic
 
 config = pulumi.Config()
 
@@ -17,19 +17,18 @@ role = iam.Role(
     assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY),
 )
 
-policy = Output.all(bucket.arn, gods_queue.arn, chat_stream.arn).apply(
+policy = Output.all(weapons_queue.arn, chat_stream.arn).apply(
     lambda args: json.dumps(
         {
             "Version": "2012-10-17",
             "Id": f"{MODULE_NAME}-policy",
             "Statement": [
                 CREATE_CW_LOGS_POLICY,
-                {"Effect": "Allow", "Action": ["s3:PutObject"], "Resource": args[0]},
-                {"Effect": "Allow", "Action": ["sqs:*"], "Resource": args[1]},
+                {"Effect": "Allow", "Action": ["sqs:*"], "Resource": args[0]},
                 {
                     "Effect": "Allow",
                     "Action": ["kinesis:PutRecord"],
-                    "Resource": args[2],
+                    "Resource": args[1],
                 },
             ],
         }
@@ -49,16 +48,21 @@ aws_lambda = lambda_.Function(
     f"{MODULE_NAME}",
     role=role.arn,
     runtime="python3.6",
-    handler="lambda_handler.god_bot",
+    handler="lambda_handler.weapons_bot",
     s3_key=config.require("artifact_name"),
     s3_bucket="morgue-artifacts",
     tracing_config={"mode": "Active"},
     timeout=200,
     environment={
         "variables": {
-            "MORGUE_BUCKETNAME": bucket.id,
             "CHAT_STREAM_ARN": chat_stream.arn,
             "CHAT_STREAM_NAME": chat_stream.name,
         }
     },
+)
+
+lambda_.EventSourceMapping(
+    f"{MODULE_NAME}-sqs-esm",
+    event_source_arn=weapons_queue.arn,
+    function_name=aws_lambda.name,
 )

@@ -74,9 +74,6 @@ class Character:
             if morgue is None:
                 morgue = self.fetch_online_morgue()
 
-        if not os.environ.get("TEST_MODE", False):
-            morgue_saver(self, morgue)
-
         return morgue
 
     def non_saved_morgue_file(self):

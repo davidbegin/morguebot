@@ -7,6 +7,7 @@ from lib.morgue_parser import fetch_weapon
 from lib.morgue_parser import fetch_weapons
 from lib.weapon_stats import WEAPON_STATS
 from lib.weapons_appraiser import WeaponsAppraiser
+from lib.pawn_star import PawnStar
 
 
 class WeaponsFormatter:
@@ -26,6 +27,10 @@ class WeaponsFormatter:
         for weapon_info in max_damages:
             formatted_weapon = self.format_weapon(weapon_info)
             formatted_max_damages.append(formatted_weapon)
+
+            pawn_star = PawnStar(weapon_info["weapon"])
+            if pawn_star.is_unrand():
+                formatted_max_damages.append([f"Cool Unrand! {weapon_info['weapon']}"])
 
         # Why don't these strings match
         if "(weapon)" in max_damages[-1]["weapon"]:

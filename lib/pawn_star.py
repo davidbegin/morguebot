@@ -76,4 +76,7 @@ class PawnStar:
         self.weapon = weapon
 
     def is_unrand(self):
-        return len([unrand for unrand in UNRANDS if unrand in self.weapon]) > 0
+        return (
+            len([unrand for unrand in UNRANDS if unrand.lower() in self.weapon.lower()])
+            > 0
+        )
