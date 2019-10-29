@@ -29,6 +29,7 @@ WORKING_COMMANDS = [
     "!jewellery",
     "!skills",
     "!potions",
+    "!runes",
     "!scrolls",
     "!spells",
     "!version",
@@ -39,6 +40,7 @@ WORKING_COMMANDS = [
 class Formatter:
     def __init__(self, character=None):
         self.character = character
+        self.morgue_parser = MorgueParser(self.character.morgue_file())
 
     def construct_message(self, command):
         print(f"Formatter construct_message {command} for {self.character.name}")
@@ -59,6 +61,8 @@ class Formatter:
             return self.print_mutations()
         elif command == "!potions":
             return self.print_potions()
+        elif command == "!runes":
+            return self.print_runes()
         elif command == "!scrolls":
             return self.print_scrolls()
         elif command == "!spells":
@@ -155,6 +159,9 @@ class Formatter:
                 uniq_items.append(m.group(1))
 
         return uniq_items
+
+    def print_runes(self):
+        return self.morgue_parser.runes()
 
     def print_weapons(self):
         weapons = fetch_weapons(self.character.morgue_file())

@@ -13,7 +13,7 @@ def process_dynamodb_records(event):
             for unrand in new_unrands:
                 send_unrand_notification(gossiper.character, unrand)
         else:
-            print("PRINT WE FOUND NO NEW UNRAND")
+            print(f"\033[33mSorry {gossiper.character} no new unrand\033[0m")
 
 
 class DungeonGossiper:

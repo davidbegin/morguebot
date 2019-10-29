@@ -68,6 +68,7 @@ UNRANDS = [
     "longbow 'piercer'",
     "arbalest 'damnation'",
     "heavy crossbow 'sniper'",
+    'the +3 sling "punk"',
 ]
 
 

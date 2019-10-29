@@ -22,9 +22,7 @@ WEAPONS_ARN = os.environ.get(
 
 def send_unrand_notification(character, unrand):
     client = boto3.client("sns")
-    msg = json.dumps(
-        {"default": f"CurseLit New Unrand {unrand} {character.overview()}"}
-    )
+    msg = json.dumps({"default": f"New Unrand {unrand} {character.overview()}"})
     response = client.publish(
         TopicArn=WEAPONS_ARN, Message=msg, MessageStructure="json"
     )

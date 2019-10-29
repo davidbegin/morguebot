@@ -81,5 +81,7 @@ class WeaponFactory:
                 weapon_name = "broad axe"
             elif "sceptre of torment" in rest_of_the_weapon:
                 weapon_name = "eveningstar"
+            elif 'sling "punk"':
+                weapon_name = "fustibalus"
 
         return weapon_name

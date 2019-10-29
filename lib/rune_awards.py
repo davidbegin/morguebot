@@ -16,7 +16,7 @@ AWARD_EMOTES = {
 PLACES = {1: "1st", 2: "2nd", 3: "3rd", 4: "4th", 5: "5th"}
 
 
-def rune_awards():
+def alt_rune_awards():
     rune_info = _fetch_all_runes()
     char_runes = [char["runes"] for char in rune_info]
     all_runes = [item for sublist in char_runes for item in sublist]
@@ -35,20 +35,20 @@ def rune_awards():
     sorted_runes = sorted(sorted_runes, key=lambda k: k["count"])
     sorted_runes.reverse()
 
-    # send_chat_to_stream(f"BibleThump Top 5 Least Rare Runes BibleThump")
-    # for rune in sorted_runes[0:5]:
-    #     print(rune)
-    #     send_chat_to_stream(f"{rune['name']} - Count: {rune['count']}")
-
-    send_chat_to_stream(f"DxCat Top 5 Rarest Runes DxCat")
-    sorted_runes.reverse()
-    runes = sorted_runes[0:5]
-    for rune in runes:
+    send_chat_to_stream(f"BibleThump Top 5 Least Rare Runes BibleThump")
+    for rune in sorted_runes[0:5]:
         print(rune)
         send_chat_to_stream(f"{rune['name']} - Count: {rune['count']}")
 
+    # send_chat_to_stream(f"DxCat Top 5 Rarest Runes DxCat")
+    # sorted_runes.reverse()
+    # runes = sorted_runes[0:5]
+    # for rune in runes:
+    #     print(rune)
+    #     send_chat_to_stream(f"{rune['name']} - Count: {rune['count']}")
 
-def old_rune_awards():
+
+def rune_awards():
     send_chat_to_stream(["PorscheWIN First Annual Rune Awards!!! PorscheWIN"])
 
     for winner in _top_5_rune_holders():

@@ -15,11 +15,14 @@ def call_bash(cmd):
     output, error = process.communicate()
 
 
+
+# arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c
 if __name__ == "__main__":
     commands = [
-            "lumigo-cli tail-sqs --queueName entitlement-seat_transform-olivia --region us-west-2",
-            "lumigo-cli tail-sns --topicName async-events-olivia --region us-west-2",
-            "lumigo-cli tail-kinesis  --streamName event-stream-rival-olivia --region us-west-2",
+            # "lumigo-cli tail-sqs --queueName --region us-west-2",
+            "lumigo-cli tail-sns --topicName gods-topic-f88048a  --region us-west-2",
+            "lumigo-cli tail-sns --topicName weapons-topic-f819b3f --region us-west-2",
+            "lumigo-cli tail-kinesis  --streamName twitch-chat-877759c --region us-west-2",
             ]
 
     # first_command, *other_commands =  commands

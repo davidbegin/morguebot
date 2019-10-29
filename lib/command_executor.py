@@ -10,6 +10,7 @@ from lib.weapon_awards import find_the_max_damage_for_all_characters
 from lib.rune_awards import rune_awards
 from lib.the_real_morgue_parser import MorgueParser
 from lib.rune_fetcher import RuneFetcher
+from lib.morgue_stalker import fetch_characters
 
 
 def process_event(event):
@@ -22,6 +23,9 @@ def process_event(event):
 
     if command == "!fetch":
         morgue_saver(character, character.non_saved_morgue_file(), arg1)
+    elif command == "!characters":
+        characters = fetch_characters()
+        send_chat_to_stream(["All The Characters"] + [", ".join(characters)])
     elif command == "!fetch_runes":
         RuneFetcher().fetch()
     elif command == "!fetch_s3_morgue":
@@ -42,7 +46,6 @@ def process_event(event):
         morgue_parser = MorgueParser(character.non_saved_morgue_file())
         msg = morgue_parser.overview()
         send_chat_to_stream(msg)
-
     elif command == "!save_morgue":
         save_morgue(character)
     elif command == "!clean_morgue":

@@ -10,7 +10,7 @@ from lib.pawn_star import PawnStar
 
 
 def celebrate_awards(max_by_type):
-    send_chat_to_stream(["PorscheWIN Third Annual Weapon Awards!!! PorscheWIN"])
+    send_chat_to_stream(["PorscheWIN Fourth Annual Weapon Awards!!! PorscheWIN"])
     for weapon_info in max_by_type:
         character = Character(name=weapon_info["character"])
         emoji = find_emoji(weapon_info["type"])

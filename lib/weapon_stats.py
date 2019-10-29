@@ -51,5 +51,4 @@ WEAPON_STATS = {
     "blowgun": {"base_damage": 0, "hit_modifier": 2, "type": "Throwing"},
     "longbow": {"base_damage": 15, "hit_modifier": 0, "type": "Bows"},
     "shortbow": {"base_damage": 9, "hit_modifier": 2, "type": "Bows"},
-    "sdaf": {"base_damage": 9, "hit_modifier": 2, "type": "Bows"},
 }
