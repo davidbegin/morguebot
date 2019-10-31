@@ -20,6 +20,32 @@ WEAPONS_ARN = os.environ.get(
 )
 
 
+def send_new_weapons_notification(character, weapons):
+    client = boto3.client("sns")
+    msg = json.dumps(
+        {
+            "default": f"OSFrog New Weapons {' '.join(weapons)} OSFrog {character.overview()}"
+        }
+    )
+    response = client.publish(
+        TopicArn=WEAPONS_ARN, Message=msg, MessageStructure="json"
+    )
+    print(json.dumps(response))
+
+
+def send_new_runes_notification(character, runes):
+    client = boto3.client("sns")
+    msg = json.dumps(
+        {
+            "default": f"OSFrog New Runes: {' '.join(runes)} OSFrog {character.overview()}"
+        }
+    )
+    response = client.publish(
+        TopicArn=WEAPONS_ARN, Message=msg, MessageStructure="json"
+    )
+    print(json.dumps(response))
+
+
 def send_unrand_notification(character, unrand):
     client = boto3.client("sns")
     msg = json.dumps({"default": f"New Unrand {unrand} {character.overview()}"})

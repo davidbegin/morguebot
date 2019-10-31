@@ -17,7 +17,9 @@ from lib.god_bot import monitor_the_gods
 from lib.weapons_bot import checkout_the_weapons
 from lib.morgue_stalker import stalk
 from lib.twitch_chat_bot import send_twitch_message
-from lib.dungeon_gossiper import process_dynamodb_records
+
+# from lib.dungeon_gossiper import process_dynamodb_records
+from lib.dungeon_gossiper import DungeonGossiper
 
 
 def morgue_stalker(event, handler):
@@ -51,7 +53,15 @@ def xl_bot(event, handler):
 
 def dungeon_gossiper(event, context):
     print(json.dumps(event))
-    process_dynamodb_records(event)
+    for record in event["Records"]:
+        gossiper = DungeonGossiper(record)
+        # check_for_unrands(gossiper)
+        if gossiper.new_weapons():
+            print(f"We got some new weapons: {gossiper.weapons()}")
+            send_new_weapon_notification(gossiper.character, gossiper.new_weapons())
+        if gossiper.new_runes():
+            print(f"We Got new runes {gossiper.new_runes()}")
+            send_new_runes_notification(gossiper.character, gossiper.new_runes())
 
 
 def weapons_bot(event, context):

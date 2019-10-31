@@ -179,9 +179,9 @@ if __name__ == "__main__":
         else:
             # We should take these in from command Land Args in JSON
             log_group_names = [
-		# "/aws/lambda/morgue-stalker-341e60e",
+		"/aws/lambda/morgue-stalker-341e60e",
 		"/aws/lambda/morgue-bot-2fc463f",
-                # "/aws/lambda/god-bot-62a15fe",
+                "/aws/lambda/god-bot-62a15fe",
                 # '/aws/lambda/xl-bot-00f604b',
                 '/aws/lambda/dungeon_gossiper-67e2768',
                 '/aws/lambda/weapons-bot-b08077f',

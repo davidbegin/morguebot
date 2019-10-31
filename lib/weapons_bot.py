@@ -4,6 +4,18 @@ import json
 import boto3
 
 
+def check_for_unrands(gossiper):
+    new_unrands = [
+        weapon for weapon in gossiper.new_weapons() if PawnStar(weapon).is_unrand()
+    ]
+    if new_unrands:
+        print(f"PRINT WE FOUND NEW UNRAND {new_unrands}")
+        for unrand in new_unrands:
+            send_unrand_notification(gossiper.character, unrand)
+    else:
+        print(f"\033[33mSorry {gossiper.character} no new unrand\033[0m")
+
+
 def checkout_the_weapons(event):
     print(json.dumps(event))
 
