@@ -20,17 +20,17 @@ def call_bash(cmd):
 if __name__ == "__main__":
     commands = [
             # "lumigo-cli tail-sqs --queueName --region us-west-2",
-            "lumigo-cli tail-sns --topicName gods-topic-f88048a  --region us-west-2",
+            # "lumigo-cli tail-sns --topicName gods-topic-gods-topic-f88048a --region us-west-2",
             "lumigo-cli tail-sns --topicName weapons-topic-f819b3f --region us-west-2",
             "lumigo-cli tail-kinesis  --streamName twitch-chat-877759c --region us-west-2",
             ]
 
-    # first_command, *other_commands =  commands
+    first_command, *other_commands =  commands
 
-    for command in commands:
+    for command in other_commands:
         full_command = f"tmux split-window -h {command}"
         call_bash(full_command)
 
     command = "tmux select-layout tiled"
-    call_bash(command)
+    call_bash(first_command)
     # call_bash(first_command)

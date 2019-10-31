@@ -19,9 +19,11 @@ def _send_chat(msg):
 
     client = boto3.client("kinesis")
 
-    decoded_msg = json.loads(msg)
-    message = decoded_msg["Message"]
-    f"CurseLit {message}"
+    try:
+        decoded_msg = json.loads(msg)
+        message = decoded_msg["Message"]
+    except:
+        message = msg
 
     response = client.put_record(
         StreamName=kinesis_name,

@@ -1,5 +1,3 @@
-import random
-
 import json
 
 from pulumi_aws import sns, iam
@@ -38,15 +36,17 @@ weapons_topic = sns.Topic(
 )
 
 
+# import random
 sns.TopicSubscription(
-    f"weapons-subscription-{random.randint(1, 99999)}",
+    # f"weapons-subscription-{random.randint(1, 99999)}",
+    f"weapons-subscription",
     endpoint=weapons_queue.arn,
     protocol="SQS",
     topic=weapons_topic.arn,
 )
 
 sns.TopicSubscription(
-    f"gods-subscription-{random.randint(1, 99999)}",
+    f"gods-subscription",
     endpoint=gods_queue.arn,
     protocol="SQS",
     topic=sns_topic.arn,

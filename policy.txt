@@ -1,0 +1,47 @@
+
+
+"{\"Version\":\"2012-10-17\",\"Id\":\"MorgueFileBucketPolicy\",\"Statement\":[{\"Sid\":\"AllowThingsInTheBucket\",\"Effe
+ct\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::851075464416:role/morgue-bot-lambda-role-782df96\",\"arn:aws:iam::851075464416:rol
+e/morgue-stalker-role-39eb325\"]},\"Action\":\"s3:*\",\"Resource\":\"arn:aws:s3:::morgue-files-2944dfb/*\"},{\"Sid\":\"AllowTheBucket\",
+\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::851075464416:role/morgue-bot-lambda-role-782df96\",\"arn:aws:iam::851075464416:role/morgue-stalker-role-39eb325\"]},\"Action\":\"s3:*\",\"Resource\":\"arn:aws:s3:::morgue-files-2944dfb\"}]}" => "{\"Version\":\"20
+12-10-17\",\"Id\":\"MorgueFileBucketPolicy\",\"Statement\":[{\"Sid\":\"AllowThingsInTheBucket\",\"Effect\":\"Allow\",\"Principal\":{\"AW
+S\":[\"arn:aws:iam::851075464416:role/morgue-stalker-role-39eb325\",\"arn:aws:iam::851075464416:role/morgue-bot-lambda-role-782df96\"]},
+\"Action\":\"s3:*\",\"Resource\":\"arn:aws:s3:::morgue-files-2944dfb/*\"},{\"Sid\":\"AllowTheBucket\",\"Effect\":\"Allow\",\"Principal\"
+:{\"AWS\":[\"arn:aws:iam::851075464416:role/morgue-stalker-role-39eb325\",\"arn:aws:iam::851075464416:role/morgue-bot-lambda-role-782df9
+6\"]},\"Action\":\"s3:*\",\"Resource\":\"arn:aws:s3:::morgue-files-2944dfb\"}]}"   
+
+
+
+Do you want to perform this update? details
+  pulumi:pulumi:Stack: (same)
+    [urn=urn:pulumi:dev::morguebot::pulumi:pulumi:Stack::morguebot-dev]
+    ++aws:sns/topicSubscription:TopicSubscription: (create-replacement)
+        [id=arn:aws:sns:us-west-2:851075464416:gods-topic-f88048a:b55e8bc1-45aa-4960-bc6c-5a99f96810fa]
+        [urn=urn:pulumi:dev::morguebot::aws:sns/topicSubscription:TopicSubscription::gods-subscription]
+        [provider=urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0]
+      ~ protocol: "sqs" => "SQS"
+    +-aws:sns/topicSubscription:TopicSubscription: (replace)
+        [id=arn:aws:sns:us-west-2:851075464416:gods-topic-f88048a:b55e8bc1-45aa-4960-bc6c-5a99f96810fa]
+        [urn=urn:pulumi:dev::morguebot::aws:sns/topicSubscription:TopicSubscription::gods-subscription]
+        [provider=urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0]
+      ~ protocol: "sqs" => "SQS"
+    ++aws:sns/topicSubscription:TopicSubscription: (create-replacement)
+        [id=arn:aws:sns:us-west-2:851075464416:weapons-topic-f819b3f:6ac34344-400f-4e98-a69c-7a4d7878abc0]
+        [urn=urn:pulumi:dev::morguebot::aws:sns/topicSubscription:TopicSubscription::weapons-subscription]
+        [provider=urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0]
+      ~ protocol: "sqs" => "SQS"
+    +-aws:sns/topicSubscription:TopicSubscription: (replace)
+        [id=arn:aws:sns:us-west-2:851075464416:weapons-topic-f819b3f:6ac34344-400f-4e98-a69c-7a4d7878abc0]
+        [urn=urn:pulumi:dev::morguebot::aws:sns/topicSubscription:TopicSubscription::weapons-subscription]
+        [provider=urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0]
+      ~ protocol: "sqs" => "SQS"
+    --aws:sns/topicSubscription:TopicSubscription: (delete-replaced)
+        [id=arn:aws:sns:us-west-2:851075464416:weapons-topic-f819b3f:6ac34344-400f-4e98-a69c-7a4d7878abc0]
+        [urn=urn:pulumi:dev::morguebot::aws:sns/topicSubscription:TopicSubscription::weapons-subscription]
+        [provider=urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0]
+    --aws:sns/topicSubscription:TopicSubscription: (delete-replaced)
+        [id=arn:aws:sns:us-west-2:851075464416:gods-topic-f88048a:b55e8bc1-45aa-4960-bc6c-5a99f96810fa]
+        [urn=urn:pulumi:dev::morguebot::aws:sns/topicSubscription:TopicSubscription::gods-subscription]
+        [provider=urn:pulumi:dev::morguebot::pulumi:providers:aws::default_1_5_0::fbfb8749-bb23-4d9a-9440-7907dd5a34d0]
+
+

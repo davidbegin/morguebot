@@ -3,6 +3,7 @@ from lib.sns import send_morguefile_notification
 from lib.morgue_db import save_a_buncha_info
 
 
+# Sorry, we only ban, because you have auto save
 BAN_LIST = ["JFunk"]
 
 
