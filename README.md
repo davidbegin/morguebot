@@ -59,7 +59,7 @@ python bot.py -e mutations -d
 ## Deploying
 
 ```
-time make artifact_deploy ARTIFACT_NAME=handler_v1.zip 
+time make artifact_deploy ARTIFACT_NAME=handler_v1.zip
 ```
 
 ## Deployed Architecture
@@ -76,8 +76,11 @@ More Info in the [Deploy README](deploy/README.md)
 Invoking the Morgue Stalker
 
 ```
-aws lambda invoke --function-name morgue-stalker-fce7e1b --payload '{"character":"artmatt"}' output.txt 
+aws lambda invoke --function-name morgue-stalker-fce7e1b --payload '{"character":"artmatt"}' output.txt
 ```
+
+### How do you extract Morguefile Information and save it to DynamoDB:
+
 
 
 

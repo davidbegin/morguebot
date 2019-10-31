@@ -30,6 +30,7 @@ def twitch_chat_bot(event, context):
     send_twitch_message(event)
 
 
+# MorgueFileProcessor
 def morgue_bot(event, handler):
     print(json.dumps(event))
     if "Records" in event or "s3" in event:

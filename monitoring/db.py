@@ -53,20 +53,21 @@ def monitor_character(character):
 
 
 # monitor_character("None")
+monitor_character("Deathblob")
 # monitor_character("LexAckson")
 # monitor_characters()
 # monitor_runes()
 
-character_name = "beginbot"
-objects = [ "the cursed +14 obsidian axe {chop, +Fly SInv *Curse}" ]
-# objects = [ "dumb weapon" ]
+# character_name = "beginbot"
+# objects = [ "the cursed +14 obsidian axe {chop, +Fly SInv *Curse}" ]
+# # objects = [ "dumb weapon" ]
 
-response = client.update_item(
-    TableName=TABLE_NAME,
-    Key={"character": {"S": character_name}},
-    AttributeUpdates={
-        "weapons": {"Value": {f"SS": objects}, "Action": "PUT"}
-    },
-)
-print(response)
+# response = client.update_item(
+#     TableName=TABLE_NAME,
+#     Key={"character": {"S": character_name}},
+#     AttributeUpdates={
+#         "weapons": {"Value": {f"SS": objects}, "Action": "PUT"}
+#     },
+# )
+# print(response)
 

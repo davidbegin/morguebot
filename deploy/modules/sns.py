@@ -46,8 +46,5 @@ sns.TopicSubscription(
 )
 
 sns.TopicSubscription(
-    f"gods-subscription",
-    endpoint=gods_queue.arn,
-    protocol="SQS",
-    topic=sns_topic.arn,
+    f"gods-subscription", endpoint=gods_queue.arn, protocol="SQS", topic=sns_topic.arn
 )
