@@ -3,28 +3,63 @@
 import json
 import asyncio
 import websockets
+from optparse import OptionParser
 
-async def have_fun():
-    uri = "ws://localhost:4444"
-    async with websockets.connect(uri) as websocket:
+# Other commands you can run
+# ToggleMute
+# SetCurrentTransition
 
-        # Other commands you can run
-        # ToggleMute
-        # SetCurrentTransition
 
-        scene = "Coding Fun Terminal"
+URI = "ws://localhost:4444"
 
-        source = "Tests Fail - PIP"
-        msg = json.dumps({"request-type":"SetSourceRender","scene": scene, "source": source, "render": False, "message-id":""})
+
+async def receive_msg():
+    async with websockets.connect(URI) as websocket:
+        return await websocket.recv()
+
+
+def get_sources_list():
+    scene = "Coding Fun Terminal"
+
+    return json.dumps(
+        {"request-type": "GetSourcesList", "scene": scene, "message-id": ""}
+    )
+
+
+async def send_msg(msg):
+    async with websockets.connect(URI) as websocket:
         await websocket.send(msg)
 
-        source = "Tests Pass - PIP"
-        msg = json.dumps({"request-type":"SetSourceRender","scene": scene, "source": source, "render": True, "message-id":""})
-        await websocket.send(msg)
 
-        # scene = "PiP"
-        # msg = json.dumps({"request-type":"SetCurrentScene","scene-name":f"{scene}","message-id":""})
-        # await websocket.send(msg)
+def toggle_source(source, render):
+    scene = "Coding Fun Terminal"
+    # source = "Tests Fail - PIP"
+
+    return json.dumps(
+        {
+            "request-type": "SetSourceRender",
+            "scene": scene,
+            "source": source,
+            "render": render,
+            "message-id": "",
+        }
+    )
+
 
 if __name__ == "__main__":
-	asyncio.get_event_loop().run_until_complete(have_fun())
+    # parser = OptionParser()
+    # parser.add_option("-r", "--render", action="store", type="string", dest="render")
+    # (options, args) = parser.parse_args()
+    # render = render.lower() == "true"
+
+    scene = "Coding Fun Terminal"
+
+    source = "Tests Pass - PIP"
+    msg = toggle_source(source, True)
+    asyncio.get_event_loop().run_until_complete(send_msg(msg))
+
+    source = "Tests Fail - PIP"
+    msg = toggle_source(source, False)
+    asyncio.get_event_loop().run_until_complete(send_msg(msg))
+    # msg = asyncio.get_event_loop().run_until_complete(receive_msg())
+    # print(msg)

@@ -9,6 +9,7 @@ import websockets
 # ToggleMute
 # SetCurrentTransition
 
+
 async def have_fun():
     uri = "ws://localhost:4444"
     async with websockets.connect(uri) as websocket:
@@ -17,7 +18,15 @@ async def have_fun():
 
         source = "Tests Fail - PIP"
 
-        msg = json.dumps({"request-type":"SetSourceRender","scene": scene, "source": source, "render": True, "message-id":"1"})
+        msg = json.dumps(
+            {
+                "request-type": "SetSourceRender",
+                "scene": scene,
+                "source": source,
+                "render": True,
+                "message-id": "1",
+            }
+        )
         # msg = json.dumps({"request-type":"SetSourceRender", "source": source, "render": True, "message-id":"1"})
 
         await websocket.send(msg)
@@ -31,5 +40,6 @@ async def have_fun():
         # msg = json.dumps({"request-type":"SetCurrentScene","scene-name":f"{scene}","message-id":""})
         # await websocket.send(msg)
 
+
 if __name__ == "__main__":
-	asyncio.get_event_loop().run_until_complete(have_fun())
+    asyncio.get_event_loop().run_until_complete(have_fun())
