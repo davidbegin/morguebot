@@ -42,8 +42,9 @@ from lib.character import Character
         ),
     ],
 )
+@pytest.mark.focus
 def test_creating_new_weapon(raw_weapon, name, enchantment, weapon_type):
-    character = Character(name="beginbot")
+    character = Character(morgue_filepath="support/GucciMane.txt", local_mode=True)
     weapon = WeaponFactory.new(character, raw_weapon)
 
     assert weapon.name == name

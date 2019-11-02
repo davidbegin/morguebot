@@ -3,7 +3,6 @@ import pytest
 from lib.dungeon_gossiper import DungeonGossiper
 
 
-@pytest.mark.focus
 def test_dungeon_gossiper():
     record = {
         "eventID": "fef6c6b73fe1805ec5d8c82bb6087997",
@@ -92,7 +91,6 @@ def test_new_unrands():
     assert new_unrands == expected_unrands
 
 
-@pytest.mark.focus
 def test_new_runes():
     # all_runes = [
     #         "abyssal",
