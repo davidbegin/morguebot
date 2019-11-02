@@ -136,3 +136,10 @@ def test_new_runes():
         "eventSourceARN": "arn:aws:dynamodb:us-west-2:851075464416:table/characters-696d3eb/stream/2019-10-26T23:46:17.531",
     }
     assert DungeonGossiper(record).new_runes() == ["barnacled"]
+
+
+# def test_no_new_image():
+# {"Record
+# s": [{"eventID": "9f793a4c9612329edb0da0438409cf8f", "eventName": "REMOVE", "eventVersion": "1.1", "eventSource": "aws:dynamodb", "awsRegion": "us-west-2", "dynamodb": {"ApproximateCreationDateTime": 1572665362.0, "Keys": {"character": {"S": "12feetdeep"}}, "OldImage": {"character": {"S": "12feetdeep"}, "xl_xl": {"
+# S": "18"}, "xl": {"S": "3"}, "weapons": {"SS": ["a +0 hand crossbow", "a +2 hand axe (weapon)"]}, "armour": {"SS": [" d - a +0 ring mail (worn)", "Jewellery"]}}, "SequenceNumber": "90159100000000006243112970", "SizeBytes": 136, "StreamViewType": "NEW_AND_OLD_IMAGES"}, "eventSourceARN": "arn:aws:dynamodb:us-west-2:8
+# 51075464416:table/characters-696d3eb/stream/2019-10-26T23:46:17.531"}]}

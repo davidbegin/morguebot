@@ -39,6 +39,18 @@ async def have_fun():
         )
         await websocket.send(msg)
 
+        source = "Deploy Done"
+        msg = json.dumps(
+            {
+                "request-type": "SetSourceRender",
+                "scene": scene,
+                "source": source,
+                "render": False,
+                "message-id": "",
+            }
+        )
+        await websocket.send(msg)
+
         # scene = "PiP"
         # msg = json.dumps({"request-type":"SetCurrentScene","scene-name":f"{scene}","message-id":""})
         # await websocket.send(msg)

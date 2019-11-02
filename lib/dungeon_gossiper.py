@@ -40,18 +40,30 @@ class DungeonGossiper:
         self.character = Character(name=name)
 
         dynamodb_record = self.record["dynamodb"]
-        new_image = dynamodb_record["NewImage"]
         self.old_runes = []
 
-        if "weapons" in new_image:
-            self.current_weapons = new_image["weapons"]["SS"]
-        else:
-            self.current_weapons = []
+        new_image = dynamodb_record["NewImage"]
+        if "NewImage" in dynamodb_record:
+            if "weapons" in new_image:
+                self.current_weapons = new_image["weapons"]["SS"]
+            else:
+                self.current_weapons = []
 
-        if "runes" in new_image:
-            self.current_runes = new_image["runes"]["SS"]
+            if "runes" in new_image:
+                self.current_runes = new_image["runes"]["SS"]
+            else:
+                self.current_runes = []
         else:
-            self.current_runes = []
+            old_image = dynamodb_record["OldImage"]
+            if "weapons" in old_image:
+                self.current_weapons = old_image["weapons"]["SS"]
+            else:
+                self.current_weapons = []
+
+            if "runes" in old_image:
+                self.current_runes = old_image["runes"]["SS"]
+            else:
+                self.current_runes = []
 
         if "OldImage" in dynamodb_record:
             old_image = dynamodb_record["OldImage"]

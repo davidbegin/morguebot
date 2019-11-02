@@ -12,9 +12,12 @@ def fetch_characters():
     if True:
         client = boto3.client("s3")
         response = client.list_objects_v2(Bucket="morgue-files-2944dfb")
-        s3_objects = response["Contents"]
-        morgue_keys = filter_out_morgue_keys(s3_objects)
-        return sanitize_them_keys(morgue_keys)
+        if "Contents" in response:
+            s3_objects = response["Contents"]
+            morgue_keys = filter_out_morgue_keys(s3_objects)
+            return sanitize_them_keys(morgue_keys)
+        else:
+            return []
     elif False:
         with open("tmp/lobby_entries.json") as f:
             lobby_entries = json.loads(f.read())["entries"]
