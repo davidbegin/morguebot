@@ -7,6 +7,11 @@ import botocore
 KINESIS_NAME = os.environ.get("CHAT_STREAM_NAME", "twitch-chat-877759c")
 
 
+def send_new_runes_msg(character, runes):
+    msg = f"PraiseIt New Runes! {' '.join(runes)} PraiseIt Congratulations {character}"
+    send_chat_to_stream(msg)
+
+
 def send_chat_to_stream(msg):
     client = boto3.client("kinesis")
 

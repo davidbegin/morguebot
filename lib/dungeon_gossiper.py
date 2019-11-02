@@ -1,32 +1,19 @@
-from lib.sns import send_unrand_notification
 from lib.sns import send_morguefile_notification
 from lib.character import Character
 from lib.pawn_star import PawnStar
 
-from lib.sns import send_new_runes_notification
-
-
-def check_for_unrands(gossiper):
-    new_unrands = [
-        weapon for weapon in gossiper.new_weapons() if PawnStar(weapon).is_unrand()
-    ]
-    if new_unrands:
-        print(f"PRINT WE FOUND NEW UNRAND {new_unrands}")
-        for unrand in new_unrands:
-            send_unrand_notification(gossiper.character, unrand)
-    else:
-        print(f"\033[33mSorry {gossiper.character} no new unrand\033[0m")
+# from lib.sns import send_new_runes_notification
+from lib.kinesis import send_new_runes_msg
 
 
 def process_dynamodb_records(event):
     for record in event["Records"]:
         gossiper = DungeonGossiper(record)
 
-        check_for_unrands(gossiper)
-
         if gossiper.new_runes():
             print(f"We Got new runes {gossiper.new_runes()}")
-            send_new_runes_notification(gossiper.character, gossiper.new_runes())
+            send_new_runes_msg(gossiper.character, gossiper.new_runes())
+            # send_new_runes_notification(gossiper.character, gossiper.new_runes())
 
 
 # What does the Gossiper do?

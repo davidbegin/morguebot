@@ -7,7 +7,6 @@ from lib.character import Character
 from lib.pawn_star import PawnStar
 
 
-
 # def check_for_unrands(gossiper):
 #     new_unrands = [
 #         weapon for weapon in gossiper.new_weapons() if PawnStar(weapon).is_unrand()
@@ -48,9 +47,13 @@ def _send_chat(msg):
         if new_unrands:
             response = client.put_record(
                 StreamName=kinesis_name,
-                Data=json.dumps({"Message": f"CurseLit {' || '.join(new_unrands)}"}),
+                Data=json.dumps(
+                    {
+                        "Message": f"OSFrog {character.name} got a New Unrand! OSFrog {' || '.join(new_unrands)}"
+                    }
+                ),
                 PartitionKey="alpha",
             )
             print(response)
-        except Exception as e:
-            print(f"Error: {e} | msg: {msg}")
+    except Exception as e:
+        print(f"Error: {e} | msg: {msg}")

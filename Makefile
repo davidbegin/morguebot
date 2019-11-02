@@ -30,7 +30,7 @@ artifact:
 
 # make artifact_deploy
 deploy: l artifact
-	&& aws s3 cp build/$(ARTIFACT_NAME) s3://morgue-artifacts/$(ARTIFACT_NAME)
+	aws s3 cp build/$(ARTIFACT_NAME) s3://morgue-artifacts/$(ARTIFACT_NAME)
 	cd deploy; source venv/bin/activate; echo $(ARTIFACT_NAME) | pulumi config set artifact_name; (pulumi up --yes && python ../scripts/deploy_done.py) || ../scripts/tests_fail.py
 
 

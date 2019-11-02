@@ -33,21 +33,9 @@ def send_new_weapons_notification(character, weapons):
 
 def send_new_runes_notification(character, runes):
     client = boto3.client("sns")
-    # msg = json.dumps(
-    #     {
-    #         "default": f"OSFrog New Runes: {' '.join(runes)} OSFrog {character.overview()}"
-    #     }
-    # )
-    msg = json.dumps({"default": f"OSFrog New Runes {character.overview()} OSFrog"})
-    response = client.publish(
-        TopicArn=WEAPONS_ARN, Message=msg, MessageStructure="json"
+    msg = json.dumps(
+        {"default": json.dumps({"character": f"{character.name}", "runes": runes})}
     )
-    print(json.dumps(response))
-
-
-def send_unrand_notification(character, unrand):
-    client = boto3.client("sns")
-    msg = json.dumps({"default": f"New Unrand {unrand} {character.overview()}"})
     response = client.publish(
         TopicArn=WEAPONS_ARN, Message=msg, MessageStructure="json"
     )
