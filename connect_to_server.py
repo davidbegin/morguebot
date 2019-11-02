@@ -53,6 +53,8 @@ class TryThisOut(WebTilesGameConnection):
             if not self.lobby_entries:
                 continue
 
+            print("We found the lobby_entries!")
+
             # {'username': 'beginbot', 'xl': '11', 'title': 'Fighter', 'spectator_count': 0, 'god': 'Trog', 'idle_time': 395, 'char': 'MiBe', 'place': 'Orc:1', 'msg': 'lobby_entry', 'game_id': 'dcss-git', 'id': 23981, 'time_last_update': 1572572963.860949}
             with open("tmp/lobby_entries.json", "w") as f:
                 f.write(json.dumps({"entries": self.lobby_entries}))
@@ -70,6 +72,7 @@ class TryThisOut(WebTilesGameConnection):
 
 @asyncio.coroutine
 def try_this_out(username, password):
+    print("inside Try this out")
     url = "ws://crawl.akrasiac.org:8080/socket"
     protocol_version = 1
     hostname = urlparse(url).hostname
@@ -86,7 +89,7 @@ def try_this_out(username, password):
         sys.exit(1)
 
 
-_log.info("Updates complete")
+# _log.info("Updates complete")
 
 
 def main():
@@ -120,8 +123,11 @@ def main():
     if not password:
         while not password:
             try:
-                password = getpass.getpass("Crawl password: ")
+                password = os.environ["CRAWL_PASSWORD"]
             except:
+                import pdb
+
+                pdb.set_trace()
                 sys.exit(1)
 
     # _log.info("Updates complete")

@@ -2,18 +2,7 @@ from lib.sns import send_morguefile_notification
 from lib.character import Character
 from lib.pawn_star import PawnStar
 
-# from lib.sns import send_new_runes_notification
 from lib.kinesis import send_new_runes_msg
-
-
-def process_dynamodb_records(event):
-    for record in event["Records"]:
-        gossiper = DungeonGossiper(record)
-
-        if gossiper.new_runes():
-            print(f"We Got new runes {gossiper.new_runes()}")
-            send_new_runes_msg(gossiper.character, gossiper.new_runes())
-            # send_new_runes_notification(gossiper.character, gossiper.new_runes())
 
 
 # What does the Gossiper do?

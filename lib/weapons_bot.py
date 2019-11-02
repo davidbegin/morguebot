@@ -28,7 +28,8 @@ def checkout_the_weapons(event):
 
 
 def _send_chat(msg):
-    print(f"Weapons Bot Time! {msg}")
+    # IF debug mode:
+    # print(f"Weapons Bot Time! {msg}")
     kinesis_arn = os.environ["CHAT_STREAM_ARN"]
     kinesis_name = os.environ["CHAT_STREAM_NAME"]
 

@@ -8,7 +8,8 @@ KINESIS_NAME = os.environ.get("CHAT_STREAM_NAME", "twitch-chat-877759c")
 
 
 def send_new_runes_msg(character, runes):
-    msg = f"PraiseIt New Runes! {' '.join(runes)} PraiseIt Congratulations {character}"
+    print(f"send_new_runes_msg: {character} {runes}")
+    msg = f"PraiseIt New Runes! {' - '.join(runes)} PraiseIt {character}"
     send_chat_to_stream(msg)
 
 

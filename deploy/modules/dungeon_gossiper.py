@@ -9,6 +9,7 @@ from modules.sns import sns_topic
 from modules.sns import weapons_topic
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
+from modules.kinesis import chat_stream
 
 MODULE_NAME = "dungeon_gossiper"
 
@@ -20,7 +21,11 @@ role = iam.Role(
 )
 
 policy = Output.all(
-    dynamodb_table.arn, dynamodb_table.stream_arn, sns_topic.arn, weapons_topic.arn
+    dynamodb_table.arn,
+    dynamodb_table.stream_arn,
+    sns_topic.arn,
+    weapons_topic.arn,
+    chat_stream.arn,
 ).apply(
     lambda args: json.dumps(
         {
@@ -35,6 +40,7 @@ policy = Output.all(
                     "Action": ["sns:*"],
                     "Resource": [args[2], args[3]],
                 },
+                {"Effect": "Allow", "Action": ["kinesis:*"], "Resource": args[4]},
             ],
         }
     )
