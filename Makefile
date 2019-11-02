@@ -5,12 +5,7 @@ f:
 		(TEST_MODE=true python3 -m pytest test/ -s -m focus && python scripts/tests_pass.py) || python scripts/tests_fail.py
 
 l:
-		black deploy/*.py
-		black lib/
-		black test/
-		black *.py
-		black deploy/ --exclude venv
-		black deploy/modules
+	(black deploy/*.py && black lib/ && black test/ && black *.py && black deploy/ --exclude venv && black deploy/modules) || scripts/tests_fail.py
 
 set_env_vars:
 	cd deploy; pulumi stack output --json | jq '.lambda_env_vars' | tee ../.env
@@ -34,8 +29,8 @@ artifact:
 
 
 # make artifact_deploy
-deploy: artifact
-	aws s3 cp build/$(ARTIFACT_NAME) s3://morgue-artifacts/$(ARTIFACT_NAME)
+deploy: l artifact
+	&& aws s3 cp build/$(ARTIFACT_NAME) s3://morgue-artifacts/$(ARTIFACT_NAME)
 	cd deploy; source venv/bin/activate; echo $(ARTIFACT_NAME) | pulumi config set artifact_name; (pulumi up --yes && python ../scripts/deploy_done.py) || ../scripts/tests_fail.py
 
 

@@ -42,8 +42,8 @@ class DungeonGossiper:
         dynamodb_record = self.record["dynamodb"]
         self.old_runes = []
 
-        new_image = dynamodb_record["NewImage"]
         if "NewImage" in dynamodb_record:
+            new_image = dynamodb_record["NewImage"]
             if "weapons" in new_image:
                 self.current_weapons = new_image["weapons"]["SS"]
             else:

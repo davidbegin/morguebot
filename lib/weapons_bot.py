@@ -3,6 +3,10 @@ import json
 
 import boto3
 
+from lib.character import Character
+from lib.pawn_star import PawnStar
+
+
 
 # def check_for_unrands(gossiper):
 #     new_unrands = [
@@ -33,6 +37,7 @@ def _send_chat(msg):
 
     # OSFrog New Weapons
     try:
+        new_unrands = []
         decoded_msg = json.loads(msg)
         message = decoded_msg["Message"]
         print(f"message: {message}")
@@ -40,16 +45,12 @@ def _send_chat(msg):
         character = Character(name=character_weapon_info["character"])
         new_weapons = character_weapon_info["weapons"]
         new_unrands = [weapon for weapon in new_weapons if PawnStar(weapon).is_unrand()]
-    except:
-        message = msg
-
-    #     new_unrands = [
-    #         weapon for weapon in gossiper.new_weapons() if PawnStar(weapon).is_unrand()
-    #     ]
-    response = client.put_record(
-        StreamName=kinesis_name,
-        Data=json.dumps({"Message": f"CurseLit {' || '.join(new_unrands)}"}),
-        PartitionKey="alpha",
-    )
-
-    print(response)
+        if new_unrands:
+            response = client.put_record(
+                StreamName=kinesis_name,
+                Data=json.dumps({"Message": f"CurseLit {' || '.join(new_unrands)}"}),
+                PartitionKey="alpha",
+            )
+            print(response)
+        except Exception as e:
+            print(f"Error: {e} | msg: {msg}")
