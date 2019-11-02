@@ -41,6 +41,7 @@ policy = Output.all(
                 {
                     "Effect": "Allow",
                     "Action": [
+                        "dynamodb:scan",
                         "dynamodb:GetItem",
                         "dynamodb:PutItem",
                         "dynamodb:UpdateItem",

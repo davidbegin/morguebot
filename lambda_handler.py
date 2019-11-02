@@ -21,6 +21,9 @@ from lib.twitch_chat_bot import send_twitch_message
 # from lib.dungeon_gossiper import process_dynamodb_records
 from lib.dungeon_gossiper import DungeonGossiper
 
+from lib.sns import send_new_weapons_notification
+from lib.sns import send_new_runes_notification
+
 
 def morgue_stalker(event, handler):
     print(json.dumps(event))
@@ -57,8 +60,8 @@ def dungeon_gossiper(event, context):
         gossiper = DungeonGossiper(record)
         # check_for_unrands(gossiper)
         if gossiper.new_weapons():
-            print(f"We got some new weapons: {gossiper.weapons()}")
-            send_new_weapon_notification(gossiper.character, gossiper.new_weapons())
+            print(f"We got some new weapons: {gossiper.new_weapons()}")
+            send_new_weapons_notification(gossiper.character, gossiper.new_weapons())
         if gossiper.new_runes():
             print(f"We Got new runes {gossiper.new_runes()}")
             send_new_runes_notification(gossiper.character, gossiper.new_runes())

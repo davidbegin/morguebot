@@ -12,7 +12,7 @@ import boto3
 # .env file???
 
 TOPIC_ARN = os.environ.get(
-    "TOPIC_ARN", "arn:aws:sns:us-west-2:851075464416:gods-queue-topic-94691e5"
+    "TOPIC_ARN", "arn:aws:sns:us-west-2:851075464416:gods-topic-f88048a"
 )
 
 WEAPONS_ARN = os.environ.get(
@@ -23,9 +23,7 @@ WEAPONS_ARN = os.environ.get(
 def send_new_weapons_notification(character, weapons):
     client = boto3.client("sns")
     msg = json.dumps(
-        {
-            "default": f"OSFrog New Weapons {' '.join(weapons)} OSFrog {character.overview()}"
-        }
+        {"default": json.dumps({"character": f"{character.name}", "weapons": weapons})}
     )
     response = client.publish(
         TopicArn=WEAPONS_ARN, Message=msg, MessageStructure="json"
@@ -35,11 +33,12 @@ def send_new_weapons_notification(character, weapons):
 
 def send_new_runes_notification(character, runes):
     client = boto3.client("sns")
-    msg = json.dumps(
-        {
-            "default": f"OSFrog New Runes: {' '.join(runes)} OSFrog {character.overview()}"
-        }
-    )
+    # msg = json.dumps(
+    #     {
+    #         "default": f"OSFrog New Runes: {' '.join(runes)} OSFrog {character.overview()}"
+    #     }
+    # )
+    msg = json.dumps({"default": f"OSFrog New Runes {character.overview()} OSFrog"})
     response = client.publish(
         TopicArn=WEAPONS_ARN, Message=msg, MessageStructure="json"
     )

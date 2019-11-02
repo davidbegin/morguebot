@@ -41,10 +41,10 @@ sns.TopicSubscription(
     # f"weapons-subscription-{random.randint(1, 99999)}",
     f"weapons-subscription",
     endpoint=weapons_queue.arn,
-    protocol="SQS",
+    protocol="sqs",
     topic=weapons_topic.arn,
 )
 
 sns.TopicSubscription(
-    f"gods-subscription", endpoint=gods_queue.arn, protocol="SQS", topic=sns_topic.arn
+    f"gods-subscription", endpoint=gods_queue.arn, protocol="sqs", topic=sns_topic.arn
 )

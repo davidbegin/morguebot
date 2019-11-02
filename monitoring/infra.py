@@ -25,12 +25,13 @@ if __name__ == "__main__":
             "lumigo-cli tail-kinesis  --streamName twitch-chat-877759c --region us-west-2",
             ]
 
-    first_command, *other_commands =  commands
+    # first_command, *other_commands =  commands
 
-    for command in other_commands:
+    # for command in other_commands:
+    for command in commands:
         full_command = f"tmux split-window -h {command}"
         call_bash(full_command)
 
-    command = "tmux select-layout tiled"
-    call_bash(first_command)
+    # command = "tmux select-layout tiled"
+    # call_bash(first_command)
     # call_bash(first_command)

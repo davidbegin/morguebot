@@ -23,6 +23,11 @@ def process_event(event):
 
     if command == "!fetch":
         morgue_saver(character, character.non_saved_morgue_file(), arg1)
+    if command == "!stalk_all":
+        characters = fetch_characters()
+        for character in characters:
+            character = Character(name=character)
+            morgue_saver(character, character.non_saved_morgue_file(), arg1)
     elif command == "!characters":
         characters = fetch_characters()
         send_chat_to_stream(["All The Characters"] + [", ".join(characters)])
@@ -71,7 +76,7 @@ def call_command(formatter, command, character_name):
     if msg:
         send_chat_to_stream(msg)
     else:
-        print(f"Error building message {command} for {character_name}")
+        print(f"No Message return for command: {command} character: {character_name}")
 
 
 def call_command_with_arg(formatter, command, arg1):

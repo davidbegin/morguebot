@@ -15,6 +15,10 @@ def fetch_characters():
         s3_objects = response["Contents"]
         morgue_keys = filter_out_morgue_keys(s3_objects)
         return sanitize_them_keys(morgue_keys)
+    elif False:
+        with open("tmp/lobby_entries.json") as f:
+            lobby_entries = json.loads(f.read())["entries"]
+            return [entry["username"] for entry in lobby_entries]
     else:
         return [
             "Fa",

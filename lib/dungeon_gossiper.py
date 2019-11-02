@@ -21,7 +21,9 @@ def check_for_unrands(gossiper):
 def process_dynamodb_records(event):
     for record in event["Records"]:
         gossiper = DungeonGossiper(record)
+
         check_for_unrands(gossiper)
+
         if gossiper.new_runes():
             print(f"We Got new runes {gossiper.new_runes()}")
             send_new_runes_notification(gossiper.character, gossiper.new_runes())
@@ -39,6 +41,7 @@ class DungeonGossiper:
 
         dynamodb_record = self.record["dynamodb"]
         new_image = dynamodb_record["NewImage"]
+        self.old_runes = []
 
         if "weapons" in new_image:
             self.current_weapons = new_image["weapons"]["SS"]
