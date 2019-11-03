@@ -28,24 +28,31 @@ def run_bot(server, character):
 
 def _process_msg(irc_response, character):
     user, msg = _parse_user_and_msg(irc_response)
+    character_name = None
+    arguments = None
 
     if _is_command_msg(msg):
         split_command = msg.split()
-        if len(split_command) > 2:
-            arguments = split_command[2:]
-        else:
-            arguments = None
-
         command = split_command[0]
 
-        if len(split_command) > 1:
-            character_name = split_command[1]
-        elif command == "!h?"
+        if command == "!h?":
             character_name = None
-        else:
-            character_name = character.name
+            # Can we return early here??
+            return invoke_dungeon_gossiper(character_name, command)
+        elif len(split_command) == 1:
+            pass
+        elif len(split_command) == 2:
+            arguments = None
+            character_name = split_command[1]
+        elif len(split_command) > 2:
+            arguments = split_command[2:]
+            character_name = split_command[1]
 
-        invoke_morgue_bot(character_name, command, arguments)
+        if command == "!fetch":
+            pass
+            # invoke_morgue_stalker(character)
+        else:
+            invoke_dungeon_gossiper(character_name, command, arguments)
     else:
         print(f"\033[37;1m{user}:\033[0m {msg}")
 
@@ -65,7 +72,7 @@ def _is_command_msg(msg):
     return msg[0] == "!" and msg[1] != "!"
 
 
-def invoke_morgue_bot(character, command, arguments):
+def invoke_dungeon_gossiper(character, command, arguments=None):
     print(
         f"\033[33mInvoking Morgue Bot\033[0m \033[037;1mcharacter:\033[0m \033[36m{character}\033[0m \033[37;1mcommand:\033[0m \033[36m{command}\033[0m"
     )
