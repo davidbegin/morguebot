@@ -76,11 +76,10 @@ def fetch_characters():
 
 def stalk(event):
     print(json.dumps(event))
+    character = event.get("character", None)
 
-    if event["character"] != "None":
-        stalk_character(event["character"])
-    # if "single_character_mode" in event:
-    #     stalk_character(event)
+    if character and character != "None":
+        stalk_character(event)
     else:
         characters_to_stalk = fetch_characters()
 

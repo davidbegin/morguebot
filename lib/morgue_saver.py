@@ -18,6 +18,11 @@ def morgue_saver(character, morgue, refresh=False):
         response = client.put_object(
             ACL="public-read", Body=morgue, Bucket=MORGUE_BUCKETNAME, Key=key
         )
-        print(response)
+        metadata = response["ResponseMetadata"]
+        status = metadata["HTTPStatusCode"]
+        if status == 200:
+            print("\033[37mObject safely stored in S3\033[0m")
+        else:
+            print(response)
     else:
-        print(f"Identical Morgue for {character.name}")
+        print(f"\033[33mIdentical Morgue for {character.name}\033[0m")

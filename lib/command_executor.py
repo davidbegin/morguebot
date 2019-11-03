@@ -29,8 +29,13 @@ def process_event(event):
         character = Character(name=character_name)
         formatter = Formatter(character)
 
-    arg1 = event.get("arg1", None)
-    arg2 = event.get("arg2", None)
+    if "arguments" in event:
+        args = event["arguments"]
+        arg1 = args[0]
+        arg2 = args[1]
+    else:
+        arg1 = event.get("arg1", None)
+        arg2 = event.get("arg2", None)
 
     if command == "!h?":
         help_msgs = [
