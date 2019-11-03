@@ -55,15 +55,21 @@ def xl_bot(event, handler):
 
 def dungeon_gossiper(event, context):
     print(json.dumps(event))
-    for record in event["Records"]:
-        gossiper = DungeonGossiper(record)
-        # check_for_unrands(gossiper)
-        if gossiper.new_weapons():
-            print(f"We got some new weapons: {gossiper.new_weapons()}")
-            send_new_weapons_notification(gossiper.character, gossiper.new_weapons())
-        if gossiper.new_runes():
-            print(f"We Got new runes {gossiper.new_runes()}")
-            send_new_runes_msg(gossiper.character, gossiper.new_runes())
+
+    if "Records" in event:
+        for record in event["Records"]:
+            gossiper = DungeonGossiper(record)
+            # check_for_unrands(gossiper)
+            if gossiper.new_weapons():
+                print(f"We got some new weapons: {gossiper.new_weapons()}")
+                send_new_weapons_notification(
+                    gossiper.character, gossiper.new_weapons()
+                )
+            if gossiper.new_runes():
+                print(f"We Got new runes {gossiper.new_runes()}")
+                send_new_runes_msg(gossiper.character, gossiper.new_runes())
+    else:
+        process_event(event)
 
 
 def weapons_bot(event, context):

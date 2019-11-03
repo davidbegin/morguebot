@@ -9,8 +9,8 @@ character_name = "beginbot"
 # objects = [ "the cursed +14 obsidian axe {chop, +Fly SInv *Curse}" ]
 objects = [ "dumb weapon" ]
 
-objects = ["very cool", "fake rune", "another2", "what", "hello", "slimey", "barnacled", "gold"]
-# objects = ["barnacled", "slimy"]
+# objects = ["very cool", "fake rune", "another2", "what", "hello", "slimey", "barnacled", "gold"]
+objects = ["barnacled"]
 
 client = boto3.client("dynamodb")
 

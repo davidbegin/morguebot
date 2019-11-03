@@ -1,0 +1,219 @@
+ Dungeon Crawl Stone Soup version 0.24.0-1-gfbc8707 (webtiles) character file.
+
+kaostheory the Chopper (Minotaur Berserker)         Turns: 3052, Time: 00:09:15
+
+Health: 57/57      AC:  6    Str: 23    XL:     6   Next: 42%
+Magic:  5/5        EV: 11    Int:  5    God:    Trog [**....]
+Gold:   176        SH:  0    Dex:  9    Spells: 5/5 levels left
+
+rFire    . . .     SeeInvis .   a - +0 hand axe
+rCold    . . .     Gourm    .   (no shield)
+rNeg     . . .     Faith    .   h - +0 ring mail
+rPois    .         Spirit   .   (helmet restricted)
+rElec    .         Reflect  .   (no cloak)
+rCorr    .         Harm     .   (no gloves)
+MR       .....                  g - +0 pair of boots
+Stlth    ..........             (no amulet)
+HPRegen  0.19/turn              L - ring of flight
+MPRegen  0.09/turn              (no ring)
+
+@: no status effects
+A: retaliatory headbutt, horns 2
+a: Berserk, Trog's Hand, Renounce Religion, Evoke Flight
+
+
+You are on level 3 of the Dungeon.
+You worship Trog.
+Trog is pleased with you.
+You are not hungry.
+
+You have visited 1 branch of the dungeon, and seen 3 of its levels.
+
+You have collected 176 gold pieces.
+
+
+Innate Abilities, Weirdness & Mutations
+
+You reflexively headbutt those who attack you in melee.
+You have a pair of horns on your head.
+
+
+   Skills:
+ + Level 5.8 Fighting
+ * Level 7.5 Axes
+ - Level 2.4 Armour
+ - Level 2.1 Dodging
+
+
+You have 5 spell levels left.
+You don't know any spells.
+Your spell library is empty.
+
+Inventory:
+
+Hand Weapons
+ a - a +0 hand axe (weapon)
+Missiles
+ b - 30 poisoned darts (quivered)
+Armour
+ g - a +0 pair of boots (worn)
+ h - a +0 ring mail (worn)
+Jewellery
+ p - a twisted opal ring
+ F - an uncursed ring of fire
+ L - a ring of flight (left hand)
+Wands
+ f - a wand of flame (14)
+Scrolls
+ m - a scroll of blinking
+Potions
+ d - 2 potions of ambrosia
+ e - 2 murky emerald potions
+ i - 2 bubbling brown potions
+ j - a sapphire potion
+ k - a potion of berserk rage {!q}
+ l - 2 lumpy cyan potions
+ o - a smoky yellow potion
+Comestibles
+ c - 5 rations
+
+
+Dungeon Overview and Level Annotations
+
+Branches:
+Dungeon (3/15)            
+
+Altars:
+Okawaru
+Qazlal
+Trog
+Zin
+
+.# ##......## ####.#...#
+.# #.....###     #...#.#
+####...###       ###.#.##
+###...##        ####.#..#
+.##...#         #.....#.#
+###...#       ###.##..#.#
+.##..##       #.#..<..#.#
+.#...#        #.#.#.....#
+.#...#        #.@.....###
+.#..#############...###
+#...........#.....###
+#...........##.##.#
+#...........##.##.#
+#...........##.##.#
+###....#..#.......#
+  #....##.####.####
+###....##..# #.#
+
+
+There are no monsters in sight!
+
+Message History
+
+The bat misses you. You furiously retaliate! You headbutt the bat.
+You kill the bat!
+Trog accepts your kill.
+The bat hits you.
+The bat closely misses you. You furiously retaliate! You headbutt the bat!
+You kill the bat!
+Trog accepts your kill.
+No target in view!
+No target in view!
+You butcher the bat corpse.
+n - 3 chunks of flesh (gained 1)
+You see here a bat skeleton. x2
+Found a scale mail and a leather armour.
+Found 5 bolts.
+Some of the chunks of flesh in your inventory have rotted away.
+You now have 176 gold pieces (gained 13).
+You see here a +0 club.
+There is a stone staircase leading down here.
+You see here a +0 club.
+There is an open door here.
+There is an open door here.
+There is an open door here.
+Eating a chunk of flesh. You eat the chunk of flesh.
+This raw flesh tastes terrible.
+Done exploring.
+Done exploring.
+Search for what [? for help]? 
+Okay, then.
+Search for what [? for help]? armor
+Saving game... please wait.
+
+Skill      XL: |  1  2  3  4 |
+---------------+-------------+-----
+Axes           |  4     5  7 |  7.5
+Fighting       |     4     5 |  5.8
+Armour         |             |  2.4
+Dodging        |             |  2.1
+
+Action                   |  1- 3 |  4- 6 || total
+-------------------------+-------+-------++-------
+Melee: Hand axe          |    55 |   105 ||   160
+       Headbutt          |     9 |    16 ||    25
+Invok: Berserk           |     2 |     3 ||     5
+  Use: Scroll            |     2 |     7 ||     9
+       Potion            |       |     1 ||     1
+  Eat: Chunk             |     1 |    11 ||    12
+Armor: Animal skin       |     6 |       ||     6
+       Ring mail         |    10 |    40 ||    50
+Dodge: Dodged            |    37 |    59 ||    96
+
+Notes
+Turn   | Place    | Note
+-------+----------+-------------------------------------------
+     0 | D:1      | kaostheory the Minotaur Berserker began the quest for the
+                  | Orb.
+     0 | D:1      | Reached XP level 1. HP: 19/19 MP: 0/0
+   213 | D:1      | Reached skill level 4 in Axes
+   300 | D:1      | Reached XP level 2. HP: 24/27 MP: 1/1
+   472 | D:1      | Reached skill level 4 in Fighting
+   787 | D:1      | Reached XP level 3. HP: 33/33 MP: 2/2
+   871 | D:2      | Noticed Natasha
+   876 | D:2      | Killed Natasha
+   876 | D:2      | Reached skill level 5 in Axes
+   977 | D:2      | Reached ** piety under Trog
+   979 | D:2      | Reached XP level 4. HP: 41/41 MP: 3/3
+  1074 | D:2      | Noticed Natasha
+  1085 | D:2      | Killed Natasha
+  1267 | D:2      | Found a stormy altar of Qazlal.
+  1267 | D:2      | Noticed an air elemental
+  1297 | D:2      | Noticed a water elemental
+  1300 | D:2      | Noticed a fire elemental
+  1303 | D:2      | Noticed an earth elemental
+  1468 | D:2      | Noticed Natasha
+  1474 | D:2      | Killed Natasha
+  1650 | D:2      | Reached skill level 6 in Axes
+  1777 | D:2      | Noticed Sigmund
+  1789 | D:2      | Killed Sigmund
+  1789 | D:2      | Reached skill level 5 in Fighting
+  1789 | D:2      | Reached skill level 7 in Axes
+  1789 | D:2      | Reached XP level 5. HP: 48/48 MP: 4/4
+  1789 | D:2      | Reached XP level 6. HP: 56/56 MP: 5/5
+  1881 | D:2      | Found a glowing silver altar of Zin.
+  2493 | D:3      | Found an iron altar of Okawaru.
+  2494 | D:3      | Found a bloodstained altar of Trog.
+
+Vanquished Creatures
+  Sigmund (D:2)
+  Natasha (thrice) (D:2)
+  5 adders
+  An ooze (D:2)
+  5 worms
+  A dart slug (D:2)
+  3 leopard geckos
+  5 orcs (D:3)
+  5 giant cockroaches
+  9 goblins
+  9 hobgoblins
+  6 jackals
+  7 kobolds
+  3 ball pythons
+  8 bats
+  A frilled lizard (D:2)
+  6 rats
+78 creatures vanquished.
+

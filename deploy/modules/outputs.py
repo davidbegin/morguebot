@@ -34,24 +34,25 @@ pulumi.export("morgue_stalker_lambda", modules.morgue_stalker_lambda.aws_lambda.
 pulumi.export("morguebot_lambda", modules.morgue_bot_lambda.aws_lambda.name),
 pulumi.export("god_bot_lambda", modules.god_bot_lambda.aws_lambda.name),
 pulumi.export("twitch_chat_bot_lambda", modules.twitch_chat_bot_lambda.aws_lambda.name)
+pulumi.export("dungeon_gossiper_lambda", modules.dungeon_gossiper.aws_lambda.name)
 
 
-pulumi.export(
-    "lambda_env_vars",
-    {
-        "god_bot": modules.god_bot_lambda.lambda_variables,
-        "morgue_bot": modules.morgue_bot_lambda.lambda_variables,
-    },
-)
+# pulumi.export(
+#     "lambda_env_vars",
+#     {
+#         "god_bot": modules.god_bot_lambda.lambda_variables,
+#         "morgue_bot": modules.morgue_bot_lambda.lambda_variables,
+#     },
+# )
 
-pulumi.export(
-    "cloudwatch_logs",
-    [
-        Output.concat("/aws/lambda/", modules.morgue_stalker_lambda.aws_lambda.name),
-        Output.concat("/aws/lambda/", modules.morgue_bot_lambda.aws_lambda.name),
-        Output.concat("/aws/lambda/", modules.god_bot_lambda.aws_lambda.name),
-        Output.concat("/aws/lambda/", modules.twitch_chat_bot_lambda.aws_lambda.name),
-    ],
-)
+# pulumi.export(
+#     "cloudwatch_logs",
+#     [
+#         Output.concat("/aws/lambda/", modules.morgue_stalker_lambda.aws_lambda.name),
+#         Output.concat("/aws/lambda/", modules.morgue_bot_lambda.aws_lambda.name),
+#         Output.concat("/aws/lambda/", modules.god_bot_lambda.aws_lambda.name),
+#         Output.concat("/aws/lambda/", modules.twitch_chat_bot_lambda.aws_lambda.name),
+#     ],
+# )
 
 # Export the Lambda environment variables to a file!

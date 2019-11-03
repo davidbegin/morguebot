@@ -16,6 +16,9 @@ class MorgueParser:
         if m:
             return f"{m.group(1).strip()}  XL: {xl_level}  Health: {health}  Location: {location}".strip()
 
+    def armour(self):
+        pass
+
     # TODO: rename x and y
     def spells(self):
         x = "Your spell library contains the following spells:"

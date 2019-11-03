@@ -59,7 +59,6 @@ def test_overview():
     assert overview == expected_overview
 
 
-@pytest.mark.focus
 @pytest.mark.parametrize(
     "character_name,expected_runes",
     [
@@ -75,3 +74,14 @@ def test_runes(character_name, expected_runes):
     morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())
     runes = morgue_parser.runes()
     assert runes == expected_runes
+
+
+@pytest.mark.focus
+def test_fetch_armour():
+    character_name = "kaostheory"
+    morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())
+    expected_armour = ""
+    armour = morgue_parser.armour()
+
+    # morgue_file = open(morgue_file_path).read()
+    # import pdb; pdb.set_trace()

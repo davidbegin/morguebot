@@ -40,6 +40,8 @@ def _process_msg(irc_response, character):
 
         if len(split_command) > 1:
             character_name = split_command[1]
+        elif command == "!h?"
+            character_name = None
         else:
             character_name = character.name
 
@@ -86,4 +88,4 @@ def invoke_morgue_bot(character, command, arguments):
         payload = {"character": character, "command": command}
 
     # We need to pull this in from Pulumi
-    client.invoke(FunctionName="morgue-bot-2fc463f", Payload=json.dumps(payload))
+    client.invoke(FunctionName="dungeon_gossiper-67e2768", Payload=json.dumps(payload))
