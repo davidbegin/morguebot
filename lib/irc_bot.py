@@ -5,6 +5,7 @@ import boto3
 
 from lib.file_watcher import watch_for_changes
 from lib.morgue_parser import fetch_altars
+from lib.twitch_chat_parser import TwitchChatParser
 
 
 def run_bot(server, character):
@@ -27,6 +28,22 @@ def run_bot(server, character):
 
 
 def _process_msg(irc_response, character):
+    user, msg = _parse_user_and_msg(irc_response)
+    if _is_command_msg(msg):
+        # instance of Event
+        event = TwitchChatParser(msg).parse()
+        # lambda_to_hit = EventRouter(event)
+        # invoke_lambda(lambda_to_hit, event.args)
+        #
+        # EventCoordinator
+    else:
+        print(f"\033[37;1m{user}:\033[0m {msg}")
+
+
+# ========================================================================================
+
+
+def _old_process_msg(irc_response, character):
     user, msg = _parse_user_and_msg(irc_response)
     character_name = None
     arguments = None

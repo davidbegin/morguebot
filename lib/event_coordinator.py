@@ -1,0 +1,2 @@
+class EventCoordinator:
+    pass

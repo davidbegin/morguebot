@@ -15,6 +15,9 @@ class WeaponsAppraiser:
 
             if max_damages:
                 return max_damages
+            else:
+                print(f"\033[31;1mNo Max Damages Returned for {self.weapons}\033[0m")
+                return []
 
     def _find_max_damages(self):
         max_damages = []

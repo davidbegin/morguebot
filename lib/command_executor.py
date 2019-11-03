@@ -14,6 +14,13 @@ from lib.morgue_stalker import fetch_characters
 from lib.help import WORKING_COMMANDS
 
 
+# An Event:
+# {
+#     "character",
+#     "command",
+#     "arg1",
+#     "arg2",
+# }
 def process_event(event):
     command = event["command"]
 

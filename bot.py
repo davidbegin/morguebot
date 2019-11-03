@@ -9,8 +9,6 @@ from lib.irc_connector import connect_to_twitch
 from lib.irc_bot import run_bot
 
 from lib.character import Character
-from lib.status_checkers import check_status
-from lib.status_checkers import validate_seed
 from lib.kinesis import send_chat_to_stream
 
 
@@ -34,9 +32,6 @@ def main():
     parser.add_option(
         "-e", "--exec-cmd", action="store", type="string", dest="exec_command"
     )
-    parser.add_option(
-        "-s", "--status-checker", action="store_true", dest="status_checker"
-    )
 
     # Whether to have the bot post back to Twitch
     parser.add_option(
@@ -54,6 +49,7 @@ def main():
         local_mode=options.local_mode,
     )
 
+    # LOCAL
     if options.exec_command:
         # send_chat_to_stream(f"pastaThat Character: {character.name} pastaThat")
         process_event(
@@ -64,9 +60,8 @@ def main():
                 "arg2": options.arg2,
             }
         )
-    elif options.status_checker:
-        check_status(character)
     else:
+        # TWITCH CHAT
         run_bot(server, character=character)
 
 

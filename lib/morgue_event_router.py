@@ -1,0 +1,2 @@
+class MorgueEventRouter:
+    pass

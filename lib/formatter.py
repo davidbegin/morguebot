@@ -21,21 +21,6 @@ from lib.character import Character
 
 from lib.weapons_formatter import WeaponsFormatter
 
-WORKING_COMMANDS = [
-    "!overview",
-    "!h?",
-    "!weapons",
-    "!armour",
-    "!jewellery",
-    "!skills",
-    "!potions",
-    "!runes",
-    "!scrolls",
-    "!spells",
-    "!version",
-    "!max_damage",
-]
-
 
 class Formatter:
     def __init__(self, character=None):
@@ -47,8 +32,6 @@ class Formatter:
 
         if command == "!overview":
             return self.print_overview()
-        elif command == "!h?":
-            return self.print_help()
         elif command == "!weapons":
             return self.print_weapons()
         elif command == "!armour":
@@ -137,12 +120,6 @@ class Formatter:
         return [f"Squid1 Squid2 Listing All Mutations Squid4"] + self.print_command(
             "Mutations", fetch_mutations(self.character.morgue_file())
         )
-
-    def print_help(self):
-        return [
-            "TheIlluminati Valid Commands: TheIlluminati",
-            ", ".join(WORKING_COMMANDS),
-        ]
 
     # ========================================================================================
 

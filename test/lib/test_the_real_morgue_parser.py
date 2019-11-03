@@ -76,10 +76,9 @@ def test_runes(character_name, expected_runes):
     assert runes == expected_runes
 
 
-@pytest.mark.focus
 def test_fetch_armour():
     character_name = "kaostheory"
     morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())
-    expected_armour = [' g - a +0 pair of boots (worn)', ' h - a +0 ring mail (worn)']
+    expected_armour = [" g - a +0 pair of boots (worn)", " h - a +0 ring mail (worn)"]
     armour = morgue_parser.armour()
     assert armour == expected_armour
