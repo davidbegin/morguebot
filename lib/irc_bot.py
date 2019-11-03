@@ -7,6 +7,7 @@ from lib.file_watcher import watch_for_changes
 from lib.morgue_parser import fetch_altars
 from lib.twitch_chat_parser import TwitchChatParser
 from lib.event_coordinator import EventCoordinator
+from lib.command_executor import process_event
 
 
 def run_bot(server, character):
@@ -14,6 +15,9 @@ def run_bot(server, character):
         # watch_for_changes()
 
         irc_response = server.recv(2048).decode("utf-8").split()
+        # event = {"character": None, "command" : "!h?", "args": []}
+        # process_event(event)
+        # return
 
         if len(irc_response) < 2:
             pass

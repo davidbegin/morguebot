@@ -16,10 +16,14 @@ def send_new_runes_msg(character, runes):
 def send_chat_to_stream(msg):
     client = boto3.client("kinesis")
 
-    # We need to chuunk the msg in chunks of 500
-
+    # We need to chunk the msg in chunks of 500
     response = client.put_record(
         StreamName=KINESIS_NAME, Data=json.dumps({"Message": msg}), PartitionKey="alpha"
     )
 
-    print(json.dumps(response))
+    metadata = response["ResponseMetadata"]
+    status = metadata["HTTPStatusCode"]
+    if status == 200:
+        print(f"\033[37mMessage sent to Kinesis Stream {msg}...\033[0m")
+    else:
+        print(f"\033[31m{json.dumps(response)}\033m")

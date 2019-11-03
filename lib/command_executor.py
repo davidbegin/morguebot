@@ -24,6 +24,7 @@ from lib.help import WORKING_COMMANDS
 def process_event(event):
     command = event["command"]
 
+    # import pdb; pdb.set_trace()
     if command != "!h?":
         character_name = find_character_name(event)
         character = Character(name=character_name)
@@ -42,11 +43,10 @@ def process_event(event):
             "TheIlluminati Some Valid Commands: TheIlluminati",
             ", ".join(WORKING_COMMANDS),
         ]
-
         send_chat_to_stream(help_msgs)
     elif command == "!fetch":
         morgue_saver(character, character.non_saved_morgue_file(), arg1)
-    if command == "!stalk_all":
+    elif command == "!stalk_all":
         characters = fetch_characters()
         for character in characters:
             character = Character(name=character)
@@ -68,8 +68,7 @@ def process_event(event):
             print(f"msg: {msg}")
             send_chat_to_stream(msg)
         else:
-            print(f"Oh no arg1: {arg1}")
-
+            print(f"Unsupported search for spells yet. Try level.")
     elif command == "!overview":
         morgue_parser = MorgueParser(character.non_saved_morgue_file())
         msg = morgue_parser.overview()
@@ -90,6 +89,7 @@ def process_event(event):
         print(f"\033[37;1marg1 type: {type(arg1)}\033[0m")
         call_command_with_arg(formatter, command, arg1)
     else:
+        print("We are about to just call command")
         call_command(formatter, command, character_name)
 
 

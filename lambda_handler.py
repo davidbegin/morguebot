@@ -18,25 +18,26 @@ from lib.weapons_bot import checkout_the_weapons
 from lib.morgue_stalker import stalk
 from lib.twitch_chat_bot import send_twitch_message
 
-from lib.dungeon_gossiper import DungeonGossiper
+from lib.lambda_handlers.dungeon_gossiper import DungeonGossiperHandler
 
 from lib.sns import send_new_weapons_notification
 from lib.kinesis import send_new_runes_msg
 
 
 def morgue_stalker(event, handler):
-    print(json.dumps(event))
+    # print(json.dumps(event))
     stalk(event)
 
 
 def twitch_chat_bot(event, context):
-    print(json.dumps(event))
+    # print(json.dumps(event))
     send_twitch_message(event)
 
 
 # MorgueFileProcessor
 def morgue_bot(event, handler):
-    print(json.dumps(event))
+    # print(json.dumps(event))
+
     if "Records" in event or "s3" in event:
         process_s3_events(event)
     else:
@@ -44,34 +45,20 @@ def morgue_bot(event, handler):
 
 
 def god_bot(event, context):
-    print(json.dumps(event))
+    # print(json.dumps(event))
     monitor_the_gods(event)
 
 
 def xl_bot(event, handler):
-    print(json.dumps(event))
+    # print(json.dumps(event))
     monitor_the_gods(event)
 
 
 def dungeon_gossiper(event, context):
-    print(json.dumps(event))
-
-    if "Records" in event:
-        for record in event["Records"]:
-            gossiper = DungeonGossiper(record)
-            # check_for_unrands(gossiper)
-            if gossiper.new_weapons():
-                print(f"We got some new weapons: {gossiper.new_weapons()}")
-                send_new_weapons_notification(
-                    gossiper.character, gossiper.new_weapons()
-                )
-            if gossiper.new_runes():
-                print(f"We Got new runes {gossiper.new_runes()}")
-                send_new_runes_msg(gossiper.character, gossiper.new_runes())
-    else:
-        process_event(event)
+    # print(json.dumps(event))
+    DungeonGossiperHandler(event).handle()
 
 
 def weapons_bot(event, context):
-    print(json.dumps(event))
+    # print(json.dumps(event))
     checkout_the_weapons(event)
