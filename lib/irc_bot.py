@@ -31,11 +31,10 @@ def _process_msg(irc_response, character):
     user, msg = _parse_user_and_msg(irc_response)
     if _is_command_msg(msg):
         # instance of Event
-        event = TwitchChatParser(msg).parse()
-        # lambda_to_hit = EventRouter(event)
-        # invoke_lambda(lambda_to_hit, event.args)
-        #
-        # EventCoordinator
+        morgue_event = TwitchChatParser(msg).parse()
+        EventCoordinator(morgue_event)
+        # lambda_to_hit = EventRouter(morgue_event).dest_lambda()
+        # invoke_lambda(morgue_event, lambda_to_hit, event.args)
     else:
         print(f"\033[37;1m{user}:\033[0m {msg}")
 
