@@ -35,7 +35,7 @@ class EventCoordinator:
             "args": self.arguments,
         }
 
-        if os.environ["TEST_MODE"]:
+        if "TEST_MODE" in os.environ:
             print(
                 "\033[36mWE are in Test Mode, this is no time to invoke Lambdas\033[0m"
             )
@@ -47,5 +47,5 @@ class EventCoordinator:
 
     def _description(self):
         print(
-            f"\033[33mInvoking Morgue Bot\033[0m \033[037;1mcharacter:\033[0m \033[36m{self.character}\033[0m \033[37;1mcommand:\033[0m \033[36m{self.command}\033[0m"
+            f"\033[33mInvoking {self.lambda_target}\033[0m \033[037;1mcharacter:\033[0m \033[36m{self.character}\033[0m \033[37;1mcommand:\033[0m \033[36m{self.command}\033[0m \033[37;1margs:\033[0m \033[36m{self.arguments}\033[0m"
         )
