@@ -5,20 +5,29 @@ from lib.twitch_chat_parser import TwitchChatParser
 
 @pytest.mark.focus
 def test_help_command():
-    event_morgue = TwitchChatParser("!h?").parse()
-    assert event_morgue.command == "!h?"
+    morgue_event = TwitchChatParser("!h?").parse()
+    assert morgue_event.command == "!h?"
 
 
 @pytest.mark.focus
 def test_fetch_command():
-    event_morgue = TwitchChatParser("!fetch beginbot").parse()
-    assert event_morgue.command == "!fetch"
-    assert event_morgue.character == "beginbot"
+    morgue_event = TwitchChatParser("!fetch beginbot").parse()
+    assert morgue_event.command == "!fetch"
+    assert morgue_event.character == "beginbot"
+    assert morgue_event.args == []
 
 
+@pytest.mark.focus
 def test_searching_weapons():
-    pass
+    morgue_event = TwitchChatParser("!weapons beginbot axe").parse()
+    assert morgue_event.command == "!weapons"
+    assert morgue_event.character == "beginbot"
+    assert morgue_event.args == ["axe"]
 
 
+@pytest.mark.focus
 def test_rune_awards():
-    pass
+    morgue_event = TwitchChatParser("!rune_awards").parse()
+    assert morgue_event.command == "!rune_awards"
+    assert morgue_event.character == None
+    assert morgue_event.args == []

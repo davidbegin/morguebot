@@ -20,4 +20,6 @@ class TwitchChatParser:
             self.args = []
 
     def parse(self):
-        return MorgueEvent(command=self.command, character=self.character)
+        return MorgueEvent(
+            command=self.command, character=self.character, args=self.args
+        )
