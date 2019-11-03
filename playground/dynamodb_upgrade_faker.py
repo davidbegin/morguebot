@@ -7,7 +7,7 @@ TABLE_NAME = "characters-696d3eb"
 character_name = "beginbot"
 
 # objects = [ "the cursed +14 obsidian axe {chop, +Fly SInv *Curse}" ]
-objects = [ "dumb weapon" ]
+# objects = [ "dumb weapon" ]
 
 # objects = ["very cool", "fake rune", "another2", "what", "hello", "slimey", "barnacled", "gold"]
 objects = ["barnacled"]

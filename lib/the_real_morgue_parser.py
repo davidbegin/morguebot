@@ -17,7 +17,17 @@ class MorgueParser:
             return f"{m.group(1).strip()}  XL: {xl_level}  Health: {health}  Location: {location}".strip()
 
     def armour(self):
-        pass
+        return self._extract_inventory("Armour", "Jewellery")
+
+    # TODO: Figure out how ot combine this with _extract_skills
+    def _extract_inventory(self, start_cat, end_cat):
+        try:
+            split_morgue_file = self.morgue_file.split("\n")
+            start_index = split_morgue_file.index(start_cat) + 1
+            end_index = split_morgue_file.index(end_cat)
+            return split_morgue_file[start_index:end_index]
+        except:
+            return None
 
     # TODO: rename x and y
     def spells(self):

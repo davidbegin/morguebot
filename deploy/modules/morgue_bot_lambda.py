@@ -32,7 +32,7 @@ policy = Output.all(
             "Version": "2012-10-17",
             "Statement": [
                 CREATE_CW_LOGS_POLICY,
-                {"Effect": "Allow", "Action": ["s3:*"], "Resource": args[0]},
+                {"Effect": "Allow", "Action": ["s3:Get*"], "Resource": args[0]},
                 {
                     "Effect": "Allow",
                     "Action": ["sns:Publish"],

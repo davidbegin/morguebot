@@ -40,7 +40,7 @@ def _process_msg(irc_response, character):
             # Can we return early here??
             return invoke_dungeon_gossiper(character_name, command)
         elif len(split_command) == 1:
-            pass
+            print(f"\033[31mWe are not going to execute: command: {command}\033[0m")
         elif len(split_command) == 2:
             arguments = None
             character_name = split_command[1]
@@ -49,8 +49,7 @@ def _process_msg(irc_response, character):
             character_name = split_command[1]
 
         if command == "!fetch":
-            pass
-            # invoke_morgue_stalker(character)
+            invoke_morgue_stalker(character_name)
         else:
             invoke_dungeon_gossiper(character_name, command, arguments)
     else:
@@ -72,6 +71,16 @@ def _is_command_msg(msg):
     return msg[0] == "!" and msg[1] != "!"
 
 
+def invoke_morgue_stalker(character):
+    payload = {
+        "character": character,
+        "command": "!fetch",
+        "single_character_mode": True,
+    }
+    client = boto3.client("lambda")
+    client.invoke(FunctionName="morgue-stalker-341e60e", Payload=json.dumps(payload))
+
+
 def invoke_dungeon_gossiper(character, command, arguments=None):
     print(
         f"\033[33mInvoking Morgue Bot\033[0m \033[037;1mcharacter:\033[0m \033[36m{character}\033[0m \033[37;1mcommand:\033[0m \033[36m{command}\033[0m"
@@ -79,7 +88,6 @@ def invoke_dungeon_gossiper(character, command, arguments=None):
     client = boto3.client("lambda")
 
     if arguments:
-
         if len(arguments) > 1:
             payload = {
                 "character": character,

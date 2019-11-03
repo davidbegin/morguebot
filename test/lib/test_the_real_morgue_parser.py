@@ -80,8 +80,6 @@ def test_runes(character_name, expected_runes):
 def test_fetch_armour():
     character_name = "kaostheory"
     morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())
-    expected_armour = ""
+    expected_armour = [' g - a +0 pair of boots (worn)', ' h - a +0 ring mail (worn)']
     armour = morgue_parser.armour()
-
-    # morgue_file = open(morgue_file_path).read()
-    # import pdb; pdb.set_trace()
+    assert armour == expected_armour
