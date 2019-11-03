@@ -25,14 +25,8 @@ class EventCoordinator:
     # review the commands the decide what to do
     # evaluate any special flags, that run this in a different mode: AKA Local
     def coordinate(self):
-        self._title()
-        if os.environ["TEST_MODE"]:
-            print(
-                "\033[36mWE are in Test Mode, this is no time to invoke Lambdas\033[0m"
-            )
-            return
-        else:
-            return self.invoke_lambda()
+        self._description()
+        return self.invoke_lambda()
 
     def invoke_lambda(self):
         payload = {
@@ -41,11 +35,17 @@ class EventCoordinator:
             "args": self.arguments,
         }
 
-        self.lambda_client.invoke(
-            FunctionName=self.lambda_target, Payload=json.dumps(payload)
-        )
+        if os.environ["TEST_MODE"]:
+            print(
+                "\033[36mWE are in Test Mode, this is no time to invoke Lambdas\033[0m"
+            )
+            return
+        else:
+            return self.lambda_client.invoke(
+                FunctionName=self.lambda_target, Payload=json.dumps(payload)
+            )
 
-    def _title(self):
+    def _description(self):
         print(
             f"\033[33mInvoking Morgue Bot\033[0m \033[037;1mcharacter:\033[0m \033[36m{self.character}\033[0m \033[37;1mcommand:\033[0m \033[36m{self.command}\033[0m"
         )

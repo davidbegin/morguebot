@@ -1,17 +1,19 @@
 import pytest
+from pytest_mock import mocker
 
 from lib.morgue_event import MorgueEvent
 from lib.event_coordinator import EventCoordinator
 
 
 @pytest.mark.focus
-def test_help_event_coordination():
+def test_help_event_coordination(mocker):
     morgue_event = MorgueEvent(command="!h?")
     event_coordinator = EventCoordinator(morgue_event)
+    mocker.patch.object(event_coordinator, "invoke_lambda")
+    event_coordinator.invoke_lambda.return_value = "I was invoked!!"
     assert event_coordinator.lambda_target == "dungeon_gossiper-67e2768"
     result = event_coordinator.coordinate()
-    # we want to assert that the dungeon gossiper was called with the aright args
-    # or the well tested abstraction was called with the right Args!!!
+    assert result == "I was invoked!!"
 
 
 def test_fetch_event_coordination():
