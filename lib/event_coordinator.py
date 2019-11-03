@@ -5,6 +5,7 @@ import boto3
 from lib.morgue_event_router import MorgueEventRouter
 
 
+# this invokes a Lambda
 class EventCoordinator:
     def __init__(self, morgue_event):
         self.morgue_event = morgue_event

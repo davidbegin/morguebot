@@ -3,12 +3,6 @@ import pytest
 from lib.the_real_morgue_parser import MorgueParser
 
 
-def test_morgue_parser_is_real_i_swear():
-    morgue_file = open("support/kilrfish.txt").read()
-    morgue_parser = MorgueParser(morgue_file)
-    assert True
-
-
 def test_parse_spells():
     morgue_file = open("support/kilrfish.txt").read()
     morgue_parser = MorgueParser(morgue_file)

@@ -49,7 +49,11 @@ def main():
         local_mode=options.local_mode,
     )
 
+
+    # Create a MorgueEvent
     # LOCAL
+
+    # MorgueEvent(command=, character= args=f])
     if options.exec_command:
         # send_chat_to_stream(f"pastaThat Character: {character.name} pastaThat")
         process_event(
