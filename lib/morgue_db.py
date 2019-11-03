@@ -72,7 +72,7 @@ class MorgueDB:
                 name: {"Value": {f"{db_type}": objects}, "Action": "PUT"}
             },
         )
-        print(f"\033[35m{response}\033[0m")
+        # print(f"\033[35m{response}\033[0m")
         # else:
         #     print(f"NOTHING TO SAVE: {name}")
 
@@ -116,7 +116,6 @@ class MorgueDB:
         response = self.client.put_item(
             TableName=TABLE_NAME, Item={"character": {"S": self.character_name}}
         )
-        print(response)
 
     def _fetch_seed(self):
         response = self.client.get_item(

@@ -8,8 +8,7 @@ class DungeonGossiperHandler:
     def __init__(self, event):
         self.event = event
 
-    def handle():
-        print("I am proud to serve you as your new DungeonGossiper(Handler)")
+    def handle(self):
         if "Records" in self.event:
             for record in self.event["Records"]:
                 gossiper = DungeonGossiper(record)

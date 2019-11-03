@@ -18,7 +18,7 @@ from lib.weapons_bot import checkout_the_weapons
 from lib.morgue_stalker import stalk
 from lib.twitch_chat_bot import send_twitch_message
 
-from lib.lambda_handlers.dungeon_gossiper import DungeonGossiperHandler
+from lib.lambda_handlers.dungeon_gossiper_handler import DungeonGossiperHandler
 
 from lib.sns import send_new_weapons_notification
 from lib.kinesis import send_new_runes_msg

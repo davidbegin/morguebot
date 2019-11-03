@@ -3,6 +3,7 @@ import json
 
 import boto3
 import botocore
+from lib.response_printer import print_response
 
 KINESIS_NAME = os.environ.get("CHAT_STREAM_NAME", "twitch-chat-877759c")
 
@@ -21,9 +22,4 @@ def send_chat_to_stream(msg):
         StreamName=KINESIS_NAME, Data=json.dumps({"Message": msg}), PartitionKey="alpha"
     )
 
-    metadata = response["ResponseMetadata"]
-    status = metadata["HTTPStatusCode"]
-    if status == 200:
-        print(f"\033[37mMessage sent to Kinesis Stream {msg}...\033[0m")
-    else:
-        print(f"\033[31m{json.dumps(response)}\033m")
+    print_response(response, msg, "Message sent to Kinesis Stream")
