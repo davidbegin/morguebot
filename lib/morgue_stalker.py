@@ -9,7 +9,7 @@ from lib.morgue_saver import morgue_saver
 
 
 def fetch_characters():
-    if False:
+    if True:
         client = boto3.client("s3")
         response = client.list_objects_v2(Bucket="morgue-files-2944dfb")
         if "Contents" in response:
@@ -18,7 +18,7 @@ def fetch_characters():
             return sanitize_them_keys(morgue_keys)
         else:
             return []
-    elif True:
+    elif False:
         with open("tmp/lobby_entries.json") as f:
             lobby_entries = json.loads(f.read())["entries"]
             return [entry["username"] for entry in lobby_entries]

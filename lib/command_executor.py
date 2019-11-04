@@ -55,9 +55,12 @@ def process_event(event):
         elif morgue_event.command == "!runes":
             msg = formatter.print_runes()
         elif morgue_event.command == "!spells":
-            # if morgue_event.is_level_search():
+            if morgue_event.level_barrier:
+                msg = character.spells_above(morgue_event.level_barrier)
+            else:
+                msg = formatter.print_spells()
+
             # elif morgue_event.is_search()
-            msg = formatter.print_spells()
             # morgue_event which args to args to filter for us
             #     if morgue_event.args[0] == "level":
             #         msg = character.spells_above(arg2)
@@ -108,17 +111,15 @@ def process_event(event):
                 morgue_saver(character, character.non_saved_morgue_file(), True)
         elif morgue_event.command == "!rune_awards":
             rune_awards()
-    # elif morgue_event.command == "!characters":
-    #     characters = fetch_characters()
-    #     send_chat_to_stream(["All The Characters"] + [", ".join(characters)])
-    # elif morgue_event.command == "!fetch_runes":
-    #     RuneFetcher().fetch()
-    # elif morgue_event.command == "!spells":
-    # elif morgue_event.command == "!clean_morgue":
-    #     clean_the_morgue()
-    # elif morgue_event.command == "!rune_awards":
-    # elif morgue_event.command == "!weapon_awards":
-    #     find_the_max_damage_for_all_characters()
+        elif morgue_event.command == "!characters":
+            characters = fetch_characters()
+            send_chat_to_stream(["All The Characters"] + [", ".join(characters)])
+        elif morgue_event.command == "!clean_morgue":
+            print("COIMING SOON")
+            # clean_the_morgue()
+        elif morgue_event.command == "!weapon_awards":
+            find_the_max_damage_for_all_characters()
+
     # elif morgue_event.args[0]:
     #     call_command_with_arg(formatter, morgue_event.command, morgue_event.args[0])
 
@@ -126,19 +127,19 @@ def process_event(event):
 # ========================================================================================
 
 
-def call_command(formatter, command, character_name):
-    msg = formatter.construct_message(command)
-    if msg:
-        send_chat_to_stream(msg)
-    else:
-        print(f"No Message return for command: {command} character: {character_name}")
+# def call_command(formatter, command, character_name):
+#     msg = formatter.construct_message(command)
+#     if msg:
+#         send_chat_to_stream(msg)
+#     else:
+#         print(f"No Message return for command: {command} character: {character_name}")
 
 
-def call_command_with_arg(formatter, command, arg1):
-    all_values = formatter.construct_message(command)
-    filtered_values = [value for value in all_values if arg1 in value]
-    if filtered_values:
-        send_chat_to_stream([f"Result of your search for '{arg1}': "] + filtered_values)
+# def call_command_with_arg(formatter, command, arg1):
+#     all_values = formatter.construct_message(command)
+#     filtered_values = [value for value in all_values if arg1 in value]
+#     if filtered_values:
+#         send_chat_to_stream([f"Result of your search for '{arg1}': "] + filtered_values)
 
 
 def save_morgue(character):
@@ -153,33 +154,33 @@ class Formatter:
         self.character = character
         self.morgue_parser = MorgueParser(self.character.morgue_file())
 
-    def construct_message(self, command):
-        print(f"Formatter construct_message {command} for {self.character.name}")
+    # def construct_message(self, command):
+    #     print(f"Formatter construct_message {command} for {self.character.name}")
 
-        if command == "!overview":
-            return self.print_overview()
-        elif command == "!weapons":
-            return self.print_weapons()
-        elif command == "!armour":
-            return self.print_armour()
-        elif command == "!jewellery":
-            return self.print_jewellery()
-        elif command == "!skills":
-            return self.print_skills()
-        elif command == "!mutations":
-            return self.print_mutations()
-        elif command == "!potions":
-            return self.print_potions()
-        elif command == "!runes":
-            return self.print_runes()
-        elif command == "!scrolls":
-            return self.print_scrolls()
-        elif command == "!spells":
-            return self.print_spells()
-        elif command == "!version":
-            return self.print_version()
-        elif command == "!max_damage":
-            return self.print_max_damage()
+    #     if command == "!overview":
+    #         return self.print_overview()
+    #     elif command == "!weapons":
+    #         return self.print_weapons()
+    #     elif command == "!armour":
+    #         return self.print_armour()
+    #     elif command == "!jewellery":
+    #         return self.print_jewellery()
+    #     elif command == "!skills":
+    #         return self.print_skills()
+    #     elif command == "!mutations":
+    #         return self.print_mutations()
+    #     elif command == "!potions":
+    #         return self.print_potions()
+    #     elif command == "!runes":
+    #         return self.print_runes()
+    #     elif command == "!scrolls":
+    #         return self.print_scrolls()
+    #     elif command == "!spells":
+    #         return self.print_spells()
+    #     elif command == "!version":
+    #         return self.print_version()
+    #     elif command == "!max_damage":
+    #         return self.print_max_damage()
 
     def print_command(self, name, value):
         fmt_str = f"{name}: {value}"

@@ -62,6 +62,7 @@ def main():
             {
                 "character": options.character,
                 "command": f"!{options.exec_command}",
+                "level_barrier": options.level_barrier,
                 # "arg1": options.arg1,
                 # "arg2": options.arg2,
             }

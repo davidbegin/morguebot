@@ -37,20 +37,29 @@ class MorgueBotCommand:
 # if its a single character, if it has a character
 # if it takes extra args, what are those extra args
 class MorgueEvent:
-    def __init__(self, command, character=None, args=[]):
+    def __init__(self, command, character=None, level_barrier=None, args=[]):
         self.command = command
         self.character = character
+        self.level_barrier = level_barrier
         self.args = args
 
     @classmethod
     def from_event(cls, event):
         command = event["command"]
         character = event["character"]
+
+        if "level_barrier" in event:
+            level_barrier = event["level_barrier"]
+        else:
+            level_barrier = None
+
         if "args" in event:
             args = event["args"]
         else:
             args = []
-        return cls(command=command, character=character, args=args)
+        return cls(
+            command=command, character=character, level_barrier=level_barrier, args=args
+        )
 
     def is_character_command(self):
         return self.command in COMMANDS["single_character"]

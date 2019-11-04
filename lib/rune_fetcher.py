@@ -4,6 +4,7 @@ from lib.the_real_morgue_parser import MorgueParser
 from lib.morgue_db import MorgueDB
 
 
+# This Was to build the Rune Awards
 class RuneFetcher:
     def fetch(self):
         characters = fetch_characters()
