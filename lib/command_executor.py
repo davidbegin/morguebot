@@ -59,14 +59,6 @@ def process_event(event):
                 msg = character.spells_above(morgue_event.level_barrier)
             else:
                 msg = formatter.print_spells()
-
-            # elif morgue_event.is_search()
-            # morgue_event which args to args to filter for us
-            #     if morgue_event.args[0] == "level":
-            #         msg = character.spells_above(arg2)
-            #         send_chat_to_stream(msg)
-            #     else:
-            #         print(f"Unsupported search for spells yet. Try level.")
         elif morgue_event.command == "!skills":
             msg = formatter.print_skills()
         elif morgue_event.command == "!version":
@@ -96,6 +88,13 @@ def process_event(event):
             pass
             # for c in ["!armour", "!weapons", "!jewellery"]:
             #     call_command_with_arg(formatter, c, morgue_event.args[0])
+
+        if morgue_event.search:
+            if type(msg) is list:
+                msg = [item for item in msg if morgue_event.search in item]
+            else:
+                if morgue_event.search not in msg:
+                    msg = None
 
         if msg:
             send_chat_to_stream(msg)
