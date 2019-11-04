@@ -25,8 +25,10 @@ def main():
         "-u", "--morgue-url", action="store", type="string", dest="morgue_url"
     )
 
-    parser.add_option("-a", "--arg1", action="store", type="string", dest="arg1")
-    parser.add_option("-b", "--arg2", action="store", type="string", dest="arg2")
+    parser.add_option("-s", "--search", action="store", type="string", dest="search")
+    parser.add_option(
+        "-b", "--level-barrier", action="store", type="string", dest="level_barrier"
+    )
 
     # Run in Different Modes
     parser.add_option(
@@ -49,9 +51,9 @@ def main():
         local_mode=options.local_mode,
     )
 
-
     # Create a MorgueEvent
     # LOCAL
+    # CommandLineParser.from_options(options)
 
     # MorgueEvent(command=, character= args=f])
     if options.exec_command:
@@ -60,8 +62,8 @@ def main():
             {
                 "character": options.character,
                 "command": f"!{options.exec_command}",
-                "arg1": options.arg1,
-                "arg2": options.arg2,
+                # "arg1": options.arg1,
+                # "arg2": options.arg2,
             }
         )
     else:

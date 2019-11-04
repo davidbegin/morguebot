@@ -12,6 +12,13 @@ def test_event_with_no_character():
     assert morgue_event.character is "beginbot"
 
 
+def test_event_is_character_command():
+    morgue_event = MorgueEvent(command="!fetch", character="beginbot")
+    assert morgue_event.is_character_command()
+    morgue_event = MorgueEvent(command="!h?")
+    assert not morgue_event.is_character_command()
+
+
 def test_event_with_character():
     pass
 

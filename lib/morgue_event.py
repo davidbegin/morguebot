@@ -29,6 +29,10 @@ COMMANDS = {
 }
 
 
+class MorgueBotCommand:
+    pass
+
+
 # We need to check if the command is valid
 # if its a single character, if it has a character
 # if it takes extra args, what are those extra args
@@ -47,3 +51,6 @@ class MorgueEvent:
         else:
             args = []
         return cls(command=command, character=character, args=args)
+
+    def is_character_command(self):
+        return self.command in COMMANDS["single_character"]

@@ -29,75 +29,98 @@ from lib.weapons_formatter import WeaponsFormatter
 
 from lib.the_real_morgue_parser import MorgueParser
 
-# An Event:
-# {
-#     "character",
-#     "command",
-#     "args": [],
-# }
+
+def print_the_help():
+    help_msgs = [
+        "TheIlluminati Some Valid Commands: TheIlluminati",
+        ", ".join(WORKING_COMMANDS),
+    ]
+    send_chat_to_stream(help_msgs)
+
+
 def process_event(event):
     morgue_event = MorgueEvent.from_event(event)
 
-    command = event["command"]
-
-    # if morgue_event.command != "!h?":
-    #     character_name = find_character_name(event)
-    #     character = Character(name=character_name)
-    #     formatter = Formatter(character)
-
     if morgue_event.command == "!h?":
-        help_msgs = [
-            "TheIlluminati Some Valid Commands: TheIlluminati",
-            ", ".join(WORKING_COMMANDS),
-        ]
-        send_chat_to_stream(help_msgs)
-    elif morgue_event.command == "!fetch":
+        return print_the_help()
+
+    if morgue_event.is_character_command():
         character = Character(name=morgue_event.character)
-        morgue_saver(character, character.non_saved_morgue_file(), arg1)
-    elif morgue_event.command == "!stalk_all":
-        characters = fetch_characters()
-        for character in characters:
-            character = Character(name=character)
-            morgue_saver(character, character.non_saved_morgue_file(), arg1)
-    elif morgue_event.command == "!characters":
-        characters = fetch_characters()
-        send_chat_to_stream(["All The Characters"] + [", ".join(characters)])
-    elif morgue_event.command == "!fetch_runes":
-        RuneFetcher().fetch()
-    elif morgue_event.command == "!fetch_s3_morgue":
-        character = Character(name=morgue_event.character)
-        print(f"We are fetching the S3 Morgue for {character.name}")
-        with open(f"tmp/s3_{character.name}.txt", "w") as f:
-            f.write(character.s3_morgue_file())
-    elif morgue_event.command == "!spells":
-        character = Character(name=morgue_event.character)
-        if morgue_event.args[0] == "level":
-            msg = character.spells_above(arg2)
+        formatter = Formatter(character)
+
+        if morgue_event.command == "!armour":
+            msg = formatter.print_armour()
+        elif morgue_event.command == "!weapons":
+            msg = formatter.print_weapons()
+        elif morgue_event.command == "!runes":
+            msg = formatter.print_runes()
+        elif morgue_event.command == "!spells":
+            # if morgue_event.is_level_search():
+            # elif morgue_event.is_search()
+            msg = formatter.print_spells()
+            # morgue_event which args to args to filter for us
+            #     if morgue_event.args[0] == "level":
+            #         msg = character.spells_above(arg2)
+            #         send_chat_to_stream(msg)
+            #     else:
+            #         print(f"Unsupported search for spells yet. Try level.")
+        elif morgue_event.command == "!skills":
+            msg = formatter.print_skills()
+        elif morgue_event.command == "!version":
+            msg = formatter.print_version()
+        elif morgue_event.command == "!jewellery":
+            msg = formatter.print_jewellery()
+        elif morgue_event.command == "!max_damage":
+            msg = formatter.print_max_damage()
+        elif morgue_event.command == "!mutations":
+            msg = formatter.print_mutations()
+        elif morgue_event.command == "!scrolls":
+            msg = formatter.print_scrolls()
+        elif morgue_event.command == "!potions":
+            msg = formatter.print_potions()
+        elif morgue_event.command == "!overview":
+            morgue_parser = MorgueParser(character.non_saved_morgue_file())
+            msg = morgue_parser.overview()
+        elif morgue_event.command == "!fetch":
+            morgue_saver(character, character.non_saved_morgue_file(), True)
+        elif morgue_event.command == "!fetch_s3_morgue":
+            print(f"We are fetching the S3 Morgue for {character.name}")
+            with open(f"tmp/s3_{character.name}.txt", "w") as f:
+                f.write(character.s3_morgue_file())
+        elif morgue_event.command == "!save_morgue":
+            save_morgue(character)
+        elif morgue_event.command == "!search":
+            pass
+            # for c in ["!armour", "!weapons", "!jewellery"]:
+            #     call_command_with_arg(formatter, c, morgue_event.args[0])
+
+        if msg:
             send_chat_to_stream(msg)
         else:
-            print(f"Unsupported search for spells yet. Try level.")
-    elif morgue_event.command == "!overview":
-        character = Character(name=morgue_event.character)
-        morgue_parser = MorgueParser(character.non_saved_morgue_file())
-        msg = morgue_parser.overview()
-        send_chat_to_stream(msg)
-    elif morgue_event.command == "!save_morgue":
-        character = Character(name=morgue_event.character)
-        save_morgue(character)
-    elif morgue_event.command == "!clean_morgue":
-        clean_the_morgue()
-    elif morgue_event.command == "!rune_awards":
-        rune_awards()
-    elif morgue_event.command == "!weapon_awards":
-        find_the_max_damage_for_all_characters()
-    elif morgue_event.command == "!search":
-        for c in ["!armour", "!weapons", "!jewellery"]:
-            call_command_with_arg(formatter, c, morgue_event.args[0])
-    elif morgue_event.args[0]:
-        call_command_with_arg(formatter, morgue_event.command, morgue_event.args[0])
+            print(
+                f"No Message return for command: {morgue_event.command} character: {morgue_event.character}"
+            )
     else:
-        character = Character(name=morgue_event.character)
-        call_command(formatter, morgue_event.command, morgue_event.character)
+        if morgue_event.command == "!stalk_all":
+            characters = fetch_characters()
+            for character in characters:
+                character = Character(name=character)
+                morgue_saver(character, character.non_saved_morgue_file(), True)
+        elif morgue_event.command == "!rune_awards":
+            rune_awards()
+    # elif morgue_event.command == "!characters":
+    #     characters = fetch_characters()
+    #     send_chat_to_stream(["All The Characters"] + [", ".join(characters)])
+    # elif morgue_event.command == "!fetch_runes":
+    #     RuneFetcher().fetch()
+    # elif morgue_event.command == "!spells":
+    # elif morgue_event.command == "!clean_morgue":
+    #     clean_the_morgue()
+    # elif morgue_event.command == "!rune_awards":
+    # elif morgue_event.command == "!weapon_awards":
+    #     find_the_max_damage_for_all_characters()
+    # elif morgue_event.args[0]:
+    #     call_command_with_arg(formatter, morgue_event.command, morgue_event.args[0])
 
 
 # ========================================================================================
