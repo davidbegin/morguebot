@@ -3,16 +3,16 @@ import os
 import re
 import time
 
-from lib.morgue_parser import fetch_overview
-from lib.morgue_parser import fetch_mutations
-from lib.morgue_parser import fetch_jewellery
-from lib.morgue_parser import fetch_scrolls
-from lib.morgue_parser import fetch_potions
-from lib.morgue_parser import fetch_weapons
-from lib.morgue_parser import fetch_armour
-from lib.morgue_parser import fetch_skills
-from lib.morgue_parser import fetch_altars
-from lib.morgue_parser import fetch_weapon
+# from lib.morgue_parser import fetch_overview
+# from lib.morgue_parser import fetch_mutations
+# from lib.morgue_parser import fetch_jewellery
+# from lib.morgue_parser import fetch_scrolls
+# from lib.morgue_parser import fetch_potions
+# from lib.morgue_parser import fetch_weapons
+# from lib.morgue_parser import fetch_armour
+# from lib.morgue_parser import fetch_skills
+# from lib.morgue_parser import fetch_altars
+# from lib.morgue_parser import fetch_weapon
 
 from lib.the_real_morgue_parser import MorgueParser
 
