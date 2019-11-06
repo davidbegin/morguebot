@@ -44,6 +44,7 @@ def process_event(event):
     if morgue_event.command == "!h?":
         return print_the_help()
 
+    msg = None
     if morgue_event.is_character_command():
         character = Character(name=morgue_event.character)
         formatter = Formatter(character)
@@ -95,13 +96,6 @@ def process_event(event):
             else:
                 if morgue_event.search not in msg:
                     msg = None
-
-        if msg:
-            send_chat_to_stream(msg)
-        else:
-            print(
-                f"No Message return for command: {morgue_event.command} character: {morgue_event.character}"
-            )
     else:
         if morgue_event.command == "!stalk_all":
             characters = fetch_characters()
@@ -119,8 +113,12 @@ def process_event(event):
         elif morgue_event.command == "!weapon_awards":
             find_the_max_damage_for_all_characters()
 
-    # elif morgue_event.args[0]:
-    #     call_command_with_arg(formatter, morgue_event.command, morgue_event.args[0])
+        if msg:
+            send_chat_to_stream(msg)
+        else:
+            print(
+                f"No Message return for command: {morgue_event.command} character: {morgue_event.character}"
+            )
 
 
 # ========================================================================================
