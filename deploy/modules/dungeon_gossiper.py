@@ -10,6 +10,7 @@ from modules.sns import weapons_topic
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
 from modules.kinesis import chat_stream
+from modules.s3 import bucket
 
 MODULE_NAME = "dungeon_gossiper"
 
@@ -26,6 +27,7 @@ policy = Output.all(
     sns_topic.arn,
     weapons_topic.arn,
     chat_stream.arn,
+    bucket.arn,
 ).apply(
     lambda args: json.dumps(
         {
@@ -41,6 +43,11 @@ policy = Output.all(
                     "Resource": [args[2], args[3]],
                 },
                 {"Effect": "Allow", "Action": ["kinesis:*"], "Resource": args[4]},
+                {
+                    "Effect": "Allow",
+                    "Action": ["s3:ListObjectsV2"],
+                    "Resource": args[5],
+                },
             ],
         }
     )

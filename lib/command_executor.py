@@ -90,12 +90,6 @@ def process_event(event):
             # for c in ["!armour", "!weapons", "!jewellery"]:
             #     call_command_with_arg(formatter, c, morgue_event.args[0])
 
-        if morgue_event.search:
-            if type(msg) is list:
-                msg = [item for item in msg if morgue_event.search in item]
-            else:
-                if morgue_event.search not in msg:
-                    msg = None
     else:
         if morgue_event.command == "!stalk_all":
             characters = fetch_characters()
@@ -108,10 +102,17 @@ def process_event(event):
             characters = fetch_characters()
             send_chat_to_stream(["All The Characters"] + [", ".join(characters)])
         elif morgue_event.command == "!clean_morgue":
-            print("COIMING SOON")
+            print("COMING SOON")
             # clean_the_morgue()
         elif morgue_event.command == "!weapon_awards":
             find_the_max_damage_for_all_characters()
+
+        if morgue_event.search:
+            if type(msg) is list:
+                msg = [item for item in msg if morgue_event.search in item]
+            else:
+                if morgue_event.search not in msg:
+                    msg = None
 
         if msg:
             send_chat_to_stream(msg)
