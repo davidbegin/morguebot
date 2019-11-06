@@ -18,9 +18,11 @@ def send_new_runes_msg(character, runes):
 
 
 def send_chat_to_stream(msg):
-    nested_msg = [textwrap.wrap(sub_msg, 500) for sub_msg in msg]
-    # Flattening List
-    msg = [item for sublist in nested_msg for item in sublist]
+    if type(msg) is list:
+        nested_msg = [textwrap.wrap(sub_msg, 500) for sub_msg in msg]
+        # Flattening List
+        msg = [item for sublist in nested_msg for item in sublist]
+
     put_kinesis_record(msg)
 
 

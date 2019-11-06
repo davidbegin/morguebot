@@ -100,7 +100,7 @@ def process_event(event):
             rune_awards()
         elif morgue_event.command == "!characters":
             characters = fetch_characters()
-            send_chat_to_stream(["All The Characters"] + [", ".join(characters)])
+            msg = ["All The Characters"] + [", ".join(characters)]
         elif morgue_event.command == "!clean_morgue":
             print("COMING SOON")
             # clean_the_morgue()
