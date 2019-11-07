@@ -16,6 +16,12 @@ class MorgueParser:
         if m:
             return f"{m.group(1).strip()}  XL: {xl_level}  Health: {health}  Location: {location}".strip()
 
+    def mutations(self):
+        m = re.search(f"A:\s(.*)", str(self.morgue_file))
+
+        if m:
+            return m.group(1)
+
     def armour(self):
         return self._extract_inventory("Armour", "Jewellery")
 

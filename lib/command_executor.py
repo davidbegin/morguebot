@@ -14,7 +14,6 @@ from lib.morgue_stalker import fetch_characters
 from lib.help import WORKING_COMMANDS
 from lib.morgue_event import MorgueEvent
 
-from lib.morgue_parser import fetch_mutations
 from lib.morgue_parser import fetch_jewellery
 from lib.morgue_parser import fetch_scrolls
 from lib.morgue_parser import fetch_potions
@@ -45,6 +44,7 @@ def process_event(event):
 
     msg = None
     if morgue_event.is_character_command():
+        print("A single Character Command!")
         character = Character(name=morgue_event.character)
         formatter = Formatter(character)
 
@@ -65,6 +65,7 @@ def process_event(event):
             msg = formatter.print_version()
         elif morgue_event.command == "!jewellery":
             msg = formatter.print_jewellery()
+            print(f"WE are looking for jewellery and this is what we found {}")
         elif morgue_event.command == "!max_damage":
             msg = formatter.print_max_damage()
         elif morgue_event.command == "!mutations":
@@ -90,6 +91,7 @@ def process_event(event):
             #     call_command_with_arg(formatter, c, morgue_event.args[0])
 
     else:
+        print("A multiple Character Command!")
         if morgue_event.command == "!stalk_all":
             characters = fetch_characters()
             for character in characters:
@@ -106,19 +108,19 @@ def process_event(event):
         elif morgue_event.command == "!weapon_awards":
             find_the_max_damage_for_all_characters()
 
-        if morgue_event.search:
-            if type(msg) is list:
-                msg = [item for item in msg if morgue_event.search in item]
-            else:
-                if morgue_event.search not in msg:
-                    msg = None
-
-        if msg:
-            send_chat_to_stream(msg)
+    if morgue_event.search:
+        if type(msg) is list:
+            msg = [item for item in msg if morgue_event.search in item]
         else:
-            print(
-                f"No Message return for command: {morgue_event.command} character: {morgue_event.character}"
-            )
+            if morgue_event.search not in msg:
+                msg = None
+
+    if msg:
+        send_chat_to_stream(msg)
+    else:
+        print(
+            f"No Message return for command: {morgue_event.command} character: {morgue_event.character}"
+        )
 
 
 # ========================================================================================
@@ -150,32 +152,6 @@ class Formatter:
     def __init__(self, character=None):
         self.character = character
         self.morgue_parser = MorgueParser(self.character.morgue_file())
-
-    # def construct_message(self, command):
-    #     print(f"Formatter construct_message {command} for {self.character.name}")
-
-    #     elif command == "!weapons":
-    #         return self.print_weapons()
-    #     elif command == "!armour":
-    #         return self.print_armour()
-    #     elif command == "!jewellery":
-    #         return self.print_jewellery()
-    #     elif command == "!skills":
-    #         return self.print_skills()
-    #     elif command == "!mutations":
-    #         return self.print_mutations()
-    #     elif command == "!potions":
-    #         return self.print_potions()
-    #     elif command == "!runes":
-    #         return self.print_runes()
-    #     elif command == "!scrolls":
-    #         return self.print_scrolls()
-    #     elif command == "!spells":
-    #         return self.print_spells()
-    #     elif command == "!version":
-    #         return self.print_version()
-    #     elif command == "!max_damage":
-    #         return self.print_max_damage()
 
     def print_command(self, name, value):
         fmt_str = f"{name}: {value}"
@@ -234,9 +210,8 @@ class Formatter:
         return self.character.morgue_file().split("\n")[0]
 
     def print_mutations(self):
-        return [f"Squid1 Squid2 Listing All Mutations Squid4"] + self.print_command(
-            "Mutations", fetch_mutations(self.character.morgue_file())
-        )
+        title = [f"Squid1 Squid2 Listing All Mutations Squid4"]
+        return title + [self.morgue_parser.mutations()]
 
     # ========================================================================================
 

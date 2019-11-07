@@ -5,7 +5,6 @@ from lib.morgue_event import MorgueEvent
 from lib.event_coordinator import EventCoordinator
 
 
-@pytest.mark.focus
 def test_help_event_coordination(mocker):
     morgue_event = MorgueEvent(command="!h?")
     event_coordinator = EventCoordinator(morgue_event)

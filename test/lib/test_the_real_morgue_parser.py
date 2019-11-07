@@ -76,3 +76,12 @@ def test_fetch_armour():
     expected_armour = [" g - a +0 pair of boots (worn)", " h - a +0 ring mail (worn)"]
     armour = morgue_parser.armour()
     assert armour == expected_armour
+
+
+@pytest.mark.focus
+def test_mutations():
+    character_name = "kilrfish"
+    morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())
+    expected_mutations = "retaliatory headbutt, horns 2"
+    mutations = morgue_parser.mutations()
+    assert mutations == expected_mutations

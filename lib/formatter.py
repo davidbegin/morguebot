@@ -4,7 +4,6 @@ import re
 import time
 
 # from lib.morgue_parser import fetch_overview
-# from lib.morgue_parser import fetch_mutations
 # from lib.morgue_parser import fetch_jewellery
 # from lib.morgue_parser import fetch_scrolls
 # from lib.morgue_parser import fetch_potions

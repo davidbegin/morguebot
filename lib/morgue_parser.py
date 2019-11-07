@@ -104,13 +104,6 @@ def fetch_potions(morgue_file):
 # ========================================================================================
 
 
-def fetch_mutations(morgue_file):
-    m = re.search(f"A:\s(.*)", str(morgue_file))
-
-    if m:
-        return m.group(1)
-
-
 def fetch_stealth(morgue_file):
     m = re.search(f"Stlth\s+(..........)\s+(.*)", str(morgue_file))
 
