@@ -14,7 +14,6 @@ from lib.morgue_stalker import fetch_characters
 from lib.help import WORKING_COMMANDS
 from lib.morgue_event import MorgueEvent
 
-from lib.morgue_parser import fetch_overview
 from lib.morgue_parser import fetch_mutations
 from lib.morgue_parser import fetch_jewellery
 from lib.morgue_parser import fetch_scrolls
@@ -155,8 +154,6 @@ class Formatter:
     # def construct_message(self, command):
     #     print(f"Formatter construct_message {command} for {self.character.name}")
 
-    #     if command == "!overview":
-    #         return self.print_overview()
     #     elif command == "!weapons":
     #         return self.print_weapons()
     #     elif command == "!armour":
@@ -235,11 +232,6 @@ class Formatter:
 
     def print_version(self):
         return self.character.morgue_file().split("\n")[0]
-
-    def print_overview(self):
-        overview = fetch_overview(self.character.morgue_file())
-        print("\n\033[35m" + str(overview) + "\033[0m")
-        return overview
 
     def print_mutations(self):
         return [f"Squid1 Squid2 Listing All Mutations Squid4"] + self.print_command(

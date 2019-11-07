@@ -63,7 +63,7 @@ aws_lambda = lambda_.Function(
 event_rule = cloudwatch.EventRule(
     f"{MODULE_NAME}-event-rule",
     name=f"{MODULE_NAME}-very-cool-every-minute",
-    schedule_expression="rate(1 minute)",
+    schedule_expression="rate(10 minutes)",
 )
 
 event_target = cloudwatch.EventTarget(

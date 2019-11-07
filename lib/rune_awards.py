@@ -1,9 +1,11 @@
+import os
+
 import boto3
 
 from lib.kinesis import send_chat_to_stream
 
 client = boto3.client("dynamodb")
-TABLE_NAME = "characters-696d3eb"
+TABLE_NAME = os.environ.get("CHARACTER_DB", "crawl-characters-f4f0a26")
 
 AWARD_EMOTES = {
     1: "HolidayPresent",
