@@ -19,7 +19,12 @@ class TwitchChatParser:
         else:
             self.args = []
 
+        if len(self.args) > 0:
+            self.search = self.args[0]
+        else:
+            self.search = False
+
     def parse(self):
         return MorgueEvent(
-            command=self.command, character=self.character, args=self.args
+            command=self.command, character=self.character, search=self.search
         )

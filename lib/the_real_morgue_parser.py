@@ -55,6 +55,9 @@ class MorgueParser:
 
     # ========================================================================================
 
+    def jewellery(self):
+        return self.find_unique_items(self.fetch_jewellery(), "\w\s-\s(.*)")
+
     def fetch_user_stats(self):
         # HP:   198/198 (201) AC: 49    Str: 39    XL:     25
         # Health: 192/192    AC: 25    Str: 21    XL:     27
@@ -72,3 +75,20 @@ class MorgueParser:
         m = re.search(f"You are (in|on) (.*)", str(self.morgue_file))
         if m:
             return m.group(2)
+
+    def find_unique_items(self, items, regex):
+        if items is None:
+            return None
+
+        uniq_items = []
+        for item in items:
+            m = re.search(regex, item)
+            if m:
+                # This should check for the amout of groups to know whether it has amounts
+                msg = m.group(1)
+                uniq_items.append(m.group(1))
+
+        return uniq_items
+
+    def fetch_jewellery(self):
+        return self._extract_inventory("Jewellery", "Wands")

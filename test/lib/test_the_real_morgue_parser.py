@@ -78,10 +78,24 @@ def test_fetch_armour():
     assert armour == expected_armour
 
 
-@pytest.mark.focus
 def test_mutations():
     character_name = "kilrfish"
     morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())
-    expected_mutations = "retaliatory headbutt, horns 2"
-    mutations = morgue_parser.mutations()
-    assert mutations == expected_mutations
+    expected = "retaliatory headbutt, horns 2"
+    result = morgue_parser.mutations()
+    assert result == expected
+
+
+def test_jewellery():
+    character_name = "kilrfish"
+    morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())
+    expected = [
+        "an uncursed ring of resist corrosion",
+        "a +3 ring of strength (left hand)",
+        "a ring of poison resistance (right hand)",
+        "an amulet of regeneration (around neck)",
+        "an uncursed ring of fire",
+        "an uncursed ring of flight",
+    ]
+    result = morgue_parser.jewellery()
+    assert result == expected

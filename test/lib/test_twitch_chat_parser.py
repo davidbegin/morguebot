@@ -15,11 +15,12 @@ def test_fetch_command():
     assert morgue_event.args == []
 
 
+@pytest.mark.focus
 def test_searching_weapons():
     morgue_event = TwitchChatParser("!weapons beginbot axe").parse()
     assert morgue_event.command == "!weapons"
     assert morgue_event.character == "beginbot"
-    assert morgue_event.args == ["axe"]
+    assert morgue_event.search == "axe"
 
 
 def test_rune_awards():

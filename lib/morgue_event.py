@@ -46,6 +46,10 @@ class MorgueEvent:
         self.level_barrier = level_barrier
         self.args = args
 
+        print(
+            f"\033[36mNew Morgue Event! {self.command} {self.character} {self.search}\033[0m"
+        )
+
     @classmethod
     def from_event(cls, event):
         command = event["command"]

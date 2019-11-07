@@ -156,14 +156,14 @@ class Formatter:
         else:
             return ["No Armour Found!"]
 
-    def print_jewellery(self):
-        jewellery = self.find_unique_items(
-            fetch_jewellery(self.character.morgue_file()), "\w\s-\s(.*)"
-        )
-        if jewellery:
-            return ["CoolCat Listing All Jewellery CoolCat"] + jewellery
-        else:
-            return ["No Jewellery Found!"]
+    # def print_jewellery(self):
+    #     jewellery = self.find_unique_items(
+    #         fetch_jewellery(self.character.morgue_file()), "\w\s-\s(.*)"
+    #     )
+    #     if jewellery:
+    #         return ["CoolCat Listing All Jewellery CoolCat"] + jewellery
+    #     else:
+    #         return ["No Jewellery Found!"]
 
     def print_potions(self):
         potions = fetch_potions(self.character.morgue_file())

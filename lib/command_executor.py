@@ -14,7 +14,6 @@ from lib.morgue_stalker import fetch_characters
 from lib.help import WORKING_COMMANDS
 from lib.morgue_event import MorgueEvent
 
-from lib.morgue_parser import fetch_jewellery
 from lib.morgue_parser import fetch_scrolls
 from lib.morgue_parser import fetch_potions
 from lib.morgue_parser import fetch_weapons
@@ -65,7 +64,7 @@ def process_event(event):
             msg = formatter.print_version()
         elif morgue_event.command == "!jewellery":
             msg = formatter.print_jewellery()
-            print(f"WE are looking for jewellery and this is what we found {}")
+            print(f"WE are looking for jewellery and this is what we found {msg}")
         elif morgue_event.command == "!max_damage":
             msg = formatter.print_max_damage()
         elif morgue_event.command == "!mutations":
@@ -109,9 +108,13 @@ def process_event(event):
             find_the_max_damage_for_all_characters()
 
     if morgue_event.search:
+        print(f"We are searching: {morgue_event.search}")
+
         if type(msg) is list:
+            print("Search a List")
             msg = [item for item in msg if morgue_event.search in item]
         else:
+            print("Search a strang")
             if morgue_event.search not in msg:
                 msg = None
 
@@ -250,9 +253,7 @@ class Formatter:
             return ["No Armour Found!"]
 
     def print_jewellery(self):
-        jewellery = self.find_unique_items(
-            fetch_jewellery(self.character.morgue_file()), "\w\s-\s(.*)"
-        )
+        jewellery = self.morgue_parser.jewellery()
         if jewellery:
             return ["CoolCat Listing All Jewellery CoolCat"] + jewellery
         else:
