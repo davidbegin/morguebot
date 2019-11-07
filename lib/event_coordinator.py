@@ -21,6 +21,8 @@ class EventCoordinator:
         self.character = morgue_event.character
         self.command = morgue_event.command
         self.arguments = morgue_event.args
+        self.search = morgue_event.search
+        self.level_barrier = morgue_event.level_barrier
         self.lambda_client = boto3.client("lambda")
 
     # review the commands the decide what to do
@@ -33,7 +35,8 @@ class EventCoordinator:
         payload = {
             "character": self.character,
             "command": self.command,
-            "args": self.arguments,
+            "search": self.search,
+            "level": self.level_barrier,
         }
 
         if "TEST_MODE" in os.environ:

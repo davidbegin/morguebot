@@ -14,8 +14,6 @@ from lib.morgue_stalker import fetch_characters
 from lib.help import WORKING_COMMANDS
 from lib.morgue_event import MorgueEvent
 
-from lib.morgue_parser import fetch_scrolls
-from lib.morgue_parser import fetch_potions
 from lib.morgue_parser import fetch_weapons
 from lib.morgue_parser import fetch_armour
 from lib.morgue_parser import fetch_skills
@@ -260,7 +258,7 @@ class Formatter:
             return ["No Jewellery Found!"]
 
     def print_potions(self):
-        potions = fetch_potions(self.character.morgue_file())
+        potions = self.morgue_parser.potions()
 
         formatted_potions = []
         for potion in potions:
@@ -276,7 +274,7 @@ class Formatter:
         return [f"DrinkPurple Listing All Potions DrinkPurple"] + formatted_potions
 
     def print_scrolls(self):
-        scrolls = fetch_scrolls(self.character.morgue_file())
+        scrolls = self.morgue_parser.scrolls()
 
         formatted_scrolls = []
         for scroll in scrolls:

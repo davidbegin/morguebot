@@ -99,3 +99,43 @@ def test_jewellery():
     ]
     result = morgue_parser.jewellery()
     assert result == expected
+
+
+def test_scrolls():
+    character_name = "GucciMane"
+    morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())
+    expected = [" b - a scroll labeled BUCEUFOSTE"]
+    result = morgue_parser.scrolls()
+    assert result == expected
+
+
+def test_potions():
+    character_name = "sunspire"
+    morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())
+    expected = [
+        " q - 23 potions of mutation",
+        " r - 14 potions of curing",
+        " t - a potion of cancellation",
+        " v - a potion of magic",
+        " z - 5 potions of brilliance",
+        " D - 5 potions of resistance",
+        " J - a potion of berserk rage",
+        " S - 5 potions of haste",
+        " Z - 7 potions of flight",
+    ]
+    result = morgue_parser.potions()
+    assert result == expected
+
+
+@pytest.mark.focus
+def test_weapons():
+    character_name = "sunspire"
+    morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())
+    expected = [
+        "a +9 scimitar of holy wrath (weapon)",
+        "the +8 arc blade {discharge, rElec}",
+        "a +7 whip of pain",
+        "a +5 scimitar of pain",
+    ]
+    result = morgue_parser.weapons()
+    assert result == expected

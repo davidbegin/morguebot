@@ -92,3 +92,34 @@ class MorgueParser:
 
     def fetch_jewellery(self):
         return self._extract_inventory("Jewellery", "Wands")
+
+    def scrolls(self):
+        result = self._extract_inventory("Scrolls", "Potions")
+        if result:
+            return result
+        else:
+            return self._extract_inventory("Scrolls", "Comestibles")
+
+    def potions(self):
+        result = self._extract_inventory("Potions", "Miscellaneous")
+        if result:
+            return result
+        else:
+            return self._extract_inventory("Potions", "Comestibles")
+
+    def weapons(self):
+        raw_weapons = self._extract_inventory("Hand Weapons", "Missiles")
+
+        if raw_weapons is None:
+            raw_weapons = self._extract_inventory("Hand Weapons", "Armour")
+
+        if raw_weapons is None:
+            return []
+
+        formatted_weapons = []
+        for weapon in raw_weapons:
+            m = re.search(f"[a-zA-Z]\s+-\s+(.*)", weapon)
+            if m:
+                formatted_weapons.append(m.group(1))
+
+        return formatted_weapons
