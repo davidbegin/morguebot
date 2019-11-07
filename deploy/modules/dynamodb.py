@@ -3,7 +3,7 @@ from pulumi_aws import dynamodb
 
 
 dynamodb_table = dynamodb.Table(
-    "crawl-characters",
+    "characters",
     hash_key="character",
     read_capacity=5,
     write_capacity=5,

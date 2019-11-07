@@ -127,7 +127,6 @@ def test_potions():
     assert result == expected
 
 
-@pytest.mark.focus
 def test_weapons():
     character_name = "sunspire"
     morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())
@@ -138,4 +137,77 @@ def test_weapons():
         "a +5 scimitar of pain",
     ]
     result = morgue_parser.weapons()
+    assert result == expected
+
+
+def test_skills():
+    character_name = "sunspire"
+    morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())
+    expected = [
+        " + Level 17.1 Fighting",
+        " + Level 16.6 Short Blades",
+        " + Level 17.1 Long Blades",
+        " + Level 16.6 Axes",
+        " + Level 16.6 Maces & Flails",
+        " + Level 16.6 Polearms",
+        " + Level 16.6 Staves",
+        " + Level 16.6 Slings",
+        " + Level 16.6 Bows",
+        " + Level 16.6 Crossbows",
+        " + Level 16.8 Throwing",
+        " + Level 16.8 Armour",
+        " + Level 17.1 Dodging",
+        " + Level 16.6 Stealth",
+        " + Level 16.6 Shields",
+        " + Level 16.6 Unarmed Combat",
+        " + Level 17.2 Spellcasting",
+        " + Level 14.3 Conjurations",
+        " + Level 14.3 Hexes",
+        " + Level 14.3 Charms",
+        " + Level 14.3 Summonings",
+        " + Level 14.3 Necromancy",
+        " + Level 15.1 Translocations",
+        " + Level 14.3 Transmutations",
+        " + Level 14.3 Fire Magic",
+        " + Level 14.3 Ice Magic",
+        " + Level 14.3 Air Magic",
+        " + Level 14.3 Earth Magic",
+        " + Level 14.3 Poison Magic",
+        " + Level 17.9 Invocations",
+        " + Level 16.6 Evocations",
+    ]
+    result = morgue_parser.skills()
+    assert result == expected
+
+
+@pytest.mark.focus
+def test_gods():
+    character_name = "sunspire"
+    morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())
+    expected = [
+        "Ashenzari",
+        "Cheibriados",
+        "Dithmenos",
+        "Elyvilon",
+        "Fedhas",
+        "Gozag",
+        "Hepliaklqana",
+        "Kikubaaqudgha",
+        "Makhleb",
+        "Nemelex Xobeh",
+        "Okawaru",
+        "Qazlal",
+        "Ru",
+        "Sif Muna",
+        "Trog",
+        "Uskayaw",
+        "Vehumet",
+        "Wu Jian",
+        "Xom",
+        "Yredelemnul",
+        "Zin",
+        "The Shining One",
+        "Beogh",
+    ]
+    result = morgue_parser.gods()
     assert result == expected

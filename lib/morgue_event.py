@@ -4,6 +4,7 @@ COMMANDS = {
         "!armour",
         "!fetch",
         "!fetch_s3_morgue",
+        "!gods",
         "!jewellery",
         "!max_damage",
         "!mutations",

@@ -123,3 +123,17 @@ class MorgueParser:
                 formatted_weapons.append(m.group(1))
 
         return formatted_weapons
+
+    def skills(self):
+        start_cat = "   Skills:"
+        end_cat = ""
+        split_morgue_file = self.morgue_file.split("\n")
+        start_index = split_morgue_file.index(start_cat) + 1
+        end_index = split_morgue_file.index(end_cat, start_index)
+        return split_morgue_file[start_index:end_index]
+
+    def gods(self):
+        split_morgue_file = self.morgue_file.split("\n")
+        start_index = split_morgue_file.index("Altars:") + 1
+        end_index = split_morgue_file.index("", start_index)
+        return split_morgue_file[start_index:end_index]

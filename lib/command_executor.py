@@ -14,12 +14,6 @@ from lib.morgue_stalker import fetch_characters
 from lib.help import WORKING_COMMANDS
 from lib.morgue_event import MorgueEvent
 
-from lib.morgue_parser import fetch_weapons
-from lib.morgue_parser import fetch_armour
-from lib.morgue_parser import fetch_skills
-from lib.morgue_parser import fetch_altars
-from lib.morgue_parser import fetch_weapon
-
 from lib.weapons_formatter import WeaponsFormatter
 
 from lib.the_real_morgue_parser import MorgueParser
@@ -71,6 +65,8 @@ def process_event(event):
             msg = formatter.print_scrolls()
         elif morgue_event.command == "!potions":
             msg = formatter.print_potions()
+        elif morgue_event.command == "!gods":
+            msg = formatter.print_gods()
         elif morgue_event.command == "!overview":
             morgue_parser = MorgueParser(character.non_saved_morgue_file())
             msg = morgue_parser.overview()
@@ -159,16 +155,16 @@ class Formatter:
         print("\n\033[35m" + fmt_str + "\033[0m")
         return [fmt_str]
 
-    def print_gods(self, morgue_file):
-        altars = set(fetch_altars(morgue_file))
-        gods_remaining = 25 - len(altars)
+    def print_gods(self):
+        gods = self.morgue_parser.gods()
+        gods_remaining = 25 - len(gods)
 
-        if len(altars) == 25:
+        if len(gods) == 25:
             return ["Kreygasm YOU HAVE SEEN EVERY GOD! Kreygasm"]
         else:
             return [
                 f"MercyWing1 Gods MercyWing2",
-                ", ".join(sorted(altars)),
+                ", ".join(sorted(gods)),
                 f"You have {gods_remaining} to be found",
             ]
 
@@ -242,9 +238,7 @@ class Formatter:
             return ["No Weapons Found!"]
 
     def print_armour(self):
-        armour = self.find_unique_items(
-            fetch_armour(self.character.morgue_file()), "\w\s-\s(.*)"
-        )
+        armour = self.morgue_parser.armour()
         if armour:
             return ["BloodTrail Listing All Armour BloodTrail"] + armour
         else:
@@ -292,7 +286,7 @@ class Formatter:
 
     def print_max_damage(self):
         if True:
-            weapons = fetch_weapons(self.character.morgue_file())
+            weapons = self.morgue_parser.weapons()
             return WeaponsFormatter(
                 character=self.character, weapons=weapons
             ).format_max_damages()
