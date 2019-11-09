@@ -30,7 +30,7 @@ class WeaponsFormatter:
 
             pawn_star = PawnStar(weapon_info["weapon"])
             if pawn_star.is_unrand():
-                formatted_max_damages.append([f"Cool Unrand! {weapon_info['weapon']}"])
+                formatted_max_damages.append(f"Cool Unrand! {weapon_info['weapon']}")
 
         # Why don't these strings match
         if "(weapon)" in max_damages[-1]["weapon"]:

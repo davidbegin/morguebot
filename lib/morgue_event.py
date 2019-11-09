@@ -81,3 +81,6 @@ class MorgueEvent:
 
     def is_character_command(self):
         return self.command in COMMANDS["single_character"]
+
+    def is_multi_character_command(self):
+        return self.command in COMMANDS["all_characters"]

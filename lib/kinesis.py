@@ -6,7 +6,7 @@ import boto3
 import botocore
 from lib.response_printer import print_response
 
-KINESIS_NAME = os.environ.get("CHAT_STREAM_NAME", "twitch-chat-877759c")
+KINESIS_NAME = os.environ.get("CHAT_STREAM_NAME", "twitch-chat-3ef1aba")
 
 client = boto3.client("kinesis")
 

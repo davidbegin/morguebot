@@ -12,6 +12,7 @@ from lib.rune_awards import rune_awards
 from lib.rune_fetcher import RuneFetcher
 from lib.morgue_stalker import fetch_characters
 from lib.help import WORKING_COMMANDS
+from lib.morgue_event import COMMANDS
 from lib.morgue_event import MorgueEvent
 
 from lib.weapons_formatter import WeaponsFormatter
@@ -20,9 +21,12 @@ from lib.the_real_morgue_parser import MorgueParser
 
 
 def print_the_help():
+    # Flattening List
+    # msg = [item for sublist in nested_msg for item in sublist]
+    commands = [item for sublist in COMMANDS.values() for item in sublist]
     help_msgs = [
         "TheIlluminati Some Valid Commands: TheIlluminati",
-        ", ".join(WORKING_COMMANDS),
+        ", ".join(commands),
     ]
     send_chat_to_stream(help_msgs)
 
@@ -83,7 +87,7 @@ def process_event(event):
             # for c in ["!armour", "!weapons", "!jewellery"]:
             #     call_command_with_arg(formatter, c, morgue_event.args[0])
 
-    else:
+    elif morgue_event.is_multi_character_command():
         print("A multiple Character Command!")
         if morgue_event.command == "!stalk_all":
             characters = fetch_characters()
@@ -100,6 +104,8 @@ def process_event(event):
             # clean_the_morgue()
         elif morgue_event.command == "!weapon_awards":
             find_the_max_damage_for_all_characters()
+    else:
+        print("WE DON'T KNOW THAT COMMAND!!!!!!!")
 
     if morgue_event.search:
         print(f"We are searching: {morgue_event.search}")
@@ -118,24 +124,6 @@ def process_event(event):
         print(
             f"No Message return for command: {morgue_event.command} character: {morgue_event.character}"
         )
-
-
-# ========================================================================================
-
-
-# def call_command(formatter, command, character_name):
-#     msg = formatter.construct_message(command)
-#     if msg:
-#         send_chat_to_stream(msg)
-#     else:
-#         print(f"No Message return for command: {command} character: {character_name}")
-
-
-# def call_command_with_arg(formatter, command, arg1):
-#     all_values = formatter.construct_message(command)
-#     filtered_values = [value for value in all_values if arg1 in value]
-#     if filtered_values:
-#         send_chat_to_stream([f"Result of your search for '{arg1}': "] + filtered_values)
 
 
 def save_morgue(character):
@@ -285,19 +273,7 @@ class Formatter:
     # ========================================================================================
 
     def print_max_damage(self):
-        if True:
-            weapons = self.morgue_parser.weapons()
-            return WeaponsFormatter(
-                character=self.character, weapons=weapons
-            ).format_max_damages()
-        else:
-            max_damages = {}
-            from morgue_stalker import fetch_characters
-
-            characters = morgue_stalker.fetch_characters()
-
-            for character in characters:
-                max_damages[character] = max_damage(
-                    Character(name=character).morgue_file()
-                )
-            return max_damages
+        weapons = self.morgue_parser.weapons()
+        return WeaponsFormatter(
+            character=self.character, weapons=weapons
+        ).format_max_damages()

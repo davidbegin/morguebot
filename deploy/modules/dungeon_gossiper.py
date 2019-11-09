@@ -62,12 +62,13 @@ iam.RolePolicyAttachment(
 iam.RolePolicy(f"{MODULE_NAME}-lambda-role-policy", role=role.id, policy=policy)
 
 lambda_variables = Output.all(
-    dynamodb_table.name, sns_topic.arn, weapons_topic.arn
+    dynamodb_table.name, sns_topic.arn, weapons_topic.arn, chat_stream.name
 ).apply(
     lambda args: {
         "CHARACTER_DB": args[0],
         "TOPIC_ARN": args[1],
         "WEAPONS_TOPIC": args[2],
+        "CHAT_STREAM_NAME": args[3],
     }
 )
 
