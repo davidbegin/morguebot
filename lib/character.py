@@ -19,6 +19,7 @@ from lib.morgue_folder_finder import find_morgue_folder
 
 from lib.spell import Spell
 from lib.spell_factory import SpellFactory
+from lib.skill_factory import SkillFactory
 
 
 if "MORGUE_BUCKETNAME" in os.environ:
@@ -127,17 +128,14 @@ class Character:
         return f"{find_morgue_folder()}/{self.name}.txt"
 
     def spellcasting(self):
-        return self.lookup_skill("Spellcasting")
+        return self.lookup_skill("Spellcasting").level
 
     def skills(self):
         return self.morgue_parser.skills()
 
     def lookup_skill(self, desired_skill):
         try:
-            raw_spellcasting = [
-                skill for skill in self.skills() if desired_skill in skill
-            ][0]
-            _, _, level, skill_type = raw_spellcasting.split()
-            return float(level)
-        except:
-            return 0.0
+            raw_skill = [skill for skill in self.skills() if desired_skill in skill][0]
+            return SkillFactory(raw_skill).new()
+        except Exception as e:
+            print(f"Error looking up skill: {e}")

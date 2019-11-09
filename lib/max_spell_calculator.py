@@ -19,7 +19,7 @@ class SpellCalculator:
         return (
             (
                 (self.spellcasting() / 2)
-                + (2 * self.average_spell_schools())
+                + (2 * self._average_spell_schools())
                 + self.brilliance()
             )
             * self.enhancers()
@@ -33,12 +33,18 @@ class SpellCalculator:
 
     # Average spell schools is the average of all the skills necessary for the spell -
     # up to three schools for some spells (e.g. Mephitic Cloud, which requires Conjurations, Poison Magic, and Air Magic).
-    def average_spell_schools(self):
+    def _average_spell_schools(self):
         spell_schools = self.spell.schools()
+
         total_skills = 0
+
         for spell_school in spell_schools:
-            total_skills += self.character.lookup_skill(spell_school)
-        return total_skills / len(spell_school)
+            skill = self.character.lookup_skill(spell_school)
+            # spell = SpellFactory(raw_).new()
+            return spell.level
+            print(f"spell_school: {spell_school} | Skill {skill}")
+            total_skills = total_skills + skill
+        return total_skills / len(spell_schools)
 
     def brilliance(self):
         return 1

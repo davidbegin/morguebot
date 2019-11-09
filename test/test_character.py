@@ -82,4 +82,4 @@ def test_skills():
 
 def test_lookup_skill():
     character = Character(morgue_filepath="support/GucciMane.txt", local_mode=True)
-    assert character.lookup_skill("Conjurations") == 4.6
+    assert character.lookup_skill("Conjurations").level == 4.6
