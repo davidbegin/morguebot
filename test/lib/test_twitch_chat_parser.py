@@ -15,7 +15,6 @@ def test_fetch_command():
     assert morgue_event.args == []
 
 
-@pytest.mark.focus
 def test_searching_weapons():
     morgue_event = TwitchChatParser("!weapons beginbot axe").parse()
     assert morgue_event.command == "!weapons"

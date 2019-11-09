@@ -62,3 +62,24 @@ def test_morgue_file_from_crawl_server(mocker):
     character.s3_morgue_file.assert_called()
     character.fetch_online_morgue.assert_called()
     assert morgue_file == expected_morgue_file
+
+
+def test_spellcasting():
+    character = Character(morgue_filepath="support/GucciMane.txt", local_mode=True)
+    assert character.spellcasting() == 3.5
+
+
+def test_skills():
+    character = Character(morgue_filepath="support/GucciMane.txt", local_mode=True)
+    expected_skills = [
+        " + Level 2.9 Dodging",
+        " - Level 2.4 Stealth",
+        " + Level 3.5 Spellcasting",
+        " + Level 4.6 Conjurations",
+    ]
+    assert character.skills() == expected_skills
+
+
+def test_lookup_skill():
+    character = Character(morgue_filepath="support/GucciMane.txt", local_mode=True)
+    assert character.lookup_skill("Conjurations") == 4.6

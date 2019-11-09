@@ -180,7 +180,6 @@ def test_skills():
     assert result == expected
 
 
-@pytest.mark.focus
 def test_gods():
     character_name = "sunspire"
     morgue_parser = MorgueParser(open(f"support/{character_name}.txt").read())

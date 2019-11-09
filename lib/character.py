@@ -125,3 +125,19 @@ class Character:
 
     def _find_morgue_filepath(self):
         return f"{find_morgue_folder()}/{self.name}.txt"
+
+    def spellcasting(self):
+        return self.lookup_skill("Spellcasting")
+
+    def skills(self):
+        return self.morgue_parser.skills()
+
+    def lookup_skill(self, desired_skill):
+        try:
+            raw_spellcasting = [
+                skill for skill in self.skills() if desired_skill in skill
+            ][0]
+            _, _, level, skill_type = raw_spellcasting.split()
+            return float(level)
+        except:
+            return 0.0
