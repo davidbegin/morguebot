@@ -5,6 +5,15 @@ class MorgueParser:
     def __init__(self, morgue_file):
         self.morgue_file = morgue_file
 
+    def intelligence(self):
+        m = re.search(f"Int:\s(.*)\s+God:", str(self.morgue_file))
+
+        if m:
+            if "(" in m.group(1):
+                return float(m.group(1).split()[0])
+            else:
+                return float(m.group(1))
+
     def overview(self):
         user_stats = self.fetch_user_stats()
         xl_level = user_stats["xl"]

@@ -20,6 +20,7 @@ from lib.morgue_folder_finder import find_morgue_folder
 from lib.spell import Spell
 from lib.spell_factory import SpellFactory
 from lib.skill_factory import SkillFactory
+from lib.skill import Skill
 
 
 if "MORGUE_BUCKETNAME" in os.environ:
@@ -138,4 +139,7 @@ class Character:
             raw_skill = [skill for skill in self.skills() if desired_skill in skill][0]
             return SkillFactory(raw_skill).new()
         except Exception as e:
-            print(f"Error looking up skill: {e}")
+            return Skill(skill_type=desired_skill, level=0, status=None)
+
+    def intelligence(self):
+        return self.morgue_parser.intelligence()
