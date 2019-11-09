@@ -230,7 +230,7 @@ class Formatter:
         return self.morgue_parser.runes()
 
     def print_weapons(self):
-        weapons = fetch_weapons(self.character.morgue_file())
+        weapons = self.morgue_parser.weapons()
         # weapons = self.find_unique_items(raw_weapons, "\w\s-\s(.*)")
         if weapons:
             return ["twitchRaid Listing All Weapons twitchRaid"] + weapons
