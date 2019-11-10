@@ -11,6 +11,9 @@ from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
 from modules.kinesis import chat_stream
 from modules.s3 import bucket
+from modules.layers import dependency_layer
+
+# from pulumi import filebase64sha256
 
 MODULE_NAME = "dungeon_gossiper"
 
@@ -82,6 +85,8 @@ aws_lambda = lambda_.Function(
     timeout=200,
     tracing_config={"mode": "Active"},
     environment={"variables": lambda_variables},
+    layers=[dependency_layer.arn],
+    # source_code_hash=filebase64sha256(f"build/{config.require('artifact_name')}")
 )
 
 lambda_.EventSourceMapping(

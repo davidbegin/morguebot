@@ -5,6 +5,8 @@ from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
 from pulumi_aws import iam, lambda_
 from pulumi_aws import cloudwatch
+from modules.layers import dependency_layer
+
 
 config = pulumi.Config()
 
@@ -57,6 +59,7 @@ aws_lambda = lambda_.Function(
     s3_bucket="morgue-artifacts",
     tracing_config={"mode": "Active"},
     timeout=900,
+    layers=[dependency_layer.arn],
     environment={"variables": {"MORGUE_BUCKETNAME": bucket.id}},
 )
 

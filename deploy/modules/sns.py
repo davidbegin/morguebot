@@ -36,9 +36,7 @@ weapons_topic = sns.Topic(
 )
 
 
-# import random
 sns.TopicSubscription(
-    # f"weapons-subscription-{random.randint(1, 99999)}",
     f"weapons-subscription",
     endpoint=weapons_queue.arn,
     protocol="sqs",

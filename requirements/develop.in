@@ -3,3 +3,4 @@
 faker
 pytest
 websockets
+awscli

@@ -8,6 +8,7 @@ from pulumi_aws import iam, lambda_
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
 from modules.dynamodb import dynamodb_table
+from modules.layers import dependency_layer
 
 config = pulumi.Config()
 
@@ -66,6 +67,7 @@ aws_lambda = lambda_.Function(
     timeout=200,
     tracing_config={"mode": "Active"},
     environment={"variables": lambda_variables},
+    layers=[dependency_layer.arn],
 )
 
 lambda_.EventSourceMapping(

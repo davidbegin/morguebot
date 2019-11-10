@@ -7,6 +7,7 @@ from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
 from pulumi_aws import kms, iam, lambda_
 from modules.dynamodb import dynamodb_table
+from modules.layers import dependency_layer
 
 config = pulumi.Config()
 
@@ -70,6 +71,7 @@ aws_lambda = lambda_.Function(
     s3_bucket="morgue-artifacts",
     tracing_config={"mode": "Active"},
     timeout=200,
+    layers=[dependency_layer.arn],
     environment={
         "variables": {
             "CHARACTER_DB": dynamodb_table.name,

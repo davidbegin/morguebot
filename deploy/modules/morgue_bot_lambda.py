@@ -13,6 +13,8 @@ from modules.kinesis import chat_stream
 from modules.s3 import bucket
 from modules.sqs import gods_queue
 from modules.dynamodb import dynamodb_table
+from modules.layers import dependency_layer
+
 
 MODULE_NAME = "morgue-bot"
 
@@ -88,6 +90,7 @@ aws_lambda = lambda_.Function(
     timeout=200,
     tracing_config={"mode": "Active"},
     environment={"variables": lambda_variables},
+    layers=[dependency_layer.arn],
 )
 
 lambda_.Permission(

@@ -13,22 +13,45 @@ l:
 set_env_vars:
 	cd deploy; pulumi stack output --json | jq '.lambda_env_vars' | tee ../.env
 
+
 # We needs this to take a random thang
 # make artifact ARTIFACT_NAME=handler422.zip
 dependencies:
-	cd /Users/begin/code/morguebot/.morguebot2/lib/python3.7/site-packages/; zip -r9 ../../../../build/dependencies2.zip .;
+	rm -rf build/python
+	rm build/dependencies.zip
+	rsync -av venv/lib/python3.7/site-packages build \
+ 		--exclude awscli* \
+		--exclude boto3* \
+	 	--exclude botocore* \
+	 	--exclude pip* \
+	 	--exclude pip* \
+	 	--exclude setuptools* \
+	 	--exclude faker* \
+	 	--exclude s3transfer* \
+	 	--exclude werkzeug* \
+	 	--exclude sixx* \
+	 	--exclude Jinja2* \
+	 	--exclude jinja2* \
+	 	--exclude itsdangerous* \
+	 	--exclude markupsafe* \
+	 	--exclude click* \
+	 	--exclude websockets* \
+	 	--exclude _pytest*
+	mv build/site-packages build/python
+	cd /Users/begin/code/morguebot/build/; zip -r9 dependencies.zip python
 
 
-run_bot:
-	# cd deploy; pulumi stack output --json
-	python bot.py -c artmatt
+save_deps: dependencies
+	aws s3 cp build/dependencies.zip s3://morgue-artifacts/dependencies.zip
+
 
 ARTIFACT_NAME := handler_$(shell date +%s).zip
 # artifact: dependencies
 artifact:
-	cp build/dependencies.zip build/$(ARTIFACT_NAME)
-	zip -rg build/$(ARTIFACT_NAME) lib/
+	zip -r build/$(ARTIFACT_NAME) lib/
+	zip -rg build/$(ARTIFACT_NAME) glm/
 	zip -g build/$(ARTIFACT_NAME) lambda_handler.py
+	zip -g build/$(ARTIFACT_NAME) handler.py
 
 
 # make artifact_deploy
@@ -41,9 +64,7 @@ deploy: l artifact
 invoke:
 	aws lambda invoke --function-name bot --payload '{"command":"${COMMAND}", "character":"${CHARACTER}"}' logs/lambda.txt
 
-# Not Working
-# deps:
-# 	virtualenv .morguebotd2
-# 	( source /Users/begin/code/morguebot/.mdeploy/bin/activate;)
-# 	pip install -r requirements/runtime.txt
+run_bot:
+	# cd deploy; pulumi stack output --json
+	python bot.py -c artmatt
 

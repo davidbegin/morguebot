@@ -1,1 +1,11 @@
 requests
+boto3
+aws-xray-sdk
+
+# This could be in develop I think
+durationpy
+
+
+# For the Generic Lambda Handler as we develop it
+flask
+structlog

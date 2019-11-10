@@ -7,6 +7,8 @@ from pulumi_aws import iam, lambda_, sns
 from modules.iam import LAMBDA_ASSUME_ROLE_POLICY
 from modules.iam import CREATE_CW_LOGS_POLICY
 from modules.sns import weapons_topic
+from modules.layers import dependency_layer
+
 
 config = pulumi.Config()
 
@@ -53,6 +55,7 @@ aws_lambda = lambda_.Function(
     s3_bucket="morgue-artifacts",
     tracing_config={"mode": "Active"},
     timeout=200,
+    layers=[dependency_layer.arn],
     environment={
         "variables": {
             "CHAT_STREAM_ARN": chat_stream.arn,

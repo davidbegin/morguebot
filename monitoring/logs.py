@@ -12,7 +12,8 @@ from optparse import OptionParser
 client = boto3.client("logs")
 
 def _filter_out_xray_warnings(events):
-    log_strs = ["START", "REPORT", "END"]
+    # log_strs = ["START", "REPORT", "END"]
+    log_strs = ["START", "END"]
 
     return list(
         filter(

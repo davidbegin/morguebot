@@ -9,6 +9,8 @@ from pulumi_aws import iam, lambda_
 
 from modules.kinesis import chat_stream
 from modules.dynamodb import dynamodb_table
+from modules.layers import dependency_layer
+
 
 config = pulumi.Config()
 
@@ -61,11 +63,13 @@ aws_lambda = lambda_.Function(
     f"{MODULE_NAME}",
     role=role.arn,
     runtime="python3.6",
-    handler="lambda_handler.xl_bot",
+    # handler="lambda_handler.xl_bot",
+    handler="handler.lambda_handler",
     s3_key=config.require("artifact_name"),
     tracing_config={"mode": "Active"},
     s3_bucket="morgue-artifacts",
     timeout=200,
+    layers=[dependency_layer.arn],
     environment={"variables": lambda_variables},
 )
 

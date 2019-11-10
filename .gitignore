@@ -9,3 +9,5 @@ logs/
 one.py
 venv/
 tmp/
+glm/
+.webtiles/
