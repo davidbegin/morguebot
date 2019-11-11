@@ -1,0 +1,8 @@
+{
+    "commands": {
+      "clear_morgue_bucket": {
+          "command": "commands.morgue_bucket:clear",
+          "logger": "true"
+      }
+   }
+}

@@ -52,8 +52,8 @@ artifact:
 	zip -rg build/$(ARTIFACT_NAME) commands/
 	zip -rg build/$(ARTIFACT_NAME) glm/
 	zip -g build/$(ARTIFACT_NAME) lambda_handler.py
+	zip -g build/$(ARTIFACT_NAME) lambda_commands.json
 	zip -g build/$(ARTIFACT_NAME) handler.py
-	zip -g build/$(ARTIFACT_NAME) test.py
 
 
 # make artifact_deploy
