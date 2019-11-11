@@ -28,7 +28,7 @@ policy = Output.all(bucket.arn, xl_upgrades_queue.arn, chat_stream.arn).apply(
             "Id": f"{MODULE_NAME}-policy",
             "Statement": [
                 CREATE_CW_LOGS_POLICY,
-                {"Effect": "Allow", "Action": ["s3:PutObject"], "Resource": args[0]},
+                {"Effect": "Allow", "Action": ["s3:*"], "Resource": args[0]},
                 {"Effect": "Allow", "Action": ["sqs:*"], "Resource": args[1]},
                 {
                     "Effect": "Allow",

@@ -4,3 +4,6 @@ faker
 pytest
 websockets
 awscli
+colorama
+pytest-cov
+pytest-mock
