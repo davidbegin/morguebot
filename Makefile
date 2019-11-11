@@ -7,7 +7,7 @@ f:
 		# (TEST_MODE=true python3 -m pytest test/ -s -m focus && python scripts/tests_pass.py) || python scripts/tests_fail.py
 
 l:
-	black deploy/*.py && black lib/ && black test/ && black *.py && black deploy/ --exclude venv && black deploy/modules
+	black deploy/*.py && black lib/ && black test/ && black *.py && black deploy/ --exclude venv && black deploy/modules && black glm/generic_lambda_handler/*.py
 	# (black deploy/*.py && black lib/ && black test/ && black *.py && black deploy/ --exclude venv && black deploy/modules) || scripts/tests_fail.py
 
 set_env_vars:

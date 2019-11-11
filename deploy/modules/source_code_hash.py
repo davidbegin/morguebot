@@ -1,7 +1,10 @@
 import hashlib
 import base64
 
-# We are assuming these are zips
+
+# So why a sha256 hash?
+# Why base64?
+# What decode?
 def get_soure_code_hash(file_path):
     chunk_size = 8192
 
