@@ -3,6 +3,10 @@
       "clear_morgue_bucket": {
           "command": "commands.morgue_bucket:clear",
           "logger": "true"
+      },
+      "debug_sns": {
+          "command": "commands.infra_debugger:sns",
+          "logger": "true"
       }
    }
 }

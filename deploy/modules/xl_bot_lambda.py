@@ -11,6 +11,8 @@ from modules.kinesis import chat_stream
 from modules.dynamodb import dynamodb_table
 from modules.layers import dependency_layer
 
+from modules.sns import sns_topic
+
 
 config = pulumi.Config()
 
@@ -21,7 +23,7 @@ role = iam.Role(
     assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY),
 )
 
-policy = Output.all(bucket.arn, xl_upgrades_queue.arn, chat_stream.arn).apply(
+policy = Output.all(bucket.arn, xl_upgrades_queue.arn, chat_stream.arn, sns_topic.arn).apply(
     lambda args: json.dumps(
         {
             "Version": "2012-10-17",
@@ -35,6 +37,7 @@ policy = Output.all(bucket.arn, xl_upgrades_queue.arn, chat_stream.arn).apply(
                     "Action": ["kinesis:PutRecord"],
                     "Resource": args[2],
                 },
+                {"Effect": "Allow", "Action": ["sns:*"], "Resource": args[3]},
             ],
         }
     )
