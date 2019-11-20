@@ -49,11 +49,6 @@ def god_bot(event, context):
     monitor_the_gods(event)
 
 
-def xl_bot(event, handler):
-    # print(json.dumps(event))
-    monitor_the_gods(event)
-
-
 def dungeon_gossiper(event, context):
     # print(json.dumps(event))
     DungeonGossiperHandler(event).handle()

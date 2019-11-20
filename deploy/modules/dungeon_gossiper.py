@@ -13,9 +13,7 @@ from modules.kinesis import chat_stream
 from modules.s3 import bucket
 from modules.layers import dependency_layer
 
-# from pulumi import filebase64sha256
-
-MODULE_NAME = "dungeon_gossiper"
+MODULE_NAME = "dungeon-gossiper"
 
 config = pulumi.Config()
 

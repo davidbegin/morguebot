@@ -50,7 +50,7 @@ def alt_rune_awards():
     #     send_chat_to_stream(f"{rune['name']} - Count: {rune['count']}")
 
 
-def rune_awards():
+def rune_awards(logger):
     send_chat_to_stream(["PorscheWIN First Annual Rune Awards!!! PorscheWIN"])
 
     for winner in _top_5_rune_holders():

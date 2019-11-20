@@ -183,10 +183,10 @@ if __name__ == "__main__":
 		# "/aws/lambda/morgue-stalker-341e60e",
 		# "/aws/lambda/morgue-bot-2fc463f",
                 # "/aws/lambda/god-bot-62a15fe",
-                '/aws/lambda/xl-bot-00f604b',
                 'API-Gateway-Execution-Logs_zl5r1fjaxf/Stage',
-                '/aws/lambda/lambda-authorizer',
-                # '/aws/lambda/dungeon_gossiper-67e2768',
+                # '/aws/lambda/lambda-authorizer',
+                '/aws/lambda/xl-bot-00f604b',
+                # '/aws/lambda/dungeon-gossiper-284d48b',
                 # '/aws/lambda/weapons-bot-b08077f',
 		# "/aws/lambda/twitch-chat-bot-82104fd",
             ]

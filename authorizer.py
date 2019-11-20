@@ -46,7 +46,7 @@ def lambda_handler(event, context):
     policy.region = tmp[3]
     policy.stage = apiGatewayArnTmp[1]
     # policy.denyAllMethods()
-    policy.allowMethod(HttpVerb.ALL, '/xl-bot/*')
+    policy.allowMethod(HttpVerb.ALL, "/xl-bot/*")
 
     # Finally, build the policy
     authResponse = policy.build()

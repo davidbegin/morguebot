@@ -13,7 +13,7 @@ class EventCoordinator:
 
         # TODO: We need to pull this in from Pulumi
         if dest_lambda == "dungeon_gossiper":
-            self.lambda_target = "dungeon_gossiper-67e2768"
+            self.lambda_target = "dungeon-gossiper-284d48b"
         else:
             self.lambda_target = "morgue-stalker-341e60e"
 

@@ -13,10 +13,27 @@ l:
 set_env_vars:
 	cd deploy; pulumi stack output --json | jq '.lambda_env_vars' | tee ../.env
 
+dependencies:
+	rm -rf build/python
+	rm build/dependencies.zip
+	rsync -av venv/lib/python3.7/site-packages build \
+ 		--exclude awscli* \
+		--exclude boto3* \
+	 	--exclude botocore* \
+	 	--exclude pip* \
+	 	--exclude pip* \
+	 	--exclude setuptools* \
+	 	--exclude faker* \
+	 	--exclude s3transfer* \
+	 	--exclude sixx* \
+	 	--exclude websockets* \
+	 	--exclude _pytest*
+	mv build/site-packages build/python
+	cd /Users/begin/code/morguebot/build/; zip -r9 dependencies.zip python
 
 # We needs this to take a random thang
 # make artifact ARTIFACT_NAME=handler422.zip
-dependencies:
+dependencies_2:
 	rm -rf build/python
 	rm build/dependencies.zip
 	rsync -av venv/lib/python3.7/site-packages build \
@@ -41,7 +58,8 @@ dependencies:
 	cd /Users/begin/code/morguebot/build/; zip -r9 dependencies.zip python
 
 
-save_deps: dependencies
+# save_deps: dependencies
+save_deps:
 	aws s3 cp build/dependencies.zip s3://morgue-artifacts/dependencies.zip
 
 

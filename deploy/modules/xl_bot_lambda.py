@@ -23,7 +23,9 @@ role = iam.Role(
     assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY),
 )
 
-policy = Output.all(bucket.arn, xl_upgrades_queue.arn, chat_stream.arn, sns_topic.arn).apply(
+policy = Output.all(
+    bucket.arn, xl_upgrades_queue.arn, chat_stream.arn, sns_topic.arn
+).apply(
     lambda args: json.dumps(
         {
             "Version": "2012-10-17",
@@ -66,7 +68,6 @@ aws_lambda = lambda_.Function(
     f"{MODULE_NAME}",
     role=role.arn,
     runtime="python3.6",
-    # handler="lambda_handler.xl_bot",
     handler="handler.lambda_handler",
     s3_key=config.require("artifact_name"),
     tracing_config={"mode": "Active"},

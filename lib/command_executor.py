@@ -20,7 +20,7 @@ from lib.weapons_formatter import WeaponsFormatter
 from lib.the_real_morgue_parser import MorgueParser
 
 
-def print_the_help():
+def print_the_help(logger):
     # Flattening List
     # msg = [item for sublist in nested_msg for item in sublist]
     commands = [item for sublist in COMMANDS.values() for item in sublist]
