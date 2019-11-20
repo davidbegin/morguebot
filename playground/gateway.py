@@ -1,7 +1,9 @@
 import requests
 
 
-url = "https://zl5r1fjaxf.execute-api.us-west-2.amazonaws.com/Stage/xl-bot/cool"
+url = "https://zl5r1fjaxf.execute-api.us-west-2.amazonaws.com/Stage/xl-bot/weapons/emf"
+# url = "https://zl5r1fjaxf.execute-api.us-west-2.amazonaws.com/Stage/xl-bot/help"
+# url = "https://zl5r1fjaxf.execute-api.us-west-2.amazonaws.com/Stage/xl-bot/cool"
 query = ""
 # query = "?command=help"
 
