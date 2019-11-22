@@ -1,13 +1,13 @@
 import requests
+import click
 
+@click.command()
+@click.option('--command', '-c')
+def xl_bot(command):
+    url = f"https://zl5r1fjaxf.execute-api.us-west-2.amazonaws.com/Stage/xl-bot/{command}"
 
-url = "https://zl5r1fjaxf.execute-api.us-west-2.amazonaws.com/Stage/xl-bot/weapons/emf"
-# url = "https://zl5r1fjaxf.execute-api.us-west-2.amazonaws.com/Stage/xl-bot/help"
-# url = "https://zl5r1fjaxf.execute-api.us-west-2.amazonaws.com/Stage/xl-bot/cool"
-query = ""
-# query = "?command=help"
+    response = requests.get(url)
+    click.secho(response.text, fg="cyan")
 
-response = requests.get(url + query)
-print(response)
-print(response.text)
-# import pdb; pdb.set_trace()
+if __name__ == "__main__":
+    xl_bot()

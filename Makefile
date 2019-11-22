@@ -72,6 +72,9 @@ artifact:
 	zip -g build/$(ARTIFACT_NAME) lambda_handler.py
 	zip -g build/$(ARTIFACT_NAME) lambda_commands.json
 	zip -g build/$(ARTIFACT_NAME) handler.py
+	zip -g build/$(ARTIFACT_NAME) flask_app.py
+	zip -g build/$(ARTIFACT_NAME) dungeon_gossiper.py
+	zip -g build/$(ARTIFACT_NAME) xl_bot.py
 
 
 # make artifact_deploy
