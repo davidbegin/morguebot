@@ -7,6 +7,18 @@ from lib.character import Character
 from flask_app import app
 
 
+@app.route("/xl-bot/armour/<name>")
+def armour(name):
+    character = Character(name=name)
+    formatter = Formatter(character)
+    msg = formatter.print_armour()
+    if msg:
+        send_chat_to_stream(msg)
+        return " ".join(msg)
+    else:
+        return "No Armour Found!"
+
+
 @app.route("/xl-bot/runes/<name>")
 def runes(name):
     character = Character(name=name)
