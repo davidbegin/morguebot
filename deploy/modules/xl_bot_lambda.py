@@ -78,11 +78,11 @@ aws_lambda = lambda_.Function(
     environment={"variables": lambda_variables},
 )
 
-lambda_.EventSourceMapping(
-    f"{MODULE_NAME}-sqs-esm",
-    event_source_arn=xl_upgrades_queue.arn,
-    function_name=aws_lambda.name,
-)
+# lambda_.EventSourceMapping(
+#     f"{MODULE_NAME}-sqs-esm",
+#     event_source_arn=xl_upgrades_queue.arn,
+#     function_name=aws_lambda.name,
+# )
 
 lambda_.Permission(
     "AllowInvocationFromSQSQueue",

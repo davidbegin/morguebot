@@ -64,8 +64,8 @@ aws_lambda = lambda_.Function(
     },
 )
 
-lambda_.EventSourceMapping(
-    f"{MODULE_NAME}-sqs-esm",
-    event_source_arn=weapons_queue.arn,
-    function_name=aws_lambda.name,
-)
+# lambda_.EventSourceMapping(
+#     f"{MODULE_NAME}-sqs-esm",
+#     event_source_arn=weapons_queue.arn,
+#     function_name=aws_lambda.name,
+# )

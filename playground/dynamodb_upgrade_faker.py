@@ -2,12 +2,12 @@ import boto3
 
 # We need to pull this in some how
 # We need Pulumi to dump and .env file!
-TABLE_NAME = "characters-696d3eb"
+TABLE_NAME = "characters-0777230"
 
 character_name = "beginbot"
 
-objects = [ "the cursed +14 obsidian axe {chop, +Fly SInv *Curse}" ]
-# objects = [ "dumb weapon" ]
+# objects = [ "the cursed +14 obsidian axe {chop, +Fly SInv *Curse}" ]
+objects = [ "dumb weapon" ]
 
 # objects = ["very cool", "fake rune", "another2", "what", "hello", "slimey", "barnacled", "gold"]
 # objects = ["barnacled"]

@@ -9,6 +9,7 @@ import modules.sqs
 import modules.twitch_chat_bot_lambda
 import modules.weapons_bot_lambda
 import modules.xl_bot_lambda
+import modules.apigateway
 
 from modules.s3 import bucket, allow_s3_bucket_access
 
@@ -16,6 +17,7 @@ import modules.morgue_bot_lambda
 import modules.morgue_stalker_lambda
 
 import modules.dungeon_gossiper
+import modules.destinations
 
 allow_s3_bucket_access(
     bucket,

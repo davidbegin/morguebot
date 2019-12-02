@@ -8,6 +8,7 @@ from modules.iam import CREATE_CW_LOGS_POLICY
 from pulumi_aws import kms, iam, lambda_
 from modules.dynamodb import dynamodb_table
 from modules.layers import dependency_layer
+from modules.sqs import errors_queue
 
 config = pulumi.Config()
 
@@ -25,7 +26,7 @@ role = iam.Role(
     f"{MODULE_NAME}-role", assume_role_policy=json.dumps(LAMBDA_ASSUME_ROLE_POLICY)
 )
 
-policy = Output.all(bucket.arn, chat_stream.arn, kms_key.arn).apply(
+policy = Output.all(bucket.arn, chat_stream.arn, kms_key.arn, errors_queue.arn).apply(
     lambda args: json.dumps(
         {
             "Version": "2012-10-17",
@@ -48,6 +49,12 @@ policy = Output.all(bucket.arn, chat_stream.arn, kms_key.arn).apply(
                     "Effect": "Allow",
                     "Action": "kms:Decrypt",
                     "Resource": f"{args[2]}",
+                },
+                {
+                    "Sid": "AllowSQS",
+                    "Effect": "Allow",
+                    "Action": "sqs:*",
+                    "Resource": f"{args[3]}",
                 },
             ],
         }

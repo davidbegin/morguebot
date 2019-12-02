@@ -4,7 +4,9 @@ import json
 import boto3
 import botocore
 
-KINESIS_NAME = "twitch-chat-877759c"
+# KINESIS_NAME = "twitch-chat-3ef1aba"
+
+KINESIS_NAME = "error-chat-8cc7e7a"
 
 
 def send_chat_to_stream(msg):

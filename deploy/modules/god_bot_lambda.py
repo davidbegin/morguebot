@@ -70,8 +70,8 @@ aws_lambda = lambda_.Function(
     layers=[dependency_layer.arn],
 )
 
-lambda_.EventSourceMapping(
-    f"{MODULE_NAME}-sqs-esm",
-    event_source_arn=gods_queue.arn,
-    function_name=aws_lambda.name,
-)
+# lambda_.EventSourceMapping(
+#     f"{MODULE_NAME}-sqs-esm",
+#     event_source_arn=gods_queue.arn,
+#     function_name=aws_lambda.name,
+# )

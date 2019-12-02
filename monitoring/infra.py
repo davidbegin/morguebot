@@ -19,10 +19,11 @@ def call_bash(cmd):
 # arn:aws:kinesis:us-west-2:851075464416:stream/twitch-chat-877759c
 if __name__ == "__main__":
     commands = [
-            # "lumigo-cli tail-sqs --queueName --region us-west-2",
-            # "lumigo-cli tail-sns --topicName gods-topic-gods-topic-f88048a --region us-west-2",
-            "lumigo-cli tail-sns --topicName weapons-topic-f819b3f --region us-west-2",
-            "lumigo-cli tail-kinesis  --streamName twitch-chat-877759c --region us-west-2",
+            "lumigo-cli tail-sqs --queueName xl-queue-067ba68 --region us-west-2",
+            "lumigo-cli tail-sqs --queueName errors-queue-4e335cd --region us-west-2",
+            # "lumigo-cli tail-sns --topicName gods-topic-f88048a --region us-west-2",
+            # "lumigo-cli tail-sns --topicName weapons-topic-f819b3f --region us-west-2",
+            # "lumigo-cli tail-kinesis  --streamName twitch-chat-3ef1aba --region us-west-2",
             ]
 
     # first_command, *other_commands =  commands

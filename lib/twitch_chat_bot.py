@@ -6,8 +6,15 @@ from lib.irc_connector import connect_to_twitch
 
 
 def send_twitch_message(event):
-    for record in event["Records"]:
-        process_kinesis_record(record)
+    if "Records" in event:
+        for record in event["Records"]:
+            process_kinesis_record(record)
+
+    # For Async
+    elif "responsePayload" in event:
+        send_msg(event["responsePayload"])
+    else:
+        send_msg(json.dumps(event))
 
 
 # ========================================================================================

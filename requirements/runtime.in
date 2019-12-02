@@ -2,6 +2,10 @@ requests
 boto3
 aws-xray-sdk
 
+# Monitoring
+click
+durationpy
+
 # This could be in develop I think
 durationpy
 

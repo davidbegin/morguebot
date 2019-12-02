@@ -45,8 +45,13 @@ def morgue_bot(event, handler):
 
 
 def god_bot(event, context):
-    # print(json.dumps(event))
+    print(json.dumps(event))
     monitor_the_gods(event)
+
+
+def destinations(event, context):
+    print(json.dumps(event))
+    DungeonGossiperHandler(event).handle()
 
 
 def dungeon_gossiper(event, context):

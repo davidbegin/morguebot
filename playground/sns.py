@@ -9,7 +9,8 @@ import boto3
 # client = boto3.client("kinesis")
 client = boto3.client("sns")
 
-topic_arn = "arn:aws:sns:us-west-2:851075464416:gods-topic-f88048a"
+topic_arn = "arn:aws:sns:us-west-2:851075464416:weapons-topic-f819b3f"
+# topic_arn = "arn:aws:sns:us-west-2:851075464416:gods-topic-f88048a"
 
 msg = json.dumps({"default": "Testing From SNS to SQS to Kinsesis!"})
 response = client.publish(
