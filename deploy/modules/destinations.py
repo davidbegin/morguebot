@@ -63,7 +63,11 @@ policy = Output.all(
                     "Resource": args[5],
                 },
                 {"Effect": "Allow", "Action": ["lambda:*"], "Resource": args[6]},
-                {"Effect": "Allow", "Action": ["SQS:*"], "Resource": [ args[7], args[8], args[9], args[10]]},
+                {
+                    "Effect": "Allow",
+                    "Action": ["SQS:*"],
+                    "Resource": [args[7], args[8], args[9], args[10]],
+                },
                 {"Effect": "Allow", "Action": ["kinesis:*"], "Resource": args[11]},
             ],
         }
