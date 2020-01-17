@@ -37,6 +37,7 @@ class Character:
         self.morgue_url = morgue_url
         self.name = name
 
+        # self.local_mode = True
         self.local_mode = local_mode
 
         self._find_morguefile()
@@ -58,7 +59,7 @@ class Character:
         return morgue_parser.overview()
 
     def spells(self):
-        return [SpellFactory(spell).new() for spell in self.morgue_parser.spells()]
+        return ( SpellFactory(spell).new() for spell in self.morgue_parser.spells() )
 
     def spells_above(self, level):
         print(f"Spells Above!: {level}")

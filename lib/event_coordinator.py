@@ -13,9 +13,9 @@ class EventCoordinator:
 
         # TODO: We need to pull this in from Pulumi
         if dest_lambda == "dungeon_gossiper":
-            self.lambda_target = "dungeon-gossiper-284d48b"
+            self.lambda_target = "dungeon-gossiper-e3a74e7"
         else:
-            self.lambda_target = "morgue-stalker-341e60e"
+            self.lambda_target = "morgue-stalker-f15d681"
 
         # There is a delegate pattern for this
         self.character = morgue_event.character

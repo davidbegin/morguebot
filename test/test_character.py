@@ -19,7 +19,7 @@ def test_morgue_url():
 
 def test_spells():
     character = Character(name="GucciMane", local_mode=True)
-    spells = character.spells()
+    spells = list(character.spells())
     assert type(spells[0]) == Spell
 
 

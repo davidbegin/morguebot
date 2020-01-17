@@ -180,16 +180,15 @@ if __name__ == "__main__":
         else:
             # We should take these in from command Land Args in JSON
             log_group_names = [
-		# "/aws/lambda/morgue-stalker-341e60e",
-		# "/aws/lambda/morgue-bot-2fc463f",
-                # 'API-Gateway-Execution-Logs_zl5r1fjaxf/Stage',
-                # '/aws/lambda/lambda-authorizer',
-                # '/aws/lambda/xl-bot-00f604b',
-                # '/aws/lambda/dungeon-gossiper-284d48b',
-                # '/aws/lambda/weapons-bot-b08077f',
-		"/aws/lambda/destinations-lambda-a2f8fc7",
-                # "/aws/lambda/god-bot-62a15fe",
-		# "/aws/lambda/twitch-chat-bot-82104fd",
+		# "/aws/lambda/god-bot-e6f3ad4",
+		# "/aws/lambda/weapons-bot-8132de4",
+		# "/aws/lambda/morgue-bot-98c8278",
+		# "/aws/lambda/xl-bot-711475c",
+		"/aws/lambda/morgue-stalker-f15d681",
+		"/aws/lambda/dungeon-gossiper-e3a74e7",
+		# "/aws/lambda/destinations-lambda-93521d5",
+		# "/aws/lambda/lambda-authorizer",
+		"/aws/lambda/twitch-chat-bot-d9c9091",
             ]
 
             first_log_group, *other_log_groups = log_group_names

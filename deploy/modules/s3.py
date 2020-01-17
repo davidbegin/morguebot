@@ -2,7 +2,7 @@ import json
 from pulumi_aws import s3
 from pulumi import Output
 
-bucket = s3.Bucket("morgue-files")
+bucket = s3.Bucket("morgue-files", force_destroy=True)
 
 
 def allow_s3_bucket_access(s3_bucket, roles, lamda_function_arn):

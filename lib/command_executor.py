@@ -37,6 +37,7 @@ def process_event(event):
     if morgue_event.command == "!h?":
         return print_the_help()
 
+    # Elif Island
     msg = None
     if morgue_event.is_character_command():
         print("A single Character Command!")
@@ -50,10 +51,12 @@ def process_event(event):
         elif morgue_event.command == "!runes":
             msg = formatter.print_runes()
         elif morgue_event.command == "!spells":
+
             if morgue_event.level_barrier:
                 msg = character.spells_above(morgue_event.level_barrier)
             else:
                 msg = formatter.print_spells()
+
         elif morgue_event.command == "!skills":
             msg = formatter.print_skills()
         elif morgue_event.command == "!version":

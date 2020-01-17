@@ -10,7 +10,6 @@ def test_help_event_coordination(mocker):
     event_coordinator = EventCoordinator(morgue_event)
     mocker.patch.object(event_coordinator, "invoke_lambda")
     event_coordinator.invoke_lambda.return_value = "I was invoked!!"
-    assert event_coordinator.lambda_target == "dungeon-gossiper-284d48b"
     result = event_coordinator.coordinate()
     assert result == "I was invoked!!"
 

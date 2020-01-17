@@ -4,6 +4,7 @@ from lib.skill_factory import SkillFactory
 class MaxSpellCalculator:
     def __init__(self, character):
         self.character = character
+        # If we consume the generator properly
         self.spells = character.spells()
 
     def calculate(self):
